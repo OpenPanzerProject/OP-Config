@@ -1,8 +1,8 @@
 ![Open Panzer](http://www.openpanzer.org/images/github/openpanzeropconfig.png)
 # Introduction
-  * Open Panzer is a project to develop open source products for the RC tank market. 
-  * The TCB (tank control board) is a highly capable circuit board designed specifically for RC model tanks, but also suitable for halftracks, cars, or even battleships. It has its own firmware repository, [see here](https://github.com/OpenPanzerProject/TCB)
-  * OP Config is a desktop application used to configure the many options on the TCB and to simplify flashing new firmware to the TCB. The repository you are in now contains the source code for the OP Config application. It was developed with the open source application software called ["Qt"](http://www.qt.io/developers/). Specifically we used Qt Creator 3.4.1 using Qt 5.4.2. 
+  * [Open Panzer](http://www.openpanzer.org) is a community project to develop open source products for the RC tank market. 
+  * The TCB (tank control board) is a highly capable circuit board designed specifically for RC model tanks, but also suitable for halftracks, cars, or even battleships. The hardware is based on an ATmega 2560 processor and the code consists of an Arduino sketch as well as various C++ libraries. It has its own firmware repository, [see here](https://github.com/OpenPanzerProject/TCB)
+  * OP Config is a desktop application used to configure the many options on the TCB and to simplify flashing new firmware to the TCB. The repository you are in now contains the source code for the OP Config application. It was written in C++ using the open source application development software called ["Qt"](http://www.qt.io/developers/). Specifically we used Qt Creator 3.4.1 using Qt 5.4.2. 
 
 ## Resources
   * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://www.openpanzer.org/wiki).

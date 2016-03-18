@@ -13,9 +13,11 @@
 If you are not a developer, you probably don't need to worry about anything on this site. Instead, go to the [Open Panzer Downloads page](http://www.openpanzer.org/downloads) and get your own installable version of OP Config. 
 
 ## Developers
-OP Config was developed using Qt Creator 3.4.1 using Qt version 5.4.2. Code is written in C++. The executable version on the [Downloads page](http://www.openpanzer.org/downloads) was compiled for Windows using the MinGW 4.9.1 32-bit compiler. Qt is well-known for being cros-platform compatible so it should be possible to compile a version for use on other operating systems such as Mac OS X, but I don't have any environment other than Windows to develop in at present. If you want to compile this source for another operating system feel free, and please let me know! 
+OP Config was developed using Qt Creator 3.4.1 using Qt version 5.4.2. Code is written in C++. The executable version on the [Downloads page](http://www.openpanzer.org/downloads) was compiled for Windows using the MinGW 4.9.1 32-bit compiler. 
 
-For those curious, we are using [Inno Setup 5.5.8](http://www.jrsoftware.org/isinfo.php) to create the installer package. We are using [WinSparkle](https://github.com/vslavik/winsparkle) for the auto-update feature - this would probably have to be changed for a non-Window version, but it is based on the widely used Mac project called [Sparkle](https://sparkle-project.org/) so that should not be too difficult. There are no other external dependencies aside from various libraries bundled with Qt. 
+Qt is well-known for being cros-platform compatible so it should be possible to compile a version for use on other operating systems such as Mac OS X, but I don't have any environment other than Windows to develop in at present. If you want to compile this source for another operating system feel free, and please let us know! 
+
+For those curious, we are using [Inno Setup 5.5.8](http://www.jrsoftware.org/isinfo.php) to create the Windows installer package. Qt has the Qt Installer Framework but we found it rather limiting. For the auto-update feature we are using [WinSparkle](https://github.com/vslavik/winsparkle). This would have to be changed for a non-Windows version, but it is based on the well-known Mac project called [Sparkle](https://sparkle-project.org/) so that should not be too difficult. There are no other external dependencies aside from various libraries bundled with Qt. 
 
 ## License
 Source files for OP Config are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.

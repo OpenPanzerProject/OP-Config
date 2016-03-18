@@ -5,12 +5,12 @@
   * OP Config is a desktop application used to configure the many options on the TCB and to simplify flashing new firmware to the TCB. The repository you are in now contains the source code for the OP Config application. It was developed with the open source application software called ["Qt"](http://www.qt.io/developers/). Specifically we used Qt Creator 3.4.1 using Qt 5.4.2. 
 
 ## Resources
-For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://www.openpanzer.org/wiki).  
-To discuss the project, feel free to join the [Open Panzer Community](http://www.openpanzer.org/forum/). 
-To download a compiled version of OP Config for installation in Windows, see the Open Panzer [Downloads page](http://www.openpanzer.org/downloads). 
+  * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://www.openpanzer.org/wiki).
+  * To discuss the project, feel free to join the [Open Panzer Community](http://openpanzer.org/forum/index.php?action=forum).
+  * To download a compiled version of OP Config for installation in Windows, see the [Open Panzer Downloads page](http://www.openpanzer.org/downloads). 
 
 ## General Users
-If you are not a developer, you probably don't need to worry about anything on this site. Instead, go to the Open Panzer [Downloads page](http://www.openpanzer.org/downloads) and get your own installable version of OP Config. 
+If you are not a developer, you probably don't need to worry about anything on this site. Instead, go to the [Open Panzer Downloads page](http://www.openpanzer.org/downloads) and get your own installable version of OP Config. 
 
 ## Developers
 OP Config was developed using Qt Creator 3.4.1 using Qt version 5.4.2. Code is written in C++. The executable version on the [Downloads page](http://www.openpanzer.org/downloads) was compiled for Windows using the MinGW 4.9.1 32-bit compiler. Qt is well-known for being cros-platform compatible so it should be possible to compile a version for use on other operating systems such as Mac OS X, but I don't have any environment other than Windows to develop in at present. If you want to compile this source for another operating system feel free, and please let me know! 

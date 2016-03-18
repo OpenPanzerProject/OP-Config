@@ -1,0 +1,28 @@
+QSlider::groove:horizontal 
+{
+	border: 1px solid #999999;
+	height: 8px;
+	border-radius: 0px; 
+}
+
+QSlider::handle:horizontal 
+{
+	/* To get rid of handle, set the width to zero */
+	width: 0px;
+}
+
+/* add-page is the amount that is left */
+/* ie, after the handle */
+QSlider::add-page:qlineargradient 
+{
+	background: #454F65;	/* purple */
+	border-radius: 0px;
+}
+
+/* sub-page is the amount that has been passed */
+/* ie, before the handle */
+QSlider::sub-page:qlineargradient 
+{
+	background: #E1E3E3;	/* light grey */
+	border-radius: 0px;
+}

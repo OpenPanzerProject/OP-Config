@@ -1,0 +1,24 @@
+QPushButton{
+    border: 1px solid #666;
+	background: #E4E4F1;
+	padding: 1px;
+	min-height: 20px;
+	min-width: 100px;
+}
+
+QPushButton:pressed, QPushButton:checked {
+    background-color: #C1CADE;
+	padding-top: 2px;
+}
+
+QMessageBox{
+	background: #E1E3E3;
+	font: #FFF;	/* Sadly you actually have to set the color in html as you generate the message box, this does nothing */
+	font-family: MS Shell Dlg 2;
+	font-size: 14px;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 16px;
+}

@@ -1,0 +1,14 @@
+QPushButton{
+    border: 1px solid #666;
+	min-height: 14px;
+	min-width: 14px;
+	max-height: 14px;
+	max-width: 14px;
+    background-color: #E4E4F1;
+	image: url(:/images/help.png);
+}
+
+QPushButton:pressed, QPushButton:checked {
+	background-color: #39085A;
+	image: url(:/images/help2.png);
+}

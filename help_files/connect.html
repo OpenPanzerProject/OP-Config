@@ -1,0 +1,127 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Connect to the TCB</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#direct">Direct Connection with USB Cable</a></li>
+			<li><a href="#wireless">Wireless Connection Over Bluetooth</a></li>
+		</ul>
+	</div>
+		
+	<h1>Connecting to the TCB</h1>
+
+	<p>
+	Before you attempt to connect to the TCB, first make sure you have <a href="drivers.html">installed the correct USB drivers</a>. 
+	</p>
+
+	<h2 id="direct">Direct Connection with USB Cable</h2>
+	
+	<p>
+	Although the TCB is capable of communicating wirelessly over Bluetooth, it is better to connect it directly to the computer with a cable for the first time 
+	to confirm that everything is working correctly. The TCB uses a standard Micro-B USB cable such as you may use for your camera, phone, or tablet.
+	</p>
+	
+	<h4>Power</h4>
+	<p>
+	When connected to the computer directly with a USB cable, the TCB will typically have enough current available to it from the USB port to power the onboard processor and 
+	communication chips. Some functions will of course not work such as driving external motors, but typically to read or write settings a battery is not required. However, 
+	having a battery plugged in at the same time as the USB cable is perfectly acceptable. 
+	</p>
+	
+	<p>
+	The USB port on the TCB is fused at 500 mA, which is the minimum current rating of virtually all USB ports. If for some reason current is ever drawn in excess of that amount, 
+	the thermal fuse on the TCB will open and your computer's USB port will be protected. This fuse does not need replacement. If you suspect the fuse has tripped, disconnect the 
+	TCB from the USB cable and wait several minutes, after which the fuse will reset itself.
+	</p>
+	
+	<h4>Dipswitch Setting</h4>
+	<p>
+	<div style="float: right;"><img src="images/dip_connect.png"/><br><span style="text-align: center;"><i>Dipswitch #5</i></span></div>
+	Dipswitch #5 controls which port the TCB will attempt to communicate with. If Dipswitch #5 is ON, the TCB will communicate via the <b>USB</b> port. If it is OFF it will
+	attempt to communicate over <b>SER.1</b> (Serial 1 output). Obviously in this case we want to set it to ON for <b>USB</b>. 
+	</p>
+	
+	<h4>Connection</h4>	
+	<p>
+	Plug the TCB into the computer. If you already have the OP Config program open, you may need to click the <b>COM Refresh</b> button in order for the TCB's COM port to display
+	in the <b>COM Port List</b> (items #3 &amp; #4 on the <a href="formlayout.html">Program Layout</a> diagram). Select the COM port that corresponds to your TCB. Make sure the
+	<b>Baud Rate</b> is set to <b>115200</b>. Now click the <b>Connect</b> button.
+	</p>
+	
+	<p>
+	At this point OP Config will attempt to communicate with the TCB. It may take several seconds to establish communications and you may see the TCB reset in the process, that is normal.
+	After several seconds, the connection will either have succeeded or failed. Either way, the <b>Serial Status</b> will be updated, and the <b>Info Area</b> will display a message 
+	to let you know (#4 and #9 on the <a href="formlayout.html">Program Layout</a> diagram). If the connection was successful, the text on the <b>Connect</b> button will change to <b>Disconnect</b>. If you click the button again, the device
+	will disconnect. 
+	</p>
+	
+	<h4>Troubleshooting direct connection issues:</h4>
+	<ul class="smalllist">
+		<li><b>Wrong COM Port:</b> There can be multiple COM ports on your computer, each one assigned to various USB devices you may have. Make sure you know which COM port number belongs to
+		your TCB. It is possible this number may change over time if you plug the TCB into a different USB slot. See the discussion in the <a href="drivers.html">Drivers</a> section for ways 
+		to identify which COM port your TCB has been assigned. Note also there are two orange LEDs on the TCB board near the USB connector. These LEDs blink anytime communication occurs from either direction. The LED closest to the edge of the board
+		will light up anytime the computer sends data to the TCB. When you click the Connect button, this LED should blink several times (though it may take a few seconds to start). If this LED
+		never illuminates and the OP Config program says that connection failed, you probably do not have the correct COM port selected.</li>
+		<li><b>COM Port Busy:</b> Only one program can access a COM port at a time. Did you connect to the TCB with the Arduino IDE or with some other serial monitoring program? If so, OP Config 
+		may be unable to open the COM port. Close the other programs and try again.</li>
+		<li><b>Wrong Dipswitch Setting:</b> Is Dipswitch #5 on the TCB set to the Off position? If so, the TCB is going to try to communicate only through the Serial 1 connector, and it will ignore data on the USB port. Put Dipswitch #5 back to the On position.</li>
+		<li><b>If All Else Fails:</b> unplug the TCB from the computer. Close the OP Config program. Plug the TCB back into the computer, making sure Windows beeps at you to indicate the TCB
+		has been detected. Re-open OP Config and try connecting again.</li>
+	</ul>
+	
+	
+
+	<h2 id="wireless">Wireless Connection Over Bluetooth</h2>
+		
+	<p>
+	To communicate with the TCB wirelessly over Bluetooth, you must have purchased the optional Bluetooth adapter, and your computer must have a Bluetooth transmitter. 
+	The Bluetooth adapter must be connected correctly to the TCB's <b>Serial 1</b> connector. For more information on these hardware details, as well as instructions for <b>pairing</b>
+	the Bluetooth adapter to your computer, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:bluetooth">Open Panzer Wiki - Bluetooth</a> page. 
+	</p>
+	
+	<h4>Make Sure Baud Rates Match</h4>
+	<p>	
+	While the TCB is essentially hard-coded to communicate at 115200 baud over USB, the Bluetooth baud rate can be whatever you set it to. For communications to work, the baud rate saved 
+	on the TCB must match the rate that you are trying to use from the computer. To set the TCB's <b>Serial 1</b> baud rate, see the <a href="misc.html">Misc tab</a>. To set the baud rate 
+	used by the computer, you of course select it from the <b>Baud Rate List</b> (#5 on the <a href="formlayout.html">Program Layout</a> diagram). 
+	</p>
+	
+	<div style="float: right;"><img src="images/dip_connect.png"/><br><span style="text-align: center;"><i>Dipswitch #5</i></span></div>
+	<h4>Set the Alternate COM Dipswitch on the TCB</h4>
+	<p>
+	Dipswitch #5 on the TCB is used to determine which serial port the TCB will communicate to the computer with. If Dipswitch #5 is On, the TCB will communicate via the USB port. If it is 
+	Off the TCB will communicate over the Serial 1 (SER.1) port. The Bluetooth adapter will be plugged into the Serial 1 connector, so in this case we want to make sure Dipswitch #5 
+	is in the Off position.
+	</p>	
+	
+	<h4>Connection</h4>
+	<p>
+	Connecting over Bluetooth follows the same procedure as over USB. If detected, your Bluetooth adapter will appear in the <b>COM Port List</b> as yet another COM port. Select the 
+	correct one, and click the <b>Connect</b> button. 
+	</p>
+	
+	<h4>Remember</h4>
+	<p>
+	When communicating over Bluetooth, you may read settings from the device, write settings to the device, and monitor the device on the <a href="firmware.html">console</a>. But you can 
+	<i>not</i> flash new firmware to the device - that requires a direct connection via USB cable.
+	</p>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

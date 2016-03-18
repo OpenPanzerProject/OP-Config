@@ -1,0 +1,90 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>USB Drivers</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<h1>Connection Methods</h1>
+
+	<p>
+	There are two ways to connect to the TCB: directly with a Micro-B USB cable, or via Bluetooth using an approved adapter. When connected directly with a cable, OP Config is able
+	to update the TCB's settings <em>as well as</em> flash new firmware. When connected via Bluetooth, OP Config can <em>only</em> update settings, it can not re-flash the chip. <br>
+	</p>
+	
+	<p>
+	<b>Note 1:</b> Because software and internet links change over time, the instructions below are generic. For specific and up-to-date information on the drivers required,
+	please see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:configurator:drivers">Open Panzer Wiki - USB Drivers</a> page.
+	</p>
+	
+	<p>
+	<b>Note 2:</b> The following instructions are for Windows only (XP/7/8/10).
+	</p>
+	
+
+	<h2>USB Drivers - For Direct Connection</h2>
+	
+	<p>
+	The TCB uses a genuine FTDI brand USB chip for direct connection to the computer via USB cable. The drivers you need are the <b>FTDI Virtual COM Port (VCP)</b>
+	drivers. These can be downloaded for free from FTDI:<br>
+	<a href="http://www.ftdichip.com/Drivers/VCP.htm">FTDI website</a>.<br><br>
+	
+	Save the drivers to your hard drive, then plug the TCB into an open USB port on your computer. 
+	If you do not already have the drivers installed on your computer, Windows will notify you that it has <b>Found New Hardware</b>.
+	</p>
+	
+	<p>
+	A Wizard should appear asking you where to look for the correct software. Instead of letting Windows connect to the internet to search for drivers, tell Windows you are 
+	going to install the drivers "from a specific location" and then, when given the option, browse to and select the folder where you saved the FTDI drivers you downloaded. 
+	</p>
+	
+	<p>
+	After installing the drivers for what Windows will probably call the "FT232R USB UART," you may see Windows try a second installation immediately after for a "USB Serial Port."
+	If so, follow the same procedure as before - tell Windows not to connect to the internet for updates, and show it the same folder where you saved the downloaded drivers. 
+	Windows may take what seems like an eternity to actually install them. 
+	</p>
+	
+	<p>
+	When the drivers are installed, Windows may ask you to reboot your computer; if so, you should probably Obey. 
+	</p>
+	
+	<p>
+	Finally, after the drivers are installed, a new COM (communication) port should have been added to your computer. Windows will assign it a name like "COM 5" but the number could be
+	anything. One way to confirm whether the driver is working is to open the OP Config program <i>without</i> the TCB connected to the computer. Take a note of the COM ports
+	shown in the <b>COM Port List</b> (item #4 on the <a href="formlayout.html">Program Layout</a> diagram). Whatever COM port numbers are listed you know do not belong to the TCB
+	because the TCB is unplugged. Now, connect the TCB to your computer with a USB cable. Refresh the COM port list with the <b>COM Refresh</b> button 
+	(#3 on the <a href="formlayout.html">Program Layout</a> diagram). Now inspect the list of COM ports - a new number should have been detected, and if so, that will be the COM port that 
+	Windows assigned to your TCB. If the list remains the same, then the drivers were not installed correctly.	</p>
+	
+	<p>
+	The other method to identify which COM port Windows has assigned to your device is to go to the <b>Device Manager</b> (From the <b>Start Menu</b>, search for "Device Manager").
+	Look for an entry under <b>Ports (COM &amp; LPT)</b> that says <b>USB Serial Port (COM)</b>. Again, the actual COM number will vary. As you plug or unplug devices into your computer, 
+	Windows will update the list of COM ports, allowing you to identify which number has been assigned to your TCB.
+	</p>
+
+	<p>
+	Note also if you own multiple TCBs, Windows will assign different numbers to each one. Windows may also ask you to re-install drivers for each TCB individually. 
+	</p>
+
+	<h2>Bluetooth Drivers - for Wireless Connection</h2>
+	
+	<p>
+	Windows already includes the necessary Bluetooth drivers if you use the Open Panzer recommended Bluetooth device, so nothing needs to be installed. 
+	See the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:bluetooth">Open Panzer Wiki - Bluetooth</a> page for more information on the recommended adapters
+	and how to set them up.
+	</p>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

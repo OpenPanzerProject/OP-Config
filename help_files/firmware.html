@@ -1,0 +1,102 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Firmware</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#flash">Update Firmware</a></li>
+			<li><a href="#console">Console Utility</a></li>
+		</ul>
+	</div>
+		
+	<h1>Firmware</h1>
+	
+	<h2 id="flash">Update Firmware</h2>
+	<p>
+	On this tab you can update the software that runs on the TCB, which we call "firmware." Think of the firmware as the operating system - it is the set of instructions that get executed when 
+	the device is turned on. The process of updating the operating system is often called "flashing new firmware" or "flashing a hex file." The word flash refers to the process of overwriting an area of 
+	memory known as "flash" on the microcontroller where the code resides, and hex refers to the type of file that holds the compiled code we are flashing.<br><br>
+	
+	It is important to note that flashing new firmware is not the same thing as updating (writing) new settings to the TCB. We read and write the settings by using the 
+	<a href="writedevice.html">green and blue arrow buttons</a>. The settings are values you specified yourself on all the other tabs of the OP Config program. We can change the settings
+	whenever we want, but updating or flashing the firmware only needs to happen when a new version of the TCB code is released. 
+	</p>
+	
+	<h4	class="entry">Get Latest Release</h4>
+	<p>
+	Click here to check the OpenPanzer.org website for the latest version of the TCB firmware. If a file is detected the version number will be displayed and the hex file will be 
+	downloaded to a temporary folder. It is highly unlikely you will download a version of the firmware that is older than the version you already have on your TCB, but it might be the same 
+	version, in which case flashing the update is unnecessary. You can always check which version of the firmware your TCB is presently running by connecting to the TCB and looking at the
+	Serial Status label on the bottom left of the OP Config program (#8 on the <a href="formlayout.html">Program Layout</a> diagram). You can also read the firmware version by connecting
+	the TCB to any serial console (such as the built-in console discussed below), and pressing the INPUT button on the TCB board, which causes the TCB to send diagnostic information, including
+	the firmware version, out the serial port. 
+	</p>
+	
+	<h4	class="entry">Use Your Own Hex</h4>
+	<p>
+	If you are a developer and have compiled your own hex, you can select it using this button. If you are working on a project in the Arduino IDE, you can generate a hex file 
+	by typing Ctrl+Alt+S or going to the Sketch menu and selecting the "Export compiled Binary" option. The hex file will then appear in your sketch folder (instructions valid for Arduino
+	1.6.5, and may change with future versions). 
+	
+	</p>
+	
+	<h4	class="entry">Flash</h4>
+	<p>
+	Once you have selected a hex file, either the one downloaded from OpenPanzer.org or your own, click the Flash button to attempt flashing the hex to the device. Be sure you have selected
+	the correct COM port first. The status of the flash operation will be shown in the console window. Be patient, the flash operation can take 30 seconds or more. <b>Developers:</b> flashing 
+	is actually accomplished by calling AVRDUDE, which is bundled with OP Config. 
+	</p>
+	
+		
+	<h2 id="console">Console Utility</h2>
+	<p>
+	The built-in console is a very useful debugging tool. It is basically a window to whichever COM port you have selected, and if you are in "Snooping" mode, any information received on 
+	that COM port will be printed in the console window.<br><br>
+	
+	What is the difference between "Snooping" the TCB and "Connecting" to the TCB using the Connect button? Both are very similar - they both attempt to open the COM port and then process serial
+	data on that port. The difference is that when you "Connect" to the TCB, after the COM port is opened the OP Config program sends a command to the TCB which puts the TCB into a 
+	special state where all it can do is communicate with the PC. In this communication state, all motors and outputs on the TCB are turned off, and the TCB will not respond to any commands
+	from your radio transmitter. It waits for instructions from OP Config and does nothing else until disconnected.<br><br>
+	
+	Snooping opens the COM port but nothing more. No commands are sent to the TCB, it is free to operate normally. You can drive the tank in this mode if you want, though it may be hard to 
+	go far if you are plugged in with a USB cable (or you can use <a href="connect.html#wireless">Bluetooth</a>). More importantly, if you press the INPUT button on the TCB while snooping
+	you can dump diagnostic information to the serial port which the console window will display. And if you have <a href="misc.html#debug">Debugging</a> turned on, the TCB will also report 
+	information in real time as you operate it - function triggers will be reported, battle hits, tank movement, and more will all be sent to the serial port where you can read it on the 
+	console window. This can be very useful for verifying that the TCB is doing what you think it should. And because no special handshake is performed or required, you can also use Snoop 
+	mode to read serial information from devices other than the TCB. 
+	</p>
+
+	<h4	class="entry">Snoop</h4>
+	<p>
+	When you click the Snoop button, the selected COM port will be opened at the specified baud rate. If you were already "Connected" to the TCB, the TCB will be told to resume normal 
+	operation mode. Click the button a second time to stop snooping. 
+	</p>
+	
+	<h4	class="entry">Clear Screen</h4>
+	<p>
+	This will empty all prior contents from the console screen. 
+	</p>
+	
+	<h4	class="entry">Autoscroll</h4>
+	<p>
+	If checked, the console window will maintain focus on the most recent line of data to arrive. 
+	</p>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

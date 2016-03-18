@@ -1,0 +1,193 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Lights and I/O</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#brake">Brake and Running Lights</a></li>
+			<li><a href="#mg">Machine Gun Light</a></li>
+			<li><a href="#indicator">Indicator Settings</a></li>
+			<li><a href="#hiflash">High-Intensity Flash Unit</a></li>
+			<li><a href="#aux">Aux Output</a></li>
+			<li><a href="#io">General Input/Output</a></li>
+		</ul>
+	</div>
+		
+	<h1>Lights and Input/Output</h1>
+
+	<p>
+	The TCB has multiple outputs intended for use with LEDs and a few other general purpose ports:
+	<ul class="smalllist">
+		<li><b>AUX:</b> Aux Output, can be used for lights but also relays and even low current motors. This port has special settings not available to the other light ports.</li>
+		<li><b>L1:</b> Light 1, can be switched on or off. The Light 1 output has one extra feature - you can automatically have a headlight sound 
+			play whenever it is turned on or off. See the <a href="sounds.html#other">Sound</a> tab for that setting.</li>
+		<li><b>L2:</b> Light 2, can be switched on or off.</li>
+		<li><b>BRK:</b> Brake and optional running lights.</li>
+		<li><b>MG:</b> Machine Gun Light.</li>
+		<li><b>GP I/O A &amp; B:</b> General purporse logic-level ports A &amp; B can be configured as input or output.</li>
+	</ul>
+	The AUX and light outputs use a JST-PH connector. This is a common connector used in RC cars for LEDs. Note that none of these ports have inline resistors built in, so if you intend to 
+	drive LEDs you will need to incorporate current-limiting resistors in your wiring. Plug-and-play inline-resistor adapters may also be available. 
+	Please see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:lights">Open Panzer Wiki - Lights</a> page for more information about the hardware.<br />
+	<br />
+	
+	The General Purpose I/O ports are logic-level which means that, unlike the AUX and light outputs, they can <i>not</i> provide very much current at all - 20mA max. Do not try to drive an 
+	LED directly from these ports! Again, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">Open Panzer Wiki - I/O Ports</a> page for more information 
+	on hardware limitations. 
+	</p>
+
+
+	<h2 id="brake">Brake and Running Lights</h2>
+	<p>
+	It is important to understand that the brake and running lights are the same light. When the brake light is on, the lamp will be at 100% brightness. When the "running" light is on, the lamp
+	will be at some dim level that you determine. You can eliminate the running-light effect by setting the dim level to 0 or simply don't  assign a trigger to turn it on. 
+	The brakes on the other hand do not need a trigger to operate - they will always come on automatically whenever the vehicle is braking.
+	</p>
+	
+	<h4 class="entry">Brake Lights On when Stopped</h4>
+	<p>
+	As mentioned, the brake lights will always come on (light to 100% brightness) when the vehicle is braking. But if you check this option, the brake lights will also automatically come on whenever
+	the vehicle is stopped <i>and</i> the engine is running.	</p>
+	
+	<h4 class="entry">Running Lights Dim Level</h4>
+	<p>
+	When brake lights are not active, you can choose to turn on or off "running" lights, which are simply the brake lights set to a lower brightness level as specified here. Running lights do not turn on automatically, you need to assign a trigger to them, such as a switch on your transmitter.	</p>
+
+	<h4 class="entry">Running Lights Always On</h4>
+	<p>
+	If you check this option, the running lights will always be on. In other words, the brake lights will always be on at the dim level specified until braking actually occurs, at 
+	which point they will be set to full brightness until braking action stops, and then they will return to the dim level. Use this option if you want running lights but don't 
+	want to assign a trigger to them. 
+	</p>
+
+
+	<h2 id="mg">Machine Gun Light</h2>
+	<h4 class="entry">Blink Interval</h4>
+	<p>
+	This setting is the speed in milliseconds (1,000 mS = 1 second) that the machine gun light blinks on and off. 
+	</p>
+	
+		
+	<h2 id="indicator">Lights Used as Indicators</h2>
+	<h4 class="entry">Blink All Lights When Radio Signal Lost</h4>
+	<p>
+	Check this box to blink every light (L1, L2, BRK, MG, APPLE HIT LEDs, and the onboard red and green LEDs) when the TCB detects a loss of radio signal. If you uncheck this option, 
+	the onboard red and green LEDs will still blink on loss of radio signal, but the others will not. <br><br>
+
+	Note: the TCB may not be able to detect a loss of signal in all cases. If your receiver
+	is set to continue trasnmitting data even when the signal is lost ("failsafe receiver"), then the TCB will have no way of knowing the radio is off.	For that reason, it is actually
+	better if you can disable any failsafe on your receiver. 
+	</p>
+	
+	<h2 id="hiflash">High Intensity Flash Unit</h2>
+	<h4 class="entry">Trigger with Cannon</h4>
+	<p>
+	If checked, the High-Intensity Flash output (FLASH on the TCB) will automatically be triggered when the Cannon Fire function is called. If unchecked, you can still trigger the flash
+	unit by itself by using the High Intensity Flash function. 
+	</p>	
+	
+	<h2 id="aux">Aux Output</h2>
+	<p>
+	The Aux Output uses the same JST-PH connector as the other light ports, and it can be used to drive another light the same as the others, just assign a trigger to turn it on or off. 
+	However this port also has several other options not available to any other port. The port can be dimmed to a preset level, or you can even assign a variable (analog) trigger 
+	to adjust the dim level on the fly. The Aux output can also be triggered to Flash (blink once) or Blink continuously until turned off. <br><br>
+	
+	The Aux Output port is also unique in that it is protected with a "flyback" diode. This makes it suitable for turning on/off an inductive load such as a 5 relay. It can even be used to 
+	drive a low-current motor (no greater than 500mA). <br><br>
+	
+	Note: just because the settings below are filled in, doesn't mean the Aux Output will actually do anything. To make it come on to a preset Dim level, or Flash, or Blink, you must 
+	assign triggers to those functions on the <a href="functions.html">Functions</a> tab.<br><br>
+	
+	For more information on the hardware limitations of this port, see the 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:special_aux_output">Open Panzer Wiki - Aux Output</a> page.<br><br>
+
+	For a complete list of all functions related to the Aux Output, see the
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:operation:functions">Open Panzer Wiki - Functions and Triggers</a> page. 
+	</p>
+	
+	<h4 class="entry">Dim - Preset Level</h4>
+	<p>		
+	The Aux Output has a function called "Aux Output - Preset Dim Level." If you trigger this funciton it is basically the same thing as turning the output On, except it will turn on to the 
+	preset dim level you specify here instead of to 100%.
+	</p>
+
+	<h4 class="entry">Flash - On Time</h4>
+	<p>		
+	The Aux Output has a function called "Aux Output - Flash." If you trigger this funciton, it will turn the Aux Output on for the length of time in milliseconds that you specify here
+	(1,000 mS = 1 second).
+	</p>
+	
+	<h4 class="entry">Blink - On and Off Time</h4>
+	<p>		
+	The Aux Output has functions called "Aux Output - Blink" and "Aux Output - Toggle Blink." The first function will start the Aux Output blinking indefinitely until you trigger the 
+	"Aux Output - Turn Off" function. The toggle function will toggle the blinking effect on and off each time it is triggered. Here you can set precisely both the on and off times 
+	that make up the blinking effect. 
+	</p>
+	
+	
+	<h2 id="io">General Purpose Input/Output Ports A &amp; B</h2>
+	<p>
+	The A &amp; B ports are general purpose, logic-level ports that can set to input or output depending on your needs.<br><br>
+
+	<b>Note:</b> if you don't intend to use ports A &amp; B, <b>leave them as inputs</b> (digital or analog doesn't matter).  As inputs there will be less chance of an accidental short
+	causing damage to the onboard processor.<br>
+	<br>
+	
+	<b>Note:</b> for more information on wiring input switches, potentiometers, or output devices to these ports, please see the 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">Open Panzer Wiki - I/O Ports</a> page. 
+	</p>
+	
+	
+	<h4 class="entry">Using the I/O as Inputs</h4>
+	<p>
+	If you set A or B to input they will show up in the Trigger Source list and you can use them to trigger any function.
+	</p>
+
+	<p>
+	<b>Digital Input:</b> If you want the input to be on/off, set the input type to "Digital (on/off)" and wire a switch such that the signal pin is connected to ground when the switch is in the on position, and 
+	disconnected when in the off position. You can now use this digital input to switch or toggle any digital function in the Function List. For example, you could use this as a physical 
+	switch on your model to turn on or off the engine if you didn't want to control that from your transmitter.
+	</p>
+
+	<p>
+	<b>Analog Input:</b> If you want the input to be variable, set the input type to "Analog (variable)" and attach a potentiometer of 1k - 10k resistance to the port such that the signal pin is connected to the
+	center tap of the potentiometer, and the two ends of the potentiometer are connected to +5v and Ground. Now you can use this analog input to adjust any analog function in the Function List. 
+	For example, you could install a potentiometer on your model to adjust the acceleration or deceleration constraint level, or both (you can assign more than one function to a single trigger). 
+	</p>
+	
+	<h4 class="entry">Using the I/O as Outputs</h4>
+	<p>
+	If you set A or B to output there will now be created several functions that you can trigger. If for example you set Port A to output, the following three functions will be added to the 
+	Function List: <br>
+	- External Output A - Toggle<br>
+ 	- External Output A - Turn On<br>
+	- External Output A - Turn Off
+	</p>
+
+	<p>
+	You can then assign any of these functions to other triggers such as switches on your transmitter. What you do with the output is up to you, but remember these are <b>logic-level</b>
+	outputs! That means they can <i>not source</i> enough current to actually power something, not even an LED! Instead consider the outputs like signals, and the signals can tell some
+	other more powerful circuit to do something, or they could be used as direct inputs into another microcontroller (such as another Arduino).<br>
+	<br>
+	If you want to use these outputs to turn on a lamp, or a relay, you will need to use a driver circuit. You can find a schematic for a MOSFET driver adapter on the Open Panzer Wiki 
+	designed specifically for this puropose, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page. 
+	</p>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

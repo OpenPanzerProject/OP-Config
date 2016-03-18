@@ -1,0 +1,97 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Miscellaneous</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#lvc">Low Voltage Cutoff</a></li>
+			<li><a href="#baud">Baud Rates</a></li>
+			<li><a href="#debug">Debugging</a></li>			
+		</ul>
+	</div>
+		
+	<h1>Miscellaneous Settings</h1>
+	
+	<h2 id="lvc">Low Voltage Cutoff</h2>
+	<p>
+	Low voltage cutoff is a feature to help protect the battery in your model from over-discharge. This can be especially important for lithium-polymer (LiPo) batteries, which can 
+	be permanently damaged if their voltage drops too low. With LVC enabled, if pack voltage drops below the level specified, all tank movement will be disabled and 
+	all lights attached to the TCB, as well as the two onboard red and green LEDs, will begin to blink in a pattern from fast to slow, over and over again.
+	</p>
+	
+	<h4 class="entry">Enabled</h4>
+	<p>
+	Check this to enabled LVC. If unchecked, the TCB will continue to operate no matter how low your battery voltage becomes!
+	</p>
+	
+	<h4 class="entry">Cutoff Voltage</h4>
+	<p>
+	Specify the voltage below which you want vehicle operation to cease. If you are using lithium-polymer batteries (LiPo) a conservative level would be 3.2 volts per
+	cell. In other words if you are using a 2S LiPo, a cutoff voltage of 6.4 volts would be reasonable. For NiCad and NiMH batteries 1 volt per cell is a typical cutoff level, 
+	so for a standard 6-cell Tamiya or Heng-Long NiCad pack a cutoff voltage of 6.0 volts would be reasonable.
+	</p>
+	
+	<p>
+	<b>Note:</b> Especially in the case of LiPo batteries, the voltage you measure when the pack is at rest (not powering anything) will be higher than it actually is under load. 
+	The TCB measures voltage under load when deciding if the LVC level has been reached. If afterwards you take the battery out and measure the voltage you may find it to be higher
+	than the LVC level you specified. That is because once the load was removed the pack's voltage rebounded. But rest assured it actually did reach the cutoff level at some point 
+	while the model was moving if the TCB entered cutoff mode. 
+	</p>
+	
+	<h2 id="baud">Baud Rates</h2>
+	<p>
+	There are 4 serial ports on the TCB. One is dedicated to the USB output and is hardcoded to a baud rate of 115,200. The baud rates for the other three can be adjusted.
+	</p>
+	
+	<h4 class="entry">Serial 1 - Aux</h4>
+	<p>
+	The Serial 1 (Auxiliary) port can be used for any purpose. It features the full compliment of pins required to connect a Bluetooth module or an FTDI adapter. Another 
+	potential use is to connect a serial-capable inertial-measurement-unit. All common baud rates can be selected.
+	</p>
+
+	<h4 class="entry">Serial 2 - Serial Motor Controller</h4>
+	<p>
+	The Serial 2 port is dedicated to communication with serial motor controllers. It has its own 2-pin JST-PH header on the TCB board. It can only transmit serial data, it can
+	not read serial input. Only two baud rates can be selected, 19200 and 38400. The default is 38400 and unless you have a specific reason to change it you should leave it at the 
+	default. This rate is known to work well with the Dimension Engineering and Pololu dual motor controllers.
+	</p>
+	
+	<h4 class="entry">Serial 3</h4>
+	<p>
+	The Serial 3 port has the reception and transmission pins routed to two different locations. The reception pin is attached to the RADIO input header and is used to read
+	data from SBus receivers. If an SBus receiver is detected, any baud rate setting here will be automatically overwritten with the non-standard SBus rate of 100000 and 
+	transmission out the SER.3 header disabled. If an SBus receiver is not detected, the Serial 3 port is available for transmission at whatever baud rate is specified here. 
+	Transmission will be out the SER.3 header, which is a 3-pin JST-PH connector that provides the transmission pin as well as +5v and Ground. This header could be used to attach a 
+	serial-enabled LCD such as those sold by SparkFun or Adafruit. At present no LCD code is implemented in the TCB firmware, and because the transmission port is disabled 
+	when an SBus receiver is used, this port is of little practical use except to developers.
+	</p>
+	
+	
+
+	<h2 id="debug">Debugging</h2>
+	<p>
+	If debugging is enabled, the TCB will send informative messages out whichever serial port is selected by Dipswitch 5. If Dipswitch 5 is in the On position, messages will go out the USB port. If it is in the Off position, messages will go out the Serial 1 (Aux Serial) port (Serial 1 can be used with a Bluetooth adapter). The easiest way to see debugging messages is to use the Snoop feature of OP Config to display them (see the <a href="firmware.html">Firmware</a> tab for more information 
+	on snooping). Of if you are developing using the Arduino IDE you can see these messages using the Arduino Serial Monitor. <br>
+	<br>
+	
+  	Debugging is very useful for troubleshooting and is enabled by default. However if your TCB is running as expected and all functionality has been verified, you may want to disable debugging messages
+	because they do slow down program operation. The effect is unlikely to be noticeable, but if you are not using the debug feature anyway, go ahead and turn it off.	
+	</p>
+	
+    <br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

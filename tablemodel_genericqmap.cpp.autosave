@@ -1,0 +1,184 @@
+#include "tablemodel_genericqmap.h"
+
+TriggerSourceModel::TriggerSourceModel(QObject *parent) : QAbstractTableModel(parent)
+{
+    // These are always present
+    triggerMap.insert(TS_NULL, "");                       // No function
+    triggerMap.insert(TS_TURRETSTICK, "Turret Stick");    // Turret stick
+    triggerMap.insert(TS_AUX1, "Aux Channel 1");          // Aux channel 1
+    triggerMap.insert(TS_AUX2, "Aux Channel 2");          // Aux channel 2
+    triggerMap.insert(TS_AUX3, "Aux Channel 3");          // Aux channel 3
+    triggerMap.insert(TS_AUX4, "Aux Channel 4");          // Aux channel 4
+
+    // These others may or may not be, dependingon if input A/B were set as inputs or not
+    // TS_INPUT_A
+    // TS_INPUT_B
+}
+
+int TriggerSourceModel::rowCount(const QModelIndex & /* parent */) const
+{
+    if (triggerMap)
+        return triggerMap.count();
+    return 0;
+}
+
+int TriggerSourceModel::columnCount(const QModelIndex & /* parent */) const
+{
+    return triggerMap.count();
+}
+
+QVariant TriggerSourceModel::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid())
+        return QVariant();
+
+    if (role == Qt::TextAlignmentRole)
+    {
+        return int(Qt::AlignRight | Qt::AlignVCenter);
+    }
+    else if (role == Qt::DisplayRole)
+    {
+        _trigger_source ts = triggerSourceAt(index.row());
+        QString td = triggerDescriptionAt(index.row());
+
+        if (index.column() == 0)
+            return ts;
+        else if (index.column() == 1)
+            return td;
+    }
+    return QVariant();
+}
+
+QVariant TriggerSourceModel::headerData(int section, Qt::Orientation /* orientation */, int role) const
+{
+    if (role != Qt::DisplayRole)
+        return QVariant();
+
+    return triggerDescriptionAt(section);
+}
+
+// The insertRows() function is called before new data is added, otherwise the data will not be displayed.
+// The beginInsertRows() and endInsertRows() functions are called to ensure all connected views are aware of the changes.
+bool TriggerSourceModel::insertRows(int position, int rows, const QModelIndex &index)
+{
+    Q_UNUSED(index);
+    beginInsertRows(QModelIndex(), position, position+rows-1);
+    for (int row=0; row < rows; row++)
+    {
+        // Blank holder row with invalid key (will get overwritten with setData
+        triggerMap.insert(-1, "");
+    }
+    endInsertRows();
+    return true;
+}
+
+// This just calls insertRows() with one row
+bool TriggerSourceModel::insertRow(int position, const QModelIndex &index)
+{
+    return this->insertRows(position, 1, index);
+}
+
+// The setData() function is the function that inserts data into the table, item by item and not row by row.
+// It is important to emit the dataChanged() signal as it tells all connected views to update their displays.
+bool TriggerSourceModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (index.isValid() && role == Qt::EditRole)
+    {
+        int row = index.row();
+
+        functionTriggerData ftd = listOfTriggerData.value(row);
+        //QList< functionTriggerData > ftd = listOfTriggerData.at(row);
+        //functionTriggerData *ftd = &(listOfTriggerData.at(row));
+        //QList< functionTriggerData > ftd = listOfTriggerData
+
+        if (index.column() == 0)
+            triggerMap.insert("", static_cast<_trigger_source>(value.toUInt()));   // We don't know the value yet, so set it to blank
+        else if (index.column() == 1)
+            // Here now is the value
+            triggerMap.value
+            ftd.functionTrigger.specialFunction = static_cast<_special_function>(value.toUInt());
+        else if (index.column() == 2)
+            ftd.TriggerDescription = value.toString();
+        else if (index.column() == 3)
+            ftd.FunctionDescription = value.toString();
+        else
+            return false;
+
+        listOfTriggerData.replace(row, ftd);
+        emit(dataChanged(index, index));
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// The removeRows() function is called to remove data. Again, beginRemoveRows() and endRemoveRows() are called
+// to ensure all connected views are aware of the changes.
+bool TriggerSourceModel::removeRows(int position, int rows, const QModelIndex &index)
+{
+    Q_UNUSED(index);
+    beginRemoveRows(QModelIndex(), position, position+rows-1);
+    for (int row=0; row < rows; ++row)
+    {
+        listOfTriggerData.removeAt(position);
+    }
+    endRemoveRows();
+    return true;
+}
+
+
+
+
+// The flags() function returns the item flags for the given index.
+Qt::ItemFlags TriggerSourceModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())        return Qt::ItemIsEnabled;
+
+    // We set the Qt::ItemIsEditable flag because we want to allow the TableModel to be edited.
+    return QAbstractTableModel::flags(index) | Qt::ItemIsEditable;
+}
+
+
+
+_trigger_source TriggerSourceModel::triggerSourceAt(int offset) const
+{
+    return (triggerMap.begin() + offset).key();
+}
+
+QString TriggerSourceModel::triggerDescriptionAt(int offset) const
+{
+    return (triggerMap.begin() + offset).value();
+}
+
+/*
+void TriggerSourceQMap::addInputA(void)
+{
+    _TS_QMAP.insert(TS_INPUT_A, "Input A");
+}
+
+void TriggerSourceQMap::addInputB(void)
+{
+    _TS_QMAP.insert(TS_INPUT_B, "Input B");
+}
+
+void TriggerSourceQMap::removeInputA(void)
+{
+    if (_TS_QMAP.contains(TS_INPUT_A))
+    {
+        _TS_QMAP.remove(TS_INPUT_A);
+    }
+}
+
+QString TriggerSourceQMap::getDescription(_trigger_source ts)
+{
+    return _TS_QMAP.value(ts);
+}
+
+QMap<_trigger_source, QString> TriggerSourceQMap::getMap()
+{
+    return _TS_QMAP;
+}
+*/

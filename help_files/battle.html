@@ -1,0 +1,218 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Battle</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#weightclass">Custom Weight Class</a></li>
+			<li><a href="#cannon">Cannon IR</a></li>
+			<li><a href="#mg">Machine Gun IR</a></li>			
+			<li><a href="#repair">Repair IR</a></li>
+			<li><a href="#damage">Damage Settings</a>
+		</ul>
+	</div>
+		
+	<h1>Battle</h1>
+	<p>
+	With the addition of an IR transmitter and a compatible IR receiver (often called an "apple"), the TCB can engage in IR 
+	battle with other tanks.<br><br>
+	
+	For details on the hardware requirements, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:ir">Open Panzer Wiki - Infra-Red</a> page. 
+	</p>
+
+	
+	<h2 id="weightclass">Custom Weight Class</h2>
+	<p>
+	<div style="float: right;"><img src="images/weightclassdip.png"/><br><i>Dipswitch settings for weight class</i></div>
+	IR battle was originally popularized by Tamiya and their concept of weight classes has become a standard in the industry. Tamiya defines three tank 
+	weight classes: Light, Medium and Heavy. Each class specifies the amount of time it takes for the tank to reload (firing rate), the number of hits a
+	tank can receive before being destroyed, and how long of an invulnerability time the tank is given after being destroyed. The TCB
+	implements these three weight classes precisely as defined by Tamiya, but also allows the user to specify a Custom weight class with their own settings.<br>
+	<br>
+	
+	The vehicle's weight class is selected by dip-switches on the TCB board. This allows you to easily change the weight class in the field without needing a computer or any other 
+	equipment. Note that if you change the weight class, you must reboot the TCB for the change to take effect (to reboot, press the RESET button on the TCB). <br><br>
+	
+	For reference, the Tamiya weight class settings are listed here:<br><br>
+	
+	<table>
+		<tr>
+			<td colspan="4" align="center" class="tabletitle">Tamiya Weight Classes</td>
+		</tr>
+		<tr>
+			<th>Class</th>
+			<th>Reload Time</th>
+			<th>Max Hits</th>
+			<th>Invulnerability Time</th>
+		</tr>
+		<tr>
+			<td>Light</td>
+			<td>3 sec.</td>
+			<td>3</td>
+			<td>15 sec.</td>
+		</tr>
+		<tr>
+			<td>Medium</td>
+			<td>5 sec.</td>
+			<td>6</td>
+			<td>12 sec.</td>
+		</tr>
+		<tr>
+			<td>Heavy</td>
+			<td>9 sec.</td>
+			<td>9</td>
+			<td>10 sec.</td>
+		</tr>
+	</table>
+
+	</p>
+
+
+	<h3>Custom Weight Class Settings</h3>
+
+	<h4 class="entry">Max Hits - Cannon</h4>
+	<p>
+	This setting defines how many cannon hits the vehicle can take before being destroyed. This is the primary setting that determines how "light" or "heavy" a vehicle is. 
+	</p>
+
+	<h4 class="entry">Cannon Reload Time</h4>
+	<p>
+	How much time must expire after firing the cannon before the cannon can be fired again. As a rule, lighter vehicles can reload faster than heavier ones. 
+	</p>
+	
+	<h4 class="entry">Invulnerability Time</h4>
+	<p>
+	As per the Tamiya spec, a destroyed vehicle is rendered inoperative for 15 seconds. After that the vehicle automatically comes back to life, or "re-spawns" to use a computer gaming term. 
+	Tamiya calls this "recovery mode." During recovery mode the tank is invulnerable to enemy fire, but is allowed to fire its own cannon. Invulnerability time is intended to give
+	the newly recovered vehicle an opportunity to move to a defensive position. Light vehicles typically have longer invulnerability times, and heavy vehicles shorter times. 
+	</p>
+
+
+	<h2 id="cannon">Cannon IR</h2>
+	<h4 class="entry">Cannon IR Protocol</h4>
+	<p>
+	Select the IR protocol your tank will transmit when the cannon is fired. Of course your tank will will also accept hits from this protocol.<br><br>
+	
+	<b>Note:</b> If you select the Tamiya protocol, your tank will also automatically accept hits from the Tamiya 2-Shot Kill protocol. If you select the Tamiya 2-Shot Kill protocol, 
+	your tank will also automatically accept hits from the regular Tamiya protocol. But although the TCB will accept hits from both, it can only fire one protocol. In other words your TCB will operate the same way a Tamiya MFU would. <br>
+	<br>
+	
+	<b>List of Supported Cannon Protocols:</b>
+	<ul class="smalllist">
+		<li><b>Tamiya</b> - 1/16th Tamiya IR, the industry standard.</li>
+		<li><b>Tamiya 2-Shot Kill</b> - an undocumented Tamiya code that will kill any opponent in two shots, regardless of their weight class.</li>
+		<li><b>Taigen</b> - protocol from Taigen 2.4GHz MFU.</li>
+		<li><b>Heng-Long</b> - protocol from Heng-Long RX-18.</li>
+		<li><b>Tamiya 1/35</b> - protocol from Tamiya 1/35 scale 2.4GHz RC tank kits. This is not compatible with the 1/16th Tamiya code.</li>
+		<li><b>VsTank 1/24</b> - protocol from VsTank "Pro" 1/24th scale RTR models.</li>
+		<li><b>Forces of Valor 1/24</b> - protocol from FOV 1/24th scale RTR models. Teams are supported. (These models appear to be discontinued.)</li>
+	</ul>
+	</p>
+
+	<h4 class="entry">Team</h4>
+	<p>
+	Some protocols implement a team setting that can be used to ignore hits from other members of the same team.
+	</p>
+	
+	<h4 class="entry">Also Accept Hits From</h4>
+	<p>
+	If desired,  you can choose an opptional second protocol to accept hits from in addition to the primary protocol. Your tank will <i>not</i> not fire this secondary protocol - it 
+	will only accept hits from it.
+	</p>
+
+
+	<h2 id="mg">Machine Gun IR</h2>
+	<h4 class="entry">Machine Gun IR Protocol</h4>
+	<p>
+	If desired, select a machine gun IR protocol you would like to transmit or take damage from.<br><br>
+	
+	<b>List of Supported Machine Gun Protocols:</b>
+	<ul class="smalllist">
+		<li><b>Clark MG</b> - Machine gun code for Clark TK series devices (TK-22, TK-60). This is the same code as #3 on any Sony TV remote.</li>
+		<li><b>RCTA MG</b> - RC Tanks Australia machine gun code, as used by the Mako 2, Mako 2 SMD, ASP Control Units, etc.</li>
+	</ul>
+	</p>
+
+	<h4 class="entry">Send IR with Machine Gun Fire</h4>
+	<p>
+	Check this option to enable transmission of the selected IR protocol whenever the machine gun is fired. Unlike the cannon IR protcol, the machine gun IR signal is repeated over
+	and over for as long as the machine gun is active. 
+	</p>
+
+	<h4 class="entry">Take Damage from MG Hits</h4>
+	<p>
+	Check this option to enable vehicle damage from incoming machine gun hits. 
+	</p>
+
+	<h4 class="entry">Max Hits - Machine Gun</h4>
+	<p>
+	If you have enabled the option to Take Damage from MG Hits, set how many hits it will take to destroy your vehicle. Unlike the number of cannon hits this setting 
+	does not vary by weight class - if enabled, it applies to all weight classes the same (including the Custom weight class). 
+	</p>
+
+
+
+	<h2 id="repair">Repair IR</h2>
+	<p>
+	Assuming your vehicle has already taken some damage, if it is then "hit" with a repair IR code it will be repaired by the amount of one cannon hit (or the equivalent number of machine 
+	gun hits). This feature is always active, all you need to do is select which repair protocol you want to accept hits from. A repair operation takes 15 seconds and during that time
+	your vehicle's transmission will be disengaged and your cannon disabled. In other words, your vehicle is especially vulnerable to enemy fire while being repaired.<br>
+	<br>
+	
+	You can choose whether to fire the Cannon IR code or the Repair IR code depending on the position of the fight/repair switch on the TCB:<br>
+	<br>
+	- In the FIGHT position, the Cannon IR code will be sent for the protocol you selected above. If a sound unit is attached the cannon sound will play, and if enabled the mechanical 
+	recoil or airsoft units will be triggered, as will the servo recoil effect. <br><br>
+	- In the REPAIR position, the Repair IR code will be sent instead, and it will be sent with much less power, so you need to be very close to the tank you are going to repair in order 
+	for the hit to be registered. If a sound unit is attached the special repair sound will be played instead of the usual cannon sound. Mechanical recoil and airsoft will <u>not</u> be 
+	triggered, nor will the servo recoil effect. Additionally, as soon as you fire the repair signal your vehicle's transmission will be disengaged and you will be unable to drive 
+	for 15 seconds while the repair operation is underway (the tank you are repairing will also be immobilized for 15 seconds). If installed, indicator LEDs in the "apple" on both the tank 
+	doing the repair and the tank being repaired will blink in a pattern that starts slow and speeds up faster, over and over again until the 15 second repair period is over.<br><br>	
+
+	<b>List of Supported Repair Protocols:</b>
+	<ul class="smalllist">
+		<li><b>Clark Repair</b> - Repair code for Clark TK series devices (TK-22, TK-60). This is the same code as #1 on any Sony TV remote.</li>
+		<li><b>IBU Repair</b> - Repair code used by the Italian Battle Unit 2 (IBU2 and IBU2 Pro).</li>
+		<li><b>RCTA Repair</b> - RC Tanks Australia repair code, as used by the Mako 2, Mako 2 SMD, ASP Control Units, etc.</li>
+	</ul>
+	</p>
+	
+	<h4 class="entry">Repair Protocol</h4>
+	<p>
+	Select the repair protocol you want to use - both in being repaired, and to repair others if your tank is set to Repair mode. 
+	</p>
+
+	<h2 id="damage">Damage Settings</h2>
+	<h4 class="entry">Damage Definition</h4>
+	<p>
+	A Damage Definition is a collection of rules that describe what happens to a vehicle as it receives hits from IR-enabled enemies. The Tamiya specification is the most well known. 
+	The TCB has capabilities that would make more creative and interesting Damage Definitions possible, but they are still under development.
+
+	<ul class="smalllist">
+		<li><b>Tamiya Spec:</b> Tamiya defines damage from incoming hits as a reduction in vehicle speed. The first hit always results in a 50% reduction in speed. Speed will remain at 50% for subsequent hits
+		until the total number of of hits received equals approximately half of the number required to destroy the vehicle, at which point the speed will be reduced to 25%. Speed will then remain 
+		at 25% until the vehicle is destroyed. After being destroyed the tank is completely immobilized for 15 seconds, after which it automatically "recovers&quot; with full health.  The TCB 
+		accurately reproduces the Tamiya damage specification, and it will even apply the same rules to custom weight classes as well as account for machine gun hits.</li>
+		<li><b>Experimental:</b> Additional damage profiles are still under development. The Experimental option is for developers to use in testing. See the 
+		<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:operation:battle">Open Panzer Wiki - IR Battle</a> page for up to date information.</li>
+	</ul>
+
+</p>
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

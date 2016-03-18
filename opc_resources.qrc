@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/formbackground.png</file>
+        <file>images/resize_handle.png</file>
+        <file>images/workformbackground.png</file>
+        <file>images/borderimage_work.png</file>
+        <file>images/download.png</file>
+        <file>images/upload.png</file>
+        <file>images/refresh.png</file>
+        <file>css/msgbox.qss</file>
+        <file>css/helpbutton.qss</file>
+        <file>images/downarrow.png</file>
+        <file>images/downarrowdisabled.png</file>
+        <file>css/channelsliderhigh.qss</file>
+        <file>css/channelsliderlow.qss</file>
+        <file>images/spin_uparrow.png</file>
+        <file>images/spin_downarrow.png</file>
+        <file>css/contentframe.qss</file>
+        <file>images/spin_downarrow_disabled.png</file>
+        <file>images/spin_uparrow_disabled.png</file>
+        <file>images/TCB.png</file>
+        <file>images/OP.png</file>
+        <file>images/tableheader_downarrow.png</file>
+        <file>images/tableheader_uparrow.png</file>
+        <file>images/checkbox_checked.png</file>
+        <file>images/checkbox_unchecked.png</file>
+        <file>images/checkbox_checked_hover.png</file>
+        <file>images/checkbox_unchecked_hover.png</file>
+        <file>images/checkbox_disabled_checked.png</file>
+        <file>images/checkbox_disabled_unchecked.png</file>
+        <file>images/consoledownarrow.png</file>
+        <file>images/consoleuparrow.png</file>
+        <file>images/functiontabledownarrow.png</file>
+        <file>images/functiontableuparrow.png</file>
+        <file>images/help.png</file>
+        <file>images/AboutIcon.png</file>
+        <file>images/opconfig.png</file>
+        <file>images/opconfig_header.png</file>
+        <file>images/tcb_subheader.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>images/OP_Icon_16.png</file>
+        <file>images/OP_Icon_32.png</file>
+        <file>images/OP_Icon_48.png</file>
+        <file>images/OP_Icon_256.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,16 @@
+
+<img src="/images/opconfig.png" />
+<br />
+<br />
+
+<span style="font-size: 14px;">
+	A desktop configuration program&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+	for the Open Panzer TCB.
+</span>
+<br />
+<br />
+
+<span style="font-size: 12px;">
+	&#169; <a href="http://www.openpanzer.org/" style="color: #330055; border-bottom: 1px solid #330055;background: #E7E0EB;">OpenPanzer.org</a>
+</span>
+

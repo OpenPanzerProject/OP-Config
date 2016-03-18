@@ -1,0 +1,302 @@
+/* 
+ *	Class = .	Can be repeated
+ *	ID = #		Must be unique	
+ */
+
+body
+{
+	margin: 5px 10px;	/* Small margin on top, a bit more to the sides. */
+	padding: 10;
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 16px;	
+	background:#f6f6f6;
+}
+
+body, td, th, tr
+{	
+	color: #000000;
+	/*	color: #454F65; */	/* use dark grey for the text, leaving #000 for headers etc */
+}
+
+img
+{
+	max-width: 100%;
+	height: auto;
+}
+
+b
+{
+	font-weight: bold;
+	color: #454F65;
+}
+.boldred
+{
+	font-weight: bold;
+	color: #990000;
+}
+
+a:link, a:visited
+{
+	text-decoration: none;	
+	color: #330055;	/* dark purple */
+	border-bottom: 1px solid #330055;
+}
+a:hover
+{
+	background: #E7E0EB;	/* light purple */	
+	text-decoration: underline;
+	border-bottom: none;	/* Turn off the bottom border, and use an underline instead */	
+	cursor: pointer;
+}
+
+p
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px; 
+	margin-bottom: 15px;
+}
+
+h1, h2, h3, h4
+{
+	font-weight: bold;
+}
+
+h1
+{
+	color: #330055; /* dark purple */
+	margin: 0px;
+	padding: 0px;
+	border: 0px; 
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 30px; 
+}
+
+h2
+{
+	color: #5F009D;	/* bright purple */
+	margin: 0px;
+	padding: 0px;
+	border: 0px; 
+	margin-top: 60px;	
+	margin-bottom: 20px;
+	font-size: 26px; 
+}
+
+h3
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px; 
+	margin-top: 60px;				
+	margin-bottom: 20px;
+	font-size: 22px; 
+}
+
+h4
+{
+	margin: 0px;
+	padding: 0px;
+	border: 0px; 
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 18px; 
+}
+h4.entry
+{
+	padding-left: 15;
+    background: url('images/h4_icon.png');
+    background-repeat: no-repeat;
+}
+
+/* ol { */
+.tealred_ol {
+    counter-reset:li; /* Initiate a counter */
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+}
+/* ol > li {	*/
+.tealred_ol li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 20px 2em; /* Give each list item a left margin to make room for the numbers (2em)*/
+    padding:4px 8px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+    border-top:2px solid #CC0000; 
+}
+/*ol > li:before { */
+.tealred_ol li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box; 
+    box-sizing:border-box;
+    width:2em;
+	border: 2px solid #CC0000;
+    border-top:2px solid #CC0000;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+    color:#fff;
+	color:#000;
+    background:#33FFFF;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+}
+
+/* This is a purple and white version of the fancy ordered list */
+.purplewhite_ol {
+    counter-reset:li; /* Initiate a counter */
+    margin-left:0; /* Remove the default left margin */
+    padding-left:0; /* Remove the default left padding */
+}
+.purplewhite_ol li {
+    position:relative; /* Create a positioning context */
+    margin:0 0 20px 2em; /* Give each list item a left margin to make room for the numbers (2em) */
+    padding:4px 8px; /* Add some spacing around the content */
+    list-style:none; /* Disable the normal item numbering */
+    border-top:2px solid #330055; 
+}
+.purplewhite_ol li:before {
+    content:counter(li); /* Use the counter as content */
+    counter-increment:li; /* Increment the counter by 1 */
+    /* Position and style the number */
+    position:absolute;
+    top:-2px;
+    left:-2em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box; 
+    box-sizing:border-box;
+    width:2em;
+    border-top:2px solid #330055;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	background: #330055;
+    color:#fff;
+    font-weight:bold;
+    font-family:"Helvetica Neue", Arial, sans-serif;
+    text-align:center;
+}
+li ol,
+li ul 
+{
+	margin-top:6px;
+}
+ol ol li:last-child 
+{
+	margin-bottom:0;
+}
+ol img
+{
+	margin-left: 2em;
+}
+ul
+{
+	list-style-image: url('images/ul_icon.png');
+}
+ul li, ol li
+{
+	margin-bottom: 20px;
+}
+
+div#toc {
+	float:right;
+	padding: 10px;
+	/* We use border and outline to create a double border */
+	border: 6px solid #E1E3E3;
+	outline: 1px solid #666;
+	outline-offset: -7px;
+	background-color: #FFF;
+}
+#toc h3 {
+	margin-top: 10px;
+	margin-bottom:6px;
+	padding: 0;
+}
+
+#toc a:link, #toc a:visited
+{
+	text-decoration: none;	
+	background: none;
+/*	background: #E7E0EB;	/* light purple */
+/*	color: #330055;	/* dark purple   */
+	color: #5F009D; /* bright purple */
+	border-bottom: 1px solid #330055;
+}
+#toc a:hover
+{
+	text-decoration: none;	
+/*	background: #C8B8D1;	/* shade darker purple */
+	background: #E7E0EB;	/* light purple */	
+	border-bottom: 1px solid #000;
+	cursor: pointer;
+}
+#toc ul
+{
+	margin: 0;
+}
+#toc li
+{
+	margin-bottom: 5px;
+}
+
+.smalllist ul
+{
+	margin: 0;
+	list-style-image: url('images/ul_icon.png');
+}
+.smalllist li
+{
+	margin-bottom: 7px;
+}
+
+/* Tables should show empty cells. */
+table
+{
+	empty-cells: show;
+	/* We use border and outline to create a double border */
+/*	border: 2px solid #666; */
+	border-collapse: collapse;
+
+	border: 6px solid #E1E3E3;
+	outline: 1px solid #666;
+	outline-offset: -7px;
+	background-color: #FFF;
+/*	width: 80%; */
+}
+/* This lets us use a different border color on the interior cells than we do for the overal table border */
+td + td,
+th + th 
+{ 
+	border-left: 1px solid #CCC; 
+}
+tr + tr 
+{ 
+	border-top: 1px solid #CCC; 
+}
+td, th 
+{ 
+	padding: 6px; 
+	margin: 1px;
+}
+th
+{
+	height: 40px;
+	vertical-align: middle;
+	text-align: left;
+	background-color: #E1E3E3;
+}
+/* Table title */
+.tabletitle
+{
+	font-weight: bold;
+	color: #330055;	
+}
+
+
+
+

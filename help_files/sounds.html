@@ -1,0 +1,93 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Benedini Sound</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#squeak">Squeak Settings</a></li>
+			<li><a href="#other">Other Sound Settings</a></li>
+		</ul>
+	</div>
+		
+	<h1>Sound Settings</h1>
+	
+	<h2>Sound Device Selection</h2>
+	<p>
+	Presently the TCB is only compatible with the <a href="http://www.benedini.de/">Benedini</a> sound cards - tested to work with the TBS Mini but it should also be compatible with 
+	the TBS Micro. Setup is simple, connect Prop 1, 2 &amp; 3 from the TBS Mini to Prop 1, 2, &amp; 3 on the TCB. Then add your sounds to the TBS Mini using the Benedini TBS-Flash
+	program. Sounds must be organized in a specific order, which is however simple to do. The TCB can trigger up to 13 sounds on the Benedini device, <i>in addition</i> to 
+	all engine sounds (startup, shutdown, idle, accelerate, etc):
+	<ul class="smalllist">
+		<li>Turret rotation</li>
+		<li>Cannon fire</li>
+		<li>Machine gun fire</li>
+		<li>Cannon hit</li>
+		<li>Machine gun hit</li>		
+		<li>Vehicle destroyed</li>
+		<li>Headlight (switch) on/off sound</li>
+		<li>Squeak 1</li>
+		<li>Squeak 2</li>
+		<li>Squeak 3</li>
+		<li>Custom User Sound 1</li>
+		<li>Custom User Sound 2</li>
+		<li>Repair sound</li>
+	</ul>
+	
+	For complete instructions on how to set up your TCB sound card, please see the 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:sound">Open Panzer Wiki - Sound</a> page.
+	</p>
+
+	<h2 id="squeak">Squeak Settings</h2>
+	<p>
+	The TCB allocates 3 sounds slots to random squeaks (Squeak 1, 2 and 3). When the vehicle is moving, the TCB will trigger each squeak sound randomly within certain time windows that
+	you can adjust. To understand how the random trigger works, let's take an example. Suppose we set the Minimum time interval for Squeak 2 to 2000 mS (2 seconds). Suppose
+	we set the Maximum time interval to 5000 mS (5 seconds). The TCB will pick a random length of time that is at least 2 seconds but no more than 5 second. It will wait for this
+	random length of time, and when that time is up, it will cause the Squeak 2 sound to play. Then it will select a new random length of time that again can be any value at least
+	2 seconds long but no longer than 5 seconds. In other words, the Minimum interval is the minimum length of time that will ever pass before a squeak repeats itself while the 
+	Maximum interval is the maximum length of time before a squeak will repeat itself; but the actual length of time between those two extremes is selected at random.<br><br>
+	
+	This random selection process continues for all three squeaks simultaneously so long as the vehicle is moving. 
+	</p>
+
+	<h4 class="entry">Enabled, Min, Max</h4>
+	<p>
+	Enable or disable each squeak, and set a minimum and maximum interval for it to repeat. 
+	</p>
+	
+	<h4 class="entry">Minimum Speed Before Squeaking</h4>
+	<p>
+	Set the minimum vehicle speed that must be reached before the random squeaking process can begin. It can sound unrealistic if your tank has barely started moving and already it is 
+	squeaking.
+	</p>
+
+
+	<h2 id="other">Other Sound Settings</h2>
+	
+	<h4 class="entry">Enable Headlight Sound</h4>
+	<p>
+	Check this option to automatically play the Headlight (Switch On/Off) sound whenever any trigger turns on or off the headlights (Light 1). 
+	</p>
+	
+	<h4 class="entry">Enable Turret Sound</h4>
+	<p>
+	Check this option to enable the turret rotation sound, uncheck to disable. 
+	</p>
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

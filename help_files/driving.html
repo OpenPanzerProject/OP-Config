@@ -1,0 +1,252 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Driving Adjustments</title>
+	<link rel="stylesheet" type="text/css" href="opconfighelp.css">
+</head>
+
+
+<body>
+
+	<div id="toc">
+		<h3>Topics</h3>
+		<ul>
+			<li><a href="#driving">Driving Adjustments</a></li>
+			<li><a href="#turning">Turning Adjustments</a></li>			
+			<li><a href="#acceldecel">Inertia &amp; Momentum</a></li>
+			<!-- <li><a href="#imu">Inertial Measurement Unit (IMU)</a></li> -->
+		</ul>
+	</div>
+		
+	<h1>Driving Adjustments</h1>
+	<p>
+	The settings on this tab all impact the manner in which the vehicle moves. 
+	</p>
+
+	
+	<h2>Engine and Transmission Basics</h2>
+	<p>
+	Although in reality the electric motor(s) in your model can be energized at any time, and there is no "neutral" gear in the gearbox unit, the TCB creates an "engine" and "transmission" 
+	in software. Before the TCB will allow your model to move, the engine must be "started" and the transmission "engaged." In addition to adding realism, this arrangement has several other 
+	benefits as we shall see. Let's take this step-by-step. To begin moving your vehicle: <br><br>
+	1. Start the engine. You can assign a trigger to the start engine function, or have it automatically occur with throttle input (see the setting below).<br><br>
+	2. When the TCB "starts the engine" it directs the engine startup sound to play and sets the Smoker to Fast Idle speed. It begins a timer for the length of time you specify below (Transmission Engage Delay) and when that time
+	expires, for your convenience it automatically engages the transmission. This delay is useful to prevent your model from moving while the startup sound is still playing.<br><br>
+	3. When the transmission is engaged, the Smoker speed is reduced from Fast Idle to Idle (see the <a href="motors.html#smoker">Motors</a> tab for Smoker speed settings).<br><br> 
+	4. Throttle movements will now result in vehicle movement.<br><br>
+	5. At any time you can choose to disengage and re-engage the transmission by assigning a trigger to those functions. While the transmission is disengaged you can still manipulate the throttle. When you
+	do so, the engine sound will speed up, as will the Smoker speed, but the tank will not move. It is just like pressing the gas pedal in your car while in neutral.<br><br> 
+	6. At any time you can turn off the engine by assigning a trigger to that function, or enabling the setting that automatically turns it off after a set amount of time at idle (see below). 
+	When the engine is turned off the motor shut-down sound plays, the smoker stops, and the tank ceases all movement. However even when the engine is stopped, you can still control the 
+	turret, cannon, and machine gun.
+	</p>
+
+	<h2 id="driving">Driving Adjustments</h2>
+	<h3>Engine Starting and Stopping</h3>
+	<h4 class="entry">Auto-Start Engine with Throttle</h4>
+	<p>
+	If you don't want to assign a trigger to turn on the engine, you can enable this option. 
+	The engine will automatically be started the first time you move the throttle forward (throttle stick must be moved more than halfway to full throttle).
+	</p>
+
+	<h4 class="entry">Auto-Stop Engine when Idle</h4>
+	<p>
+	If you would like the engine to automatically turn off after the tank has been sitting idle for some length of time, specify the time here in minutes. This can be useful 
+	if you don't want to assign a trigger to the engine off function. If set to zero (0) the effect is disabled and your tank will idle for as long as you let it 
+	(or until Low Voltage Cutoff is reached, see the <a href="misc.html#lvc">Misc</a> tab). 
+	</p>
+
+	<h3>Limit Reverse Speed</h3>
+	<h4 class="entry">Max Reverse Speed</h4>
+	<p>
+	This option lets you set a maximum reverse speed as a percent of full speed. If 100%, the vehicle will be capable of traveling in reverse just as fast as it can forward. 
+	If 0%, reverse will be disabled. 
+	</p>
+
+	<h3>Nudge Motors on Start</h3>
+	<p>
+	Much effort has gone into programming the TCB so that we can control our models in a realistic manner. Everyone is aware of what the stock Heng-Long driving experience looks like, 
+	and it's not realistic. The best way to improve the appearance of our vehicle's movement is by setting acceleration and deceleration constraints (discussed below). But at 
+	high inertia levels (meaning the vehicle accelerates slowly), driving may be smooth but starting from a stop can suffer. We may be required to give large throttle commands to get the 
+	vehicle started, the vehicle may then start moving faster than we had wanted it to, and the feeling of throttle responsiveness at low throttle settings can decrease. That is because
+	it takes more power to overcome the resistance of a stationary gearbox and drivetrain, than it does to keep those things moving once they've started. The Nudge feature was created
+	to address these issues.<br><br>
+	
+	A "Nudge" only occurs when the tank has been stopped and is first starting to move (either in forward or reverse). If enabled, Nudge will apply a certain minimum throttle setting
+	for a specified length of time that over-rides any acceleration constraint. When the Nudge Time is over, throttle response will revert to whatever constraint has been applied. A Nudge
+	will not be applied again until the vehicle has once again come to a stop.<br><br>
+	
+	If you are not using any acceleration constraint, or the level is very low, you may not need any Nudging. If so, disable Nudge by setting the percent to 0. Otherwise, a good starting point
+	for testings is 30% Nudge for 250-500 mS (1/4 - 1/2 of a second). Adjust from there to fit your model and driving preference. 
+	</p>
+	
+	<h4 class="entry">Motor Nudge Percent</h4>
+	<p>
+	This is the minimum throttle that will be applied during the nudge. Set to 0 to disable the Nudge effect. 
+	</p>
+
+	<h4 class="entry">Nudge Time</h4>
+	<p>
+	This is how long the Nudge effect will last in milliseconds (1 mS = 1 second). 
+	</p>
+
+	<h3>Driving Delays</h3>
+	<h4 class="entry">Transmission Engage Delay</h4>
+	<p>
+	This delay is the length of time that will pass from when the engine is first started, and when the TCB automatically engages the transmission as a convenience to the user. 
+	This length of time should be at least as long as your engine startup sound clip, to prevent the vehicle from moving while the startup sound is still playing. Setting is in seconds. 
+	</p>
+
+	<h4 class="entry">Engine On/Off Delay</h4>
+	<p>
+	This delay will be the minimum length of time that must pass before the engine can be turned on after being turned off, or turned off after being turned on. If you turn the engine 
+	on and off back and forth too quickly, it is possible for the sound unit to become out of sync - you may find the engine sound playing when the engine is off, and no sound playing
+	when the engine is on. This setting can help you prevent that, but if it does happen, simply reboot the TCB by pressing the RESET button on the board, or just cycle power to the board
+	and the issue will resolve itself. Setting is in seconds. 
+	</p>
+
+	<h4 class="entry">Change Direction Delay</h4>
+	<p>
+	This setting is intended to help prevent unnecessary wear on your gearbox. If set to 0 (disabled), it will be possible to change direction from forward to reverse (or vice versa), 
+	instantaneously. This can be very hard on the gearbox not to mention the drivetrain and your model generally. Obviously it also doesn't look very realistic. Set a delay here to prevent 
+	this sort of whiplash from happening. The delay will represent the amount of time your model must be <i>stopped</i> before it can change direction from forward to reverse or vice versa. 
+	Setting is in seconds. 
+	</p>		
+	
+
+
+	<h2 id="turning">Turning Adjustments</h2>
+	<h4 class="entry">Turn Mode</h4>
+	<p>
+	There are three turn modes possible for Tanks and Halftracks (these do not apply to Cars or halftracks with a single rear drive motor). 
+	You can set the mode here, but you can also change the mode during operation by assigning triggers to the turn mode functions. A 3-position switch
+	works well for this, and lets you quickly experience the difference between each mode so you can determine your preference. 
+	<ul class="smalllist">
+		<li><b>Turn Mode 1:</b> Most simple, and also most similar to the way full size tanks actually turn. In this mode, the turn command is subtracted from the inner track
+			only - the outer track maintains drive speed. Think of it as a brake on the inner track.</li>
+		<li><b>Turn Mode 2:</b> Similar to Mode 1 in that the turn is subtracted from the inner track only, but now we mix a bit of the steering input into the throttle command as well. 
+			In other words, as the turn command increases, so does the total drive speed. Think of it like this: every time the driver decides to turn, he also decides to step on the gas 
+			by the same amount that he is turning. This is not entirely realistic but it does makes for smoother driving, because the tank is not slowing down with every turn as it does in Mode 1.</li>
+		<li><b>Turn Mode 3:</b> This is a milder version of Mode 2. Instead of increasing speed across the board during turns, we divided the turn in half, and split the 
+			difference across the tracks. Half of the turn is applied as an <i>increase</i> to the outer track, half is applied as a <i>decrease</i> to the inner track. 
+			The nice side-effect of this mode, is that the turning radius increases as speed increases, and tightens up as speed decreases, which we would expect for a full 
+			size vehicle.</li>
+	</ul>
+	</p>		
+
+
+	<h4 class="entry">Neutral Turn Allowed</h4>
+	<p>
+	A "Neutral Turn" is when a tank rotates each track in opposite directions at the same speed. You may have heard this called "super spin." The result is that the tank rotates in place
+	without moving forward or backwards. Obviously this option is not available for Halftracks or Cars. Not all full-size tanks had the ability to do neutral turns, so you can enable or 
+	disable this feature as you wish.<br><br>
+	
+	<b>Note:</b> There seem to be as many ways to produce a neutral turn as there are manufacturers of tank electronics. Here is how you do it with the TCB:<br>
+	- First, the tank must be at a stop. You can not enter a neutral turn while the tank is moving.<br>
+	- Do not give any forward or reverse command.<br>
+	- Move the steering stick left or right, while maintaining zero throttle, to begin turning in place. The more you hold the stick to the left or right, the faster the neutral turn will be.<br>
+	- You can not start moving forward or reverse while turning in place. First you must let the tank come to a stop - then you can proceed with forward or reverse movement. 
+	</p>		
+	
+	<h4 class="entry">Max Neutral Turn Speed</h4>
+	<p>
+	The term "super spin" was coined to describe the Heng-Long version of a neutral turn, which basically spins the tank around at tremendous speed like a top. This is undoubtedly very cool, 
+	but couldn't be less realistic. If you want the ability to do neutral turns but also don't want your tank to spin like a whirling dervish, set a max Neutral Turn Speed here to some lower
+	percentage.	</p>		
+	
+	<h4 class="entry">Halftrack: Turn Percent to Treads</h4>
+	<p>
+	This setting only applies to Halftracks with independent rear tread motors. Any turn command will always be applied to the steering servo (front wheels). But you can also choose
+	to have some or all of the turn command applied to the rear treads as well, to aid in steering. Any turn command applied to the rear treads will be subject to the 
+	current Turn Mode.	</p>	
+	
+	
+	
+	<h2 id="acceldecel">Inertia &amp; Momentum</h2>
+	<p>
+	Inertia is a force that operates against an object trying to accelerate. In real life a tank that weighs many tons can not accelerate immediately from a stop to full speed, but
+	a lightweight plastic model that is vastly overpowered can.<br><br>
+	
+	Momentum is the tendency of an object in motion to stay in motion. Momentum is what causes heavy vehicles to coast to a stop. But a small model tank will stop instantly if you let
+	off the throttle.<br><br>
+	
+	Without any effective inertia or momentum a model tank looks very unrealistic when driven, or "toy-like." We can change that by simulating the effects of inertia and momentum in 
+	software. You may have heard some people call this "tank physics." We prefer to use the terms "Acceleration Constraint" and "Deceleration Constraint." The acceleration constraint is
+	a limit placed on the speed at which the vehicle can accelerate. The deceleration constraint is a limit placed on the speed at which the vehicle can decelerate.<br>
+	<br> 
+	
+	The acceleration and deceleration constraints can be set individually, or disabled completely. You can also adjust the level of constraint on the fly by assigning an analog trigger
+	to those functions.<br><br>
+	
+	The simple way to adjust these constraints is to set their <i>level</i>. The constraint level can vary from 1 to 14. Each level represents an increase in approximately 1/2 second of 
+	time that it would take the vehicle to accelerate from a full stop to full speed (acceleration constraint), or to coast to a complete stop from full speed (deceleration constraint).<br><br>
+	
+	For example, if you set the acceleration constraint to Level 4, that would be (4 * 1/2 second) = 2 seconds that it would take the vehicle to accelerate from a complete stop to full speed. 
+	If you set the deceleration constraint to Level 14, that would be (14 * 1/2 second) = 7 seconds that it would take the vehicle to coast to a complete stop from full speed.<br><br>
+	
+	Level 1 is the minimum constraint and it represents a delay of only 1/2 second. The effect will hardly be noticeable, and any less than that you might as well just disable the constraint
+	completely.<br><br>
+	
+	In addition to the constraint Level, you can also specify a constraint Preset. A preset is a further refinement of the constraint Level. At the time of release presets are considered
+	experimental, and some presets may do nothing. The idea behind a preset is to adjust the constraints dynamically as a function of other conditions. Instead of having a static 
+	constraint that prevents the vehicle from accelerating faster than a fixed amount of time, a preset might allow faster acceleration at slow speeds, or when the instantaneous throttle 
+	command is more than a certain percentage above the current speed. Rather than linear deceleration, a preset may simulate logarithmic deceleration - slow at first, but gradually increasing
+	as speed decreases. A preset could take the Level you specify as a base from which to modify, or it could overwrite your chosen level completely.<br>
+	<br>
+	
+	These are just some examples of what presets might be capable of, but they need more development. 
+	Please see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:opconfig:tabs:driving#inertia_momentum">Open Panzer Wiki</a>
+	for up-to-date information on the status of these presets.<br><br>
+	
+	<b>Note:</b> Even if you set the deceleration constraint level very high, you can always stop your tank immediately by applying full opposite throttle (emergency brake). For example, 
+	assume your tank is moving forward at full speed, and you set the deceleration constraint level to 14 (meaning it will take 7 seconds to coast to a stop). If you return the throttle stick
+	to center, the tank will begin coasting to a stop. If you move the throttle stick slightly in the opposite (reverse) direction, you will start to apply brake. The brake lights will 
+	come on and the rate of deceleration will increase. The further back you hold the stick, the more brake will be applied. But if you hold the stick <i>all the way</i> reversed, no matter
+	what Level or Preset or speed you are going, the tank will always stop immediately. (The same thing is true for a tank moving in reverse - simply apply forward to brake, and full forward
+	to stop immediately.) In other words, even though your tank may coast for a very long time, you can always prevent running into obstacles by hitting the emergency brake. 
+	</p>
+	
+	<h4 class="entry">Acceleration Constraint</h4>
+	<p>
+	<b>Enable Acceleration Constraint:</b> Check this box to enable the constraint. If un-checked, your vehicle will move as fast as your thumb can move the throttle stick.<br>
+	<b>Level:</b> Set the acceleration constraint level. Remember, each number represents approximately an extra 1/2 second of time that it will take your vehicle to accelerate to
+	full speed from a complete stop.<br>
+	<b>Preset:</b> Select an acceleration preset, or select None if you just want to use the Level by itself.
+	</p>
+	
+	</p>		
+
+	<h4 class="entry">Deceleration Constraint</h4>
+	<p>
+	<b>Enable Deceleration Constraint:</b> Check this box to enable the constraint. If un-checked, your vehicle will stop instantly when you return the throttle stick to center, with no coasting.<br>
+	<b>Level:</b> Set the deceleration constraint level. Remember, each number represents approximately an extra 1/2 second of time that it will take your vehicle to coast to a stop from full speed.<br>
+	<b>Preset:</b> Select a deceleration preset, or select None if you just want to use the Level by itself.	
+	</p>			
+
+
+    <!--
+	<h2 id="imu">Inertial Measurement Unit (IMU)</h2>
+	<h4>Barrel Stabilization</h4>
+	<p>
+		Enable:
+		Sensitivity: (1-100)
+	</p>		
+	
+	<h4>Hill Physics</h4>
+	<p>
+		Enable:
+		Sensitivity: (1-100)	
+	</p>		
+-->
+
+
+<br />
+<br />
+<br />
+
+</body>
+
+</html>
+
+

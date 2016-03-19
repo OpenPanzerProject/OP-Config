@@ -23,13 +23,13 @@
 	<h2 id="lvc">Low Voltage Cutoff</h2>
 	<p>
 	Low voltage cutoff is a feature to help protect the battery in your model from over-discharge. This can be especially important for lithium-polymer (LiPo) batteries, which can 
-	be permanently damaged if their voltage drops too low. With LVC enabled, if pack voltage drops below the level specified, all tank movement will be disabled and 
+	be permanently damaged if their voltage drops too low. With LVC enabled, if pack voltage drops below the level specified all tank movement will be disabled and 
 	all lights attached to the TCB, as well as the two onboard red and green LEDs, will begin to blink in a pattern from fast to slow, over and over again.
 	</p>
 	
 	<h4 class="entry">Enabled</h4>
 	<p>
-	Check this to enabled LVC. If unchecked, the TCB will continue to operate no matter how low your battery voltage becomes!
+	Check this to enable LVC. If unchecked, the TCB will continue to operate no matter how low your battery voltage becomes!
 	</p>
 	
 	<h4 class="entry">Cutoff Voltage</h4>
@@ -79,7 +79,7 @@
 	<h2 id="debug">Debugging</h2>
 	<p>
 	If debugging is enabled, the TCB will send informative messages out whichever serial port is selected by Dipswitch 5. If Dipswitch 5 is in the On position, messages will go out the USB port. If it is in the Off position, messages will go out the Serial 1 (Aux Serial) port (Serial 1 can be used with a Bluetooth adapter). The easiest way to see debugging messages is to use the Snoop feature of OP Config to display them (see the <a href="firmware.html">Firmware</a> tab for more information 
-	on snooping). Of if you are developing using the Arduino IDE you can see these messages using the Arduino Serial Monitor. <br>
+	on snooping). Or if you are developing with the Arduino IDE you can see these messages using the Arduino Serial Monitor. <br>
 	<br>
 	
   	Debugging is very useful for troubleshooting and is enabled by default. However if your TCB is running as expected and all functionality has been verified, you may want to disable debugging messages

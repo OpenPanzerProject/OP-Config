@@ -1,1 +1,1 @@
-C:\Qt\5.4\msvc2013_64\bin\qcollectiongenerator.exe opconfighelp.qhcp -o opconfighelp.qhc
+C:\Qt\5.4\mingw491_32\bin\qcollectiongenerator.exe opconfighelp.qhcp -o opconfighelp.qhc

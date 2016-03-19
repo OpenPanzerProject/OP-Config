@@ -24,12 +24,17 @@
 	<p>
 	When you first open the OP Config program all the settings you see are initialized to some default values. These probably will not match the settings on your TCB. 
 	For that reason, if you just want to modify a few settings on the TCB, it is a good idea to <i><b>read</b></i> them into the OP Config program first, then modify them, 
-	and only then <i><b>write</b></i> them back to the device. Whenever you write settings to the TCB any previous settings on the device are completely over-written.<br>
+	and only then <i><b>write</b></i> them back to the device. Whenever you write settings to the TCB any previous settings on the device are completely over-written.
+	This includes all radio setup information and even some settings you can't see in OP Config but which are stored in the background.
+	</p> 
+	
+	<p>
+	So again, it is always a good idea to read in all settings from the TCB first, then make changes in OP Config, and only then write the settings back to the TCB.
 	</p>
 	
 	<p>
 	If the <b>Progress Bar</b> halts midway through the operation, and after five or ten seconds has still not resumed, an error has occurred and the operation is not going to complete.
-	In that case, click the <b>Connect</b> button (which should now read <b>Disconnect</b>). Then re-connect to the TCB and try again. 
+	In that case, click the <b>Disconnect</b> button. Then re-connect to the TCB and try again. 
 	</p>
 
 

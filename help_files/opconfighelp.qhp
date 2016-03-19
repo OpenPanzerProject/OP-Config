@@ -15,10 +15,7 @@
 				<section title="Radio" ref="./radio.html"></section>
 				<section title="Motors" ref="./motors.html"></section>
 				<section title="Lights &amp; I/O" ref="./lightsio.html"></section>
-				<section title="Functions &amp; Triggers" ref="./functions.html">
-					<section title="Function List" ref="./functionlist.html"></section>
-					<section title="Trigger List" ref="./triggerlist.html"></section>				
-				</section>
+				<section title="Functions &amp; Triggers" ref="./functions.html"></section>
 				<section title="Driving" ref="./driving.html"></section>
 				<section title="Battle" ref="./battle.html"></section>
 				<section title="Sounds" ref="./sounds.html"></section>

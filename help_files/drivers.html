@@ -18,7 +18,7 @@
 	
 	<p>
 	<b>Note 1:</b> Because software and internet links change over time, the instructions below are generic. For specific and up-to-date information on the drivers required,
-	please see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:configurator:drivers">Open Panzer Wiki - USB Drivers</a> page.
+	please see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:opconfig:gs:drivers">Open Panzer Wiki - USB Drivers</a> page.
 	</p>
 	
 	<p>
@@ -30,22 +30,36 @@
 	
 	<p>
 	The TCB uses a genuine FTDI brand USB chip for direct connection to the computer via USB cable. The drivers you need are the <b>FTDI Virtual COM Port (VCP)</b>
-	drivers. These can be downloaded for free from FTDI:<br>
-	<a href="http://www.ftdichip.com/Drivers/VCP.htm">FTDI website</a>.<br><br>
+	drivers. These can be downloaded for free from FTDI:
+	</p>
+
+	<h4 class="entry"><a href="http://www.ftdichip.com/Drivers/VCP.htm">FTDI website</a></h4>
 	
-	Save the drivers to your hard drive, then plug the TCB into an open USB port on your computer. 
-	If you do not already have the drivers installed on your computer, Windows will notify you that it has <b>Found New Hardware</b>.
+	<p>
+	<br>
+	You will want to get the <b>x86</b> (32-bit) versions - yes, even if you are running a 64-bit OS. If installing on XP get the 2.10.00 drivers under the "No Longer Supported" section 
+	(scroll down to the bottom of the page), otherwise download whatever the most recent version for Windows is.
 	</p>
 	
 	<p>
-	A Wizard should appear asking you where to look for the correct software. Instead of letting Windows connect to the internet to search for drivers, tell Windows you are 
-	going to install the drivers "from a specific location" and then, when given the option, browse to and select the folder where you saved the FTDI drivers you downloaded. 
+	Download the Zip file, extract it to a folder somewhere on your hard-drive, then plug the TCB into an open USB port on your computer. If you do not already have the drivers installed on your computer, 
+	Windows will notify you that it has Found New Hardware.
+	</p>
+	
+	<p>	
+	How Windows responds at this point depends on your version. It may automatically start searching for drivers, and if so, tell it you will install them yourself "from a specific location" and then browse 
+	to the folder where you just saved the FTDI drivers. Windows 10 may not even give you this option. In that case you will want to open Device Manager (if you can't find it just go to the 
+	Start Menu - Search, then type in "Device Manager"). Once there look under both the "Ports (COM &amp; LPT)" and "Universal Serial Bus controllers" sections for unrecognized devices, 
+	right-click on them and select "Update Driver Software" and then browse to the folder you downloaded.
 	</p>
 	
 	<p>
-	After installing the drivers for what Windows will probably call the "FT232R USB UART," you may see Windows try a second installation immediately after for a "USB Serial Port."
-	If so, follow the same procedure as before - tell Windows not to connect to the internet for updates, and show it the same folder where you saved the downloaded drivers. 
-	Windows may take what seems like an eternity to actually install them. 
+	FTDI does have installation guides if you get stuck, see: <a href="http://www.ftdichip.com/Support/Documents/InstallGuides.htm">http://www.ftdichip.com/Support/Documents/InstallGuides.htm</a>.
+	</p>
+	
+	<p>
+	You may find that you need to install the driver twice, once for what Windows will probably call the <b>FT232R USB UART</b>, and a second time for a <b>USB Serial Port</b>. If so, follow the same 
+	procedure as before, manually showing Windows the folder where you downloaded the drivers.
 	</p>
 	
 	<p>
@@ -74,8 +88,8 @@
 	
 	<p>
 	Windows already includes the necessary Bluetooth drivers if you use the Open Panzer recommended Bluetooth device, so nothing needs to be installed. 
-	See the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:bluetooth">Open Panzer Wiki - Bluetooth</a> page for more information on the recommended adapters
-	and how to set them up.
+	See the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:bluetooth">Open Panzer Wiki - Bluetooth</a> page for more information on the recommended device
+	and how to set it up.
 	</p>
 
 

@@ -23,10 +23,11 @@
 	<h1>Motor Selection</h1>
 
 	<p>
-	On this tab you will specify how you want to power the main drive motors as well as the two turret motors (one for turret rotation, and one for turret elevation). As you make your selections in the
+	On this tab you will specify how you want to power the main drive motors as well as the two turret motors (one for turret rotation, and one for barrel elevation). As you make your selections in the
 	OP Config program, you will see next to them helpful notes about where to plug in your motor, speed control, or servo. But for more information on wiring these devices to the TCB, 
 	see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:motors">Open Panzer Wiki - Motor Control</a> page.
-	<br><br>
+	<br>
+	<br>
 	
 	Also on this tab you can set options for the "mechanical barrel," which means either a mechanical recoil unit or airsoft unit. You can also set options for a recoil servo if you intend to use one 
 	instead of mechanical recoil, and finally you will also see options related to smoke units. 
@@ -41,7 +42,7 @@
 	There are three possible vehicle types, each with slightly different drive motor considerations. Select the one that matches your model:
 	<ul class="smalllist">
 		<li><b>Tank:</b> Tanks have two independent drive motors. Steering is accomplished through differential control of these motors.  </li>
-		<li><b>Halftrack:</b> Halftracks also have two independent drive motors. Steering is accomplished <i>both</i> through differential control of the drive motors, <i>and</i> through a steering servo 
+		<li><b>Halftrack:</b> Halftracks also have two independent drive motors. Steering is accomplished both through differential control of the drive motors <i>and</i> through a steering servo 
 		attached to the front wheels. (The proportion of steering applied to the treads and the servo can be adjusted on the <a href="driving.html">Driving tab</a> under the Turning section.)</li>
 		<li><b>Car:</b> A car has a single drive motor. Steering is accomplished through a steering servo. You could also use this mode for halftrack models that do not have independent tread motors.</li>
 	</ul>		
@@ -59,7 +60,7 @@
 		 on the TCB). If this is a car with only a single drive motor, plug it into RC Output 1. <br><br>
 		
 		<span class="boldred">Note:</span> Almost all ESCs implement a "battery-eliminator-circuitry" (BEC) that provides 5v through the servo plug, typically used to power an RC receiver.
-		Since the TCB already has its own source of 5v power, you <span class="boldred">MUST</span> <i>remove the middle cable from the connector on any ESC</i> you plug into the TCB (the middle wire is usually 
+		Since the TCB already has its own source of 5v power, you <span class="boldred">MUST</span> remove the middle cable from the connector on any ESC you plug into the TCB (the middle wire is usually 
 		red or orange in color). Otherwise the two 5v sources will conflict with each other and you may damage the ESC or the TCB. 
 		See the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:motors:rcesc">Open Panzer Wiki - RC ESC</a> page for instructions on how to do this.<br>
 		<br>
@@ -71,10 +72,16 @@
 		Again, 2 amps is not sufficient for main drive motors on 1/16th scale models, so only use this option for drive motors on small, lightweight models. The motor for the Left tread should be plugged into Terminal A, 
 		and the motor for the Right tread into Terminal B.</li>
 		
-		<li><b>Serial ESCs:</b> The final option for controlling the drive motors is to use a dual-motor, <i><u>serial</u></i> ESC. The Dimension Engineering Sabertooth models are supported as are the Pololu Qik series. 
-		Support for others may be added in time, please see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:motors:serialmotor">Open Panzer Wiki - Serial Motor Controllers</a> page for up-to-date information. 
-		These ESCs are designed to drive two motors from a single unit, making them ideal for tanks and halftracks. They are controlled with a digital serial protocol that only requires a two-wire cable. 
-		Plug this cable into the dedicated connector on the TCB, labelled <b>MOTOR SERIAL</b>.
+		<li><b>Serial ESCs:</b> The final option for controlling the drive motors is to use a dual-motor <i>serial</i> ESC. 
+		These ESCs are designed to drive two motors from a single unit, making them ideal for tanks and halftracks. They are controlled with a digital serial protocol that only requires a two-wire cable - 
+		plug this cable into the dedicated connector on the TCB, labelled <b>MOTOR SERIAL</b>. 
+		The Dimension Engineering Sabertooth models are supported as are the Pololu Qik series. Support for others may be added in time, please see the 
+		<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:motors:serialmotor">Open Panzer Wiki - Serial Motor Controllers</a> page for up-to-date information.<br>
+		<br>
+		For most applications we find the serial motor controllers to be the superior option over hobby ESCs. You only need a single unit to drive both motors instead of two ESCs, and the price is often less. 
+		They take up less room and require less wiring. The Sabertooth and Qik series both operate at ultrasonic frequencies, so no annoying motor whine. They have models ranging from miniature 
+		(Pololu Qik 2s9v1) to the massive (the Sabertooth 2x60 would easily power a 1/6 scale model), and everything in-between (the Sabertooth 2x5 is suitable for all but the heaviest 1/16th scale models). 
+		The one advantage hobby ESCs have is the ability to use brushless motors. The choice is up to you! 
 		</li>
 	</ol>
 	</p>
@@ -102,15 +109,15 @@
 	
 	<b>Note:</b> If you do select a servo for turret elevation, you may also want to set custom end-points on your servo travel. But because the radio's turret stick is used for more than direct control 
 	of the turret motors, it is not practical to use the transmitter's end-point settings to do so. Never fear, you can do it much more easily	using the TCB's servo-setup menu, 
-	see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:servobarrel">Open Panzer Wiki - Barrel Elevation Servo</a> page for more information.
-	</p>
+	see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:servobarrel">Open Panzer Wiki - Barrel Elevation Servo</a> page for more information. There you can also see a video demostration of 
+	the difference between regular RC Ouput and the Servo Pan Effect. </p>
 
 
 	
 	<h2 id="barrel">Mechanical Barrel</h2>
 	<p>
 	The term "mechanical barrel" refers to the use of either a mechanical recoil unit (such as the Tamiya or Asiatam/Taigen units), or the use of an Airsoft unit. You can not choose both. If you wish to use
-	Airsoft <i>and</i> recoil, use a servo mechanism for the recoil action (<a href="#servorecoil">see below</a> for more on recoil servos). 
+	Airsoft <i>and</i> recoil, set the Mechanical Barrel to Airsoft and then use a servo mechanism for the recoil action (<a href="#servorecoil">see below</a> for more on recoil servos). 
 	</p>
 	
 	<h4 class="entry">Trigger with Cannon</h4>
@@ -120,8 +127,10 @@
 	</p>
 	
 	<h4 class="entry">Select Type</h4> 
-	<p>Select either Airsoft or Mechanical Recoil. Note: although the TCB is compatible with most popular recoil and airsoft units, some changes in wiring will probably be necessary
-	(Tamiya recoil units are the exception, they are plug-and-play but will need an adapter as they use a non-standard plug). Wiring diagrams and instructions are available on the 
+	<p>Select either Airsoft or Mechanical Recoil.<br><br>
+	
+	<b>Note:</b> although the TCB is compatible with most popular recoil and airsoft units, some changes in wiring will probably be necessary. 
+	Tamiya recoil units are the exception, they are plug-and-play but will need an adapter as they use a non-standard plug. Wiring diagrams and instructions are available on the 
 	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:airsoft">Open Panzer Wiki - Airsoft</a> and 	
 	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:mechrecoil">Open Panzer Wiki - Mechanical Recoil</a> pages. 
 	</p>
@@ -144,7 +153,7 @@
 	<p>
 	<b>Note:</b> Because the recoil servo is not directly mapped to any transmitter channel, there is no way to adjust the recoil servo's end-points or reversing by using a setting on your transmitter. 
 	Never fear, you can customize the recoil servo easily using the TCB's recoil servo setup menu: see the 
-	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:servorecoil">Open Panzer Wiki - Servo Recoil</a> page for more. 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:servorecoil">Open Panzer Wiki - Servo Recoil</a> page for more info as well as a video demonstrating the various settings discussed below. 
 	</p>	
 	
 	<h4 class="entry">Trigger with Cannon</h4>
@@ -161,9 +170,9 @@
 	<br><br>
 	
 	If you set Time to Recoil to a number that is too low, the servo will not reach the opposite extreme before it starts to return. If you set it to a number too high, the servo will recoil the barrel and 
-	then pause until the rest of the time expires, and only then move back in the opposite direction.<br><br>
+	then pause until the rest of the time expires, and only then move back in the opposite direction (this can be useful if you want a pause).<br><br>
 	
-	This setting doesn't dictate how fast the servo should recoil - that is a hardware constraint of the servo which can't be changed. Instead, this setting is to <i>tell the TCB</i>
+	This setting doesn't dictate how fast the servo should recoil - that is a hardware constraint of the servo which can't be changed. Instead, the purpose of this setting is to <i>tell the TCB</i>
 	how long the servo takes to recoil.<br><br>
 	
 	Some trial and error will probably be necessary to determine the correct time for your servo and application. However all servos today are sold with published specifications regarding their speed which 

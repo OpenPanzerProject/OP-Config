@@ -29,9 +29,9 @@
 
 	<h4>Intro</h4>
 	<p>
-	The TCB is quite literally a small but powerful computer that controls every aspect of your model. With the Radio setup features of the OP Config software, the TCB can be programmed to map virually any channel
-	of your radio to any function on the TCB. From starting the engine, to firing the cannon, to changing the turn mode or adjusting accleration physics in real time, dozens of features can
-	be  applied to any position of any channel you want. For this reason, it is important to note that you do not need an advanced computer radio, nor do you need a radio with multiple 
+	The TCB is quite literally a small but powerful computer that controls every aspect of your model. With the Radio setup features of the OP Config software, the TCB can be programmed to map virtually any channel
+	of your radio to any function on the TCB. From starting the engine, to firing the cannon, to changing the turn mode or adjusting acceleration physics in real time, dozens of features can
+	be  applied to any position of any channel you want. For this reason it is important to note you do not need an advanced computer radio, nor do you need a radio with multiple 
 	model memories. Those are great features to have in a radio but you will not need them for the TCB. If you have two TCBs installed in two very different models, you can still use the same transmitter
 	with the same settings to control them both, since all the unique configuration and channel mappings will be stored in the TCB itself.	</p>
 	
@@ -53,7 +53,7 @@
 	<h4>Number of Channels</h4>
 	<p>
 	The TCB is compatible with two types of receivers - those that output channel data by PPM and those that implement the SBus protocol. You can read more about these types of receivers on the 
-	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:rx">Open Panzer Wiki - Receiver</a> page, but the important thing to know is that in PPM mode, the TCB will only read up to 8 channels, whereas SBus will always consist
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:rx">Open Panzer Wiki - Receiver</a> page, but the important thing to know is that in PPM mode the TCB will only read up to 8 channels, whereas SBus will always consist
 	of 16 channels. Of course, your transmitter may not be capable of sourcing 8 or 16 channels. The receiver will probably still send the data for any unused channels to the TCB, but the value
 	of those channels will never change. We will have the option of telling the TCB to ignore unused channels if that is the case. 
 	</p>
@@ -66,7 +66,7 @@
 	
 	<h4>Sticks</h4>
 	<p>
-	Although the TCB is flexible enough to accomodate any arrangement you may prefer, the general assumption in these guides is that you will devote one stick to tank movement - forward/reverse and
+	Although the TCB is flexible enough to accommodate any arrangement you may prefer, the general assumption in these guides is that you will devote one stick to tank movement - forward/reverse and
 	left/right. The second stick is assumed to be the "turret stick" and will control the turret left/right rotation and the barrel up/down movement. Which of these sticks is the left stick 
 	and which is the right is completely up to you. When setup this way, the turret stick is also able to be used as a 9-position switch for triggering various functions (the 9 positions are the 
 	4 corners, the 4 ends, and centered). You do not have to use the turret stick in this way, you are free to trigger functions with aux channels instead. But if you decide to setup your radio
@@ -77,14 +77,14 @@
 	<h4>Aux Channels</h4>
 	<p>
 	An Aux channel is any channel other than the 4 channels associated with the two sticks. At most you can have up to 12 Aux channels with an SBus receiver or 4 Aux channels with a PPM receiver, 
-	assuming your transmitter is also capable of transmitting and controlling them. Aux channels can represent switches, knobs, or levers on your transmitter. The switches may be 2-position 
+	assuming your transmitter is also capable of transmitting and controlling them. Aux channels can represent switches, knobs, or levers on your transmitter. If switches, they may be 2-position 
 	or 3-position. We will need to inform the TCB about the nature of each of these channels so it will know what to expect. The type of Aux channel will also dictate what kinds of functions 
 	it can be mapped to (see the <a href="functions.html">Functions tab</a>).	</p>
 	
 	
 	<h2 id="setup">Radio Setup</h2>
 	<p>
-	When you first open the OP Config program, you will see several settings on the Radio tab which you can adjust manually. However, the best way to setup your radio is to:<br>
+	When you first open the OP Config program you will see several settings on the Radio tab which you can adjust manually. However, the best way to setup your radio is to:<br>
 	1) Plug your receiver into the TCB's RADIO port (a male-to-male servo cable works best)<br>
 	2) Turn on your transmitter<br>
 	3) Plug your TCB into your computer with a USB cable<br>
@@ -118,9 +118,9 @@
 		
 		<li><b>Aux Channel Type:</b> The TCB recognizes two types of Aux channels which it calls <b>Analog</b> or <b>Digital</b>. An example of an analog channel is a knob or lever. For that matter the sticks 
 		are also examples of "analog" channels but the TCB already assumes that. A digital Aux channel is any kind of switch. Make sure you specify the correct type for each Aux channel. Again, you can watch
-		the blue bars on the right side of the screen as you manipulate the switches and knobs on your transmitter to idenitify the type of each channel.</li>
+		the blue bars on the right side of the screen as you manipulate the switches and knobs on your transmitter to identify the type of each channel.</li>
 		
-		<li><b>Aux Channel Positions:</b> If an Aux channel is specified as <b>Analog</b>, the Position setting will be hidden because an analog channel has essentially an unlimited number of positions. In the
+		<li><b>Aux Channel Positions:</b> If an Aux channel is specified as <b>Analog</b>, the Position setting will be hidden because an analog channel has an essentially unlimited number of positions. In the
 		example above, Aux channels 1 &amp; 2 are Analog so have no Position setting available. But if your Aux channel is a switch, or in other words, a <b>Digital</b> channel, you need to tell the TCB whether 
 		it is a 2-position switch or a 3-position switch. Support for switches with greater number of positions is not presently implemented. It is also important to remember that a 3-position switch will have 3 
 		positions, and a 2-position switch will have 2 positions. But of course! That sounds very logical. However it can cause some confusion when we look at the current switch position in item #9 below. </li>
@@ -140,14 +140,14 @@
 		to the right but the Direction text says "Left", then you know you need to reverse that channel (by checking the Reversed checkbox).</li>
 		
 		<li><b>Current Switch Position:</b> Similar to the Current Stick Direction, the Current Switch Position is a textual description of the current position of each switch. There is no description for 
-		analog Aux channels because they can have any position possible. Notice something interesing in the example above: Aux Channel 4 and Aux Channel 6 are both listed as being in "Pos 2" even though
+		analog Aux channels because they can have any position possible. Notice something interesting in the example above: Aux Channel 4 and Aux Channel 6 are both listed as being in "Pos 2" even though
 		from the other information we can see that Aux Channel 4 has a value of 1500 (exactly centered) and Aux Channel 6 has a value of 2011 (all the way to one end). How can this be? The reason has to do 
 		with the number of positions available for each channel. Notice that Aux Channel 4 is a 3-position switch. That means it can be in position 1, 2, or 3 and position 2 will be dead center. Aux Channel 6
 		is only a 2-position switch. It can only be in position 1 or 2 and position 2 will be all the way to one extreme. The point is, "Position 2" may mean something different for each channel depending 
 		on how many positions that channel has.</li>
 		
 		<li><b>Read Radio Button:</b> When disconnected from the TCB, this and the other two buttons beside it will be disabled. After connecting, this button will be enabled and the text will say <b>Read Radio</b>. 
-		If you click on this button, and the TCB can detect the radio, radio streaming will begin. This button will become depressed (darker in color) and the text will change to <b>Done Reading</b> as you 
+		If you click on this button and the TCB can detect the radio, radio streaming will begin. This button will become depressed (darker in color) and the text will change to <b>Done Reading</b> as you 
 		can see in the screenshot above. If you click on the button while it says <b>Done Reading</b>, radio streaming will stop. <b>Note:</b> If you wish to read the radio, remember to turn the transmitter on <i>before</i> connecting 
 		to the TCB because the TCB needs to run a detection routine that will not be available to it once it begins communicating with the PC. If your transmitter is on but clicking the <b>Read Radio</b> button
 		gives you an error message about the radio being absent, that is probably the reason. Disconnect from the TCB (but leave the USB cable plugged in to provide power), turn on your transmitter, then reconnect.</li>

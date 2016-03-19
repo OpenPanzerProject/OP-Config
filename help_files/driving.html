@@ -33,7 +33,7 @@
 	1. Start the engine. You can assign a trigger to the start engine function, or have it automatically occur with throttle input (see the setting below).<br><br>
 	2. When the TCB "starts the engine" it directs the engine startup sound to play and sets the Smoker to Fast Idle speed. It begins a timer for the length of time you specify below (Transmission Engage Delay) and when that time
 	expires, for your convenience it automatically engages the transmission. This delay is useful to prevent your model from moving while the startup sound is still playing.<br><br>
-	3. When the transmission is engaged, the Smoker speed is reduced from Fast Idle to Idle (see the <a href="motors.html#smoker">Motors</a> tab for Smoker speed settings).<br><br> 
+	3. At the moment when the transmission is engaged, the Smoker speed is reduced from Fast Idle to Idle (see the <a href="motors.html#smoker">Motors</a> tab for Smoker speed settings).<br><br> 
 	4. Throttle movements will now result in vehicle movement.<br><br>
 	5. At any time you can choose to disengage and re-engage the transmission by assigning a trigger to those functions. While the transmission is disengaged you can still manipulate the throttle. When you
 	do so, the engine sound will speed up, as will the Smoker speed, but the tank will not move. It is just like pressing the gas pedal in your car while in neutral.<br><br> 
@@ -47,7 +47,7 @@
 	<h4 class="entry">Auto-Start Engine with Throttle</h4>
 	<p>
 	If you don't want to assign a trigger to turn on the engine, you can enable this option. 
-	The engine will automatically be started the first time you move the throttle forward (throttle stick must be moved more than halfway to full throttle).
+	The engine will automatically be started the first time you move the throttle forward (throttle stick must be moved to more than half throttle).
 	</p>
 
 	<h4 class="entry">Auto-Stop Engine when Idle</h4>
@@ -71,7 +71,7 @@
 	high inertia levels (meaning the vehicle accelerates slowly), driving may be smooth but starting from a stop can suffer. We may be required to give large throttle commands to get the 
 	vehicle started, the vehicle may then start moving faster than we had wanted it to, and the feeling of throttle responsiveness at low throttle settings can decrease. That is because
 	it takes more power to overcome the resistance of a stationary gearbox and drivetrain, than it does to keep those things moving once they've started. The Nudge feature was created
-	to address these issues.<br><br>
+	to address this issue.<br><br>
 	
 	A "Nudge" only occurs when the tank has been stopped and is first starting to move (either in forward or reverse). If enabled, Nudge will apply a certain minimum throttle setting
 	for a specified length of time that over-rides any acceleration constraint. When the Nudge Time is over, throttle response will revert to whatever constraint has been applied. A Nudge
@@ -88,14 +88,14 @@
 
 	<h4 class="entry">Nudge Time</h4>
 	<p>
-	This is how long the Nudge effect will last in milliseconds (1 mS = 1 second). 
+	This is how long the Nudge effect will last in milliseconds (1000 mS = 1 second). 
 	</p>
 
 	<h3>Driving Delays</h3>
 	<h4 class="entry">Transmission Engage Delay</h4>
 	<p>
-	This delay is the length of time that will pass from when the engine is first started, and when the TCB automatically engages the transmission as a convenience to the user. 
-	This length of time should be at least as long as your engine startup sound clip, to prevent the vehicle from moving while the startup sound is still playing. Setting is in seconds. 
+	This delay is the length of time from when the engine is first started to when the TCB automatically engages the transmission as a convenience to the user. 
+	This delay should be at least as long as your engine startup sound clip, to prevent the vehicle from moving while the startup sound is still playing. Setting is in seconds. 
 	</p>
 
 	<h4 class="entry">Engine On/Off Delay</h4>
@@ -139,13 +139,13 @@
 	<h4 class="entry">Neutral Turn Allowed</h4>
 	<p>
 	A "Neutral Turn" is when a tank rotates each track in opposite directions at the same speed. You may have heard this called "super spin." The result is that the tank rotates in place
-	without moving forward or backwards. Obviously this option is not available for Halftracks or Cars. Not all full-size tanks had the ability to do neutral turns, so you can enable or 
+	without moving forward or backwards. Obviously this option is not available for Halftracks or Cars. Not all tanks in real life have the ability to do neutral turns, so you can enable or 
 	disable this feature as you wish.<br><br>
 	
 	<b>Note:</b> There seem to be as many ways to produce a neutral turn as there are manufacturers of tank electronics. Here is how you do it with the TCB:<br>
 	- First, the tank must be at a stop. You can not enter a neutral turn while the tank is moving.<br>
 	- Do not give any forward or reverse command.<br>
-	- Move the steering stick left or right, while maintaining zero throttle, to begin turning in place. The more you hold the stick to the left or right, the faster the neutral turn will be.<br>
+	- Move the steering stick left or right while maintaining zero throttle to begin turning in place. The more you hold the stick to the left or right, the faster the neutral turn will be.<br>
 	- You can not start moving forward or reverse while turning in place. First you must let the tank come to a stop - then you can proceed with forward or reverse movement. 
 	</p>		
 	

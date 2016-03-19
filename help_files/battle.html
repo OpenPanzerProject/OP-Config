@@ -108,12 +108,13 @@
 	<b>List of Supported Cannon Protocols:</b>
 	<ul class="smalllist">
 		<li><b>Tamiya</b> - 1/16th Tamiya IR, the industry standard.</li>
-		<li><b>Tamiya 2-Shot Kill</b> - an undocumented Tamiya code that will kill any opponent in two shots, regardless of their weight class.</li>
+		<li><b>Tamiya 2-Shot Kill</b> - an undocumented Tamiya code that will kill any Tamiya opponent in two shots, regardless of their weight class.</li>
 		<li><b>Taigen</b> - protocol from Taigen 2.4GHz MFU.</li>
 		<li><b>Heng-Long</b> - protocol from Heng-Long RX-18.</li>
 		<li><b>Tamiya 1/35</b> - protocol from Tamiya 1/35 scale 2.4GHz RC tank kits. This is not compatible with the 1/16th Tamiya code.</li>
-		<li><b>VsTank 1/24</b> - protocol from VsTank "Pro" 1/24th scale RTR models.</li>
-		<li><b>Forces of Valor 1/24</b> - protocol from FOV 1/24th scale RTR models. Teams are supported. (These models appear to be discontinued.)</li>
+		<li><b>VsTank 1/24</b> - protocol from VsTank Pro 1/24th scale RTR models.</li>
+		<li><b>Forces of Valor 1/24</b> - protocol from FOV 1/24th scale RTR models. Teams are supported. These models are discontinued. In 2016 Imex/Taigen announced plans to re-release them, but it is still 
+		unclear if the new versions will use the same IR protocol or not.</li>
 	</ul>
 	</p>
 
@@ -124,7 +125,7 @@
 	
 	<h4 class="entry">Also Accept Hits From</h4>
 	<p>
-	If desired,  you can choose an opptional second protocol to accept hits from in addition to the primary protocol. Your tank will <i>not</i> not fire this secondary protocol - it 
+	If desired,  you can choose an optional second protocol to accept hits from in addition to the primary protocol. Your tank will <i>not</i> not fire this secondary protocol - it 
 	will only accept hits from it.
 	</p>
 
@@ -143,7 +144,7 @@
 
 	<h4 class="entry">Send IR with Machine Gun Fire</h4>
 	<p>
-	Check this option to enable transmission of the selected IR protocol whenever the machine gun is fired. Unlike the cannon IR protcol, the machine gun IR signal is repeated over
+	Check this option to enable transmission of the selected IR protocol whenever the machine gun is fired. Unlike the cannon IR protocol, the machine gun IR signal is repeated over
 	and over for as long as the machine gun is active. 
 	</p>
 
@@ -167,15 +168,16 @@
 	your vehicle's transmission will be disengaged and your cannon disabled. In other words, your vehicle is especially vulnerable to enemy fire while being repaired.<br>
 	<br>
 	
-	You can choose whether to fire the Cannon IR code or the Repair IR code depending on the position of the fight/repair switch on the TCB:<br>
-	<br>
-	- In the FIGHT position, the Cannon IR code will be sent for the protocol you selected above. If a sound unit is attached the cannon sound will play, and if enabled the mechanical 
-	recoil or airsoft units will be triggered, as will the servo recoil effect. <br><br>
-	- In the REPAIR position, the Repair IR code will be sent instead, and it will be sent with much less power, so you need to be very close to the tank you are going to repair in order 
-	for the hit to be registered. If a sound unit is attached the special repair sound will be played instead of the usual cannon sound. Mechanical recoil and airsoft will <u>not</u> be 
-	triggered, nor will the servo recoil effect. Additionally, as soon as you fire the repair signal your vehicle's transmission will be disengaged and you will be unable to drive 
-	for 15 seconds while the repair operation is underway (the tank you are repairing will also be immobilized for 15 seconds). If installed, indicator LEDs in the "apple" on both the tank 
-	doing the repair and the tank being repaired will blink in a pattern that starts slow and speeds up faster, over and over again until the 15 second repair period is over.<br><br>	
+	You can choose whether to fire the Cannon IR code or the Repair IR code depending on the position of the fight/repair switch on the TCB:
+	<ul class="smalllist">
+		<li>In the <b>FIGHT</b> position, the Cannon IR code will be sent for the protocol you selected above. If a sound unit is attached the cannon sound will play, and if enabled the mechanical 
+		recoil or airsoft units will be triggered, as will the servo recoil effect and the high intensity flash unit.</li>
+		<li>In the <b>REPAIR</b> position, the Repair IR code will be sent instead, and it will be sent with much less power, so you need to be very close to the tank you are going to repair in order 
+		for the hit to be registered. If a sound unit is attached the special repair sound will be played instead of the usual cannon sound. Mechanical recoil and airsoft will <u>not</u> be 
+		triggered, nor will the servo recoil effect or the high intensity flash unit. Additionally, as soon as you fire the repair signal your vehicle's transmission will be disengaged and you will be unable to drive 
+		for 15 seconds while the repair operation is underway (the tank you are repairing will also be immobilized for 15 seconds). If installed, indicator LEDs in the "apple" on both the tank 
+		doing the repair and the tank being repaired will blink in a pattern that starts slow and speeds up faster, over and over again until the 15 second repair period is over.</li>
+	</ul>
 
 	<b>List of Supported Repair Protocols:</b>
 	<ul class="smalllist">

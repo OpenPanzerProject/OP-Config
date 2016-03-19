@@ -244,7 +244,7 @@ void MainWindow::checkForUpdates()
     // it doesn't give the user to "skip this update." Of course they can always cancel it
     // and do it later. EDIT: actually doesn't seem to make any difference, the option is still
     // there. I think it's confusing but whatever.
-    win_sparkle_check_update_without_ui();
+    win_sparkle_check_update_with_ui();
 }
 void MainWindow::showEvent(QShowEvent *event)
 {

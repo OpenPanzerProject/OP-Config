@@ -1179,7 +1179,16 @@ void MainWindow::SaveChannelNum(QString priorChan, QString newChan, ChannelOrder
             auxReversedCheck[AuxChannelNum]->setChecked(DeviceData.AuxChannel[AuxChannelNum].Settings.reversed);
             // Now remove the empty item
             auxTypeCombo[AuxChannelNum]->removeItem(auxTypeCombo[AuxChannelNum]->findText(""));
-            auxSwitchPosCombo[AuxChannelNum]->removeItem(auxSwitchPosCombo[AuxChannelNum]->findText(""));
+            // But only remove the empty item on the SwitchPosCombo if the channel type is digital, otherwise we still want it
+            if (DeviceData.AuxChannel[AuxChannelNum].Settings.Digital)
+            {
+                auxSwitchPosCombo[AuxChannelNum]->removeItem(auxSwitchPosCombo[AuxChannelNum]->findText(""));
+            }
+            else
+            {   // Otherwise if this is analog, keep the SwitchPos combo on the empty option since positions don't apply
+                auxSwitchPosCombo[AuxChannelNum]->setCurrentText("");
+                DeviceData.AuxChannel[AuxChannelNum].Settings.numPositions = 2; // But default to 2 positions in our variable because that is the default we want to return to when they change it back to digital.
+            }
             // Now re-enable
             //auxTypeCombo[AuxChannelNum]->setEnabled(true);
             //auxSwitchPosCombo[AuxChannelNum]->setEnabled(true);

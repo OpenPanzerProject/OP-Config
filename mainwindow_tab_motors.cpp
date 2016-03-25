@@ -172,19 +172,22 @@ void MainWindow::ValidateMotorSelections()
     // Now depending on what *wasn't* selected, it may be possible to add pass-through servo signals to unused servo outputs
     // So these functions always remain together in the list, we will do all of them whether they need it or not.
     // First, add all:
-    ui->cboSelectFunction->removeAllServoPassthroughs();    // Remove and then add, so we can be sure they go in order
-    ui->cboSelectFunction->addAllServoPassthroughs();       // Now add all in order
+    ui->cboSelectFunction->removeAllRCPassthroughs();    // Remove and then add, so we can be sure they go in order
+    ui->cboSelectFunction->addAllRCPassthroughs();       // Now add all in order
     // Now remove the ones that should not be there. If we remove one from the combo, check also if it exists already in our
     // function trigger list, and if so, remove it from there too.
 
     // Servo 1 & 2 - available if drive motors are not RC outputs, and if there is no steering servo
     if (ui->cboDriveMotors->isRCOutput())
     {   // In this case we lose both servo 1 & 2
-        ui->cboSelectFunction->removeServoPassthrough(SERVONUM_LEFTTREAD);
-        ui->cboSelectFunction->removeServoPassthrough(SERVONUM_RIGHTTREAD);
+        ui->cboSelectFunction->removeRCPassthrough(SERVONUM_LEFTTREAD);
+        ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
 
         // Now make sure these aren't in our function triggers
-        if (FT_TableModel->removeFunctionFromList(SF_SERVO1_PASS) || FT_TableModel->removeFunctionFromList(SF_SERVO2_PASS))
+        if (FT_TableModel->removeFunctionFromList(SF_RC1_PASS) ||
+            FT_TableModel->removeFunctionFromList(SF_RC1_PASS_PAN) ||
+            FT_TableModel->removeFunctionFromList(SF_RC2_PASS) ||
+            FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
     else
@@ -192,26 +195,29 @@ void MainWindow::ValidateMotorSelections()
         if (ui->cboDriveType->currentData() != DT_TANK)
         {   // Even if the drive motors are not RC outs, we might still lose the right tread servo slot if we have
             // a steering servo, which we will if this is a halftrack or car
-            ui->cboSelectFunction->removeServoPassthrough(SERVONUM_RIGHTTREAD);
+            ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
             // Now make sure this isn't in our function trigger list
-            if (FT_TableModel->removeFunctionFromList(SF_SERVO2_PASS))
+            if (FT_TableModel->removeFunctionFromList(SF_RC2_PASS) ||
+                FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN))
                 RemovedFunctionTriggersMsgBox();
         }
     }
     // Servo 3 - available if turret rotation is not RC output
     if (ui->cboTurretRotationMotor->isRCOutput())
     {
-        ui->cboSelectFunction->removeServoPassthrough(SERVONUM_TURRETROTATION);
+        ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETROTATION);
         // Now make sure this isn't in our function trigger list
-        if (FT_TableModel->removeFunctionFromList(SF_SERVO3_PASS))
+        if (FT_TableModel->removeFunctionFromList(SF_RC3_PASS) ||
+            FT_TableModel->removeFunctionFromList(SF_RC3_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
     // Servo 4 - available if turret elevation is not RC output
     if (ui->cboTurretElevationMotor->isRCOutput())
     {
-        ui->cboSelectFunction->removeServoPassthrough(SERVONUM_TURRETELEVATION);
+        ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETELEVATION);
         // Now make sure this isn't in our function trigger list
-        if (FT_TableModel->removeFunctionFromList(SF_SERVO4_PASS))
+        if (FT_TableModel->removeFunctionFromList(SF_RC4_PASS) ||
+            FT_TableModel->removeFunctionFromList(SF_RC4_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
 

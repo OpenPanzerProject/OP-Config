@@ -150,7 +150,7 @@ struct weightClassSettings{
                                                         // (multipler * port number) + 0/1 (off/on)
 #define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
 
-const byte COUNT_SPECFUNCTIONS  = 68;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 72;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -204,22 +204,26 @@ enum _special_function : byte {
     SF_SMOKER			= 49,		// 49	-- analog function
     SF_MOTOR_A			= 50,		// 50	-- analog function
     SF_MOTOR_B			= 51,		// 51	-- analog function
-    SF_SERVO1_PASS	    = 52,		// 52	-- analog function ("PASS" for pass-through)
-    SF_SERVO2_PASS	    = 53,		// 53   -- analog function
-    SF_SERVO3_PASS	    = 54,		// 54   -- analog function
-    SF_SERVO4_PASS	    = 55,		// 55   -- analog function
-    SF_BARREL_ON		= 56,		// 56
-    SF_BARREL_OFF		= 57,		// 57
-    SF_BARREL_TOGGLE	= 58,		// 58
-    SF_BARREL_LEVEL		= 59,		// 59   -- analog function
-    SF_HILLS_ON			= 60,		// 60
-    SF_HILLS_OFF		= 61,		// 61
-    SF_HILLS_TOGGLE		= 62,		// 62
-    SF_HILLS_LEVEL		= 63,		// 63   -- analog function
-    SF_USER_FUNC_1		= 64,		// 64
-    SF_USER_FUNC_2		= 65,		// 65
-    SF_USER_ANLG_1		= 66,		// 66	-- analog function
-    SF_USER_ANLG_2		= 67		// 67	-- analog function
+    SF_RC1_PASS         = 52,       // 52   -- analog function ("PASS" for pass-through)
+    SF_RC2_PASS         = 53,       // 53   -- analog function
+    SF_RC3_PASS         = 54,       // 54   -- analog function
+    SF_RC4_PASS         = 55,       // 55   -- analog function
+    SF_RC1_PASS_PAN     = 56,       // 56   -- analog function (Pan servo passthrough signal)
+    SF_RC2_PASS_PAN     = 57,       // 57   -- analog function
+    SF_RC3_PASS_PAN     = 58,       // 58   -- analog function
+    SF_RC4_PASS_PAN     = 59,       // 59   -- analog function
+    SF_BARREL_ON        = 60,       // 60
+    SF_BARREL_OFF       = 61,       // 61
+    SF_BARREL_TOGGLE    = 62,       // 62
+    SF_BARREL_LEVEL     = 63,       // 63   -- analog function
+    SF_HILLS_ON         = 64,       // 64
+    SF_HILLS_OFF        = 65,       // 65
+    SF_HILLS_TOGGLE     = 66,       // 66
+    SF_HILLS_LEVEL      = 67,       // 67   -- analog function
+    SF_USER_FUNC_1      = 68,       // 68
+    SF_USER_FUNC_2      = 69,       // 69
+    SF_USER_ANLG_1      = 70,       // 70   -- analog function
+    SF_USER_ANLG_2      = 71        // 71   -- analog function
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

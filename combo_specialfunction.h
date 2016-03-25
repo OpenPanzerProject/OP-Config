@@ -26,11 +26,11 @@ public:
     boolean isFunctionDigital(_special_function sf);
 
     // Servo pass-through functions
-    void addServoPassthrough(int);
-    void addAllServoPassthroughs(void);
-    void removeServoPassthrough(int);
-    void removeAllServoPassthroughs(void);
-    boolean isServoPassthroughPresent(int);
+    void addRCPassthrough(int);
+    void addAllRCPassthroughs(void);
+    void removeRCPassthrough(int);
+    void removeAllRCPassthroughs(void);
+    boolean isRCPassthroughPresent(int);
 
     // Generic add/remove function
     void AddSF(_special_function sf);
@@ -42,7 +42,7 @@ signals:
     void externalOutputsA_Added(void);
     void externalOutputsB_Added(void);
     void currentFunctionChanged(_special_function, boolean);
-    void servoPassthroughAdded(int);
+    void rcPassthroughAdded(int);
     void specialFunctionAdded(_special_function);
     void specialFunctionRemoved(_special_function);
 
@@ -60,10 +60,10 @@ private:
   QMap<_special_function, QString> SFAnalogQMap;
   boolean _EOA_Present = false;
   boolean _EOB_Present = false;
-  boolean _Servo1_Present = false;
-  boolean _Servo2_Present = false;
-  boolean _Servo3_Present = false;
-  boolean _Servo4_Present = false;
+  boolean _RCOutput1_Present = false;
+  boolean _RCOutput2_Present = false;
+  boolean _RCOutput3_Present = false;
+  boolean _RCOutput4_Present = false;
 };
 
 #endif // SPECIALFUNCTIONCOMBOBOX_H

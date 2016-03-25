@@ -161,116 +161,132 @@ void SpecialFunctionComboBox::removeExternalOutputsB(void)
 }
 
 
-void SpecialFunctionComboBox::addServoPassthrough(int servoNum)
+void SpecialFunctionComboBox::addRCPassthrough(int rcOutput)
 {
-    boolean servoThere = false;
-    _special_function servoFunction;
+    boolean rcOutputThere1 = false;
+    boolean rcOutputThere2 = false;
+    _special_function rcFunction1;  // There actually two functions for each RC Output
+    _special_function rcFunction2;
 
-    switch (servoNum)
+    switch (rcOutput)
     {
     case 1:
-        servoFunction = SF_SERVO1_PASS;
-        _Servo1_Present = true;     // It may actually not be present yet, but it will be by the time this function exits.
+        rcFunction1 = SF_RC1_PASS;
+        rcFunction2 = SF_RC1_PASS_PAN;
+        _RCOutput1_Present = true;     // It may actually not be present yet, but it will be by the time this function exits.
         break;
     case 2:
-        servoFunction = SF_SERVO2_PASS;
-        _Servo2_Present = true;
+        rcFunction1 = SF_RC2_PASS;
+        rcFunction2 = SF_RC2_PASS_PAN;
+        _RCOutput2_Present = true;
         break;
     case 3:
-        servoFunction = SF_SERVO3_PASS;
-        _Servo3_Present = true;
+        rcFunction1 = SF_RC3_PASS;
+        rcFunction2 = SF_RC3_PASS_PAN;
+        _RCOutput3_Present = true;
         break;
     case 4:
-        servoFunction = SF_SERVO4_PASS;
-        _Servo4_Present = true;
+        rcFunction1 = SF_RC4_PASS;
+        rcFunction2 = SF_RC4_PASS_PAN;
+        _RCOutput4_Present = true;
         break;
     default:
-        servoFunction = SF_NULL_FUNCTION;
+        rcFunction1 = SF_NULL_FUNCTION;
+        rcFunction2 = SF_NULL_FUNCTION;
     }
 
     // Do nothing if invalid number
-    if (servoFunction == SF_NULL_FUNCTION) return;
+    if (rcFunction1 == SF_NULL_FUNCTION && rcFunction2 == SF_NULL_FUNCTION) return;
 
     // We won't know until we've been through every item of the list, which ones are present
     // Assume none are, run through each item, set a flag if it already exists
     for (int i=0; i<this->count(); i++)
     {
-        if (this->itemData(i) == servoFunction) servoThere = true;
+        if (this->itemData(i) == rcFunction1) rcOutputThere1 = true;
+        if (this->itemData(i) == rcFunction2) rcOutputThere2 = true;
     }
 
     // If any don't exists, add them
-    if (!servoThere) this->insertItem(count(), SFQMap.value(servoFunction), servoFunction);
+    if (!rcOutputThere1) this->insertItem(count(), SFQMap.value(rcFunction1), rcFunction1);
+    if (!rcOutputThere2) this->insertItem(count(), SFQMap.value(rcFunction2), rcFunction2);
 
     // If any were added, emit the signal
-    if (!servoThere)
+    if (!rcOutputThere1 || !rcOutputThere2)
     {
-        emit servoPassthroughAdded(servoNum);   // Let the world know this has been added
+        emit rcPassthroughAdded(rcOutput);   // Let the world know this has been added
     }
 }
-void SpecialFunctionComboBox::removeServoPassthrough(int servoNum)
+void SpecialFunctionComboBox::removeRCPassthrough(int rcOutput)
 {
-    _special_function servoFunction;
+    _special_function rcFunction1;
+    _special_function rcFunction2;
 
-    switch (servoNum)
+    switch (rcOutput)
     {
     case 1:
-        servoFunction = SF_SERVO1_PASS;
-        _Servo1_Present = false;     // It may actually not be removed yet, but it will be by the time this function exits.
+        rcFunction1 = SF_RC1_PASS;
+        rcFunction2 = SF_RC1_PASS_PAN;
+        _RCOutput1_Present = false;     // It may actually not be removed yet, but it will be by the time this function exits.
         break;
     case 2:
-        servoFunction = SF_SERVO2_PASS;
-        _Servo2_Present = false;
+        rcFunction1 = SF_RC2_PASS;
+        rcFunction2 = SF_RC2_PASS_PAN;
+        _RCOutput2_Present = false;
         break;
     case 3:
-        servoFunction = SF_SERVO3_PASS;
-        _Servo3_Present = false;
+        rcFunction1 = SF_RC3_PASS;
+        rcFunction2 = SF_RC3_PASS_PAN;
+        _RCOutput3_Present = false;
         break;
     case 4:
-        servoFunction = SF_SERVO4_PASS;
-        _Servo4_Present = false;
+        rcFunction1 = SF_RC4_PASS;
+        rcFunction2 = SF_RC4_PASS_PAN;
+        _RCOutput4_Present = false;
         break;
     default:
-        servoFunction = SF_NULL_FUNCTION;
+        rcFunction1 = SF_NULL_FUNCTION;
+        rcFunction2 = SF_NULL_FUNCTION;
     }
 
     // Do nothing if invalid number
-    if (servoFunction == SF_NULL_FUNCTION) return;
+    if (rcFunction1 == SF_NULL_FUNCTION && rcFunction2 == SF_NULL_FUNCTION) return;
 
     for (int i=0; i<this->count(); i++)
     {
-        if (this->itemData(i) == servoFunction) { this->removeItem(i); }
+        if (this->itemData(i) == rcFunction1) { this->removeItem(i); }
+        if (this->itemData(i) == rcFunction2) { this->removeItem(i); }
     }
 }
-void SpecialFunctionComboBox::removeAllServoPassthroughs(void)
+void SpecialFunctionComboBox::removeAllRCPassthroughs(void)
 {
-    removeServoPassthrough(1);
-    removeServoPassthrough(2);
-    removeServoPassthrough(3);
-    removeServoPassthrough(4);
+    removeRCPassthrough(1);
+    removeRCPassthrough(2);
+    removeRCPassthrough(3);
+    removeRCPassthrough(4);
 }
-void SpecialFunctionComboBox::addAllServoPassthroughs(void)
+void SpecialFunctionComboBox::addAllRCPassthroughs(void)
 {
-    addServoPassthrough(1);
-    addServoPassthrough(2);
-    addServoPassthrough(3);
-    addServoPassthrough(4);
+    addRCPassthrough(1);
+    addRCPassthrough(2);
+    addRCPassthrough(3);
+    addRCPassthrough(4);
 }
 
-boolean SpecialFunctionComboBox::isServoPassthroughPresent(int servoNum)
+boolean SpecialFunctionComboBox::isRCPassthroughPresent(int rcOutput)
 {
-    switch (servoNum)
+    switch (rcOutput)
     {
     case 1:
-        return _Servo1_Present;
+        return _RCOutput1_Present;
         break;
     case 2:
-        return _Servo2_Present;
+        return _RCOutput2_Present;
         break;
     case 3:
-        return _Servo3_Present;
+        return _RCOutput3_Present;
         break;
     case 4:
-        return _Servo4_Present;
+        return _RCOutput4_Present;
         break;
     default:
         return false;

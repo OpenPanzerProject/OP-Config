@@ -73,7 +73,7 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_AUXOUT_TOGGLE, "Aux Output - Toggle On/Off");
     _SF_ALL_QMAP.insert(SF_AUXOUT_ON, "Aux Output - Turn On");
     _SF_ALL_QMAP.insert(SF_AUXOUT_OFF, "Aux Output - Turn Off");
-    _SF_ALL_QMAP.insert(SF_AUXOUT_LEVEL, "Aux Output - Set Level");             // Analog
+    _SF_ALL_QMAP.insert(SF_AUXOUT_LEVEL, "Aux Output - Set Level");                 // Analog
     _SF_ALL_QMAP.insert(SF_AUXOUT_PRESETDIM, "Aux Output - Preset Dim Level");
     _SF_ALL_QMAP.insert(SF_AUXOUT_FLASH, "Aux Output - Flash");
     _SF_ALL_QMAP.insert(SF_AUXOUT_BLINK, "Aux Output - Blink");
@@ -92,19 +92,23 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_TOGGLE, "External Output B - Toggle");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_ON, "External Output B - Turn On");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_OFF, "External Output B - Turn Off");
-    _SF_ALL_QMAP.insert(SF_ACCEL_LEVEL, "Set Acceleration Level");              // Analog
-    _SF_ALL_QMAP.insert(SF_DECEL_LEVEL, "Set Deceleration Level");              // Analog
+    _SF_ALL_QMAP.insert(SF_ACCEL_LEVEL, "Set Acceleration Level");                  // Analog
+    _SF_ALL_QMAP.insert(SF_DECEL_LEVEL, "Set Deceleration Level");                  // Analog
     _SF_ALL_QMAP.insert(SF_TURNMODE_1, "Set Turn Mode = 1");
     _SF_ALL_QMAP.insert(SF_TURNMODE_2, "Set Turn Mode = 2");
     _SF_ALL_QMAP.insert(SF_TURNMODE_3, "Set Turn Mode = 3");
-    _SF_ALL_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");                  // Analog
-    _SF_ALL_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");                // Analog
-    _SF_ALL_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");                // Analog
-    _SF_ALL_QMAP.insert(SF_SERVO1_PASS, "Servo 1 Pass-through");                // Analog
-    _SF_ALL_QMAP.insert(SF_SERVO2_PASS, "Servo 2 Pass-through");                // Analog
-    _SF_ALL_QMAP.insert(SF_SERVO3_PASS, "Servo 3 Pass-through");                // Analog
-    _SF_ALL_QMAP.insert(SF_SERVO4_PASS, "Servo 4 Pass-through");                // Analog
-// DISABLED FOR NOW
+    _SF_ALL_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");                      // Analog
+    _SF_ALL_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");                    // Analog
+    _SF_ALL_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");                    // Analog
+    _SF_ALL_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC2_PASS, "RC Output 2 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC3_PASS, "RC Output 3 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC4_PASS, "RC Output 4 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC1_PASS_PAN, "RC Output 1 - Pan Servo");                // Analog
+    _SF_ALL_QMAP.insert(SF_RC2_PASS_PAN, "RC Output 2 - Pan Servo");                // Analog
+    _SF_ALL_QMAP.insert(SF_RC3_PASS_PAN, "RC Output 3 - Pan Servo");                // Analog
+    _SF_ALL_QMAP.insert(SF_RC4_PASS_PAN, "RC Output 4 - Pan Servo");                // Analog
+    // DISABLED FOR NOW
 //    _SF_ALL_QMAP.insert(SF_BARREL_ON, "Barrel Stabilization - Turn On");
 //    _SF_ALL_QMAP.insert(SF_BARREL_OFF, "Barrel Stabilization - Turn Off");
 //    _SF_ALL_QMAP.insert(SF_BARREL_TOGGLE, "Barrel Stabilization - Toggle");
@@ -112,11 +116,11 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
 //    _SF_ALL_QMAP.insert(SF_HILLS_ON, "Hill Physics - Turn On");
 //    _SF_ALL_QMAP.insert(SF_HILLS_OFF, "Hill Physics - Turn Off");
 //    _SF_ALL_QMAP.insert(SF_HILLS_TOGGLE, "Hill Physics - Toggle");
-//    _SF_ALL_QMAP.insert(SF_HILLS_LEVEL, "Hill Physics - Set Sensitivity");      // Analog
+//    _SF_ALL_QMAP.insert(SF_HILLS_LEVEL, "Hill Physics - Set Sensitivity");        // Analog
     _SF_ALL_QMAP.insert(SF_USER_FUNC_1, "User Function 1");
     _SF_ALL_QMAP.insert(SF_USER_FUNC_2, "User Function 2");
-    _SF_ALL_QMAP.insert(SF_USER_ANLG_1, "Analog User Function 1");              // Analog
-    _SF_ALL_QMAP.insert(SF_USER_ANLG_2, "Analog User Function 2");              // Analog
+    _SF_ALL_QMAP.insert(SF_USER_ANLG_1, "Analog User Function 1");                  // Analog
+    _SF_ALL_QMAP.insert(SF_USER_ANLG_2, "Analog User Function 2");                  // Analog
     return _SF_ALL_QMAP;
 }
 
@@ -188,10 +192,14 @@ QMap<_special_function, QString> OP_QMaps::getAnalogSpecialFunctionsQMap()
     _SF_ANALOG_QMAP.insert(SF_AUXOUT_LEVEL, "Aux Output - Set Level");
     _SF_ANALOG_QMAP.insert(SF_ACCEL_LEVEL, "Set Acceleration Level");
     _SF_ANALOG_QMAP.insert(SF_DECEL_LEVEL, "Set Deceleration Level");
-    _SF_ANALOG_QMAP.insert(SF_SERVO1_PASS, "Servo 1 Pass-through");
-    _SF_ANALOG_QMAP.insert(SF_SERVO2_PASS, "Servo 2 Pass-through");
-    _SF_ANALOG_QMAP.insert(SF_SERVO3_PASS, "Servo 3 Pass-through");
-    _SF_ANALOG_QMAP.insert(SF_SERVO4_PASS, "Servo 4 Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC2_PASS, "RC Output 2 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC3_PASS, "RC Output 3 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC4_PASS, "RC Output 4 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC1_PASS_PAN, "RC Output 1 - Pan Servo");
+    _SF_ANALOG_QMAP.insert(SF_RC2_PASS_PAN, "RC Output 2 - Pan Servo");
+    _SF_ANALOG_QMAP.insert(SF_RC3_PASS_PAN, "RC Output 3 - Pan Servo");
+    _SF_ANALOG_QMAP.insert(SF_RC4_PASS_PAN, "RC Output 4 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");
     _SF_ANALOG_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");
     _SF_ANALOG_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");

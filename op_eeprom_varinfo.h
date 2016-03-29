@@ -268,7 +268,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {2415, 314, varUINT8, "4"},        // DecelSkipNum
     {2416, 315, varUINT8, "0"},        // DecelPreset
     {2417, 316, varUINT8, "40"},        // BrakeSensitivityPct
-    {2418, 317, varUINT16, "1500"},        // TimeToShift_mS
+    {2418, 317, varUINT16, "1000"},        // TimeToShift_mS
     {2419, 319, varUINT16, "1000"},        // EnginePauseTime_mS
     {2420, 321, varUINT16, "2000"},        // TransmissionDelay_mS
     {2421, 323, varBOOL, "1"},        // NeutralTurnAllowed

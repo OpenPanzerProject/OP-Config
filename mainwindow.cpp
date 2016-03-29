@@ -537,7 +537,7 @@ void MainWindow::showPageDocumentation(QString file)
 void MainWindow::SetupHelpButtons()
 {
     ptrHelpButton = ui->hpbRadio;               // Point to any one of our help buttons
-    ptrHelpButton->PassAssistant(assistant);    // Pass the pointer to our assistant object, only needs to be done once.
+    ptrHelpButton->PassAssistant(assistant);    // Pass a pointer to the assistant object to our ptrHelpButton, only needs to be done once.
 
     // Create a signal mapper so we can map the released() signal of each button to another signal that includes a string value
     // This mapped signal will be connected to the showPageDocumentation function which takes a string address value to open
@@ -626,6 +626,8 @@ void MainWindow::SetupHelpButtons()
     // Now connect the mapped signals to the showPageDocumentation() function
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(showPageDocumentation(QString)));
 
+    // Not really a help button, but we also map the link in this text warning label to a section of the help documentation.
+    connect(ui->lblESCWarningHelp, SIGNAL(linkActivated(QString)), this, SLOT(showPageDocumentation(QString)));
 }
 
 

@@ -59,15 +59,19 @@
 		The ESC/Servo for the Left tread should be plugged into RC Output 1 (also labeled <b>Left</b> on the TCB) and the ESC/Servo for the Right tread should be plugged into RC Output 2 (labeled <b>Right</b>
 		 on the TCB). If this is a car with only a single drive motor, plug it into RC Output 1. <br><br>
 		
-		<span class="boldred">Note:</span> Almost all ESCs implement a "battery-eliminator-circuitry" (BEC) that provides 5v through the servo plug, typically used to power an RC receiver.
-		Since the TCB already has its own source of 5v power, you <span class="boldred">MUST</span> remove the middle cable from the connector on any ESC you plug into the TCB (the middle wire is usually 
-		red or orange in color). Otherwise the two 5v sources will conflict with each other and you may damage the ESC or the TCB. 
-		See the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:motors:rcesc">Open Panzer Wiki - RC ESC</a> page for instructions on how to do this.<br>
+		<span class="boldred">Warning:</span> Almost every hobby ESC today includes a BEC (battery eliminator circuit). The purpose is for the ESC to provide 5v power to the radio receiver and subsequently the 
+        servos in a typical hobby application (which “eliminates” the need for a separate receiver battery). However, because the TCB already has its own 5v supply, you <span class="boldred">must</span> disable 
+        the speed control's BEC before plugging it into the TCB, or you could damage one or both!<br /><br />
+        
+        Disabling the BEC is very simple, you only have to remove the center pin of the speed control plug. The pin can be replaced later if you decide to use the speed control for some other project, 
+        so it is not destructive in any way. Here's how:<br /><br />
+        <a class="image_link" href="images/disable_bec.jpg"><img src="images/disable_bec.jpg" width="800" align="middle"/></a>
 		<br>
-		
+        <br>
 		If you are using a continuous-rotation servo then you can leave all three wires in the servo cable intact - the TCB will provide 5v power <i>to</i> the servo. But remember, the TCB can't source 
 		much more than 2 Amps to the servo connectors so only use continuous rotation servos for drive motors on very small and lightweight models. 
 		</li>
+
 		<li><b>Built-in Driver:</b> The TCB includes an integrated dual motor controller that can supply up to 2 Amps per motor. Motors are connected via screw terminals labeled Onboard Motors A &amp; B. 
 		Again, 2 amps is not sufficient for main drive motors on 1/16th scale models, so only use this option for drive motors on small, lightweight models. The motor for the Left tread should be plugged into Terminal A, 
 		and the motor for the Right tread into Terminal B.</li>

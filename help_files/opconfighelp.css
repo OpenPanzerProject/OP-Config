@@ -49,6 +49,22 @@ a:hover
 	cursor: pointer;
 }
 
+/* We may have an image link, and we don't want the other a elements applied to it */
+a.image_link, 
+a.image_link:link, 
+a.image_link:visited
+{
+    text-decoration: none;
+    color: #000;
+    border: none;
+}
+a.image_link:hover
+{
+    background: #f6f6f6;    /*Regular body background*/
+    text-decoration: none;	
+    border: none; 
+}
+
 p
 {
 	margin: 0px;

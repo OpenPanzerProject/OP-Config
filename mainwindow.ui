@@ -847,7 +847,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -5101,7 +5101,7 @@ QSizeGrip {
                    <string notr="true"/>
                   </property>
                   <property name="text">
-                   <string>&lt;a href=&quot;ESCWarningLink&quot; style=&quot;color: #330055; border-bottom: 1px solid #330055;&quot;&gt;Read here for more&lt;/a&gt;.
+                   <string>&lt;a href=&quot;motors.html#drivemotors&quot; style=&quot;color: #330055; border-bottom: 1px solid #330055;&quot;&gt;Read here for more&lt;/a&gt;.
 
 </string>
                   </property>
@@ -7711,7 +7711,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>10</x>
-                  <y>440</y>
+                  <y>410</y>
                   <width>421</width>
                   <height>181</height>
                  </rect>
@@ -7984,7 +7984,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>10</x>
                   <y>0</y>
                   <width>421</width>
-                  <height>431</height>
+                  <height>401</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -8015,7 +8015,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>170</y>
+                   <y>160</y>
                    <width>151</width>
                    <height>21</height>
                   </rect>
@@ -8071,7 +8071,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>170</y>
+                   <y>160</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -8087,7 +8087,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>170</y>
+                   <y>160</y>
                    <width>21</width>
                    <height>21</height>
                   </rect>
@@ -8105,7 +8105,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>400</y>
+                   <y>370</y>
                    <width>141</width>
                    <height>21</height>
                   </rect>
@@ -8123,7 +8123,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>400</y>
+                   <y>370</y>
                    <width>101</width>
                    <height>21</height>
                   </rect>
@@ -8141,7 +8141,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>370</y>
+                   <y>340</y>
                    <width>121</width>
                    <height>21</height>
                   </rect>
@@ -8159,7 +8159,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>340</y>
+                   <y>310</y>
                    <width>161</width>
                    <height>21</height>
                   </rect>
@@ -8177,7 +8177,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>370</y>
+                   <y>340</y>
                    <width>101</width>
                    <height>21</height>
                   </rect>
@@ -8195,7 +8195,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>340</y>
+                   <y>310</y>
                    <width>101</width>
                    <height>21</height>
                   </rect>
@@ -8319,7 +8319,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>140</y>
+                   <y>130</y>
                    <width>241</width>
                    <height>21</height>
                   </rect>
@@ -8339,7 +8339,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>270</y>
+                   <y>250</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -8357,7 +8357,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>240</y>
+                   <y>220</y>
                    <width>151</width>
                    <height>21</height>
                   </rect>
@@ -8375,7 +8375,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>270</y>
+                   <y>250</y>
                    <width>141</width>
                    <height>21</height>
                   </rect>
@@ -8393,7 +8393,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>240</y>
+                   <y>220</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -8409,7 +8409,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>270</y>
+                   <y>250</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -8428,7 +8428,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>290</x>
-                   <y>240</y>
+                   <y>220</y>
                    <width>101</width>
                    <height>21</height>
                   </rect>
@@ -8446,7 +8446,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>210</y>
+                   <y>190</y>
                    <width>241</width>
                    <height>21</height>
                   </rect>
@@ -8466,7 +8466,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>310</y>
+                   <y>280</y>
                    <width>241</width>
                    <height>21</height>
                   </rect>
@@ -8486,7 +8486,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>400</y>
+                   <y>370</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -8505,7 +8505,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>340</y>
+                   <y>310</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -8524,7 +8524,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>210</x>
-                   <y>370</y>
+                   <y>340</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>

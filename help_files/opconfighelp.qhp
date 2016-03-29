@@ -73,7 +73,8 @@
 			<file>images/savesettings.png</file>		<!-- Read/Write File	-->
 			<file>images/RadioLayout.png</file>			<!-- Radio Setup 		-->
 			<file>images/saveminmax.png</file>
-			<file>images/weightclassdip.png</file>		<!-- Battle tab			-->
+			<file>images/disable_bec.jpg</file>         <!-- Motors tab         -->
+            <file>images/weightclassdip.png</file>		<!-- Battle tab			-->
 			
         </files>
     </filterSection>

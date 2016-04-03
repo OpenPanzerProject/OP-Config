@@ -67,11 +67,12 @@
 	<h4 class="entry">Serial 3</h4>
 	<p>
 	The Serial 3 port has the reception and transmission pins routed to two different locations. The reception pin is attached to the RADIO input header and is used to read
-	data from SBus receivers. If an SBus receiver is detected, any baud rate setting here will be automatically overwritten with the non-standard SBus rate of 100000 and 
-	transmission out the SER.3 header disabled. If an SBus receiver is not detected, the Serial 3 port is available for transmission at whatever baud rate is specified here. 
+	data from serial receivers such as those capable of SBus or iBus transmissions. If a serial receiver is detected, any baud rate setting here will be automatically overwritten 
+    with required baud rate for the protocol found (100,000 for SBus, 115,200 for iBus), and transmission out the SER.3 header will be disabled. 
+    If no serial receiver is detected (for example, the receiver is PPM instead), the Serial 3 port is available for transmission at whatever baud rate is specified here. 
 	Transmission will be out the SER.3 header, which is a 3-pin JST-PH connector that provides the transmission pin as well as +5v and Ground. This header could be used to attach a 
 	serial-enabled LCD such as those sold by SparkFun or Adafruit. At present no LCD code is implemented in the TCB firmware, and because the transmission port is disabled 
-	when an SBus receiver is used, this port is of little practical use except to developers.
+	when serial receivers are used, this port is of little practical use except to developers.
 	</p>
 	
 	

@@ -52,14 +52,16 @@
 	
 	<h4>Number of Channels</h4>
 	<p>
-	The TCB is compatible with two types of receivers - those that output channel data by PPM and those that implement the SBus protocol. You can read more about these types of receivers on the 
-	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:rx">Open Panzer Wiki - Receiver</a> page, but the important thing to know is that in PPM mode the TCB will only read up to 8 channels, whereas SBus will always consist
-	of 16 channels. Of course, your transmitter may not be capable of sourcing 8 or 16 channels. The receiver will probably still send the data for any unused channels to the TCB, but the value
-	of those channels will never change. We will have the option of telling the TCB to ignore unused channels if that is the case. 
+	The TCB is compatible with several types of receivers - those that output channel data by PPM, and those that implement a digital serial protocol (presently SBus and iBus are supported). 
+    You can read more about these types of receivers on the 
+    <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:rx">Open Panzer Wiki - Receiver</a> page, but the important thing to know is that in PPM mode the TCB can only read up to a max of 8 channels, 
+    whereas SBus can carry up to 16 channels and iBus up to 14. Of course, your transmitter may not be capable of sourcing the full number of possible channels. Many receivers will probably still send data 
+    for unused channels up to the max they are capable of, but the value of those channels will never change if you can't assign them to a control on your transmitter. 
+    We will have the option of telling the TCB to ignore unused channels if that is the case. 
 	</p>
 	
 	<p>
-	At a bare minimum, the TCB must be able to read 4 channels mapped to the two transmitter sticks. PPM and SBus receivers transmit channel information as a stream of data, one channel value after
+	At a bare minimum, the TCB must be able to read 4 channels mapped to the two transmitter sticks. PPM and serial receivers transmit channel information as a stream of data, one channel value after
 	another. But depending on the manufacturer of your radio the channels may be sent in a different order, and there is no industry standard. We will need to tell the TCB which channel number
 	belongs to which stick.
 	</p>
@@ -76,10 +78,10 @@
 	
 	<h4>Aux Channels</h4>
 	<p>
-	An Aux channel is any channel other than the 4 channels associated with the two sticks. At most you can have up to 12 Aux channels with an SBus receiver or 4 Aux channels with a PPM receiver, 
-	assuming your transmitter is also capable of transmitting and controlling them. Aux channels can represent switches, knobs, or levers on your transmitter. If switches, they may be 2-position 
-	or 3-position. We will need to inform the TCB about the nature of each of these channels so it will know what to expect. The type of Aux channel will also dictate what kinds of functions 
-	it can be mapped to (see the <a href="functions.html">Functions tab</a>).	</p>
+	An Aux channel is any channel other than the 4 channels associated with the two sticks. At most you can have up to 12 Aux channels with an SBus receiver, 10 Aux channels with an iBus receiver, 
+    or 4 Aux channels with a PPM receiver: assuming your transmitter is also capable of transmitting and controlling those extra channels. Aux channels can represent switches, knobs, or levers on 
+    your transmitter. If switches, they may be 2-position or 3-position. We will need to inform the TCB about the nature of each of these channels so it will know what to expect. The type of 
+    Aux channel will also dictate what kinds of functions it can be mapped to (see the <a href="functions.html">Functions tab</a>).	</p>
 	
 	
 	<h2 id="setup">Radio Setup</h2>
@@ -114,7 +116,7 @@
 		small change in the signal, you may find your model creeping about when you thought it should be stopped. The Deadband setting is a way to overcome the issue of an unsteady signal. Any stick movement <i>less than</i> 
 		the deadband amount will be ignored. This number should be small, but greater than 0. Don't set it any larger than you need to - the greater the deadband, the more you will have to move your stick on
 		purpose to get anything to happen. Watching the <b>Pulse</b> column while the radio is streaming will give you a good idea of the variability of your signal. PPM receivers will exhibit much more
-		jitter than SBus.</li>
+		jitter than digital serial receivers.</li>
 		
 		<li><b>Aux Channel Type:</b> The TCB recognizes two types of Aux channels which it calls <b>Analog</b> or <b>Digital</b>. An example of an analog channel is a knob or lever. For that matter the sticks 
 		are also examples of "analog" channels but the TCB already assumes that. A digital Aux channel is any kind of switch. Make sure you specify the correct type for each Aux channel. Again, you can watch

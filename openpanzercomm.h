@@ -100,10 +100,10 @@
 #define MAX_ERRORS              10      // How many communication errors allowed before we just disconnect
 
 // Time
-#define INIT_TIME               3500    // How much total time will we use to try to connect to the device
+#define INIT_TIME               4100    // How much total time will we use to try to connect to the device
 #define FIRST_BLITZ_TIME        2000    // Time in milliseconds between the first init string and how long we think the device takes to reboot (and get past bootloader)
 #define SECOND_BLITZ_TIME       500     // Time in milliseconds between spamming the device repeatedly with our INIT_STRING
-#define WATCHDOG_TIME           1000    // Time in milliseconds we will wait for a response from the device
+#define WATCHDOG_TIME           1000    // Time in milliseconds we will wait for a response from the device generally.
 #define STAY_AWAKE_BEEP_TIME    5000    // How often should we send a stay-awake signal to the device. Should be less than the device's timeout time.
 #define RADIO_STREAM_OVER_TIME  500     // If we don't get a radio streaming sentence in this amount of time, consider streaming done.
 

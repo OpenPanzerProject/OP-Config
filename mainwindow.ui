@@ -847,7 +847,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -3164,7 +3164,7 @@ QSizeGrip {
                    </font>
                   </property>
                   <property name="text">
-                   <string>Pos 1</string>
+                   <string>Middle</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3185,7 +3185,7 @@ QSizeGrip {
                    </font>
                   </property>
                   <property name="text">
-                   <string>Pos 1</string>
+                   <string>Down</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -11437,7 +11437,14 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <addaction name="separator"/>
     <addaction name="actionAbout_OP_Config"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionResetAllVals"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
    <addaction name="menuDevice"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -11504,6 +11511,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   <action name="actionAbout_OP_Config">
    <property name="text">
     <string>About OP Config</string>
+   </property>
+  </action>
+  <action name="actionResetAllVals">
+   <property name="text">
+    <string>Reset All Values to Default</string>
    </property>
   </action>
  </widget>

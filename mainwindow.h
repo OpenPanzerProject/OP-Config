@@ -150,6 +150,10 @@ private slots:
       void AboutOP();
       void showPageDocumentation(QString file);
 
+    // Slots for the Tools menu
+    // ---------------------------------------------------------------------------------------------------->>
+      void ResetAllValues();
+
     // Slots for connecting/disconnecting/error handling the device
     // ---------------------------------------------------------------------------------------------------->>
       void fillPortsInfo();                       // Updates the list of detected COM ports
@@ -425,9 +429,12 @@ private:
       uint16_t nextVarPos;                            // What position in the VarArray are we going to read/write next
       uint16_t startVarPos;                           // Sometimes we may only want to write a subset of variables. This will be the start variable,
       uint16_t endVarPos;                             // and this will be the end variable.
-      void tempDisableDeviceActions(void);            // We disable some stuff during read/write operations
-      void reEnableDeviceActions(void);               // This re-enables the same stuff
+      void DisableDeviceActionsDuringReadWrite(void); // We disable some stuff during read/write operations (see mainwindow_device_rw.cpp)
+      void EnableDeviceActionsAfterReadWrite(void);   // This re-enables the same stuff
       void resetReadWriteProcess();                   // This sets the read and write flags to false
+
+      void DisableDeviceActionsDuringRadioStream(void); // Disable some actions when the radio is streaming (see mainwindow_tab_radio.cpp)
+      void EnableDeviceActionsAfterRadioStream(void); // This re-enables the same stuff
 
 
     // XML File Reading/Writing

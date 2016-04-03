@@ -497,6 +497,10 @@ void MainWindow::initActionsConnections()
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(writeSettingsToFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 
+    // Tools Menu
+    ui->actionResetAllVals->setEnabled(true);
+    connect(ui->actionResetAllVals, SIGNAL(triggered()), this, SLOT(ResetAllValues()));
+
     // Device Menu
     ui->actionConnect->setEnabled(true);
     ui->actionDisconnect->setEnabled(false);
@@ -518,6 +522,22 @@ void MainWindow::initActionsConnections()
     ui->actionAbout_OP_Config->setEnabled(true);
     connect(ui->actionAbout_OP_Config, SIGNAL(triggered()), this, SLOT(AboutOP()));
 
+}
+
+
+
+//------------------------------------------------------------------------------------------------------------------------>>
+// ABSTRACT ACTIONS
+//------------------------------------------------------------------------------------------------------------------------>>
+void MainWindow::ResetAllValues()
+{
+    // This sets all controls to the same defaults the program is initalized with on open.
+    if (msgBox("Are you sure you want to reset every setting to default?", vbYesNo, "Reset all Settings?", vbQuestion) == QMessageBox::Yes)
+    {
+        loadVarArrayDefaults();       // Load defaults into our VarArray
+        VarArray_to_Variables();      // Copy VarArray into our named variables
+        Variables_to_Controls();      // Now assign the named variables to our controls
+    }
 }
 
 

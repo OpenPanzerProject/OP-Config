@@ -190,7 +190,7 @@ void MainWindow::updateVarArray_fromSerial(uint16_t ID, QByteArray value)
             statusProgressBar->hide();
                 qApp->processEvents();
             // Now we're done, we can re-enable these
-            reEnableDeviceActions();
+            EnableDeviceActionsAfterReadWrite();
 
             // Ok, we've loaded the settings from our device into VarArray.
             // Now we need to copy the VarArray to named variables,
@@ -225,7 +225,7 @@ void MainWindow::readSettingsFromDevice(void)
     statusProgressBar->setValue(1);
 
     // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
-    tempDisableDeviceActions();
+    DisableDeviceActionsDuringReadWrite();
 
     sendReadCommand_byPos(1);               // Read the first value
     // Now when the value is read, the readAllSettings flag will cause the read routine to request
@@ -267,7 +267,7 @@ void MainWindow::writeAllSettingsToDevice()
     statusProgressBar->setValue(startVarPos);
 
     // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
-    tempDisableDeviceActions();
+    DisableDeviceActionsDuringReadWrite();
 
     sendWriteCommand_byPos(startVarPos);  // Write the first value
     // Now when the value is written, and the device responds, the writeAllSettings flag will cause the acknowledgment routine
@@ -297,7 +297,7 @@ void MainWindow::writeSomeSettingsToDevice(uint16_t startID, uint16_t endID)
     statusProgressBar->setValue(startVarPos);
 
     // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
-    tempDisableDeviceActions();
+    DisableDeviceActionsDuringReadWrite();
 
     sendWriteCommand_byPos(startVarPos);  // Write the first value
     // Now when the value is written, and the device responds, the writeSomeSettings flag will cause the acknowledgment routine
@@ -351,7 +351,7 @@ void MainWindow::processNextSentence(void)
                 qApp->processEvents();
 
             // Now we're done, we can re-enable these
-            reEnableDeviceActions();
+            EnableDeviceActionsAfterReadWrite();
             ui->cmdWriteDevice->setChecked(false);
             ui->cmdSnoop->setEnabled(true);
             ui->cmdFlashHex->setEnabled(true);
@@ -360,7 +360,9 @@ void MainWindow::processNextSentence(void)
         }
     }
 }
-void MainWindow::tempDisableDeviceActions()
+
+//
+void MainWindow::DisableDeviceActionsDuringReadWrite()
 {
     // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
     ui->actionDisconnect->setEnabled(false);
@@ -370,11 +372,14 @@ void MainWindow::tempDisableDeviceActions()
     ui->actionWrite->setEnabled(false);
     ui->cmdWriteDevice->setEnabled(false);
 
+    // Or this either
+    ui->actionResetAllVals->setEnabled(false);
+
     ui->cmdRadioStream->setEnabled(false);
     ui->cmdSaveCenters->setEnabled(false);
     ui->cmdSaveMinMax->setEnabled(false);
 }
-void MainWindow::reEnableDeviceActions()
+void MainWindow::EnableDeviceActionsAfterReadWrite()
 {
     // After reading/writing operation is complete, we re-enable these
     ui->actionDisconnect->setEnabled(true);
@@ -383,6 +388,9 @@ void MainWindow::reEnableDeviceActions()
     ui->cmdReadDevice->setEnabled(true);
     ui->actionWrite->setEnabled(true);
     ui->cmdWriteDevice->setEnabled(true);
+
+    // And this
+    ui->actionResetAllVals->setEnabled(true);
 
     ui->cmdRadioStream->setEnabled(true);
     if (comm->isRadioStreaming())   // These only get re-enabled if we are presently streaming.

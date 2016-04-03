@@ -490,10 +490,7 @@ void MainWindow::SetRadioStreamStatus(boolean streaming)
         ui->cmdSaveMinMax->setEnabled(true);                  //
 
         // While streaming, we don't want the user to try reading/writing to the device
-        ui->actionRead->setEnabled(false);
-        ui->cmdReadDevice->setEnabled(false);
-        ui->actionWrite->setEnabled(false);
-        ui->cmdWriteDevice->setEnabled(false);
+        DisableDeviceActionsDuringRadioStream();
 
         // Also initialize these to false, they will get set later if they apply
         Flag_RadioValuesChanged = false;
@@ -514,14 +511,7 @@ void MainWindow::SetRadioStreamStatus(boolean streaming)
         Flag_StartRadioStream = false;                        // Reset this
 
         // Now streaming is over we can re-enable these, but only if we are still connected
-        // (Because one reason streaming may have stopped is because we disconnected)
-        if (comm->isConnected())
-        {
-            ui->actionRead->setEnabled(true);
-            ui->cmdReadDevice->setEnabled(true);
-            ui->actionWrite->setEnabled(true);
-            ui->cmdWriteDevice->setEnabled(true);
-        }
+        EnableDeviceActionsAfterRadioStream();  // This function will check the connection status
 
         // This flag means the user ran the save-center-values or the save-min/max-values routines while we were streaming
         // In that case, we'd like to go ahead and post these changes to the device rather than relying on the user to remember
@@ -539,11 +529,51 @@ void MainWindow::SetRadioStreamStatus(boolean streaming)
         //ui->frmChannelVals->hide();
     }
 }
+void MainWindow::DisableDeviceActionsDuringRadioStream()
+{
+    // While streaming, we don't want the user to try reading/writing to the device
+    ui->actionRead->setEnabled(false);
+    ui->cmdReadDevice->setEnabled(false);
+    ui->actionWrite->setEnabled(false);
+    ui->cmdWriteDevice->setEnabled(false);
+
+    // Or this either
+    ui->actionResetAllVals->setEnabled(false);
+}
+void MainWindow::EnableDeviceActionsAfterRadioStream()
+{
+    // Streaming is over, we can re-enable these, but only if we are still connected:
+    // Because one reason streaming may have stopped is because we disconnected.
+    if (comm->isConnected())
+    {
+        ui->actionRead->setEnabled(true);
+        ui->cmdReadDevice->setEnabled(true);
+        ui->actionWrite->setEnabled(true);
+        ui->cmdWriteDevice->setEnabled(true);
+    }
+    // This one can be re-enabled regardless of connection status
+    ui->actionResetAllVals->setEnabled(true);
+}
 void MainWindow::SaveNumUtilizedChannels(uint8_t numChannels)
 {   // If the device responded with the number of utilized channels, this routine will get called
+
+    // Save it
     NumUtilizedChannels = numChannels;
-    if (NumUtilizedChannels >= STICKCHANNELS)
+
+    // Let's run through each channel order and make sure as many are active as they have utilized, but
+    // if they aren't utilizing the full amount, set the extras to NA
+    if (NumUtilizedChannels > STICKCHANNELS)
     {
+        // Run through the utilized channels, make sure they show up.
+        for (int i=STICKCHANNELS; i<NumUtilizedChannels; i++)
+        {
+            if (channelOrderCombo[i+1]->currentText() == "N/A")
+            {   // Set the channel order to the 1 + the prior channel order
+                channelOrderCombo[i+1]->setCurrentIndex(channelOrderCombo[i]->currentIndex()+1);
+            }
+        }
+
+        // Run through the extra channels beyond the utilized ones and set them to NA
         if (NumUtilizedChannels < COUNT_OP_CHANNELS)
         {
             for (int i=COUNT_OP_CHANNELS; i>NumUtilizedChannels;i--)
@@ -552,7 +582,11 @@ void MainWindow::SaveNumUtilizedChannels(uint8_t numChannels)
                 channelOrderCombo[i-1]->setCurrentIndex(channelOrderCombo[i-1]->findText("N/A"));
             }
         }
+    }
 
+    // If they have at least 4 channels, proceed with radio streaming
+    if (NumUtilizedChannels >= STICKCHANNELS)
+    {
         if (Flag_StartRadioStream)
         {
             // If Flag_StartRadioStream is set to true, it means that once we know the number of channels

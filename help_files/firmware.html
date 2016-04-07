@@ -50,9 +50,10 @@
 	
 	<h4	class="entry">Flash</h4>
 	<p>
-	Once you have selected a hex file, either the one downloaded from OpenPanzer.org or your own, click the Flash button to attempt flashing the hex to the device. Be sure you have selected
-	the correct COM port first. The status of the flash operation will be shown in the console window. Be patient, the flash operation can take 30 seconds or more. <b>Developers:</b> flashing 
-	is actually accomplished by calling AVRDUDE, which is bundled with OP Config. 
+	Once you have selected a hex file, either the latest release you downloaded or one of your own, click the Flash button to attempt flashing the hex to the device. Be sure you have selected
+	the correct COM port first, <i>and</i> be sure that you have Dipswitch #5 on the TCB set to use the correct serial port (Dipswitch #5 in the On position to flash over USB, or in the 
+    Off position to flash over the Serial 1 port). The status of the flash operation will be shown in the console window. Be patient, the flash operation can take 30 seconds or more.<br />
+    <b>Developers:</b> flashing is actually accomplished by calling AVRDUDE, which is bundled with OP Config. 
 	</p>
 	
 		

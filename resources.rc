@@ -1,4 +1,5 @@
-IDI_ICON1 ICON DISCARDABLE "images/openpanzer.ico"
+IC01 ICON "images/openpanzer.ico"
+ICO2 ICON "images/openpanzersettings.ico"
 
 #include <windows.h>
 #include <winver.h>

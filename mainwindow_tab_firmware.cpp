@@ -340,29 +340,32 @@ void MainWindow::cmdFlashHex_clicked()
 
     MouseWait();        // Hourglass the cursor
 
-    // .arg(QCoreApplication::applicationDirPath()); returns:
-    // "D:/UAV/QT/Projects/build-OpenPanzerConfig-Desktop_Qt_5_4_2_MSVC2013_64bit-Release/release/
-    // So for testing I've copie the AVRDude files there
+    // .arg(QCoreApplication::applicationDirPath()); returns the release dev folder:
+    // "path/QT/Projects/build-OpenPanzerConfig-Desktop_Qt_5_4_2_MSVC2013_64bit-Release/release/
+    // So for testing I've copied the AVRDude files there
 
     // Construct our AVRDUDE executable and list of arguments.
-    QString program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());
-    QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath());
-    QString flagVerbose = "-v";             // -v Verbose output
-    QString flagPart = "-patmega2560";      // -p part
-    QString flagProgrammer = "-cwiring";// -c programmer
-    QString flagPort = "-P";                // -P port
-    QString flagBaud = "-b115200";          // -b baud - hardcoded to 115,200
-    QString flagDisableErase = "-D";        // -D disables erase before write
+    // Don't put any spaces in the argument list, or it won't work.
+    QString program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
+    QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
+    QString flagPart =       "-patmega2560";   // -p part - ours is the ATmega2560. This also needs to be defined in avrdude.conf.
+    QString flagProgrammer = "-cwiring";       // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
+                                               //    See which is used in Arduino boards.txt for your chip, in our case it is
+                                               //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
+    QString flagPort =       "-P";             // -P port
+    flagPort.append(ui->cboCOMPorts->currentText());    // And now we append the actual COM port to the -P flag
+    QString flagSkipVerify = "-V";             // -V Skip verification, saves a lot of time
+    QString flagVerbose =    "-v";             // -v Verbose output
+    QString flagBaud =       "-b115200";       // -b baud - hardcoded to 115,200
+
+    // Path to hex
     //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QCoreApplication::applicationDirPath());
     QString hex = "-Uflash:w:";
             hex.append(HexFile);
             hex.append(":i");
 
-    // Add the selected COM port
-    flagPort.append(ui->cboCOMPorts->currentText());
-
     QStringList arguments;
-    arguments << conf << flagVerbose << flagPart << flagProgrammer << flagPort << flagBaud << flagDisableErase << hex;
+    arguments << conf << flagPart << flagProgrammer << flagPort << flagSkipVerify << flagVerbose << flagBaud << hex;
 
     // Clear text box
     ui->txtConsole->clear();

@@ -5,21 +5,52 @@
 //------------------------------------------------------------------------------------------------------------------------>>
 // FILE - READING AND WRITING
 //------------------------------------------------------------------------------------------------------------------------>>
-// Although we go through the trouble of including a DTD in our setting file, QXmlStreamReader doesn't seem to do any
-// validation against it whatsoever. I guess it has to be hard-coded instead. For now we just give a message about how
-// many vars were imported.
-void MainWindow::readSettingsFromFile()
+// This is just the Device menu action, and we simply get a file path/name from the user, then pass it to the actual reading function
+void MainWindow::actionReadSettingsFromFile()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from OPZ File"), ".", tr("OPZ files (*.opz)"));
 
-    if (filename == "") return; // Exit if they cancel
+    if (filename == "") return;     // Exit if they cancel
+    else readSettingsFromFile(filename, false);
 
+}
+
+// This is the actual reading function, it takes a file path/name as argument. We split this into its own thing because
+// we might want to call it distinctly from the menu action, for example, if the application is opened with a command line
+// argument (such as we have set to do in Windows when a user double-clicks an .opz file).
+//
+// Although we go through the trouble of including a DTD in our setting file, QXmlStreamReader doesn't seem to do any
+// validation against it whatsoever. I guess it has to be hard-coded instead. For now we just give a message about how
+// many vars were imported.
+void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
+{
+    if (filename == "") return;
+
+    // QFile wants separators to be "/", not "\", see http://doc.qt.io/qt-5/qfile.html
+    //filename.replace(QString("\\"),QString("/"));     // Use replace, or
+    filename = QDir::fromNativeSeparators(filename);    // This built-in function does it
+    filename.remove("\n");
+    filename = filename.trimmed();
+
+    // Had this happening even after using trimmed sometimes when comming from command line, caused infinite headaches debugging...
+    if (filename.left(1) == " ")
+        filename = filename.right(filename.length()-1);
+
+    filename = filename.trimmed();                      // Once again for damn good measure
+
+    // Use this to test for errors
+    // filename.prepend("\"");
+    // filename.append("\"");
+    // msgBox(filename, vbOkOnly, "Attempt filename:", vbNoIcon);
+    // if (file->exists()) msgBox("File exists",vbOkOnly, "Exists", vbNoIcon);
+
+    // Create a QFile with this path
     QFile* file = new QFile(filename);
 
     // Error if we can't open it for some reason
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        msgBox(tr("Unable to open file: %1") .arg(filename), vbOkOnly, "OPZ Settings File", vbCritical);
+        msgBox(tr("Unable to open file: %1<br><br>%2") .arg(filename).arg(file->errorString()), vbOkOnly, "OPZ Settings File", vbCritical);
         SetStatusLabel("Unable to open file!",slBad);
         return;
     }
@@ -171,6 +202,10 @@ void MainWindow::readSettingsFromFile()
             else
             {
                 SetStatusLabel(QString("All settings imported (100%)"),slGood);
+                if (confirm)
+                {
+                    msgBox(tr("All settings imported from file:<br><br>%1") .arg(filename), vbOkOnly, "OPZ Settings File", vbInformation);
+                }
             }
         }
 

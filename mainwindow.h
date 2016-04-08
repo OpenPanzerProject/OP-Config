@@ -27,10 +27,10 @@
 #include <QDebug>
 #include <QLineEdit>
 #include <QProgressBar>
-#include <QStringList>          // Class of string lists
-#include <QStringListModel>     // String list model, for creating simple text models to populate listviews, etc.
-#include <QAbstractItemView>    // No idea.
-#include <QtSerialPort/QSerialPortInfo>    // Serial port info, used to populate the drop-down list of COM Ports
+#include <QStringList>                              // Class of string lists
+#include <QStringListModel>                         // String list model, for creating simple text models to populate listviews, etc.
+#include <QAbstractItemView>
+#include <QtSerialPort/QSerialPortInfo>             // Serial port info, used to populate the drop-down list of COM Ports
 #include <QFileDialog.h>
 #include <QSignalMapper>
 #include <QSortFilterProxyModel>
@@ -41,7 +41,8 @@
 #include <QScrollBar>
 #include <QFileInfo>
 #include <QPixmap>
-#include <combo_drivetype.h>  // My custom drive type combo box
+#include <QCommandLineParser>
+#include <combo_drivetype.h>                        // My custom drive type combo box
 #include <combo_channelorder.h>
 #include <combo_baudrates.h>
 #include <combo_specialfunction.h>
@@ -49,10 +50,10 @@
 #include <combo_auxchannelpositions.h>
 #include <tablemodel_functiontriggers.h>
 #include <getopqmaps.h>
-#include <helpbutton.h>         // Custom push button for help files
+#include <helpbutton.h>                             // Custom push button for help files
 #include <qxmlstream.h>
-#include <devices.h>            // My file that defines the different devices we can configure
-#include <openpanzercomm.h>        // OpenPanzer communication library
+#include <devices.h>                                // My file that defines the different devices we can configure
+#include <openpanzercomm.h>                         // OpenPanzer communication library
 #include <op_eeprom_varinfo.h>
 #include <assistant.h>
 #include <downloader.h>
@@ -65,14 +66,14 @@ enum ButtonCollection{vbYesNo, vbYesNoCancel, vbOkCancel, vbOkOnly};
 enum IconCollection{vbCritical, vbInformation, vbQuestion, vbWarning, vbExclamation, vbNoIcon};
 
 // Settings for the status label that we fade in and out
-#define STATUS_LABEL_ON_DELAY       3000    // How long to show status messages in the bottom status bar
-#define STATUS_LABEL_FADEOUT_TIME   2000    // How long does the fade out effect take
-#define STATUS_LABEL_FADEIN_TIME    350     // How long does the fade in effect take
+#define STATUS_LABEL_ON_DELAY       3000            // How long to show status messages in the bottom status bar
+#define STATUS_LABEL_FADEOUT_TIME   2000            // How long does the fade out effect take
+#define STATUS_LABEL_FADEIN_TIME    350             // How long does the fade in effect take
 enum StatusLabelStatus{slGood, slBad, slNeutral};   // We use these to decide what color the label should have
 
 // Settings for the radio streaming frame tha we also fade in and out
-#define RADIO_STREAM_FADEOUT_TIME   4000    // How long does the fade out effect take
-#define RADIO_STREAM_FADEIN_TIME    150     // How long does the fade in effect take
+#define RADIO_STREAM_FADEOUT_TIME   4000            // How long does the fade out effect take
+#define RADIO_STREAM_FADEIN_TIME    150             // How long does the fade in effect take
 
 // Define the index numbers of the various tabs
 #define TAB_INDEX_RADIO             0
@@ -112,12 +113,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    virtual void showEvent(QShowEvent *event);  // We need this event so we can wait until the main form loads to show WinSparkle
+    virtual void showEvent(QShowEvent *event);      // We need this event so we can wait until the main form loads to show WinSparkle
 
     // These functions will be used as callbacks for the WinSparkle dll and need to be static.
     // WinSparkle is a program we use to check for OP Config updates
-    static int canShutdown();   // Are we ready to shutdown?
-    static void shutDown();     // Shutdown
+    static int canShutdown();                       // Are we ready to shutdown?
+    static void shutDown();                         // Shutdown
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------>>
 // PUBLIC SLOTS
@@ -130,15 +131,21 @@ public slots:
     void setDevice(OP_device_name);
 
     // WinSparkle updater.
-    void initWinSparkle();      // Initialize the WinSparkle app
-    void checkForUpdates();     // The check for updates function
+    void initWinSparkle();                          // Initialize the WinSparkle app
+    void checkForUpdates();                         // The check for updates function
+
+    // Slot for processing command line arguments. Better as a slot because we can assign a signal to it that will only call it
+    // after the main loop has started. Also make it public so QApplication (or in our case, SingleApplication) can call it.
+    // ---------------------------------------------------------------------------------------------------->>
+      void ProcessCommandLineArgs();                // If the app is opened with command line arguments, we process them (MainWindow.cpp)
+
 
 // -------------------------------------------------------------------------------------------------------->>
 // SIGNALS
 // -------------------------------------------------------------------------------------------------------->>
 signals:
     void PulseCentersSaved(boolean);
-    void windowWasShown();  // Has main form finished loading
+    void windowWasShown();                          // Has main form finished loading
 
     // -------------------------------------------------------------------------------------------------------->>
 // PRIVATE SLOTS
@@ -156,29 +163,30 @@ private slots:
 
     // Slots for connecting/disconnecting/error handling the device
     // ---------------------------------------------------------------------------------------------------->>
-      void fillPortsInfo();                       // Updates the list of detected COM ports
-      void setCOMPort();                          // Sets the current COM port
-      void setBaudRate();                         // Sets the current baud rate
-      void toggleDeviceConnection();              // Connect/disconnect from device
-      void connectToDevice();                     // Connect to device
-      void disconnectFromDevice();                // Disconnect from device
-      void ShowConnectionStatus(boolean connected);// When the device responds or is disconnected, this slot will get called
-      void ShowSnoopStatus(boolean connected);    // If the port is open or closed for snooping, this will get called
+      void fillPortsInfo();                         // Updates the list of detected COM ports
+      void setCOMPort();                            // Sets the current COM port
+      void setBaudRate();                           // Sets the current baud rate
+      void toggleDeviceConnection();                // Connect/disconnect from device
+      void connectToDevice();                       // Connect to device
+      void disconnectFromDevice();                  // Disconnect from device
+      void ShowConnectionStatus(boolean connected); // When the device responds or is disconnected, this slot will get called
+      void ShowSnoopStatus(boolean connected);      // If the port is open or closed for snooping, this will get called
       void ProcessCommError(QString, QSerialPort::SerialPortError);    // Display communication error message box
 
     // Slots for reading/writing the device
     // ---------------------------------------------------------------------------------------------------->>
-      void readSettingsFromDevice();              // Read all settings from device
-      void writeAllSettingsToDevice();            // Write all settings to device
+      void readSettingsFromDevice();                // Read all settings from device
+      void writeAllSettingsToDevice();              // Write all settings to device
       void writeSomeSettingsToDevice(uint16_t startID, uint16_t endID);   // Write some settings to device
       void SerialStatus_displayFirmware(QString version);      // Display device firmware version in status bar
       void updateVarArray_fromSerial(uint16_t ID, QByteArray Value);  // This is just a wrapper call to updateVarArray_byID so we don't have to make that other function a slot
-      void processNextSentence(void);              // When the device responds with a SERID_NEXT_SENTENCE request
+      void processNextSentence(void);               // When the device responds with a SERID_NEXT_SENTENCE request
 
     // Slots for reading/writing to XML file
     // ---------------------------------------------------------------------------------------------------->>
-      void readSettingsFromFile();                // Read all settings from a file
-      void writeSettingsToFile();                 // Save all settings to a file
+      void actionReadSettingsFromFile();            // Read all settings from a file - this slot actually only gets the file name, which
+                                                    // it then passes to the real readSettingsFromFile(Qstring) private function
+      void writeSettingsToFile();                   // Save all settings to a file
 
     // Form control slots
     // ---------------------------------------------------------------------------------------------------->>
@@ -219,8 +227,8 @@ private slots:
       void SetupPortBFunctionTrigger(int);
 
       // Functions tab
-      void SetupTriggerSources(_special_function,boolean);    // When they select a function from the drop-down, then we set up the appropriate triggers that can be applied
-      void SetupTriggerActions(int);    // When they select a trigger from teh drop-down, then we set up the appropriate actions for that trigger
+      void SetupTriggerSources(_special_function,boolean);  // When they select a function from the drop-down, then we set up the appropriate triggers that can be applied
+      void SetupTriggerActions(int);                        // When they select a trigger from teh drop-down, then we set up the appropriate actions for that trigger
       void cmdAddFunctionTrigger_clicked(bool checked);
       void cmdRemoveFunctionTrigger_clicked(bool checked);
       void UpdateTurretStickDelayOptions(boolean);
@@ -261,7 +269,7 @@ private slots:
       void flashStarted();
       void flashFinished();
       void readyReadStandardOutput();
-      void readyReadStandardError();        // Won't be using this one after all
+      void readyReadStandardError();                // Won't be using this one after all
       void getLocalHex();
       void getWebHex();
       void checkHexVersion();
@@ -274,8 +282,8 @@ private slots:
       void putDataToConsole(const QByteArray &data);
 
       // Status bar (along the bottom)
-      void StartStatusLabelOnDelay(void);   // During this delay, the status label is visible
-      void FadeOutStatusLabel();            // This slot fades out the status label
+      void StartStatusLabelOnDelay(void);           // During this delay, the status label is visible
+      void FadeOutStatusLabel();                    // This slot fades out the status label
 
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------>>
@@ -284,12 +292,12 @@ private slots:
 private:
     // Forms
     // ---------------------------------------------------------------------------------------------------->>
-      Ui::MainWindow *ui;                   // This form
+      Ui::MainWindow *ui;                           // This form
 
     // Mouse
     // ---------------------------------------------------------------------------------------------------->>
-      void MouseWait();                     // Sets the mouse to hourglass
-      void MouseRestore();                  // Returns the mouse to a pointer
+      void MouseWait();                             // Sets the mouse to hourglass
+      void MouseRestore();                          // Returns the mouse to a pointer
 
     // QT Assistant
     // ---------------------------------------------------------------------------------------------------->>
@@ -297,9 +305,9 @@ private:
 
     // Help Buttons
     // ---------------------------------------------------------------------------------------------------->>
-      HelpButton *ptrHelpButton;            // We create a pointer to one so we can pass the reference to Assistant
-      QSignalMapper *signalMapper;          // We'll use a signal mapper to map a string output from each button's released event
-      void SetupHelpButtons(void);          // This will map all the help buttons to the specific location in the help files
+      HelpButton *ptrHelpButton;                    // We create a pointer to one so we can pass the reference to Assistant
+      QSignalMapper *signalMapper;                  // We'll use a signal mapper to map a string output from each button's released event
+      void SetupHelpButtons(void);                  // This will map all the help buttons to the specific location in the help files
 
     // Message box helper
     // ---------------------------------------------------------------------------------------------------->>
@@ -308,12 +316,12 @@ private:
 
     // Form stuff
     // ---------------------------------------------------------------------------------------------------->>
-      void initActionsConnections();        // Set up abstract actions
-      QLabel *serialStatusLabel;            // References to labels and ProgressBar in the Status Bar
+      void initActionsConnections();                // Set up abstract actions
+      QLabel *serialStatusLabel;                    // References to labels and ProgressBar in the Status Bar
       QLabel *otherStatusLabel;
       QFrame *connectFrame;
       QProgressBar *statusProgressBar;
-      QStringListModel *listViewWestModel;  // This is a class that provides a model that supplies strings to views (we can use views in listboxes, combo boxes, whatever)
+      QStringListModel *listViewWestModel;          // This is a class that provides a model that supplies strings to views (we can use views in listboxes, combo boxes, whatever)
 
     // Status bar
       void SetupStatusBarLabel();
@@ -351,7 +359,7 @@ private:
         boolean Flag_StartRadioStream;
         boolean Flag_SaveCenterValues;
         boolean Flag_SaveMinMaxValues;
-        boolean Flag_RadioValuesChanged;    // If while streaming the user saves the center or min/max values, this flag will get set to true
+        boolean Flag_RadioValuesChanged;            // If while streaming the user saves the center or min/max values, this flag will get set to true
         void FadeInRadioStreaming(void);
         void FadeOutRadioStreaming(void);
       // Motor tab
@@ -384,54 +392,55 @@ private:
         boolean AttemptFlash;
         QString strAVRDUDEOutput;
         QProcess *AVRDUDEProcess;
-        boolean GotWebHex;          // If we've downloaded a hex from the web set this flag, so if the user tries again it's instantaneous
-        QString WebHexFilePath;     // If we've downloaded the hex from the web, this is the full path (including file name) where we saved it.
-        boolean isCharNumeric(char);    // Is this a character from 0 to 9
+        boolean GotWebHex;                          // If we've downloaded a hex from the web set this flag, so if the user tries again it's instantaneous
+        QString WebHexFilePath;                     // If we've downloaded the hex from the web, this is the full path (including file name) where we saved it.
+        boolean isCharNumeric(char);                // Is this a character from 0 to 9
 
     // Var Array (from op_eeprom_varinfo.h) - searching, reading, updating
     // ---------------------------------------------------------------------------------------------------->>
-      QMap<uint16_t, QByteArray> VarArray;    // QMap is a generic key/value list container, the key and value can be of any type. Very convenient for us.
-      void loadVarArrayDefaults(void);      // Copies default values from STORAGEVARS to VarArray
+      QMap<uint16_t, QByteArray> VarArray;          // QMap is a generic key/value list container, the key and value can be of any type. Very convenient for us.
+      void loadVarArrayDefaults(void);              // Copies default values from STORAGEVARS to VarArray
       boolean updateVarArray_byID(uint16_t ID, QByteArray Value);
       boolean updateVarArray_byPos(uint16_t arrayPos, QByteArray value);
       boolean getStorageVarInfo_byID(_storage_var_info &svi, uint16_t findID);
       boolean getStorageVarInfo_byPos(_storage_var_info & svi, uint16_t arrayPos);
       uint16_t findStorageArrayPosition(uint16_t findID);
-      void VarArray_to_Variables(void);     // These two functions are really the critical ones in terms of mapping all our variables to the VarArray
-      void Variables_to_VarArray(void);     // Mess these up, and you are in trouble, as they are hard-coded.
+      void VarArray_to_Variables(void);             // These two functions are really the critical ones in terms of mapping all our variables to the VarArray
+      void Variables_to_VarArray(void);             // Mess these up, and you are in trouble, as they are hard-coded.
 
     // Variables to Controls and back
     // ---------------------------------------------------------------------------------------------------->>
-      void Variables_to_Controls(void);     // These update all the controls with values stored in named variables
-      void Controls_to_Variables(void);     // These copy all control values to named variables
+      void Variables_to_Controls(void);             // These update all the controls with values stored in named variables
+      void Controls_to_Variables(void);             // These copy all control values to named variables
 
 
     // Named vars (as opposed to numbered variables)
     // ---------------------------------------------------------------------------------------------------->>
-      _device_data DeviceData;              // This struct holds a named version of every piece of information we may want from the device
+      _device_data DeviceData;                      // This struct holds a named version of every piece of information we may want from the device
 
 
     // Physical Device Settings
     // ---------------------------------------------------------------------------------------------------->>
-      OP_device_name CurrentDevice;     // The name of the Open Panzer device we will be communicating with
-      OpenPanzerComm *comm;             // Our OpenPanzer Communication object
-      boolean AttemptConnect;           // This will only be true while the connection attempt is in process. Once we are
-                                        // connected or disconnected it will become false, and connection status can be obtained
-                                        // from comm->isConnected()
+      OP_device_name CurrentDevice;                 // The name of the Open Panzer device we will be communicating with
+      OpenPanzerComm *comm;                         // Our OpenPanzer Communication object
+      boolean AttemptConnect;                       // This will only be true while the connection attempt is in process. Once we are
+                                                    // connected or disconnected it will become false, and connection status can be obtained
+                                                    // from comm->isConnected()
 
     // Reading from and Writing to Device
     // ---------------------------------------------------------------------------------------------------->>
-      void sendReadCommand_byPos(uint16_t VarPos);    // Read variable from device by VarArray position
-      void sendWriteCommand_byPos(uint16_t VarPos);   // Write variable to device by VarArray position
-      boolean readAllSettings;                        // Flags
+      void readSettingsFromFile(QString, boolean);  // Give a file path, it verifies the file exists and tries to read it in. If the second arg is true, will provide confirmation message
+      void sendReadCommand_byPos(uint16_t VarPos);  // Read variable from device by VarArray position
+      void sendWriteCommand_byPos(uint16_t VarPos); // Write variable to device by VarArray position
+      boolean readAllSettings;                      // Flags
       boolean writeAllSettings;
       boolean writeSomeSettings;
-      uint16_t nextVarPos;                            // What position in the VarArray are we going to read/write next
-      uint16_t startVarPos;                           // Sometimes we may only want to write a subset of variables. This will be the start variable,
-      uint16_t endVarPos;                             // and this will be the end variable.
+      uint16_t nextVarPos;                          // What position in the VarArray are we going to read/write next
+      uint16_t startVarPos;                         // Sometimes we may only want to write a subset of variables. This will be the start variable,
+      uint16_t endVarPos;                           // and this will be the end variable.
       void DisableDeviceActionsDuringReadWrite(void); // We disable some stuff during read/write operations (see mainwindow_device_rw.cpp)
-      void EnableDeviceActionsAfterReadWrite(void);   // This re-enables the same stuff
-      void resetReadWriteProcess();                   // This sets the read and write flags to false
+      void EnableDeviceActionsAfterReadWrite(void); // This re-enables the same stuff
+      void resetReadWriteProcess();                 // This sets the read and write flags to false
 
       void DisableDeviceActionsDuringRadioStream(void); // Disable some actions when the radio is streaming (see mainwindow_tab_radio.cpp)
       void EnableDeviceActionsAfterRadioStream(void); // This re-enables the same stuff

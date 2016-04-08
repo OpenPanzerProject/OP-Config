@@ -3164,7 +3164,7 @@ QSizeGrip {
                    </font>
                   </property>
                   <property name="text">
-                   <string>Middle</string>
+                   <string>Pos 1</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3185,7 +3185,7 @@ QSizeGrip {
                    </font>
                   </property>
                   <property name="text">
-                   <string>Down</string>
+                   <string>Pos 1</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

@@ -124,8 +124,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(comm, SIGNAL(RadioNotReady()), this, SLOT(RadioNotReady()));
     connect(comm, SIGNAL(RadioStreamingChanged(boolean)), this, SLOT(SetRadioStreamStatus(boolean)));
 
-    // WinSparkle init. WinSparkle is an application we use to update the program.
+    // WinSparkle init. WinSparkle is an application we use to update the program. But we don't want it to start until
+    // after the main window has shown
     connect(this, SIGNAL(windowWasShown()), this, SLOT(initWinSparkle()), Qt::ConnectionType(Qt::QueuedConnection | Qt::UniqueConnection));
+
 
     // Reading/writing to device initialize
     resetReadWriteProcess();
@@ -207,6 +209,70 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       ui->listViewWest->setCurrentIndex(listViewWestModel->index(0,0));
       ui->stackedWidgetMain->setCurrentIndex(0);
       qApp->processEvents();  // Equivalent of VB DoEvents()
+
+
+    // Finally, now we're all loaded and cozy-comfy: parse any command line arguments
+    // ---------------------------------------------------------------------------------------------------------------------------------->>
+      // But wait! Don't process them until the window has loaded.
+      // "A QTimer with a timeout of 0 will time out as soon as all the events in the window system's event queue have been processed"
+      QTimer::singleShot(0, this, SLOT(ProcessCommandLineArgs()));
+
+
+
+}
+
+
+//------------------------------------------------------------------------------------------------------------------------>>
+// COMMAND LINE ARGUMENTS
+//------------------------------------------------------------------------------------------------------------------------>>
+void MainWindow::ProcessCommandLineArgs()
+{
+    // At present we don't have much in the way of command line options configured, and there really isn't much need.
+    // But our Windows installer will associate ".opz" files with the OPConfig application. Opz files are XML settings files
+    // used to save TCB settings to a computer as backup. What we have done in the installer (Inno Setup) is to cause any
+    // double-click on an .opz file in Windows to execute opconfig.exe with a command line option -f followed by the path and
+    // name of the opz file. For example, clicking on C:\mysettings.opz would execute:
+    // opconfig -f C:\mysettings.opz
+
+    // So we do want to parse the -f option, get the file name, and pass it to our readSettingsFromFile routine (mainwindow_file_rw.cpp)
+
+    // If future command line arguments are created in the future, we would check for their presence here and create whatever logic
+    // is needed to handle them.
+
+    // The QCommandLineParser adds some convenient functionality for checking command line flags and values. We will only be using
+    // a very small portion of what it can actually do, which includes command line help, etc...
+    // QCommandLineParser: http://doc.qt.io/qt-5/qcommandlineparser.html
+    // QCommandLineOption: http://doc.qt.io/qt-5/qcommandlineoption.html
+    QCommandLineParser parser;
+
+    // Create an -f option with a value (filename) and call it loadSettingsFileOption. They can use syntax "-f" or "--file"
+    // - First argument of this version of QCommandLineOption is a string list of the various ways they can write the option (f or file)
+    // - Second is the description ("Read settings from file.")
+    // - Third is the name we give to the value the user will pass for this option (filename)
+    QCommandLineOption loadSettingsFileOption(QStringList() << "f" << "file",
+                                              "Read settings from file.",
+                                              "filename");
+
+    // Now add this option to our parser
+    parser.addOption(loadSettingsFileOption);
+
+    // Process the actual command line arguments given by the user. Here we could pass the app (if we were in main.cpp),
+    // or it also allows us to simply pass a QStringList of arguments.
+    parser.process(QCoreApplication::arguments());
+
+    // Check if the -f flag was even used (we named it loadSettingsFileOption)
+    if (parser.isSet(loadSettingsFileOption))
+    {
+        // It was, now retrieve the value that came with it.
+        QString filename = (parser.value(loadSettingsFileOption));
+        filename.simplified(); // trim white space
+
+        // Ok - if they passed a file name, send it to the readSettingsFromFile function (mainwindow_file_rw.cpp)
+        if (filename != "")
+        {
+            readSettingsFromFile(filename, true);
+        }
+    }
 }
 
 //------------------------------------------------------------------------------------------------------------------------>>
@@ -493,7 +559,7 @@ void MainWindow::initActionsConnections()
     ui->actionOpenFile->setEnabled(true);
     ui->actionSaveFile->setEnabled(true);
     ui->actionExit->setEnabled(true);
-    connect(ui->actionOpenFile, SIGNAL(triggered()), this, SLOT(readSettingsFromFile()));
+    connect(ui->actionOpenFile, SIGNAL(triggered()), this, SLOT(actionReadSettingsFromFile()));
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(writeSettingsToFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
 

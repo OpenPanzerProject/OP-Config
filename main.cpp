@@ -19,16 +19,38 @@
 
 #include "mainwindow.h"
 #include "deviceselect.h"
-#include <QApplication>
-#include <QStyleFactory>
-
+//#include <QApplication>   // We are using SingleApplication instead, which is a subclass of QApplication
 #include "winsparkle.h"
+#include "singleapplication.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication::setApplicationName("OP Config");
+    QApplication::setApplicationVersion(VER_PRODUCTVERSION_STR);
+    QApplication::setOrganizationName("OPEN PANZER");
+
+    // Use the SingleApplication version instead - this prevents multiple instances from opening
+    SingleApplication app(argc, argv);
+    //QApplication app(argc, argv);
+
+
     MainWindow w;
     w.show();
+
+    // When the user tries to open a second instance of the same application, the SingleApplication showUp() signal is emitted
+    // We can then use that signal to bring the focus to the instance that is already running. Of course in Windows this will
+    // only actually highlight it in your taskbar, it won't actually bring it to the fore.
+    QObject::connect(&app, &SingleApplication::showUp, [&]
+    {
+        w.show();
+        w.raise();
+        w.activateWindow();
+    });
+
+
+    // What would now be ideal is if we could get the second application instance to pass its command-line arguments to the
+    // original instance before it closes. It is possible, but I have not figured it out.
+
 
     // This is the deviceselect form. We're not using it for now, it was just for testing.
     // We may want to use something like it someday if we have multiple devices configured from
@@ -37,6 +59,7 @@ int main(int argc, char *argv[])
     //deviceselect *dialog = new deviceselect();
     //dialog->exec();
 
-    return a.exec();
+    return app.exec();
+
 }
 

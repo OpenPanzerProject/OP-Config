@@ -71,7 +71,8 @@ SOURCES += main.cpp\
     mainwindow_vararray.cpp \
     mainwindow_device_rw.cpp \
     mainwindow_file_rw.cpp \
-    mainwindow_tab_radio.cpp
+    mainwindow_tab_radio.cpp \
+    singleapplication.cpp
 
 HEADERS  += mainwindow.h \
     deviceselect.h \
@@ -104,7 +105,8 @@ HEADERS  += mainwindow.h \
     version.h \
     winsparkle.h \
     winsparkle-version.h \
-    resources.rc
+    resources.rc \
+    singleapplication.h
 
 FORMS    += mainwindow.ui \
         deviceselect.ui
@@ -115,3 +117,6 @@ RESOURCES += \
 DISTFILES +=
 
 CONFIG += c++11     #Needed this or it wouldn't compile under mingw
+
+# Added this for the SingleApplication class
+DEFINES += QAPPLICATION_CLASS=QApplication # or whatever app class you want

@@ -121,7 +121,8 @@ void OpenPanzerComm::openSerial_forComms(void)
         // In other words, you use the opposite commands when setting. Although it does make sense given the terminology of the
         // functions, it can be confusing.
 
-        // On the Arduino boards as well as the TCB, DTR is not used for flow control, instead setting the pin to low causes a hardware reset.
+        // On the Arduino boards as well as the TCB, DTR is not used for flow control, instead it is capacitevely coupled with the RESET pin
+        // on the ATmega chip. Setting DTR low causes the RESET pin to go low, which causes a hardware reset.
         // This can be useful, but if all we want is to communicate, we don't want the host (pc) to set DTR low (mean data terminal is ready) -
         // because that will restart the board and we will never get to communicate. So we explicitly set data terminal NOT ready,
         // which has the effect of putting DTR high.

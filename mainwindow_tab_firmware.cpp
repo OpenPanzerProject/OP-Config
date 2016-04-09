@@ -357,6 +357,9 @@ void MainWindow::cmdFlashHex_clicked()
     QString flagSkipVerify = "-V";             // -V Skip verification, saves a lot of time
     QString flagVerbose =    "-v";             // -v Verbose output
     QString flagBaud =       "-b115200";       // -b baud - hardcoded to 115,200
+    QString flagDisableErase = "-D";           // -D disables erase before write. You'd think we woul want to erase before write,
+                                               //    but the Arduino IDE always includes this flag, and without it AVRDUDE often
+                                               //    gives an error message.
 
     // Path to hex
     //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QCoreApplication::applicationDirPath());
@@ -365,7 +368,7 @@ void MainWindow::cmdFlashHex_clicked()
             hex.append(":i");
 
     QStringList arguments;
-    arguments << conf << flagPart << flagProgrammer << flagPort << flagSkipVerify << flagVerbose << flagBaud << hex;
+    arguments << conf << flagPart << flagProgrammer << flagPort << flagSkipVerify << flagVerbose << flagBaud << flagDisableErase << hex;
 
     // Clear text box
     ui->txtConsole->clear();

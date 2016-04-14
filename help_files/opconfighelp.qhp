@@ -68,9 +68,11 @@
 			<file>images/opconfig.png</file>
 			<file>images/AboutIcon.png</file>			<!-- Index page  		-->
 			<file>images/FormLayout.png</file>			<!-- Form Layout 		-->
-			<file>images/dip_connect.png</file>			<!-- Connect page		-->
-			<file>images/readwritedevice.png</file>		<!-- Read/Write Device 	-->
+			<file>images/dip_connect_usb.png</file>	    <!-- Connect page		-->
+			<file>images/dip_connect_bt.png</file>
+            <file>images/readwritedevice.png</file>		<!-- Read/Write Device 	-->
 			<file>images/savesettings.png</file>		<!-- Read/Write File	-->
+            <file>images/opz_icon.png</file>
 			<file>images/RadioLayout.png</file>			<!-- Radio Setup 		-->
 			<file>images/saveminmax.png</file>
 			<file>images/disable_bec.jpg</file>         <!-- Motors tab         -->

@@ -806,9 +806,11 @@ void OpenPanzerComm::startRadioStreamingTimer(void)
 }
 void OpenPanzerComm::reStartRadioStreamingTimer(void)
 {
+    // It should already be created, but just in case...
+    if (!RadioStreaming) radioStreamingTimer->setSingleShot(true);
     // Starting a timer that is already started will re-start it
-    if (RadioStreaming)
-        radioStreamingTimer->start(RADIO_STREAM_OVER_TIME);
+    radioStreamingTimer->start(RADIO_STREAM_OVER_TIME);
+    RadioStreaming = true;
 }
 void OpenPanzerComm::stopRadioStreamingTimer(void)
 {

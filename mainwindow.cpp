@@ -105,6 +105,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // This button will refresh the COM port list (for when you plug in a device after the program has already loaded)
     connect(ui->cmdRefreshCOMs, SIGNAL(clicked(bool)), this, SLOT(fillPortsInfo()));
 
+    // Connect cmdTest1 and cmdTest2 buttons
+    connect(ui->cmdTest1, SIGNAL(clicked(bool)), this, SLOT(cmdTest1_Click()));
+    connect(ui->cmdTest2, SIGNAL(clicked(bool)), this, SLOT(cmdTest2_Click()));
+    // Hide them if we're not using them for testing
+    ui->cmdTest1->hide();
+    ui->cmdTest2->hide();
+
     // Connect/Read/Write buttons
     ui->cmdConnect->setChecked(false);      // Start not connected
     ui->cmdReadDevice->setEnabled(false);   // Can't read until connected
@@ -380,7 +387,14 @@ void MainWindow::changeStackedWidget(const QModelIndex& current, const QModelInd
         comm->closeSerial();
     }
 }
-
+void MainWindow::cmdTest1_Click()
+{
+    qDebug() << "Test 1 button clicked";
+}
+void MainWindow::cmdTest2_Click()
+{
+    qDebug() << "Test 2 button clicked";
+}
 
 
 //------------------------------------------------------------------------------------------------------------------------>>

@@ -92,12 +92,12 @@ void OpenPanzerComm::openSerial_forSnoop(void)
 {
     setSerialSettings();    // Make sure these are updated
 
-    if (serial->isOpen()) { serial->close(); } // Close before opening
+    // Close before opening, this actually shouldn't happen though.
+    // But if it does, we also throw in a "set DTR pin High" (false=high) just for good measure. (High means don't reset the device.)
+    if (serial->isOpen()) { serial->setDataTerminalReady(false); serial->close(); }
 
     if (serial->open(QIODevice::ReadWrite)) // This statement can take a while to complete
     {
-        resetDevice();  // In this case, we would like to reset the device in order to get a clean start
-
         // If we are just snooping, all we need to do is open the serial port: which we've already done if we're at this statement.
         Snooping = true;
     }
@@ -109,25 +109,46 @@ void OpenPanzerComm::openSerial_forSnoop(void)
     emit SnoopingChanged(Snooping);
 }
 
+void OpenPanzerComm::TestDTRTrue()
+{
+    if (serial->isOpen())
+    {
+        resetDevice();
+        serial->setDataTerminalReady(true);
+    }
+}
+void OpenPanzerComm::TestDTRFalse()
+{
+    if (serial->isOpen())
+    {
+        serial->setDataTerminalReady(false);
+        qDebug() << "Set DTR False";
+    }
+}
+
 void OpenPanzerComm::openSerial_forComms(void)
 {
     setSerialSettings();    // Make sure these are updated
 
-    if (serial->isOpen()) { serial->close(); } // Close before opening
+    // Close before opening, this actually shouldn't happen though.
+    // But if it does, we also throw in a "set DTR pin High" (false=high) just for good measure. (High means don't reset the device.)
+    if (serial->isOpen()) { serial->setDataTerminalReady(false); serial->close(); }
 
     if (serial->open(QIODevice::ReadWrite)) // This statement can take a while to complete
     {   // When checking isDataTerminalReady(), a return value of true means DTR is high, return false means DTR is low.
         // However, when using the setDataTerminalReady(bool) function, you set it to to high by passing false, and low by passing true.
         // In other words, you use the opposite commands when setting. Although it does make sense given the terminology of the
-        // functions, it can be confusing.
+        // functions, it can be confusing. And yes, I've tested all this empirically with a voltmeter. setDataTerminalReady(false)
+        // WILL put DTR to low and it WILL cause the TCB to reset. This is fine if that's what we want to do, but we don't always.
 
-        // On the Arduino boards as well as the TCB, DTR is not used for flow control, instead it is capacitevely coupled with the RESET pin
+        // On the Arduino boards as well as the TCB, DTR is not used for flow control, instead it is capacitively coupled with the RESET pin
         // on the ATmega chip. Setting DTR low causes the RESET pin to go low, which causes a hardware reset.
         // This can be useful, but if all we want is to communicate, we don't want the host (pc) to set DTR low (mean data terminal is ready) -
         // because that will restart the board and we will never get to communicate. So we explicitly set data terminal NOT ready,
         // which has the effect of putting DTR high.
 
         // Note, this can only be set after the serial port is open.
+        serial->setRequestToSend(true);      // Not sure this matters, but emotionally it makes a slight difference.
         serial->setDataTerminalReady(false); // False here means "set DTR pin High"
 
         // But - in testing, this doesn't seem to work consistently. QSerialPort seems to toggle DTR if it feels like it, probably based on
@@ -217,8 +238,11 @@ void OpenPanzerComm::connectionFailed()
 void OpenPanzerComm::closeSerial()
 {
     if (!Snooping) TellDevice_Goodbye();
-    // We also try to reset the device
-    if(_EEPROM_Written) { resetDevice(); } // This causes the device to reload the updated variables from EEPROM
+
+    // If we wrote settings to the device, we want it to reboot so it can apply the new settings.
+    // If we didn't write anything, we *don't* want to reset the device, leave DTR high.
+    if(_EEPROM_Written) { resetDevice(); }
+
     // Close the port
     if (serial->isOpen())
     {   // Make sure DTR is high at the end, in case it makes any difference next time
@@ -279,6 +303,8 @@ void OpenPanzerComm::resetDevice()
 {   // We toggle the DTR pin low. This causes the device to reboot.
     if (serial->isOpen())
     {   if (DEBUG_MSGS) qDebug() << "Attempt to reset device.";
+        // Yes, there is no pause between setting DTR low and putting it back to high.
+        // Tested with a meter, it still gets set low momentarily, and it still resets the device.
         serial->setDataTerminalReady(true);  // True here means "set DTR pin Low." This will cause device to reset.
         serial->setDataTerminalReady(false); // False here means "set DTR pin High"
     }
@@ -286,13 +312,22 @@ void OpenPanzerComm::resetDevice()
 
 void OpenPanzerComm::Snoop()
 {
+   // Here we want to start snooping
    if (Connected)
    {
-       // We already have the serial port open. We just need to tell the TCB to resume normal operation.
+       // If we are already connected to the device, then the serial port is already open. All we need to do is
+       // tell the device to exit communication mode and go into normal operation mode, but we leave the serial port
+       // open so we can listen to whatever it says in normal operation mode.
+
+       // Tell the device to resume normal operation:
        TellDevice_Goodbye();
-       // But actually, if we just posted some changes to the TCB we may want to see their effect in the console,
-       // and this won't happen until the device is reset. So let's try to reboot it too.
-       resetDevice();
+
+       // If while we were "connected" we posted any changes, we probably want to see their effect in the console,
+       // and this won't happen until the device is reset. So let's try to reboot it too, but ONLY if we
+       // wrote changes:
+       if (_EEPROM_Written) { resetDevice(); }
+
+       // Now update flags and emit signals
        Connected = false;               // In this case, Connected = false doesn't mean the port is closed,
        emit ConnectionChanged(false);   // it just means we aren't in communication mode anymore.
 
@@ -300,8 +335,8 @@ void OpenPanzerComm::Snoop()
        emit SnoopingChanged(true);      // This emits the Snooping true signal
    }
    else
-   {
-       openSerial_forSnoop();           // openSerial will take care of emitting the correct signals
+   {   // In this case we want to snoop and the serial port isn't open yet, so we will open it.
+       openSerial_forSnoop();           // openSerial_forSnoop() will take care of emitting the correct signals
    }
 }
 
@@ -437,6 +472,7 @@ void OpenPanzerComm::stopStreamRadio(void)
     // skip it whenever we end a streaming operation from the device (but we don't want to skip it on other communications).
     SkipWatchdog = true;
     sendNullValueSentence(PCCMD_STOPSTREAM_RADIO);
+    // We'll let the streaming timer expire, which will set the RadioStreaming flag = false.
 }
 
 void OpenPanzerComm::requestFirmwareVersion(void)
@@ -814,13 +850,12 @@ void OpenPanzerComm::reStartRadioStreamingTimer(void)
 }
 void OpenPanzerComm::stopRadioStreamingTimer(void)
 {
-    if (radioStreamingTimer->isActive())
-        radioStreamingTimer->stop();
-
+    if (radioStreamingTimer->isActive()) { radioStreamingTimer->stop(); }
     RadioStreaming = false;
 }
 void OpenPanzerComm::radioStreamingTimeout(void)
-{
+{   // This function gets called if the radio stream fails to send the next streaming message
+    // within RADIO_STREAM_OVER_TIME time.
     if (RadioStreaming)
     {
         RadioStreaming = false;

@@ -161,6 +161,12 @@ private slots:
     // ---------------------------------------------------------------------------------------------------->>
       void ResetAllValues();
 
+    // Slots for the two test buttons on the Radio tab
+    // ---------------------------------------------------------------------------------------------------->>
+      void cmdTest1_Click();                        // These slots are in the mainwindow.cpp file under FORM-GENERAL
+      void cmdTest2_Click();                        // And the connections are made in the MainWindow constructor
+
+
     // Slots for connecting/disconnecting/error handling the device
     // ---------------------------------------------------------------------------------------------------->>
       void fillPortsInfo();                         // Updates the list of detected COM ports

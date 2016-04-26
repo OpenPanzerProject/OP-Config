@@ -173,6 +173,8 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.TurretElevation_EPMin = VarArray.value(1811).toInt();                        // 1811 - Turret elevation end-point minimum
     DeviceData.TurretElevation_EPMax = VarArray.value(1812).toInt();                        // 1812 - Turret elevation end-point maximum
     DeviceData.TurretElevation_Reversed = VarArray.value(1813).toUInt();                    // 1813 - Turret elevation motor reversed
+    DeviceData.TurretElevation_MaxSpeedPct = VarArray.value(1814).toUInt();                 // 1814 - Barrel elevation motor speed as percent of maximum
+    DeviceData.TurretRotation_MaxSpeedPct = VarArray.value(1815).toUInt();                  // 1815 - Turret rotation motor speed as percent of maximum
 
     // Mechanical Barrel and Recoil Servo settings - 20xx
     DeviceData.Airsoft = VarArray.value(2011).toUInt();                                     // 2011 - Airsoft true/false
@@ -206,12 +208,13 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.NeutralTurnPct = VarArray.value(2422).toUInt();                              // 2422 - Neutral turn speed as percent of drive speed
     DeviceData.TurnMode = VarArray.value(2423).toUInt();                                    // 2423 - Turn mode
     DeviceData.DriveType = VarArray.value(2424).toUInt();                                   // 2424 - Drive type
-    DeviceData.MaxReverseSpeedPct = VarArray.value(2425).toUInt();                          // 2425 - Max reverse speed
-    DeviceData.HalftrackTreadTurnPct = VarArray.value(2426).toUInt();                       // 2426 - Pct of turn applied to halftrack treads
-    DeviceData.EngineAutoStart = VarArray.value(2427).toUInt();                             // 2427 - Auto-start engine with throttle
-    DeviceData.EngineAutoStopTime_mS = VarArray.value(2428).toInt();                        // 2428 - Auto-stop engine after idle time
-    DeviceData.MotorNudgePct = VarArray.value(2429).toUInt();                               // 2429 - Motor nudge percent
-    DeviceData.NudgeTime_mS = VarArray.value(2430).toUInt();                                // 2430 - Nudge time in milliseconds
+    DeviceData.MaxForwardSpeedPct = VarArray.value(2425).toUInt();                          // 2425 - Max forward speed
+    DeviceData.MaxReverseSpeedPct = VarArray.value(2426).toUInt();                          // 2426 - Max reverse speed
+    DeviceData.HalftrackTreadTurnPct = VarArray.value(2427).toUInt();                       // 2427 - Pct of turn applied to halftrack treads
+    DeviceData.EngineAutoStart = VarArray.value(2428).toUInt();                             // 2428 - Auto-start engine with throttle
+    DeviceData.EngineAutoStopTime_mS = VarArray.value(2429).toInt();                        // 2429 - Auto-stop engine after idle time
+    DeviceData.MotorNudgePct = VarArray.value(2430).toUInt();                               // 2430 - Motor nudge percent
+    DeviceData.NudgeTime_mS = VarArray.value(2431).toUInt();                                // 2431 - Nudge time in milliseconds
 
     // "Physics" Settings - 25xx
     DeviceData.EnableBarrelStabilize = VarArray.value(2511).toUInt();                       // 2511 - Enable barrel stabilization
@@ -447,6 +450,8 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(1811, QByteArray::number(DeviceData.TurretElevation_EPMin));                    // 1811 - Turret elevation end-point minimum
     VarArray.insert(1812, QByteArray::number(DeviceData.TurretElevation_EPMax));                    // 1812 - Turret elevation end-point maximum
     VarArray.insert(1813, QByteArray::number(DeviceData.TurretElevation_Reversed));                 // 1813 - Turret elevation motor reversed
+    VarArray.insert(1814, QByteArray::number(DeviceData.TurretElevation_MaxSpeedPct));              // 1814 - Barrel elevation motor speed as percent of maximum
+    VarArray.insert(1815, QByteArray::number(DeviceData.TurretRotation_MaxSpeedPct));               // 1815 - Turret rotation motor speed as percent of maximum
 
     // Mechanical Barrel and Recoil Servo settings - 20xx
     VarArray.insert(2011, QByteArray::number(DeviceData.Airsoft));                                  // 2011 - Airsoft true/false
@@ -480,12 +485,13 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2422, QByteArray::number(DeviceData.NeutralTurnPct));                           // 2422 - Neutral turn speed as percent of drive speed
     VarArray.insert(2423, QByteArray::number(DeviceData.TurnMode));                                 // 2423 - Turn mode
     VarArray.insert(2424, QByteArray::number(DeviceData.DriveType));                                // 2424 - Drive type
-    VarArray.insert(2425, QByteArray::number(DeviceData.MaxReverseSpeedPct));                       // 2425 - Max reverse speed
-    VarArray.insert(2426, QByteArray::number(DeviceData.HalftrackTreadTurnPct));                    // 2426 - Pct of turn applied to halftrack treads
-    VarArray.insert(2427, QByteArray::number(DeviceData.EngineAutoStart));                          // 2427 - Auto-start engine with throttle
-    VarArray.insert(2428, QByteArray::number(DeviceData.EngineAutoStopTime_mS));                    // 2428 - Auto-stop engine after idle time
-    VarArray.insert(2429, QByteArray::number(DeviceData.MotorNudgePct));                            // 2429 - Motor nudge percent
-    VarArray.insert(2430, QByteArray::number(DeviceData.NudgeTime_mS));                             // 2430 - Nudge time in milliseconds
+    VarArray.insert(2425, QByteArray::number(DeviceData.MaxForwardSpeedPct));                       // 2425 - Max forward speed
+    VarArray.insert(2426, QByteArray::number(DeviceData.MaxReverseSpeedPct));                       // 2426 - Max reverse speed
+    VarArray.insert(2427, QByteArray::number(DeviceData.HalftrackTreadTurnPct));                    // 2427 - Pct of turn applied to halftrack treads
+    VarArray.insert(2428, QByteArray::number(DeviceData.EngineAutoStart));                          // 2428 - Auto-start engine with throttle
+    VarArray.insert(2429, QByteArray::number(DeviceData.EngineAutoStopTime_mS));                    // 2429 - Auto-stop engine after idle time
+    VarArray.insert(2430, QByteArray::number(DeviceData.MotorNudgePct));                            // 2430 - Motor nudge percent
+    VarArray.insert(2431, QByteArray::number(DeviceData.NudgeTime_mS));                             // 2431 - Nudge time in milliseconds
 
     // Accelerometer Settings - 25xx
     VarArray.insert(2511, QByteArray::number(DeviceData.EnableBarrelStabilize));                    // 2511 - Enable barrel stabilization

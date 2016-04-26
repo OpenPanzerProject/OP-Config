@@ -2,6 +2,7 @@
 #frmMotorSelection,
 #frmRecoilSettings,
 #frmMechanicalBarrel,
+#frmTurretSpeeds,
 #frmSmoker,
 #frmBrakeLights,
 #frmAuxOutput,

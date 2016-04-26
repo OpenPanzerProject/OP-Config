@@ -90,6 +90,9 @@ void MainWindow::Variables_to_Controls(void)
     ui->chkEnableMechBarrel->setChecked(DeviceData.MechanicalBarrelWithCannon);
     SetMechBarrelAuto(ui->chkEnableMechBarrel->isChecked());
     ShowHideRecoilDelay();
+    // Turret speed limitations
+    ui->spinTurretRotationSpeed->setValue(DeviceData.TurretRotation_MaxSpeedPct);
+    ui->spinBarrelElevationSpeed->setValue(DeviceData.TurretElevation_MaxSpeedPct);
     // Recoil servo settings
     ui->spinRecoilTimeToRecoil->setValue(DeviceData.RecoilServo_Recoil_mS);
     ui->spinRecoilTimeToReturn->setValue(DeviceData.RecoilServo_Return_mS);
@@ -147,6 +150,7 @@ void MainWindow::Variables_to_Controls(void)
     autostop /= 60000;
     ui->dspinEngineAutoStop->setValue(autostop);
     ui->spinReverseSpeed->setValue(DeviceData.MaxReverseSpeedPct);
+    ui->spinForwardSpeed->setValue(DeviceData.MaxForwardSpeedPct);
     double secs;    // The following three need to be converted from milliseconds to seconds
     secs = static_cast<double>(DeviceData.TimeToShift_mS) / 1000.0;
     ui->dspinShiftTime->setValue(secs);
@@ -307,6 +311,9 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.MechanicalBarrelWithCannon = ui->chkEnableMechBarrel->isChecked();
     DeviceData.Airsoft = ui->cboMechBarrelType->currentData().toBool();
     DeviceData.RecoilDelay = ui->spinRecoilDelay->value();
+    // Turret Speed Limitations
+    DeviceData.TurretRotation_MaxSpeedPct = ui->spinTurretRotationSpeed->value();
+    DeviceData.TurretElevation_MaxSpeedPct = ui->spinBarrelElevationSpeed->value();
     // Recoil Servo settings
     DeviceData.ServoRecoilWithCannon = ui->chkEnableRecoilServo->isChecked();
     DeviceData.RecoilServo_Recoil_mS = ui->spinRecoilTimeToRecoil->value();
@@ -370,6 +377,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.EngineAutoStart = ui->chkEngineAutoStart->isChecked();
     DeviceData.EngineAutoStopTime_mS = static_cast<int32_t>(ui->dspinEngineAutoStop->value() * 60000.0); // We need to convert minutes to milli-seconds
     DeviceData.MaxReverseSpeedPct = ui->spinReverseSpeed->value();
+    DeviceData.MaxForwardSpeedPct = ui->spinForwardSpeed->value();
     // The following three need to be converted from seconds to milliseconds
     DeviceData.TimeToShift_mS = static_cast<uint16_t>(ui->dspinShiftTime->value() * 1000.0);
     DeviceData.TransmissionDelay_mS = static_cast<uint16_t>(ui->dspinTransDelay->value() * 1000.0);

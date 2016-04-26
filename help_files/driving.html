@@ -57,11 +57,11 @@
 	(or until Low Voltage Cutoff is reached, see the <a href="misc.html#lvc">Misc</a> tab). 
 	</p>
 
-	<h3>Limit Reverse Speed</h3>
-	<h4 class="entry">Max Reverse Speed</h4>
+	<h3>Speed Limits</h3>
+	<h4 class="entry">Limit Driving Speeds</h4>
 	<p>
-	This option lets you set a maximum reverse speed as a percent of full speed. If 100%, the vehicle will be capable of traveling in reverse just as fast as it can forward. 
-	If 0%, reverse will be disabled. 
+	This option lets you modify the maximum allowed forward and reverse reverse speed as a percent of full speed. A full speed setting of 100% will allow your model to move as fast as its 
+    hardware will allow. This is a function of your motor, battery, gearbox, etc. To limit the maximum speed, specify a value less than 100%. You can have different maximum speeds for forward and reverse. 
 	</p>
 
 	<h3>Nudge Motors on Start</h3>
@@ -72,23 +72,25 @@
 	vehicle started, the vehicle may then start moving faster than we had wanted it to, and the feeling of throttle responsiveness at low throttle settings can decrease. That is because
 	it takes more power to overcome the resistance of a stationary gearbox and drivetrain, than it does to keep those things moving once they've started. The Nudge feature was created
 	to address this issue.<br><br>
-	
-	A "Nudge" only occurs when the tank has been stopped and is first starting to move (either in forward or reverse). If enabled, Nudge will apply a certain minimum throttle setting
-	for a specified length of time that over-rides any acceleration constraint. When the Nudge Time is over, throttle response will revert to whatever constraint has been applied. A Nudge
-	will not be applied again until the vehicle has once again come to a stop.<br><br>
-	
+
+    A "Nudge" only occurs when the tank has been stopped and is first starting to move (either in forward or reverse). If enabled, Nudge will apply a certain minimum throttle setting 
+    for a specified length of time that over-rides any acceleration constraint. It also over-rides any speed limitation that may have been set above! It is up to you to choose a nudge amount 
+    that makes sense. If your max forward speed is set to 70%, a nudge amount of 90% may look odd. When the Nudge Time is over, throttle response will revert to whatever constraint has been 
+    applied. A Nudge will not be applied again until the vehicle has once again come to a stop.<br><br>
+
 	If you are not using any acceleration constraint, or the level is very low, you may not need any Nudging. If so, disable Nudge by setting the percent to 0. Otherwise, a good starting point
 	for testings is 30% Nudge for 250-500 mS (1/4 - 1/2 of a second). Adjust from there to fit your model and driving preference. 
 	</p>
 	
 	<h4 class="entry">Motor Nudge Percent</h4>
 	<p>
-	This is the minimum throttle that will be applied during the nudge. Set to 0 to disable the Nudge effect. 
+    This is the minimum throttle that will be applied during the nudge. For as long as Nudge Time lasts, the throttle will instantly be set to Nudge Percent and kept there, regardless of any 
+    acceleration/deceleration constraint and regardless of any forward/reverse speed limit that may also have been set. Set to 0 to disable the Nudge effect. 
 	</p>
 
 	<h4 class="entry">Nudge Time</h4>
 	<p>
-	This is how long the Nudge effect will last in milliseconds (1000 mS = 1 second). 
+    This is how long the Nudge effect will last in milliseconds when movement first begins from a stop (1000 mS = 1 second).
 	</p>
 
 	<h3>Driving Delays</h3>

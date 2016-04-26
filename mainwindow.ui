@@ -847,7 +847,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -4134,7 +4134,7 @@ QSizeGrip {
                    <x>210</x>
                    <y>60</y>
                    <width>51</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -4188,7 +4188,7 @@ QSizeGrip {
                    <x>210</x>
                    <y>90</y>
                    <width>51</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -4204,7 +4204,7 @@ QSizeGrip {
                    <x>210</x>
                    <y>120</y>
                    <width>51</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -4220,7 +4220,7 @@ QSizeGrip {
                    <x>210</x>
                    <y>150</y>
                    <width>51</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -5156,9 +5156,9 @@ QSizeGrip {
                <widget class="FrameContent" name="frmRecoilSettings">
                 <property name="geometry">
                  <rect>
-                  <x>10</x>
+                  <x>430</x>
                   <y>390</y>
-                  <width>411</width>
+                  <width>391</width>
                   <height>141</height>
                  </rect>
                 </property>
@@ -5197,7 +5197,7 @@ QSizeGrip {
                   <rect>
                    <x>0</x>
                    <y>23</y>
-                   <width>411</width>
+                   <width>391</width>
                    <height>20</height>
                   </rect>
                  </property>
@@ -5286,7 +5286,7 @@ QSizeGrip {
                 <widget class="HelpButton" name="hpbRecoilServo">
                  <property name="geometry">
                   <rect>
-                   <x>380</x>
+                   <x>360</x>
                    <y>10</y>
                    <width>18</width>
                    <height>18</height>
@@ -5308,7 +5308,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>71</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="maximum">
@@ -5321,7 +5321,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>101</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="maximum">
@@ -5438,7 +5438,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>70</y>
                    <width>61</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -5454,7 +5454,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>99</y>
                    <width>61</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimumSize">
@@ -5518,7 +5518,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>130</y>
                    <width>61</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -5691,7 +5691,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>121</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="maximum">
@@ -5877,6 +5877,188 @@ QSizeGrip {
                  </property>
                 </widget>
                </widget>
+               <widget class="FrameContent" name="frmTurretSpeeds">
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>390</y>
+                  <width>411</width>
+                  <height>111</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QLabel" name="label_23">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>181</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>Turret Speed Limits</string>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frame_8">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>411</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_33">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>70</y>
+                   <width>161</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Max Barrel Elevation Speed</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbTurret">
+                 <property name="geometry">
+                  <rect>
+                   <x>380</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_313">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>40</y>
+                   <width>161</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Max Turret Rotation Speed</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinTurretRotationSpeed">
+                 <property name="geometry">
+                  <rect>
+                   <x>200</x>
+                   <y>40</y>
+                   <width>61</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokerIdle2_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>40</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokerIdle2_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>70</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinBarrelElevationSpeed">
+                 <property name="geometry">
+                  <rect>
+                   <x>200</x>
+                   <y>70</y>
+                   <width>61</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                </widget>
+               </widget>
               </widget>
               <widget class="QWidget" name="pgLightsIO">
                <widget class="FrameContent" name="frmBrakeLights">
@@ -6026,7 +6208,7 @@ QSizeGrip {
                    <x>220</x>
                    <y>70</y>
                    <width>61</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -6389,7 +6571,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>100</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -6459,7 +6641,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>130</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -6493,7 +6675,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>40</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -6565,7 +6747,7 @@ QSizeGrip {
                    <x>150</x>
                    <y>70</y>
                    <width>71</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -6711,7 +6893,7 @@ QSizeGrip {
                    <x>130</x>
                    <y>50</y>
                    <width>61</width>
-                   <height>21</height>
+                   <height>22</height>
                   </rect>
                  </property>
                  <property name="minimum">
@@ -8052,7 +8234,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Max Reverse Speed</string>
+                  <string>Limit Driving Speeds</string>
                  </property>
                 </widget>
                 <widget class="QFrame" name="frame_20">
@@ -8112,7 +8294,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <widget class="QLabel" name="label_48">
                  <property name="geometry">
                   <rect>
-                   <x>290</x>
+                   <x>370</x>
                    <y>160</y>
                    <width>21</width>
                    <height>21</height>
@@ -8358,7 +8540,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Limit Reverse Speed</string>
+                  <string>Speed Limits</string>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblNudgeTime2">
@@ -8563,6 +8745,58 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="singleStep">
                   <double>0.500000000000000</double>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_89">
+                 <property name="geometry">
+                  <rect>
+                   <x>210</x>
+                   <y>140</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Reverse</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinForwardSpeed">
+                 <property name="geometry">
+                  <rect>
+                   <x>290</x>
+                   <y>160</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_98">
+                 <property name="geometry">
+                  <rect>
+                   <x>290</x>
+                   <y>140</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Forward</string>
                  </property>
                 </widget>
                </widget>

@@ -15,6 +15,7 @@
 			<li><a href="#drivemotors">Drive Motors</a></li>
 			<li><a href="#turretmotors">Turret Motors</a></li>
 			<li><a href="#barrel">Mechanical Barrel</a></li>
+            <li><a href="#turretspeed">Turret Speed Limits</a></li>
 			<li><a href="#servorecoil">Servo Recoil</a></li>
 			<li><a href="#smoker">Mechanical Smoker</a></li>
 		</ul>
@@ -148,7 +149,34 @@
 	
 	
 	
-	<h2 id="servorecoil">Servo Recoil</h2>
+	<h2 id="turretspeed">Turret Speed Limits</h2>
+    <p>
+    The speed limit setting will work on all motor types, except for an unmodified hobby servo with the motor type set to "RC Output." In that case, because the signal being sent to the servo is actually a 
+    <i>position</i> command, any speed limitation settings will instead decrease the servo's end-points.
+    </p>
+    
+    <p>For all other types of motors and outputs, the speed limitation will work as expected.
+    </p>
+
+    <p>If you want to use a standard, unmodified hobby servo for barrel elevation, you should select "Servo - Pan Effect" as the motor type and not "RC Output." Not only will you have finer control of the barrel 
+    movement, but the pan effect code will allow this speed limitation setting to work as expected (it will restrict the maximum speed at which the barrel servo can move).
+    </p>
+ 
+    <p>
+    If you want to use a servo for any other control, such as turret rotation or even as a drive motor, then you can use "RC Output" but you must use a hobby servo <i>modified for continuous rotation</i>. 
+    Continuous rotation will probably be necessary anyway for those controls, but one side effect of that modification is the signal sent to the servo now functions as a speed command instead of a position 
+    command, so any speed limitation setting will now work as expected. 
+    </p>
+
+    <h4 class="entry">Max Turret Rotation Speed</h4>
+    <p>If you wish to limit the speed of the turret rotation motor, set this to some number less than 100.</p>
+
+    <h4 class="entry">Max Barrel Elevation Speed</h4>
+    <p>If you wish to limit the speed of the barrel elevation motor, set this to some number less than 100.</p>
+
+    
+    
+    <h2 id="servorecoil">Servo Recoil</h2>
 	<p>
 	If you prefer to use a servo for recoil instead of the mechanical units, the TCB has you covered. The recoil servo should be plugged into RC Output 5 (also labelled <b>Recoil</b>) on the TCB. 
 	The settings here allow us to precisely control the speed of the recoil and the speed of the barrel's return to battery ("return to battery" means the barrel is fully extended). 

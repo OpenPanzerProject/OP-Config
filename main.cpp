@@ -23,8 +23,14 @@
 #include "winsparkle.h"
 #include "singleapplication.h"
 
+
 int main(int argc, char *argv[])
 {
+    //QApplication::setAttribute(Qt::AA_Use96Dpi);
+    //QApplication::setDesktopSettingsAware(false);
+    //This was only introduced in Qt 5.6, I am using 5.4
+    //QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
     QApplication::setApplicationName("OP Config");
     QApplication::setApplicationVersion(VER_PRODUCTVERSION_STR);
     QApplication::setOrganizationName("OPEN PANZER");

@@ -96,8 +96,10 @@ void MainWindow::ShowConnectionStatus(boolean connected)
                 ui->cmdConnect->setEnabled(true);
         ui->actionRead->setEnabled(false);      // Read action disabled
         ui->cmdReadDevice->setEnabled(false);   // Read device button disabled
+        ui->cmdReadDevice->setChecked(false);   // Button un-checked
         ui->actionWrite->setEnabled(false);     // Write action disabled
         ui->cmdWriteDevice->setEnabled(false);  // Write device button disabled
+        ui->cmdWriteDevice->setChecked(false);  // Button un-checked
 
         // Re-enable these controls
         ui->cboCOMPorts->setEnabled(true);
@@ -164,19 +166,46 @@ void MainWindow::resetReadWriteProcess()
     writeAllSettings = false;
     writeSomeSettings = false;
 }
-void MainWindow::updateVarArray_fromSerial(uint16_t ID, QByteArray value)
+void MainWindow::updateVarArray_fromSerial(uint16_t ID, QByteArray value, boolean found)
 {
-    // This function triggers when we receive back the value of a setting we requested from the device
+    // This function triggers when we receive a response after requesting a value from the device.
+    // If "found" is true, the value is included and is valid.
+    // If "found" is false, the value will (should) be 0, but regardless, should be ignored, because false means the value could not be found.
 
-    // Update the value in our array
-    updateVarArray_byID(ID, value);
+    #define MaxRetries 1    // 1 re-try means we will try twice total, for each variable
+    static int totalPossibleVars = NUM_STORED_VARS;     // How many variables is it possible to import
+    double pctImported = 0;
+    static int numRetries = 0;
+    static int numFailed = 0;
+
+    if (!found)
+    {
+        if (numRetries < MaxRetries)
+        {
+            numRetries += 1;
+            nextVarPos -= 1;                            // Send the last var pos once again
+        }
+        else
+        {
+            numRetries = 0;                             // Reset the re-try count. We will just move on to the next var, and give up on this one.
+                                                        // If a subsequent next variable fails too, it will also be retried because numRetries is now back to 0.
+            numFailed += 1;                             // Increment the fail count so we can notify the user at the end.
+        }
+    }
+    else
+    {
+        updateVarArray_byID(ID, value);                 // Here we got a valid value back, so update the varArray
+        numRetries = 0;                                 // Also reset numRetries
+    }
+
+
 
     // If we are in the middle of reading all settings sequentially, proceed to next
     if (readAllSettings)
     {
         // In this case we want to read every setting, so as soon as one is read in,
         // we request the next.
-        if (nextVarPos < NUM_STORED_VARS)       // NUM_STORED_VARS is the absolute number but since the array is zero-based that last position will be 1-less
+        if (nextVarPos < NUM_STORED_VARS)       // NUM_STORED_VARS is the total number but since the array is zero-based that last position will be 1-less
         {
             statusProgressBar->setValue(nextVarPos);     // Update progress bar
             sendReadCommand_byPos(nextVarPos);           // request next variable
@@ -184,7 +213,9 @@ void MainWindow::updateVarArray_fromSerial(uint16_t ID, QByteArray value)
         }
         else
         {
+            // Stop, we're done
             readAllSettings = false;
+            numRetries = 0;
             nextVarPos = 0;
             // Done with progress bar
             statusProgressBar->hide();
@@ -192,18 +223,42 @@ void MainWindow::updateVarArray_fromSerial(uint16_t ID, QByteArray value)
             // Now we're done, we can re-enable these
             EnableDeviceActionsAfterReadWrite();
 
-            // Ok, we've loaded the settings from our device into VarArray.
-            // Now we need to copy the VarArray to named variables,
-            // and then copy the named variables to our controls.
-            VarArray_to_Variables();
-            Variables_to_Controls();
+            if (numFailed == totalPossibleVars)
+            {
+                msgBox(tr("An error occurred. No settings were imported."), vbOkOnly, "Device Read", vbCritical);
+                SetStatusLabel("No settings imported",slBad);
+            }
+            else
+            {
+                // Ok, we've loaded the settings from our device into VarArray.
+                // Now we need to copy the VarArray to named variables,
+                // and then copy the named variables to our controls.
+                VarArray_to_Variables();
+                Variables_to_Controls();
 
-            // If we make it here, by definition we read everything
-            SetStatusLabel(QString("All settings read (100%)"),slGood);
-            ui->cmdReadDevice->setChecked(false);
-            ui->cmdSnoop->setEnabled(true);
-            ui->cmdFlashHex->setEnabled(true);
-            MouseRestore();
+                // Uncheck the ReadDevice button since we're done
+                ui->cmdReadDevice->setChecked(false);
+                // And re-enable these actions
+                ui->cmdSnoop->setEnabled(true);
+                ui->cmdFlashHex->setEnabled(true);
+                MouseRestore();
+
+                if (numFailed > 0)
+                {   // In this case we did not successfully read every single variable
+                    pctImported = ((double)(totalPossibleVars - numFailed)/(double)totalPossibleVars)*100.0;
+                    SetStatusLabel(QString("Partial settings read (%1%)").arg(QString::number(pctImported,'f',0)),slGood);
+                    msgBox(tr("Of %1 settings, %2 were unable to be read.<br>You may wish to try again, or update your firmware.") .arg(totalPossibleVars).arg(numFailed), vbOkOnly, "Device Read", vbInformation);
+                }
+                else
+                {
+                    // In this case we read all settings without error
+                    SetStatusLabel(QString("All settings read (100%)"),slGood);
+                    // We don't bother showing a message box in this case, the status message is enough.
+                }
+
+                // Reset num failed for the next go-round
+                numFailed = 0;
+            }
         }
     }
 }
@@ -215,9 +270,6 @@ void MainWindow::readSettingsFromDevice(void)
     ui->cmdSnoop->setEnabled(false);
     ui->cmdFlashHex->setEnabled(false);
 
-    readAllSettings = true;                 // Set the read all flag
-    nextVarPos = 2;                         // Next one will be number 2
-
     // Show and initialize the progress bar
     statusProgressBar->show();
             qApp->processEvents();
@@ -227,6 +279,8 @@ void MainWindow::readSettingsFromDevice(void)
     // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
     DisableDeviceActionsDuringReadWrite();
 
+    nextVarPos = 2;                         // Next one will be number 2
+    readAllSettings = true;                 // Set the read all flag
     sendReadCommand_byPos(1);               // Read the first value
     // Now when the value is read, the readAllSettings flag will cause the read routine to request
     // the next variable, until they have finally all been read. This will be done in updateVarArray_fromSerial

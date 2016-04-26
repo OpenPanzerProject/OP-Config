@@ -5,12 +5,13 @@ OpenPanzerComm::OpenPanzerComm()
     // Objects
     // ---------------------------------------------------------------------------------------------------------------------------------->>
         serial = new QSerialPort(this);
-        // setSettingsRestoredOnClose will be deprecated in QT 6 and beyond. If true, it means QSerialPort will restore the
-        // previous settings on close, which is the default. Some have found that if prior to opening the DTR was low, QSerialPort
-        // will set DTR back to low on disconnect. In our case that is not really a terrible problem (it resets the device, which we
-        // may want to do anyway). The bigger issue is resetting on connect, but we have sort of found a way to work around that.
-        // Sadly, regardless of what we put this setting to or any other, I can not get QSerialPort to behave consistently with regards
-        // to DTR on open.
+        // setSettingsRestoredOnClose will be deprecated in QT 6 and beyond. If setSettingsRestoredOnClose is true, it means QSerialPort
+        // will restore the previous settings on close, which is the default. Some have found that if prior to opening the port that
+        // DTR was low, QSerialPort will set DTR back to low on disconnect. In our case that is not really a terrible problem (it resets
+        // the device, which we *may* want to do anyway (depends). The bigger issue is resetting on connect, but we have sort of found a
+        // way to work around that. Sadly, regardless of what we put this setting to or any other, I can not get QSerialPort to behave
+        // consistently with regards to the state DTR on serial port open. Not to mention the crazy things Windows does with it when the
+        // port is closed as part of its "discovery" (basically toggle DTR every half second, keeping the TCB in a continual state of reset).
         serial->setSettingsRestoredOnClose(false);
 
         // Timers
@@ -37,7 +38,6 @@ OpenPanzerComm::OpenPanzerComm()
         connect(this, SIGNAL(AnyData()), this, SLOT(restartWatchdog()));    // Any time some portion of a response comes back, restart the watchdog
         connect(this, SIGNAL(AnySentence()), this, SLOT(stopWatchdog()));   // Any time a complete sentence is received, stop the watchdog timer
         connect(this, SIGNAL(RepeatSentence()), this, SLOT(processRepeatSentence()));
-        connect(this, SIGNAL(NoSuchValue()), this, SLOT(processNoSuchValue()));
 
     // Serial connections
         connect(this, SIGNAL(IncrementError()), this, SLOT(handleNonCriticalError()));
@@ -98,6 +98,12 @@ void OpenPanzerComm::openSerial_forSnoop(void)
 
     if (serial->open(QIODevice::ReadWrite)) // This statement can take a while to complete
     {
+
+        // Note, this can only be set after the serial port is open.
+        serial->setRequestToSend(true);      // Not sure this matters, but emotionally it makes a slight difference.
+        serial->setDataTerminalReady(false); // False here means "set DTR pin High." If possible, we want to avoid resetting the device,
+                                             // which occurs when you set DTR to low (read more in openSerial_forComms below)
+
         // If we are just snooping, all we need to do is open the serial port: which we've already done if we're at this statement.
         Snooping = true;
     }
@@ -107,23 +113,6 @@ void OpenPanzerComm::openSerial_forSnoop(void)
     }
     // Emit the signal to let us know what happened
     emit SnoopingChanged(Snooping);
-}
-
-void OpenPanzerComm::TestDTRTrue()
-{
-    if (serial->isOpen())
-    {
-        resetDevice();
-        serial->setDataTerminalReady(true);
-    }
-}
-void OpenPanzerComm::TestDTRFalse()
-{
-    if (serial->isOpen())
-    {
-        serial->setDataTerminalReady(false);
-        qDebug() << "Set DTR False";
-    }
 }
 
 void OpenPanzerComm::openSerial_forComms(void)
@@ -440,22 +429,6 @@ void OpenPanzerComm::processRepeatSentence(void)
     }
 }
 
-// When the device responds with DVCMD_NOSUCH_VALUE
-void OpenPanzerComm::processNoSuchValue(void)
-{
-    if (NumErrors < MAX_ERRORS)
-    {   // What can you really do? We assume we are trying to read or write a variable the device doesn't know about, and therefore, doesn't need.
-        // So we basically just ignore it by pretending the device did whatever it would normally have done, and then requested the next sentence.
-        // But we count it towards the error count. If we get a lot of these, we are writing the wrong settings file or something.
-        emit NextSentence();
-        NumErrors += 1;
-    }
-    else
-    {
-        emit CommError("Too many invalid values requested from device. Device disconnected.", QSerialPort::NoError );
-    }
-}
-
 void OpenPanzerComm::requestUtilizedRadioChannels(void)
 {
     sendNullValueSentence(PCCMD_NUM_CHANNELS);
@@ -561,7 +534,7 @@ void OpenPanzerComm::readData()
                     // IDs above MIN_EEPROM_ID are always eeprom variables
                     if (SentenceIN.ID > MIN_EEPROM_ID)
                     {
-                        emit HereIsValue(SentenceIN.ID, SentenceIN.Value);
+                        emit HereIsValue(SentenceIN.ID, SentenceIN.Value, true);    // True means a value was returned
                     }
                     // IDs less than MIN_EEPROM_ID are special cases. The ID will usually be a repeat of the CMD that was sent,
                     // but not always, such as in the case with radio streaming data.
@@ -615,7 +588,7 @@ void OpenPanzerComm::readData()
                     break;
 
                 case DVCMD_NOSUCH_VALUE:
-                    if (SentenceIN.ID == SentenceIN.Command) emit NoSuchValue();
+                    if (SentenceIN.ID == SentenceIN.Command) emit HereIsValue(SentenceIN.ID, SentenceIN.Value, false);    // False means a value was not found (SentenceIn.Value will be 0 but should be ignored)
                     break;
 
                 case DVCMD_GOODBYE:

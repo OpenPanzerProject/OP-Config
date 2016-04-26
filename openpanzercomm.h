@@ -233,13 +233,12 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void SnoopingChanged(boolean snooping);         // Signal for anytime we open or close port for the purpose of snooping
         void RadioStreamingChanged(boolean streaming);  // Radio streaming has started or stopped
         void HereIsFirmwareVersion(QString version);    // Signal for providing firmware version
-        void HereIsValue(uint16_t ID, QByteArray Value);// Signal for providing value read from device
+        void HereIsValue(uint16_t ID, QByteArray Value, boolean found);// Signal for providing value read from device
         void HereAreNumChannels(uint8_t numChannels);   // Return the number of utilized radio channels
         void HereArePulseWidths(int16_t *pulseWidths);  // Return an array of pulse widths
         void RadioNotReady(void);                       // If the radio is not ready/connected, this signal gets sent
         void RepeatSentence(void);                      // Repeat sentence signal
         void NextSentence(void);                        // Next sentence signal
-        void NoSuchValue(void);                         // Device returned No Such Value (incorrect ID)
         void AnyData(void);                             // This doesn't necessarily mean a sentence has arrived, but we use this to restart the watchdog
         void NewData(const QByteArray &data);           // Used for the console functionality, this just returns a QByteArray of data that has come in
         void AnySentence(void);                         // A full sentence has arrived, we can use this to stop the watchdog timer
@@ -336,8 +335,6 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
          // Communication slots
          // ---------------------------------------------------------------------------------------------------->>
            void processRepeatSentence(void);        // When the device sends a DVCMD_REPEAT_SENTENCE request
-           void processNoSuchValue(void);           // When the device responds with DVCMD_NOSUCH_VALUE
-
 
 };
 

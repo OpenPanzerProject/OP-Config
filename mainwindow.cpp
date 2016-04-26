@@ -123,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Connections to the OpenPanzerComm object (there are some other set on SetupControls_FirmwareTab for snooping/console features)
     connect(comm, SIGNAL(ConnectionChanged(boolean)), this, SLOT (ShowConnectionStatus(boolean)));
     connect(comm, SIGNAL(HereIsFirmwareVersion(QString)), this, SLOT(SerialStatus_displayFirmware(QString)));
-    connect(comm, SIGNAL(HereIsValue(uint16_t, QByteArray)), this, SLOT(updateVarArray_fromSerial(uint16_t, QByteArray)));
+    connect(comm, SIGNAL(HereIsValue(uint16_t, QByteArray, boolean)), this, SLOT(updateVarArray_fromSerial(uint16_t, QByteArray, boolean)));
     connect(comm, SIGNAL(NextSentence()), this, SLOT(processNextSentence()));
     connect(comm, SIGNAL(CommError(QString, QSerialPort::SerialPortError)), this, SLOT(ProcessCommError(QString, QSerialPort::SerialPortError)));
     connect(comm, SIGNAL(HereAreNumChannels(uint8_t)), this, SLOT(SaveNumUtilizedChannels(uint8_t)));
@@ -650,6 +650,7 @@ void MainWindow::SetupHelpButtons()
     // Motors Tab
         connect(ui->hpbMotorSelection, SIGNAL(released()), signalMapper, SLOT(map()));      // Motor selection
         connect(ui->hpbBarrel, SIGNAL(released()), signalMapper, SLOT(map()));              // Mechanical barrel
+        connect(ui->hpbTurret, SIGNAL(released()), signalMapper, SLOT(map()));              // Turret settings
         connect(ui->hpbSmoker, SIGNAL(released()), signalMapper, SLOT(map()));              // Mechanical Smoker
         connect(ui->hpbRecoilServo, SIGNAL(released()), signalMapper, SLOT(map()));         // Recoil Servo
     // Lights & IO
@@ -690,6 +691,7 @@ void MainWindow::SetupHelpButtons()
     // Motors tab
         signalMapper->setMapping(ui->hpbMotorSelection, "motors.html#drivemotors");         // Drive motors
         signalMapper->setMapping(ui->hpbBarrel, "motors.html#barrel");                      // Mechanical Barrel
+        signalMapper->setMapping(ui->hpbTurret, "motors.html#turretspeed");                 // Turret Settings
         signalMapper->setMapping(ui->hpbRecoilServo, "motors.html#servorecoil");            // Recoil Servo
         signalMapper->setMapping(ui->hpbSmoker, "motors.html#smoker");                      // Smoker
     // Lights & IO

@@ -208,7 +208,6 @@ void MainWindow::readSettingsFromFile(QString filename, boolean confirm)
                 }
             }
         }
-
     }
 }
 void MainWindow::writeSettingsToFile()

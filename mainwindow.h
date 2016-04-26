@@ -185,7 +185,7 @@ private slots:
       void writeAllSettingsToDevice();              // Write all settings to device
       void writeSomeSettingsToDevice(uint16_t startID, uint16_t endID);   // Write some settings to device
       void SerialStatus_displayFirmware(QString version);      // Display device firmware version in status bar
-      void updateVarArray_fromSerial(uint16_t ID, QByteArray Value);  // This is just a wrapper call to updateVarArray_byID so we don't have to make that other function a slot
+      void updateVarArray_fromSerial(uint16_t ID, QByteArray Value, boolean found);  // Process return message from device after requesting value.
       void processNextSentence(void);               // When the device responds with a SERID_NEXT_SENTENCE request
 
     // Slots for reading/writing to XML file

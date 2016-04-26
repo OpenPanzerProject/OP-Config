@@ -484,10 +484,10 @@ boolean FunctionTriggerTableModel::removeAuxTriggers(int AuxChannelNum)
 
     uint16_t TriggerID;
     int AuxChannel;
-    int removedAny = false;
+    boolean removedAny = false;
 
     int numRows = this->rowCount(QModelIndex());
-    for (int i = 0; i < numRows ; i++)
+    for (int i = numRows-1; i>=0; i--)
     {
         TriggerID = TriggerIDAtRow(i);
         AuxChannel = getAuxChannelNumberFromTriggerID(TriggerID);
@@ -509,10 +509,10 @@ boolean FunctionTriggerTableModel::checkAuxChannelTypesAgainstFunctionTriggers(i
     _special_function sf;
     boolean isSFDigital;
     int AuxChannel;
-    int removedAny = false;
+    boolean removedAny = false;
 
     int numRows = this->rowCount(QModelIndex());
-    for (int i = 0; i < numRows ; i++)
+    for (int i = numRows-1; i>=0; i--)
     {
         sf = SpecialFunctionAtRow(i);
         isSFDigital = OPQMap->isSpecialFunctionDigital(sf);
@@ -536,10 +536,10 @@ boolean FunctionTriggerTableModel::checkAuxChannelPositionsAgainstFunctionTrigge
     boolean isSFDigital;
     int AuxChannel;
     int NumPositions;
-    int removedAny = false;
+    boolean removedAny = false;
 
     int numRows = this->rowCount(QModelIndex());
-    for (int i = 0; i < numRows ; i++)
+    for (int i = numRows-1; i>=0; i--)
     {
         TriggerID = TriggerIDAtRow(i);
         sf = SpecialFunctionAtRow(i);
@@ -570,10 +570,12 @@ boolean FunctionTriggerTableModel::checkExternalPortDirectionAgainstFunctionTrig
     int SF_PortNum;
     int Trigger_PortNum;
     int TriggerID;
-    int removedAny = false;
+    boolean removedAny = false;
+
 
     int numRows = this->rowCount(QModelIndex());
-    for (int i = 0; i < numRows ; i++)
+    //for (int i = 0; i < numRows ; i++)
+    for (int i = numRows-1; i>=0; i--)
     {
         // First, check port triggers (which should be inputs) to make sure those ports are set to input
         TriggerID = TriggerIDAtRow(i);
@@ -583,15 +585,17 @@ boolean FunctionTriggerTableModel::checkExternalPortDirectionAgainstFunctionTrig
             this->removeRow(i);
             removedAny = true;
         }
-
-        // Next, check any port functions (which are outputs) to make sure those ports are set to output
-        sf = SpecialFunctionAtRow(i);
-        SF_PortNum = OPQMap->GetSpecialFunctionExternalPortNum(sf);
-        if (SF_PortNum == PortNum && !PortIsOutput) // should be output
+        else    // We don't need to remove this row twice, so only check this second part if the first part did nothing
         {
-            // We need to remove this row.
-            this->removeRow(i);
-            removedAny = true;
+            // Next, check any port functions (which are outputs) to make sure those ports are set to output
+            sf = SpecialFunctionAtRow(i);
+            SF_PortNum = OPQMap->GetSpecialFunctionExternalPortNum(sf);
+            if (SF_PortNum == PortNum && !PortIsOutput) // should be output
+            {
+                // We need to remove this row.
+                this->removeRow(i);
+                removedAny = true;
+            }
         }
     }
     return removedAny;
@@ -607,10 +611,10 @@ boolean FunctionTriggerTableModel::checkExternalPortInputTypeAgainstFunctionTrig
     boolean isSFDigital;
     int Trigger_PortNum;
     int TriggerID;
-    int removedAny = false;
+    boolean removedAny = false;
 
     int numRows = this->rowCount(QModelIndex());
-    for (int i = 0; i < numRows ; i++)
+    for (int i = numRows-1; i>=0; i--)
     {
         sf = SpecialFunctionAtRow(i);
         isSFDigital = OPQMap->isSpecialFunctionDigital(sf);
@@ -629,10 +633,10 @@ boolean FunctionTriggerTableModel::checkExternalPortInputTypeAgainstFunctionTrig
 boolean FunctionTriggerTableModel::removeFunctionFromList(_special_function sf)
 {   // Pass a special function and if it exists in the list, it will be removed.
     // If anything is removed, the function will return true, if not, false.
-    int removedAny = false;
+    boolean removedAny = false;
 
     int numRows = this->rowCount(QModelIndex());
-    for (int i = 0; i < numRows ; i++)
+    for (int i = numRows-1; i>=0; i--)
     {
         if (sf == SpecialFunctionAtRow(i))
         {   // Remove this row.

@@ -61,6 +61,9 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_HI_FLASH, "High Intensity Flash");
     _SF_ALL_QMAP.insert(SF_MG_FIRE, "Machine Gun - Fire");
     _SF_ALL_QMAP.insert(SF_MG_OFF, "Machine Gun - Stop");
+    _SF_ALL_QMAP.insert(SF_BARREL_ENABLE, "Airsoft/Mech Recoil - Enable");
+    _SF_ALL_QMAP.insert(SF_BARREL_DISABLE, "Airsoft/Mech Recoil - Disable");
+    _SF_ALL_QMAP.insert(SF_BARREL_TOGGLE, "Airsoft/Mech Recoil - Toggle");
     _SF_ALL_QMAP.insert(SF_LIGHT1_TOGGLE, "Light 1 (Headlights) - Toggle On/Off");
     _SF_ALL_QMAP.insert(SF_LIGHT1_ON, "Light 1 (Headlights) - Turn On");
     _SF_ALL_QMAP.insert(SF_LIGHT1_OFF, "Light 1 (Headlights) - Turn Off");
@@ -121,6 +124,7 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_USER_FUNC_2, "User Function 2");
     _SF_ALL_QMAP.insert(SF_USER_ANLG_1, "Analog User Function 1");                  // Analog
     _SF_ALL_QMAP.insert(SF_USER_ANLG_2, "Analog User Function 2");                  // Analog
+    _SF_ALL_QMAP.insert(SF_DUMP_DEBUG, "Dump Settings");
     return _SF_ALL_QMAP;
 }
 
@@ -140,6 +144,9 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_HI_FLASH, "High Intensity Flash");
     _SF_DIGITAL_QMAP.insert(SF_MG_FIRE, "Machine Gun - Fire");
     _SF_DIGITAL_QMAP.insert(SF_MG_OFF, "Machine Gun - Stop");
+    _SF_DIGITAL_QMAP.insert(SF_BARREL_ENABLE, "Airsoft/Mech Recoil - Enable");
+    _SF_DIGITAL_QMAP.insert(SF_BARREL_DISABLE, "Airsoft/Mech Recoil - Disable");
+    _SF_DIGITAL_QMAP.insert(SF_BARREL_TOGGLE, "Airsoft/Mech Recoil - Toggle");
     _SF_DIGITAL_QMAP.insert(SF_LIGHT1_TOGGLE, "Light 1 (Headlights) - Toggle On/Off");
     _SF_DIGITAL_QMAP.insert(SF_LIGHT1_ON, "Light 1 (Headlights) - Turn On");
     _SF_DIGITAL_QMAP.insert(SF_LIGHT1_OFF, "Light 1 (Headlights) - Turn Off");
@@ -182,6 +189,7 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
 //    _SF_DIGITAL_QMAP.insert(SF_HILLS_TOGGLE, "Hill Physics - Toggle");
     _SF_DIGITAL_QMAP.insert(SF_USER_FUNC_1, "User Function 1");
     _SF_DIGITAL_QMAP.insert(SF_USER_FUNC_2, "User Function 2");
+    _SF_DIGITAL_QMAP.insert(SF_DUMP_DEBUG, "Dump Settings");
     return _SF_DIGITAL_QMAP;
 }
 
@@ -289,7 +297,6 @@ QMap<_trigger_source, QString> OP_QMaps::getDigitalTriggerSourcesQMap()
     _OPT_DIGITAL_QMAP.insert(TS_AUX10, "Aux Channel 10");          // Aux channel 10
     _OPT_DIGITAL_QMAP.insert(TS_AUX11, "Aux Channel 11");          // Aux channel 11
     _OPT_DIGITAL_QMAP.insert(TS_AUX12, "Aux Channel 12");          // Aux channel 12
-
     _OPT_DIGITAL_QMAP.insert(TS_INPUT_A, "External Input A");      // External input A (if set to input)
     _OPT_DIGITAL_QMAP.insert(TS_INPUT_B, "External Input B");      // External input B (if set to input)
     return _OPT_DIGITAL_QMAP;

@@ -9,7 +9,7 @@
 //=======================================================================================================================================>>
 // You must make sure this number equals the number of variables defined in the __eeprom_data struct (including the first var FirstVar)
 //
-    #define NUM_STORED_VARS			282
+    #define NUM_STORED_VARS			285
 
 //
 // The definition above, as well as the PROGMEM array below, can be generated from the Excel reference sheet
@@ -169,7 +169,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {1415, 167, varUINT16, "33"},        // SF_Trigger[2].TriggerID
     {1416, 169, varUINT8, "7"},        // SF_Trigger[2].specialFunction
     {1417, 170, varUINT16, "9"},        // SF_Trigger[3].TriggerID
-    {1418, 172, varUINT8, "13"},        // SF_Trigger[3].specialFunction
+    {1418, 172, varUINT8, "16"},        // SF_Trigger[3].specialFunction
     {1419, 173, varUINT16, "0"},        // SF_Trigger[4].TriggerID
     {1420, 175, varUINT8, "0"},        // SF_Trigger[4].specialFunction
     {1421, 176, varUINT16, "0"},        // SF_Trigger[5].TriggerID
@@ -248,89 +248,92 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {1811, 284, varINT16, "1000"},        // TurretElevation_EPMin
     {1812, 286, varINT16, "2000"},        // TurretElevation_EPMax
     {1813, 288, varBOOL, "0"},        // TurretElevation_Reversed
-    {2011, 289, varBOOL, "1"},        // Airsoft
-    {2012, 290, varBOOL, "1"},        // MechanicalBarrelWithCannon
-    {2013, 291, varINT16, "0"},        // RecoilDelay
-    {2014, 293, varBOOL, "0"},        // RecoilReversed
-    {2015, 294, varBOOL, "1"},        // ServoRecoilWithCannon
-    {2016, 295, varINT16, "100"},        // RecoilServo_Recoil_mS
-    {2017, 297, varINT16, "1000"},        // RecoilServo_Return_mS
-    {2018, 299, varINT16, "1000"},        // RecoilServo_EPMin
-    {2019, 301, varINT16, "2000"},        // RecoilServo_EPMax
-    {2211, 303, varBOOL, "1"},        // SmokerControlAuto
-    {2212, 304, varINT16, "64"},        // SmokerIdleSpeed
-    {2213, 306, varINT16, "102"},        // SmokerFastIdleSpeed
-    {2214, 308, varINT16, "255"},        // SmokerMaxSpeed
-    {2411, 310, varBOOL, "1"},        // AccelRampEnabled
-    {2412, 311, varUINT8, "4"},        // AccelSkipNum
-    {2413, 312, varUINT8, "0"},        // AccelPreset
-    {2414, 313, varBOOL, "1"},        // DecelRampEnabled
-    {2415, 314, varUINT8, "4"},        // DecelSkipNum
-    {2416, 315, varUINT8, "0"},        // DecelPreset
-    {2417, 316, varUINT8, "40"},        // BrakeSensitivityPct
-    {2418, 317, varUINT16, "1000"},        // TimeToShift_mS
-    {2419, 319, varUINT16, "1000"},        // EnginePauseTime_mS
-    {2420, 321, varUINT16, "2000"},        // TransmissionDelay_mS
-    {2421, 323, varBOOL, "1"},        // NeutralTurnAllowed
-    {2422, 324, varUINT8, "50"},        // NeutralTurnPct
-    {2423, 325, varUINT8, "2"},        // TurnMode
-    {2424, 326, varUINT8, "1"},        // DriveType
-    {2425, 327, varUINT8, "70"},        // MaxReverseSpeedPct
-    {2426, 328, varUINT8, "50"},        // HalftrackTreadTurnPct
-    {2427, 329, varBOOL, "0"},        // EngineAutoStart
-    {2428, 330, varINT32, "0"},        // EngineAutoStopTime_mS
-    {2429, 334, varUINT8, "0"},        // MotorNudgePct
-    {2430, 335, varUINT16, "250"},        // NudgeTime_mS
-    {2511, 337, varBOOL, "0"},        // EnableBarrelStabilize
-    {2512, 338, varUINT8, "50"},        // BarrelSensitivity
-    {2513, 339, varBOOL, "0"},        // EnableHillPhysics
-    {2514, 340, varUINT8, "50"},        // HillSensitivity
-    {2711, 341, varINT16, "350"},        // IgnoreTurretDelay_mS
-    {2811, 343, varUINT8, "0"},        // SoundDevice
-    {2812, 344, varUINT16, "1500"},        // Squeak1_MinInterval_mS
-    {2813, 346, varUINT16, "4000"},        // Squeak1_MaxInterval_mS
-    {2814, 348, varUINT16, "2000"},        // Squeak2_MinInterval_mS
-    {2815, 350, varUINT16, "5000"},        // Squeak2_MaxInterval_mS
-    {2816, 352, varUINT16, "3000"},        // Squeak3_MinInterval_mS
-    {2817, 354, varUINT16, "8000"},        // Squeak3_MaxInterval_mS
-    {2818, 356, varBOOL, "1"},        // Squeak1_Enabled
-    {2819, 357, varBOOL, "1"},        // Squeak1_Enabled
-    {2820, 358, varBOOL, "1"},        // Squeak1_Enabled
-    {2821, 359, varUINT8, "25"},        // MinSqueakSpeed
-    {2822, 360, varBOOL, "1"},        // HeadlightSound_Enabled
-    {2823, 361, varBOOL, "0"},        // TurretSound_Enabled
-    {3011, 362, varUINT8, "1"},        // IR_FireProtocol
-    {3012, 363, varUINT8, "0"},        // IR_HitProtocol_2
-    {3013, 364, varUINT8, "10"},        // IR_RepairProtocol
-    {3014, 365, varUINT8, "0"},        // IR_MGProtocol
-    {3015, 366, varBOOL, "0"},        // Use_MG_Protocol
-    {3016, 367, varBOOL, "0"},        // Accept_MG_Damage
-    {3017, 368, varUINT8, "0"},        // DamageProfile
-    {3018, 369, varUINT16, "1500"},        // CustomClassSettings.reloadTime
-    {3019, 371, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
-    {3020, 373, varUINT8, "1"},        // CustomClassSettings.maxHits
-    {3021, 374, varUINT8, "10"},        // CustomClassSettings.maxMGHits
-    {3022, 375, varBOOL, "FALSE"},        // SendTankID
-    {3023, 376, varUINT16, "1"},        // TankID
-    {3024, 378, varUINT8, "0"},        // IR_Team
-    {3211, 379, varUINT32, "115200"},        // USBSerialBaud
-    {3212, 383, varUINT32, "115200"},        // AuxSerialBaud
-    {3213, 387, varUINT32, "38400"},        // MotorSerialBaud
-    {3214, 391, varUINT32, "38400"},        // Serial3TxBaud
-    {3215, 395, varBOOL, "0"},        // LVC_Enabled
-    {3216, 396, varUINT16, "6400"},        // LVC_Cutoff_mV
-    {3411, 398, varBOOL, "0"},        // RunningLightsAlwaysOn
-    {3412, 399, varUINT8, "30"},        // RunningLightsDimLevelPct
-    {3413, 400, varBOOL, "0"},        // BrakesAutoOnAtStop
-    {3414, 401, varUINT16, "30"},        // AuxLightFlashTime_mS
-    {3415, 403, varUINT16, "30"},        // AuxLightBlinkOnTime_mS
-    {3416, 405, varUINT16, "30"},        // AuxLightBlinkOffTime_mS
-    {3417, 407, varUINT8, "30"},        // AuxLightPresetDim
-    {3418, 408, varUINT8, "30"},        // MGLightBlink_mS
-    {3419, 409, varBOOL, "1"},        // FlashLightsWhenSignalLost
-    {3420, 410, varBOOL, "1"},        // HiFlashWithCannon
-    {9011, 411, varBOOL, "1"},        // PrintDebug
-    {9999, 413, varUINT32, "43589"}        // InitStamp
+    {1814, 289, varUINT8, "100"},        // TurretElevation_MaxSpeedPct
+    {1815, 290, varUINT8, "100"},        // TurretRotation_MaxSpeedPct
+    {2011, 291, varBOOL, "1"},        // Airsoft
+    {2012, 292, varBOOL, "1"},        // MechanicalBarrelWithCannon
+    {2013, 293, varINT16, "0"},        // RecoilDelay
+    {2014, 295, varBOOL, "0"},        // RecoilReversed
+    {2015, 296, varBOOL, "1"},        // ServoRecoilWithCannon
+    {2016, 297, varINT16, "100"},        // RecoilServo_Recoil_mS
+    {2017, 299, varINT16, "1000"},        // RecoilServo_Return_mS
+    {2018, 301, varINT16, "1000"},        // RecoilServo_EPMin
+    {2019, 303, varINT16, "2000"},        // RecoilServo_EPMax
+    {2211, 305, varBOOL, "1"},        // SmokerControlAuto
+    {2212, 306, varINT16, "89"},        // SmokerIdleSpeed
+    {2213, 308, varINT16, "128"},        // SmokerFastIdleSpeed
+    {2214, 310, varINT16, "255"},        // SmokerMaxSpeed
+    {2411, 312, varBOOL, "1"},        // AccelRampEnabled
+    {2412, 313, varUINT8, "4"},        // AccelSkipNum
+    {2413, 314, varUINT8, "0"},        // AccelPreset
+    {2414, 315, varBOOL, "1"},        // DecelRampEnabled
+    {2415, 316, varUINT8, "4"},        // DecelSkipNum
+    {2416, 317, varUINT8, "0"},        // DecelPreset
+    {2417, 318, varUINT8, "40"},        // BrakeSensitivityPct
+    {2418, 319, varUINT16, "1000"},        // TimeToShift_mS
+    {2419, 321, varUINT16, "1000"},        // EnginePauseTime_mS
+    {2420, 323, varUINT16, "2000"},        // TransmissionDelay_mS
+    {2421, 325, varBOOL, "1"},        // NeutralTurnAllowed
+    {2422, 326, varUINT8, "50"},        // NeutralTurnPct
+    {2423, 327, varUINT8, "2"},        // TurnMode
+    {2424, 328, varUINT8, "1"},        // DriveType
+    {2425, 329, varUINT8, "100"},        // MaxForwardSpeedPct
+    {2426, 330, varUINT8, "70"},        // MaxReverseSpeedPct
+    {2427, 331, varUINT8, "50"},        // HalftrackTreadTurnPct
+    {2428, 332, varBOOL, "0"},        // EngineAutoStart
+    {2429, 333, varINT32, "0"},        // EngineAutoStopTime_mS
+    {2430, 337, varUINT8, "0"},        // MotorNudgePct
+    {2431, 338, varUINT16, "250"},        // NudgeTime_mS
+    {2511, 340, varBOOL, "0"},        // EnableBarrelStabilize
+    {2512, 341, varUINT8, "50"},        // BarrelSensitivity
+    {2513, 342, varBOOL, "0"},        // EnableHillPhysics
+    {2514, 343, varUINT8, "50"},        // HillSensitivity
+    {2711, 344, varINT16, "350"},        // IgnoreTurretDelay_mS
+    {2811, 346, varUINT8, "0"},        // SoundDevice
+    {2812, 347, varUINT16, "1500"},        // Squeak1_MinInterval_mS
+    {2813, 349, varUINT16, "4000"},        // Squeak1_MaxInterval_mS
+    {2814, 351, varUINT16, "2000"},        // Squeak2_MinInterval_mS
+    {2815, 353, varUINT16, "5000"},        // Squeak2_MaxInterval_mS
+    {2816, 355, varUINT16, "3000"},        // Squeak3_MinInterval_mS
+    {2817, 357, varUINT16, "8000"},        // Squeak3_MaxInterval_mS
+    {2818, 359, varBOOL, "1"},        // Squeak1_Enabled
+    {2819, 360, varBOOL, "1"},        // Squeak1_Enabled
+    {2820, 361, varBOOL, "1"},        // Squeak1_Enabled
+    {2821, 362, varUINT8, "25"},        // MinSqueakSpeed
+    {2822, 363, varBOOL, "1"},        // HeadlightSound_Enabled
+    {2823, 364, varBOOL, "0"},        // TurretSound_Enabled
+    {3011, 365, varUINT8, "1"},        // IR_FireProtocol
+    {3012, 366, varUINT8, "0"},        // IR_HitProtocol_2
+    {3013, 367, varUINT8, "10"},        // IR_RepairProtocol
+    {3014, 368, varUINT8, "0"},        // IR_MGProtocol
+    {3015, 369, varBOOL, "0"},        // Use_MG_Protocol
+    {3016, 370, varBOOL, "0"},        // Accept_MG_Damage
+    {3017, 371, varUINT8, "0"},        // DamageProfile
+    {3018, 372, varUINT16, "1500"},        // CustomClassSettings.reloadTime
+    {3019, 374, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
+    {3020, 376, varUINT8, "1"},        // CustomClassSettings.maxHits
+    {3021, 377, varUINT8, "10"},        // CustomClassSettings.maxMGHits
+    {3022, 378, varBOOL, "FALSE"},        // SendTankID
+    {3023, 379, varUINT16, "1"},        // TankID
+    {3024, 381, varUINT8, "0"},        // IR_Team
+    {3211, 382, varUINT32, "115200"},        // USBSerialBaud
+    {3212, 386, varUINT32, "115200"},        // AuxSerialBaud
+    {3213, 390, varUINT32, "38400"},        // MotorSerialBaud
+    {3214, 394, varUINT32, "38400"},        // Serial3TxBaud
+    {3215, 398, varBOOL, "0"},        // LVC_Enabled
+    {3216, 399, varUINT16, "6400"},        // LVC_Cutoff_mV
+    {3411, 401, varBOOL, "0"},        // RunningLightsAlwaysOn
+    {3412, 402, varUINT8, "30"},        // RunningLightsDimLevelPct
+    {3413, 403, varBOOL, "0"},        // BrakesAutoOnAtStop
+    {3414, 404, varUINT16, "30"},        // AuxLightFlashTime_mS
+    {3415, 406, varUINT16, "30"},        // AuxLightBlinkOnTime_mS
+    {3416, 408, varUINT16, "30"},        // AuxLightBlinkOffTime_mS
+    {3417, 410, varUINT8, "30"},        // AuxLightPresetDim
+    {3418, 411, varUINT8, "30"},        // MGLightBlink_mS
+    {3419, 412, varBOOL, "1"},        // FlashLightsWhenSignalLost
+    {3420, 413, varBOOL, "1"},        // HiFlashWithCannon
+    {9011, 414, varBOOL, "1"},        // PrintDebug
+    {9999, 415, varUINT32, "43589"}        // InitStamp
 };
 
 

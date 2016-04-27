@@ -5159,7 +5159,7 @@ QSizeGrip {
                   <x>430</x>
                   <y>390</y>
                   <width>391</width>
-                  <height>141</height>
+                  <height>161</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -5215,7 +5215,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>70</y>
+                   <y>100</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -5233,7 +5233,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>230</x>
-                   <y>70</y>
+                   <y>100</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -5251,7 +5251,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>100</y>
+                   <y>130</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -5269,7 +5269,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>230</x>
-                   <y>100</y>
+                   <y>130</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -5306,7 +5306,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>150</x>
-                   <y>71</y>
+                   <y>101</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -5319,7 +5319,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>150</x>
-                   <y>101</y>
+                   <y>131</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -5375,6 +5375,65 @@ QSizeGrip {
                  </property>
                  <property name="text">
                   <string>(If unchecked, use function trigger)</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkRecoilServoReversed">
+                 <property name="geometry">
+                  <rect>
+                   <x>150</x>
+                   <y>73</y>
+                   <width>21</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_315">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>70</y>
+                   <width>121</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Reverse</string>
+                 </property>
+                </widget>
+                <widget class="RecoilServoPresetComboBox" name="cboRecoilServoPreset">
+                 <property name="geometry">
+                  <rect>
+                   <x>150</x>
+                   <y>157</y>
+                   <width>231</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblRecoilServoPreset">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>156</y>
+                   <width>81</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Apply Preset</string>
                  </property>
                 </widget>
                </widget>
@@ -11861,6 +11920,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <class>IRTeamsComboBox</class>
    <extends>QComboBox</extends>
    <header location="global">combo_irteams.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RecoilServoPresetComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_recoilservopreset.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

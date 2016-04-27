@@ -35,6 +35,12 @@ void MainWindow::SetupControls_MotorTab(void)
     // Setup servo recoil
     // This handles the user setting related to whether recoil servo should auto trigger with cannon fire.
     connect(ui->chkEnableRecoilServo, SIGNAL(clicked(bool)), this, SLOT(SetRecoilServoAuto(bool)));
+    // We hide these two controls for now - a label and a combo box. Later someday when more pre-made recoil units become
+    // available for purchase, we can enable these and have various presets that correspond to settings appropriate for
+    // those pre-built units. For now, there is really only a single unit available, the Taigen Tiger 1 combination
+    // airsoft/servo recoil unit. We just set our default values to work with it.
+    ui->lblRecoilServoPreset->hide();
+    ui->cboRecoilServoPreset->hide();
 
     // Any changes in the motor selections will trigger a validation routine
     connect(ui->cboDriveType, SIGNAL(currentIndexChanged(int)), this, SLOT(ValidateMotorSelections()));

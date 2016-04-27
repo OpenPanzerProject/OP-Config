@@ -96,6 +96,7 @@ void MainWindow::Variables_to_Controls(void)
     // Recoil servo settings
     ui->spinRecoilTimeToRecoil->setValue(DeviceData.RecoilServo_Recoil_mS);
     ui->spinRecoilTimeToReturn->setValue(DeviceData.RecoilServo_Return_mS);
+    ui->chkRecoilServoReversed->setChecked(DeviceData.RecoilReversed);
     ui->chkEnableRecoilServo->setChecked(DeviceData.ServoRecoilWithCannon);
     SetRecoilServoAuto(ui->chkEnableRecoilServo->isChecked());
     // Smoker settings - convert to Percent-based for user convenience (0-100, but they are actually 0-255)
@@ -316,6 +317,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.TurretElevation_MaxSpeedPct = ui->spinBarrelElevationSpeed->value();
     // Recoil Servo settings
     DeviceData.ServoRecoilWithCannon = ui->chkEnableRecoilServo->isChecked();
+    DeviceData.RecoilReversed = ui->chkRecoilServoReversed->isChecked();
     DeviceData.RecoilServo_Recoil_mS = ui->spinRecoilTimeToRecoil->value();
     DeviceData.RecoilServo_Return_mS = ui->spinRecoilTimeToReturn->value();
     // Smoker settings - convert 0-100 back to 0-255

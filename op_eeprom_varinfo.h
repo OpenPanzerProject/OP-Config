@@ -256,7 +256,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {2014, 295, varBOOL, "1"},        // RecoilReversed
     {2015, 296, varBOOL, "1"},        // ServoRecoilWithCannon
     {2016, 297, varINT16, "200"},        // RecoilServo_Recoil_mS
-    {2017, 299, varINT16, "900"},        // RecoilServo_Return_mS
+    {2017, 299, varINT16, "800"},        // RecoilServo_Return_mS
     {2018, 301, varINT16, "1000"},        // RecoilServo_EPMin
     {2019, 303, varINT16, "2000"},        // RecoilServo_EPMax
     {2211, 305, varBOOL, "1"},        // SmokerControlAuto

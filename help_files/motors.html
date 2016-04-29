@@ -16,8 +16,8 @@
 			<li><a href="#turretmotors">Turret Motors</a></li>
 			<li><a href="#barrel">Mechanical Barrel</a></li>
             <li><a href="#turretspeed">Turret Speed Limits</a></li>
-			<li><a href="#servorecoil">Servo Recoil</a></li>
-			<li><a href="#smoker">Mechanical Smoker</a></li>
+			<li><a href="#smoker">Smoker</a></li>
+			<li><a href="#servorecoil">Recoil Servo</a></li>
 		</ul>
 	</div>
 		
@@ -176,7 +176,40 @@
 
     
     
-    <h2 id="servorecoil">Servo Recoil</h2>
+	<h2 id="smoker">Smoker</h2>
+	<p>
+	The TCB is compatible with Heng-Long style smoker units or any unit that requires nothing more than a variable voltage. You do not need a special "proportional" smoker, the TCB takes care of the 
+	smoker speed internally whenever you advance the throttle. For further information on hardware see the 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:smoker">Open Panzer Wiki - Smoker</a> page. 
+	</p>
+
+	<h4 class="entry">Control</h4>
+	<p>
+	The SMOKER output on the TCB can be controlled in two ways. Automatically by engine speed is what you should use if you actually intend to connect a smoke unit to the TCB. In this control mode
+	the TCB will automatically take care of turning on and off the smoker with the engine, setting the speed to match the engine speed while running, and applying the idle, fast idle, and max speed 
+	settings defined below. But if you are not going to use a smoke unit, you can treat the SMOKER output as a general purpose, unidirectional motor speed controller. In Manual mode the output can 
+	be controlled with any analog trigger source assigned to the <b>Smoker - Manual Control</b> function. 
+	</p>
+	
+	<h4 class="entry">Idle Speed:</h4>
+	<p>
+	This is the minimum smoker speed. The smoker will operate at this speed when the engine is running, the transmission is engaged, and the vehicle is stopped. 
+	</p>
+	
+	<h4 class="entry">Fast Idle Speed:</h4>
+	<p>
+	You have the option of setting a slightly faster idle speed to take effect when the engine is running but the transmission is disengaged. This can serve as a visual 
+	indication of the transmission status, and it also mimics the reality that many vehicles do have a faster idle speed when not in gear. 
+	</p>
+	
+	<h4 class="entry">Max Speed:</h4>
+	<p>
+	If at full throttle you think your smoker is running too fast for realism, you can reduce the maximum speed. 
+	</p>
+
+
+
+    <h2 id="servorecoil">Recoil Servo</h2>
 	<p>
 	If you prefer to use a servo for recoil instead of the mechanical units, the TCB has you covered. The recoil servo should be plugged into RC Output 5 (also labelled <b>Recoil</b>) on the TCB. 
 	The settings here allow us to precisely control the speed of the recoil and the speed of the barrel's return to battery ("return to battery" means the barrel is fully extended). 
@@ -226,39 +259,7 @@
 	and that is precisely how long it will take. 
 	</p>
 	
-	
-	
 
-	<h2 id="smoker">Smoker</h2>
-	<p>
-	The TCB is compatible with Heng-Long style smoker units or any unit that requires nothing more than a variable voltage. You do not need a special "proportional" smoker, the TCB takes care of the 
-	smoker speed internally whenever you advance the throttle. For further information on hardware see the 
-	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:smoker">Open Panzer Wiki - Smoker</a> page. 
-	</p>
-
-	<h4 class="entry">Control</h4>
-	<p>
-	The SMOKER output on the TCB can be controlled in two ways. Automatically by engine speed is what you should use if you actually intend to connect a smoke unit to the TCB. In this control mode
-	the TCB will automatically take care of turning on and off the smoker with the engine, setting the speed to match the engine speed while running, and applying the idle, fast idle, and max speed 
-	settings defined below. But if you are not going to use a smoke unit, you can treat the SMOKER output as a general purpose, unidirectional motor speed controller. In Manual mode the output can 
-	be controlled with any analog trigger source assigned to the <b>Smoker - Manual Control</b> function. 
-	</p>
-	
-	<h4 class="entry">Idle Speed:</h4>
-	<p>
-	This is the minimum smoker speed. The smoker will operate at this speed when the engine is running, the transmission is engaged, and the vehicle is stopped. 
-	</p>
-	
-	<h4 class="entry">Fast Idle Speed:</h4>
-	<p>
-	You have the option of setting a slightly faster idle speed to take effect when the engine is running but the transmission is disengaged. This can serve as a visual 
-	indication of the transmission status, and it also mimics the reality that many vehicles do have a faster idle speed when not in gear. 
-	</p>
-	
-	<h4 class="entry">Max Speed:</h4>
-	<p>
-	If at full throttle you think your smoker is running too fast for realism, you can reduce the maximum speed. 
-	</p>
 
 
 

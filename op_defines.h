@@ -150,7 +150,7 @@ struct weightClassSettings{
                                                         // (multipler * port number) + 0/1 (off/on)
 #define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
 
-const byte COUNT_SPECFUNCTIONS  = 76;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 79;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -227,7 +227,10 @@ enum _special_function : byte {
     SF_USER_FUNC_2      = 72,       // 72
     SF_USER_ANLG_1      = 73,       // 73   -- analog function
     SF_USER_ANLG_2      = 74,       // 74   -- analog function
-    SF_DUMP_DEBUG       = 75
+    SF_DUMP_DEBUG       = 75,       // 75
+    SF_NT_ENABLE        = 76,       // 76
+    SF_NT_DISABLE       = 77,       // 77
+    SF_NT_TOGGLE        = 78        // 78
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

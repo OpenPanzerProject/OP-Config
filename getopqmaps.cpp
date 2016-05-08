@@ -125,6 +125,9 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_USER_ANLG_1, "Analog User Function 1");                  // Analog
     _SF_ALL_QMAP.insert(SF_USER_ANLG_2, "Analog User Function 2");                  // Analog
     _SF_ALL_QMAP.insert(SF_DUMP_DEBUG, "Dump Settings");
+    _SF_ALL_QMAP.insert(SF_NT_ENABLE, "Neutral Turn - Enable");
+    _SF_ALL_QMAP.insert(SF_NT_DISABLE, "Neutral Turn - Disable");
+    _SF_ALL_QMAP.insert(SF_NT_TOGGLE, "Neutral Turn - Toggle");
     return _SF_ALL_QMAP;
 }
 
@@ -190,6 +193,9 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_USER_FUNC_1, "User Function 1");
     _SF_DIGITAL_QMAP.insert(SF_USER_FUNC_2, "User Function 2");
     _SF_DIGITAL_QMAP.insert(SF_DUMP_DEBUG, "Dump Settings");
+    _SF_DIGITAL_QMAP.insert(SF_NT_ENABLE, "Neutral Turn - Enable");
+    _SF_DIGITAL_QMAP.insert(SF_NT_DISABLE, "Neutral Turn - Disable");
+    _SF_DIGITAL_QMAP.insert(SF_NT_TOGGLE, "Neutral Turn - Toggle");
     return _SF_DIGITAL_QMAP;
 }
 

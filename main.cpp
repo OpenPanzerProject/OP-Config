@@ -26,9 +26,11 @@
 
 int main(int argc, char *argv[])
 {
-    //QApplication::setAttribute(Qt::AA_Use96Dpi);
-    //QApplication::setDesktopSettingsAware(false);
-    //This was only introduced in Qt 5.6, I am using 5.4
+    // Doesn't seem to help the high DPI/screen scaling issue
+    //QApplication::setDesktopSettingsAware();
+
+    // This was only introduced in Qt 5.6 and may help with high DPI issues
+    // Untested because I am still compiling in 5.4 for other reasons (Qt Assistant doesn't work in 5.6 for one)
     //QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication::setApplicationName("OP Config");

@@ -453,6 +453,16 @@ void OpenPanzerComm::requestFirmwareVersion(void)
     sendNullValueSentence(PCCMD_READ_VERSION);
 }
 
+void OpenPanzerComm::ConfigurePololu_Drive(void)
+{
+    sendNullValueSentence(PCCMD_CONFPOLOLU_DRIVE);
+}
+
+void OpenPanzerComm::ConfigurePololu_Turret(void)
+{
+    sendNullValueSentence(PCCMD_CONFPOLOLU_TURRET);
+}
+
 void OpenPanzerComm::readEEPROM(uint16_t WhatID)
 {
     clearSentenceOUT();

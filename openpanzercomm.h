@@ -110,11 +110,11 @@
 // Commands sent by PC
 #define INIT_STRING				"OPZ\n"	// The initialization string to tell the device to start listening
 
-
+#define PCCMD_CONFPOLOLU_DRIVE  119     // PC wants us to configure a Pololu device connected to Serial 2 for use with drive motors
+#define PCCMD_CONFPOLOLU_TURRET 120     // PC wants us to configure a Pololu device connected to Serial 2 for use with turret motors
 #define PCCMD_NUM_CHANNELS      121     // Tell the device to send us the number of utilized channels
 #define PCCMD_STARTSTREAM_RADIO	122     // Tell the device to send us radio pulse widths
 #define PCCMD_STOPSTREAM_RADIO	123		// Tell the device to stop streaming pulse-widths
-
 #define PCCMD_UPDATE_EEPROM	  	124
 #define PCCMD_READ_EEPROM	    126
 #define PCCMD_READ_VERSION		128
@@ -207,6 +207,8 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void requestUtilizedRadioChannels(void);
         void startStreamRadio(void);
         void stopStreamRadio(void);
+        void ConfigurePololu_Drive(void);
+        void ConfigurePololu_Turret(void);
 
         boolean sendNullValueSentence(uint8_t CMD);
         boolean sendSentence(DataSentence &_sentence);

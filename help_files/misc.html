@@ -14,7 +14,8 @@
 		<ul>
 			<li><a href="#lvc">Low Voltage Cutoff</a></li>
 			<li><a href="#baud">Baud Rates</a></li>
-			<li><a href="#debug">Debugging</a></li>			
+			<li><a href="#debug">Debugging</a></li>	
+            <li><a href="#pololu">Pololu Qik Configuration</a></li>
 		</ul>
 	</div>
 		
@@ -89,6 +90,43 @@
 	because they do slow down program operation. The effect is unlikely to be noticeable, but if you are not using the debug feature anyway, go ahead and turn it off.	
 	</p>
 	
+
+
+	<h2 id="pololu">Pololu Qik Configuration</h2>
+	<p>
+	If you are using a Pololu Qik dual-motor serial controller (either the 2s12v10 or the 2s9v1), you may need to configure it for use with the TCB.
+    </p>
+    
+    <p>
+    Unlike the Sabertooth serial motor controllers which can be configured by dip-switches on the actual device, the Pololu Qik controllers must be configured by 
+    sending special commands to them over serial. The default settings used by Pololu will work fine with the TCB so long as the Qik is used to control the main drive motors. 
+    But if you want to use a Pololu Qik controller to drive the turret motors, or if you have a Pololu Qik controller that had its default settings changed, you will need 
+    to re-configure it.
+    </p>
+    
+    <p>
+    To configure a Pololu Qik controller, connect it to the TCB's Motor Serial port and provide it with power from a battery. OP Config must also be actively connected to the TCB via USB or Bluetooth, 
+    otherwise the configuration buttons will be disabled.
+	</p>
+    
+    <p>
+    For more information on the Pololu Qik devices, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:motors:serialmotor">Serial Motor Controllers</a>
+    page on the Open Panzer Wiki. 
+    </p>
+    
+    <h4 class="entry">Configure Pololu for Drive Motors</h4>
+    <p>
+    Click this button to configure the attached Pololu device for use with drive motors. The red LED on the Pololu Qik controller will blink briefly. The Pololu will now respond 
+    to drive commands if you have the Drive Motors type set to <b>Pololu Serial ESC</b> on the <a href="motors.html">Motors</a> tab.
+    </p>
+    
+    <h4 class="entry">Configure Pololu for Turret Motors</h4>
+    <p>
+    Click this button to configure the attached Pololu device for use with turret motors. The red LED on the Pololu Qik controller will blink briefly. The Pololu will now respond 
+    to turret rotation and barrel elevation commands if you have either of those motor types set to <b>Pololu Serial ESC</b> on the <a href="motors.html">Motors</a> tab.
+    </p>
+
+
     <br />
 <br />
 <br />

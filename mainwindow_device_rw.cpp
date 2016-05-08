@@ -65,6 +65,10 @@ void MainWindow::ShowConnectionStatus(boolean connected)
         ui->cmdWriteDevice->setEnabled(true);   // Write device button enabled
         ui->cmdRadioStream->setEnabled(true);   // Radio streaming button is enabled
 
+        // Enable Pololu configuration buttons
+        ui->cmdConfigPololuDrive->setEnabled(true);
+        ui->cmdConfigPololuTurret->setEnabled(true);
+
         // It won't matter, but it's confusing if the user can change COM port or baud rate while connected.
         ui->cboCOMPorts->setEnabled(false);
         ui->cboConsoleBaud->setEnabled(false);
@@ -106,6 +110,10 @@ void MainWindow::ShowConnectionStatus(boolean connected)
         ui->cboConsoleBaud->setEnabled(true);
         ui->cmdFlashHex->setEnabled(true);
         ui->cmdSnoop->setEnabled(true);
+
+        // Disable Pololu configuration buttons
+        ui->cmdConfigPololuDrive->setEnabled(false);
+        ui->cmdConfigPololuTurret->setEnabled(false);
 
         // Reset radio streaming buttons in case we disconnected in the middle of a stream
         ui->cmdRadioStream->setChecked(false);
@@ -413,6 +421,14 @@ void MainWindow::processNextSentence(void)
             MouseRestore();
         }
     }
+
+    // Another case where we want to take action on NEXT_SENTENCE is when we asked the TCB to configure a
+    // Pololu device. This isn't very sophisticated for now - the TCB doesn't return success or failure,
+    // because presently we aren't receiving serial commands from the motor controllers so it won't even know
+    // if it succeeded or failed. Basically all this is telling us is that we sent the commands to the Pololu
+    // and we hope they worked and now we're done, so notify the user that the process is over.
+    if (configurePololuDrive)  { configurePololuDrive  = false; SetStatusLabel(QString("Pololu Configured for Drive"), slNeutral); }
+    if (configurePololuTurret) { configurePololuTurret = false; SetStatusLabel(QString("Pololu Configured for Turret"), slNeutral); }
 }
 
 //
@@ -429,9 +445,14 @@ void MainWindow::DisableDeviceActionsDuringReadWrite()
     // Or this either
     ui->actionResetAllVals->setEnabled(false);
 
+    // Or these
     ui->cmdRadioStream->setEnabled(false);
     ui->cmdSaveCenters->setEnabled(false);
     ui->cmdSaveMinMax->setEnabled(false);
+
+    // Disable Pololu configuration buttons during read/write
+    ui->cmdConfigPololuDrive->setEnabled(false);
+    ui->cmdConfigPololuTurret->setEnabled(false);
 }
 void MainWindow::EnableDeviceActionsAfterReadWrite()
 {
@@ -445,6 +466,10 @@ void MainWindow::EnableDeviceActionsAfterReadWrite()
 
     // And this
     ui->actionResetAllVals->setEnabled(true);
+
+    // Re-enable Pololu configuration buttons after read/write (we are still connected at this point)
+    ui->cmdConfigPololuDrive->setEnabled(true);
+    ui->cmdConfigPololuTurret->setEnabled(true);
 
     ui->cmdRadioStream->setEnabled(true);
     if (comm->isRadioStreaming())   // These only get re-enabled if we are presently streaming.

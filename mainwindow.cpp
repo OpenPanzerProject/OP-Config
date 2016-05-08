@@ -74,8 +74,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->listViewWest->setModel(listViewWestModel);
     // Select the first item. WOW! No chance of using a simple integer here. We must pass it a const QModelIndex type
     // We just pull it from our model, row 0, column 0
-    ui->listViewWest->setCurrentIndex(listViewWestModel->index(0,0) );
-
+    ui->listViewWest->setCurrentIndex(listViewWestModel->index(0,0));
 
     // Help Buttons
     // ---------------------------------------------------------------------------------------------------------------------------------->>
@@ -93,10 +92,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Let's connect the listview and stacked widget. What a convoluted nightmare this is, about three hours of work for these two lines.
     // QListView really doesn't have any signals that are worth a damn. Nor can we use a signal from QStringListModel object. Instead
     // we must use a signal from the more generic QItemSelectionModel which we point to our list view selection model
-    // Now this signal works and passes both current and previous index nubmers to our created function called changeStackedWidget.
+    // Now this signal works and passes both current and previous index numbers to our created function called changeStackedWidget.
     // We only need to use the new "current" index and set the stacked widget to that same index.
     QItemSelectionModel *selectionModel = ui->listViewWest->selectionModel();
     connect(selectionModel, SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(changeStackedWidget(QModelIndex,QModelIndex)));
+    // Uncomment the below if compiling with Qt 5.6
+    // In Qt 5.6 whenever we click on the list view, it would select two items - the one you wanted to select, and the next one too.
+    // This doesn't look right. If we use this second signal to re-assert the listView selected item, we can sort of work around it.
+    // You get some flickering but it does work.
+    //connect(ui->listViewWest, SIGNAL(clicked(QModelIndex)), this, SLOT(changeStackedWidget56Fix(QModelIndex)));
 
     // When we change items in the COM port or Baud rate drop-downs, update our port settings
     connect(ui->cboCOMPorts, SIGNAL(currentIndexChanged(int)), this, SLOT(setCOMPort()));
@@ -387,6 +391,15 @@ void MainWindow::changeStackedWidget(const QModelIndex& current, const QModelInd
         comm->closeSerial();
     }
 }
+// Uncomment the below if compiling in Qt 5.6
+/*void MainWindow::changeStackedWidget56Fix(const QModelIndex& current)
+{
+    // In Qt 5.6, there is a bug that will highlight both the current listView item and the one after it, whenever
+    // you click on it. I was able to work around this by adding a second signal from listViewWest clicked that
+    // calls this slot. It causes a flicker because the second item is still selected, but then this one de-selects it.
+    ui->listViewWest->setCurrentIndex(current);
+    qApp->processEvents();  // Equivalent of VB DoEvents()
+}*/
 void MainWindow::cmdTest1_Click()
 {
     qDebug() << "Test 1 button clicked";
@@ -680,6 +693,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbLVC, SIGNAL(released()), signalMapper, SLOT(map()));                 // Low voltage cutoff
         connect(ui->hpbBaud, SIGNAL(released()), signalMapper, SLOT(map()));                // Baud rates
         connect(ui->hpbDebug, SIGNAL(released()), signalMapper, SLOT(map()));               // Debug
+        connect(ui->hpbPololu, SIGNAL(released()), signalMapper, SLOT(map()));              // Pololu configuration
     // Firmware tab
         connect(ui->hpbFirmware, SIGNAL(released()), signalMapper, SLOT(map()));            // Firmware
         connect(ui->hpbConsole, SIGNAL(released()), signalMapper, SLOT(map()));             // Console
@@ -721,6 +735,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbLVC, "misc.html#lvc");                              // Low voltage cutoff
         signalMapper->setMapping(ui->hpbBaud, "misc.html#baud");                            // Baud rates
         signalMapper->setMapping(ui->hpbDebug, "misc.html#debug");                          // Debug
+        signalMapper->setMapping(ui->hpbPololu, "misc.html#pololu");                        // Pololu configuration
     // Firmware
         signalMapper->setMapping(ui->hpbFirmware, "firmware.html#flash");                   // Firmware
         signalMapper->setMapping(ui->hpbConsole, "firmware.html#console");                  // Console

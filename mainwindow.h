@@ -124,8 +124,8 @@ public:
 // PUBLIC SLOTS
 // ------------------------------------------------------------------------------------------------------------------------------------------------>>
 public slots:
-    // These are functions that will be called if we connect them to a signal
-    void changeStackedWidget(const QModelIndex&, const QModelIndex&);
+
+
 
     // Set the current device. This function will be called by the deviceselect dialog form when the project first opens.
     void setDevice(OP_device_name);
@@ -151,6 +151,12 @@ signals:
 // PRIVATE SLOTS
 // -------------------------------------------------------------------------------------------------------->>
 private slots:
+    // These are functions that will be called if we connect them to a signal
+    void changeStackedWidget(const QModelIndex&, const QModelIndex&);
+    // Uncomment the below if compiling with Qt 5.6. See bug report: https://bugreports.qt.io/browse/QTBUG-53186
+    // A fix for the dual-select bug in Qt 5.6
+    //void changeStackedWidget56Fix(const QModelIndex&);
+
     // Slots for the Assistant (help documentation) and the About menu
     // ---------------------------------------------------------------------------------------------------->>
       void showDocumentation();
@@ -268,7 +274,8 @@ private slots:
       void ShowHideOtherSqueakSettings(bool);
 
       // Misc tab
-
+      void cmdConfigurePololuDrive_clicked(void);
+      void cmdConfigurePololuTurret_clicked(void);
 
       // Firmware tab - hex flashing
       void cmdFlashHex_clicked();
@@ -441,6 +448,8 @@ private:
       boolean readAllSettings;                      // Flags
       boolean writeAllSettings;
       boolean writeSomeSettings;
+      boolean configurePololuDrive;                 // Flags set during Pololu configuration
+      boolean configurePololuTurret;
       uint16_t nextVarPos;                          // What position in the VarArray are we going to read/write next
       uint16_t startVarPos;                         // Sometimes we may only want to write a subset of variables. This will be the start variable,
       uint16_t endVarPos;                           // and this will be the end variable.

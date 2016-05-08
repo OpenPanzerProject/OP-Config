@@ -144,7 +144,7 @@ QListView::item {
 	margin: 0;
 }
 /* Selected */
-QListView::item:selected, QListView::item:selected:active {
+QListView::item:selected, QListView::item:selected:active { 
 	/* Horizontal gradient from white on the left to light purple grey on the right, blending into the light purple grey of the form */
 	background: qlineargradient(x1:1, y1:0, x2: 0, y2: 0, stop: 0 #E1E3E3, stop: 1 #FFFFFF);
 	color: #000;
@@ -785,11 +785,17 @@ QSizeGrip {
               <property name="lineWidth">
                <number>1</number>
               </property>
+              <property name="autoScroll">
+               <bool>true</bool>
+              </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="showDropIndicator" stdset="0">
                <bool>false</bool>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectItems</enum>
               </property>
               <property name="iconSize">
                <size>
@@ -847,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>7</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -11178,6 +11184,155 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="text">
                   <string/>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="FrameContent" name="frmPololu">
+                <property name="geometry">
+                 <rect>
+                  <x>360</x>
+                  <y>0</y>
+                  <width>341</width>
+                  <height>111</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_34">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>341</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_148">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>291</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Pololu Qik Configuration</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbPololu">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_150">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>40</y>
+                   <width>211</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Configure Pololu for Drive motors</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_151">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>70</y>
+                   <width>221</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Configure Pololu for Turret motors</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdConfigPololuDrive">
+                 <property name="geometry">
+                  <rect>
+                   <x>240</x>
+                   <y>40</y>
+                   <width>75</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Configure</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdConfigPololuTurret">
+                 <property name="geometry">
+                  <rect>
+                   <x>240</x>
+                   <y>70</y>
+                   <width>75</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Configure</string>
                  </property>
                 </widget>
                </widget>

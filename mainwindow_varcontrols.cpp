@@ -169,6 +169,8 @@ void MainWindow::Variables_to_Controls(void)
     ui->chkDecelEnable->setChecked(DeviceData.DecelRampEnabled);
     ui->cboDecelPreset->setCurrentIndex(ui->cboDecelPreset->findData(DeviceData.DecelPreset));
     ui->cboDecelLevel->setCurrentIndex(DeviceData.DecelSkipNum -1 );     // Here we set the literal index (-1 because combo is zero-based)
+    ShowHideAccelOptions(ui->chkAccelEnable->isChecked());
+    ShowHideDecelOptions(ui->chkDecelEnable->isChecked());
     // Turning
     ui->cboTurnMode->setCurrentIndex(DeviceData.TurnMode - 1);           // Here we set the literal index (-1 because combo is zero-based)
     ui->chkNeutralTurn->setChecked(DeviceData.NeutralTurnAllowed);

@@ -283,6 +283,9 @@ void MainWindow::ValidateMotorSelections()
         case POLOLU:
             ui->lblDriveMotors->setText("Connect motors to Pololu Qik: Left = \"M0\", Right = \"M1\"");
             break;
+        case OP_SCOUT:
+            ui->lblDriveMotors->setText("Connect motors to Scout: Left = \"M1\", Right = \"M2\"");
+            break;
         default:
             ui->lblDriveMotors->setText("");
         }
@@ -310,6 +313,9 @@ void MainWindow::ValidateMotorSelections()
         case POLOLU:
             ui->lblRotationMotor->setText("Connect turret rotation motor to \"M0\" on Pololu Qik");
             break;
+        case OP_SCOUT:
+            ui->lblRotationMotor->setText("Connect turret rotation motor to \"M1\" on Scout");
+            break;
         default:
             ui->lblRotationMotor->setText("");
         }
@@ -328,6 +334,9 @@ void MainWindow::ValidateMotorSelections()
             break;
         case POLOLU:
             ui->lblElevationMotor->setText("Connect barrel eleavation motor to \"M1\" on Pololu Qik");
+            break;
+        case OP_SCOUT:
+            ui->lblElevationMotor->setText("Connect barrel elevation motor to \"M2\"  on Scout");
             break;
         default:
             ui->lblElevationMotor->setText("");

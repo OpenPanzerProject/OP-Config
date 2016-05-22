@@ -31,7 +31,7 @@ void DriveTypeComboBox::setCategory(MotorCategory mc)
 
     insertItem(count(), "Sabertooth Serial ESC", SABERTOOTH);
     insertItem(count(), "Pololu Serial ESC", POLOLU);
-    //insertItem(count(), "OP Scout Serial ESC", OP_SCOUT);     // For some day when we have an Open-Panzer designed serial ESC
+    insertItem(count(), "OP Scout Serial ESC", OP_SCOUT);
 
     // Create our own custom signal
     connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(emitCurrentDriveTypeChanged()));

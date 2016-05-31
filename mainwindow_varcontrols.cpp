@@ -104,6 +104,7 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinSmokerMax->setValue(qRound(static_cast<double>(DeviceData.SmokerMaxSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerFastIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
+    ui->spinSmokeDestroyed->setValue(qRound(static_cast<double>(DeviceData.SmokerDestroyedSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ShowHideSmokerSettings();
 
 
@@ -162,15 +163,24 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinNudgePercent->setValue(DeviceData.MotorNudgePct);
     ui->spinNudgeTime->setValue(DeviceData.NudgeTime_mS);
     ShowHideNudgeTime(DeviceData.MotorNudgePct);
-    // Acceleration/Deceleration
-    ui->chkAccelEnable->setChecked(DeviceData.AccelRampEnabled);
-    ui->cboAccelPreset->setCurrentIndex(ui->cboAccelPreset->findData(DeviceData.AccelPreset));
-    ui->cboAccelLevel->setCurrentIndex(DeviceData.AccelSkipNum - 1);     // Here we set the literal index (-1 because combo is zero-based)
-    ui->chkDecelEnable->setChecked(DeviceData.DecelRampEnabled);
-    ui->cboDecelPreset->setCurrentIndex(ui->cboDecelPreset->findData(DeviceData.DecelPreset));
-    ui->cboDecelLevel->setCurrentIndex(DeviceData.DecelSkipNum -1 );     // Here we set the literal index (-1 because combo is zero-based)
-    ShowHideAccelOptions(ui->chkAccelEnable->isChecked());
-    ShowHideDecelOptions(ui->chkDecelEnable->isChecked());
+    // Acceleration/Deceleration - Profile 1
+    ui->chkAccelEnable_1->setChecked(DeviceData.AccelRampEnabled_1);
+    ui->cboAccelPreset_1->setCurrentIndex(ui->cboAccelPreset_1->findData(DeviceData.AccelPreset_1));
+    ui->cboAccelLevel_1->setCurrentIndex(DeviceData.AccelSkipNum_1 - 1);     // Here we set the literal index (-1 because combo is zero-based)
+    ui->chkDecelEnable_1->setChecked(DeviceData.DecelRampEnabled_1);
+    ui->cboDecelPreset_1->setCurrentIndex(ui->cboDecelPreset_1->findData(DeviceData.DecelPreset_1));
+    ui->cboDecelLevel_1->setCurrentIndex(DeviceData.DecelSkipNum_1 -1 );     // Here we set the literal index (-1 because combo is zero-based)
+    ShowHideAccelOptions_1(ui->chkAccelEnable_1->isChecked());
+    ShowHideDecelOptions_1(ui->chkDecelEnable_1->isChecked());
+    // Acceleration/Deceleration - Profile 2
+    ui->chkAccelEnable_2->setChecked(DeviceData.AccelRampEnabled_2);
+    ui->cboAccelPreset_2->setCurrentIndex(ui->cboAccelPreset_2->findData(DeviceData.AccelPreset_2));
+    ui->cboAccelLevel_2->setCurrentIndex(DeviceData.AccelSkipNum_2 - 1);     // Here we set the literal index (-1 because combo is zero-based)
+    ui->chkDecelEnable_2->setChecked(DeviceData.DecelRampEnabled_2);
+    ui->cboDecelPreset_2->setCurrentIndex(ui->cboDecelPreset_2->findData(DeviceData.DecelPreset_2));
+    ui->cboDecelLevel_2->setCurrentIndex(DeviceData.DecelSkipNum_2 -1 );     // Here we set the literal index (-1 because combo is zero-based)
+    ShowHideAccelOptions_2(ui->chkAccelEnable_2->isChecked());
+    ShowHideDecelOptions_2(ui->chkDecelEnable_2->isChecked());
     // Turning
     ui->cboTurnMode->setCurrentIndex(DeviceData.TurnMode - 1);           // Here we set the literal index (-1 because combo is zero-based)
     ui->chkNeutralTurn->setChecked(DeviceData.NeutralTurnAllowed);
@@ -327,6 +337,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.SmokerMaxSpeed = qRound((static_cast<double>(ui->spinSmokerMax->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerIdleSpeed = qRound((static_cast<double>(ui->spinSmokerIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerFastIdleSpeed = qRound((static_cast<double>(ui->spinSmokerFastIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
+    DeviceData.SmokerDestroyedSpeed = qRound((static_cast<double>(ui->spinSmokeDestroyed->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
 
     // Lights & IO tab
     // ---------------------------------------------------------------------------------------------------------->>
@@ -388,13 +399,20 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.EnginePauseTime_mS = static_cast<uint16_t>(ui->dspinEngineDelay->value() * 1000.0);
     DeviceData.MotorNudgePct = ui->spinNudgePercent->value();
     DeviceData.NudgeTime_mS = ui->spinNudgeTime->value();
-    // Acceleration/Deceleration
-    DeviceData.AccelRampEnabled = ui->chkAccelEnable->isChecked();
-    DeviceData.AccelPreset = static_cast<ACCEL_DRIVE_PRESET>(ui->cboAccelPreset->itemData(ui->cboAccelPreset->currentIndex()).toUInt());
-    DeviceData.AccelSkipNum = ui->cboAccelLevel->currentIndex() + 1;   // Here we save the literal index + 1 (combo is zero-based)
-    DeviceData.DecelRampEnabled = ui->chkDecelEnable->isChecked();
-    DeviceData.DecelPreset = static_cast<DECEL_DRIVE_PRESET>(ui->cboDecelPreset->itemData(ui->cboDecelPreset->currentIndex()).toUInt());
-    DeviceData.DecelSkipNum = ui->cboDecelLevel->currentIndex() + 1;   // Here we save the literal index + 1 (combo is zero-based)
+    // Acceleration/Deceleration - Profile 1
+    DeviceData.AccelRampEnabled_1 = ui->chkAccelEnable_1->isChecked();
+    DeviceData.AccelPreset_1 = static_cast<ACCEL_DRIVE_PRESET>(ui->cboAccelPreset_1->itemData(ui->cboAccelPreset_1->currentIndex()).toUInt());
+    DeviceData.AccelSkipNum_1 = ui->cboAccelLevel_1->currentIndex() + 1;   // Here we save the literal index + 1 (combo is zero-based)
+    DeviceData.DecelRampEnabled_1 = ui->chkDecelEnable_1->isChecked();
+    DeviceData.DecelPreset_1 = static_cast<DECEL_DRIVE_PRESET>(ui->cboDecelPreset_1->itemData(ui->cboDecelPreset_1->currentIndex()).toUInt());
+    DeviceData.DecelSkipNum_1 = ui->cboDecelLevel_1->currentIndex() + 1;   // Here we save the literal index + 1 (combo is zero-based)
+    // Acceleration/Deceleration - Profile 2
+    DeviceData.AccelRampEnabled_2 = ui->chkAccelEnable_2->isChecked();
+    DeviceData.AccelPreset_2 = static_cast<ACCEL_DRIVE_PRESET>(ui->cboAccelPreset_2->itemData(ui->cboAccelPreset_2->currentIndex()).toUInt());
+    DeviceData.AccelSkipNum_2 = ui->cboAccelLevel_2->currentIndex() + 1;   // Here we save the literal index + 1 (combo is zero-based)
+    DeviceData.DecelRampEnabled_2 = ui->chkDecelEnable_2->isChecked();
+    DeviceData.DecelPreset_2 = static_cast<DECEL_DRIVE_PRESET>(ui->cboDecelPreset_2->itemData(ui->cboDecelPreset_2->currentIndex()).toUInt());
+    DeviceData.DecelSkipNum_2 = ui->cboDecelLevel_2->currentIndex() + 1;   // Here we save the literal index + 1 (combo is zero-based)
     // Turning
     DeviceData.TurnMode = ui->cboTurnMode->currentIndex() + 1;         // Here we save the literal index + 1 (combo is zero-based)
     DeviceData.NeutralTurnAllowed = ui->chkNeutralTurn->isChecked();

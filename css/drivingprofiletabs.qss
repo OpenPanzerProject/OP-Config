@@ -1,0 +1,39 @@
+/* The tab widget frame */
+QTabWidget::pane 
+{ 
+    border: none; 
+	background-color: #FFF;
+}
+
+QTabWidget::tab-bar 
+{
+    /* left: 5px; /* move to the right by 5px */
+}
+
+/* Style the tab using the tab sub-control. Note that
+    it reads QTabBar _not_ QTabWidget */
+QTabBar::tab 
+{
+    background: #E1E3E3;
+    background-color: #E1E3E3;
+    border: 1px solid #666;
+    border-bottom-color: #FFF; /* same as the pane color */
+    min-width: 20ex;
+    padding: 2px 8px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover 
+{
+    background: #FFF;
+}
+
+QTabBar::tab:selected 
+{
+    border-color: #666;
+    border-bottom-color: #FFF; /* same as pane color */
+}
+
+QTabBar::tab:!selected 
+{
+    margin-top: 2px; /* make non-selected tabs look smaller */
+}

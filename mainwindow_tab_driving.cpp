@@ -10,9 +10,19 @@ void MainWindow::SetupControls_DrivingTab(void)
     QString display;
     QString level;
 
+    // Apply css to driving profiles QTabWidget and QTabBar
+    QFile file(":/css/drivingprofiletabs.qss");
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        ui->tabDrivingProfiles->setStyleSheet(file.readAll());
+        file.close();
+    }
+
     // Setup accel/decel preset combos
-    ui->cboAccelPreset->setCategory(ptAccel);
-    ui->cboDecelPreset->setCategory(ptDecel);
+    ui->cboAccelPreset_1->setCategory(ptAccel);
+    ui->cboDecelPreset_1->setCategory(ptDecel);
+    ui->cboAccelPreset_2->setCategory(ptAccel);
+    ui->cboDecelPreset_2->setCategory(ptDecel);
 
     // Setup accel/decel level combos
     // We wil be using the index number to reference the level, so we don't need user data,
@@ -24,9 +34,14 @@ void MainWindow::SetupControls_DrivingTab(void)
         level.setNum(((i+1)*0.5),'f',1);
         display.append(level);
         display.append(" sec)");
-        ui->cboAccelLevel->insertItem(i, display);
-        ui->cboDecelLevel->insertItem(i, display);
+        ui->cboAccelLevel_1->insertItem(i, display);
+        ui->cboDecelLevel_1->insertItem(i, display);
+        ui->cboAccelLevel_2->insertItem(i, display);
+        ui->cboDecelLevel_2->insertItem(i, display);
     }
+
+    // Initialize driving mode to Tab 1 (Profile 1 - default)
+    ui->tabDrivingProfiles->setCurrentIndex(0);
 
     // Turn Modes
     for (int i = 0; i < NUM_TURN_MODES; i++)
@@ -38,8 +53,10 @@ void MainWindow::SetupControls_DrivingTab(void)
     // If we disable neutral turns, no need to allow a neutral turn percent speed
     connect(ui->chkNeutralTurn, SIGNAL(clicked(bool)), this, SLOT(ShowHideNeutralTurnPct(bool)));
     // If we disable accel/decel, disable some other options as well
-    connect(ui->chkAccelEnable, SIGNAL(clicked(bool)), this, SLOT(ShowHideAccelOptions(bool)));
-    connect(ui->chkDecelEnable, SIGNAL(clicked(bool)), this, SLOT(ShowHideDecelOptions(bool)));
+    connect(ui->chkAccelEnable_1, SIGNAL(clicked(bool)), this, SLOT(ShowHideAccelOptions_1(bool)));
+    connect(ui->chkDecelEnable_1, SIGNAL(clicked(bool)), this, SLOT(ShowHideDecelOptions_1(bool)));
+    connect(ui->chkAccelEnable_2, SIGNAL(clicked(bool)), this, SLOT(ShowHideAccelOptions_2(bool)));
+    connect(ui->chkDecelEnable_2, SIGNAL(clicked(bool)), this, SLOT(ShowHideDecelOptions_2(bool)));
     // If we disable barrel stabilization or hill physics, disable the sensitivity options as well
     connect(ui->chkEnableBarrel, SIGNAL(clicked(bool)), this, SLOT(ShowHideBarrelSensitivity(bool)));
     connect(ui->chkEnableHills, SIGNAL(clicked(bool)), this, SLOT(ShowHideHillSensitivity(bool)));
@@ -150,42 +167,80 @@ void MainWindow::ShowHideHalftrackTurn(int)
         ui->spinHalftrackTurnPct->setEnabled(false);
     }
 }
-void MainWindow::ShowHideAccelOptions(bool isChecked)
+void MainWindow::ShowHideAccelOptions_1(bool isChecked)
 {
     if (isChecked)
     {   // Show options
-        ui->lblAccelPreset->setEnabled(true);
-        ui->cboAccelPreset->setEnabled(true);
-        ui->lblAccelLevel->setEnabled(true);
-        ui->cboAccelLevel->setEnabled(true);
+        ui->lblAccelPreset_1->setEnabled(true);
+        ui->cboAccelPreset_1->setEnabled(true);
+        ui->lblAccelLevel_1->setEnabled(true);
+        ui->cboAccelLevel_1->setEnabled(true);
     }
     else
     {   // Hide options
-        ui->lblAccelPreset->setEnabled(false);
-        ui->cboAccelPreset->setCurrentIndex(ui->cboAccelPreset->findData(ADP_NONE));
-        ui->cboAccelPreset->setEnabled(false);
-        ui->lblAccelLevel->setEnabled(false);
-        ui->cboAccelLevel->setCurrentIndex(3);  // This will put it on item 4, which is default
-        ui->cboAccelLevel->setEnabled(false);
+        ui->lblAccelPreset_1->setEnabled(false);
+        ui->cboAccelPreset_1->setCurrentIndex(ui->cboAccelPreset_1->findData(ADP_NONE));
+        ui->cboAccelPreset_1->setEnabled(false);
+        ui->lblAccelLevel_1->setEnabled(false);
+        ui->cboAccelLevel_1->setCurrentIndex(3);  // This will put it on item 4, which is default for Profile 1
+        ui->cboAccelLevel_1->setEnabled(false);
     }
 }
-void MainWindow::ShowHideDecelOptions(bool isChecked)
+void MainWindow::ShowHideDecelOptions_1(bool isChecked)
 {
     if (isChecked)
     {   // Show options
-        ui->lblDecelPreset->setEnabled(true);
-        ui->cboDecelPreset->setEnabled(true);
-        ui->lblDecelLevel->setEnabled(true);
-        ui->cboDecelLevel->setEnabled(true);
+        ui->lblDecelPreset_1->setEnabled(true);
+        ui->cboDecelPreset_1->setEnabled(true);
+        ui->lblDecelLevel_1->setEnabled(true);
+        ui->cboDecelLevel_1->setEnabled(true);
     }
     else
     {   // Hide options
-        ui->lblDecelPreset->setEnabled(false);
-        ui->cboAccelPreset->setCurrentIndex(ui->cboDecelPreset->findData(DDP_NONE));
-        ui->cboDecelPreset->setEnabled(false);
-        ui->lblDecelLevel->setEnabled(false);
-        ui->cboDecelLevel->setCurrentIndex(3);  // This will put it on item 4, which is default
-        ui->cboDecelLevel->setEnabled(false);
+        ui->lblDecelPreset_1->setEnabled(false);
+        ui->cboAccelPreset_1->setCurrentIndex(ui->cboDecelPreset_1->findData(DDP_NONE));
+        ui->cboDecelPreset_1->setEnabled(false);
+        ui->lblDecelLevel_1->setEnabled(false);
+        ui->cboDecelLevel_1->setCurrentIndex(3);  // This will put it on item 4, which is default for Profile 1
+        ui->cboDecelLevel_1->setEnabled(false);
+    }
+}
+void MainWindow::ShowHideAccelOptions_2(bool isChecked)
+{
+    if (isChecked)
+    {   // Show options
+        ui->lblAccelPreset_2->setEnabled(true);
+        ui->cboAccelPreset_2->setEnabled(true);
+        ui->lblAccelLevel_2->setEnabled(true);
+        ui->cboAccelLevel_2->setEnabled(true);
+    }
+    else
+    {   // Hide options
+        ui->lblAccelPreset_2->setEnabled(false);
+        ui->cboAccelPreset_2->setCurrentIndex(ui->cboAccelPreset_2->findData(ADP_NONE));
+        ui->cboAccelPreset_2->setEnabled(false);
+        ui->lblAccelLevel_2->setEnabled(false);
+        ui->cboAccelLevel_2->setCurrentIndex(0);  // This will put it on item 1, which is default for Profile 2
+        ui->cboAccelLevel_2->setEnabled(false);
+    }
+}
+void MainWindow::ShowHideDecelOptions_2(bool isChecked)
+{
+    if (isChecked)
+    {   // Show options
+        ui->lblDecelPreset_2->setEnabled(true);
+        ui->cboDecelPreset_2->setEnabled(true);
+        ui->lblDecelLevel_2->setEnabled(true);
+        ui->cboDecelLevel_2->setEnabled(true);
+    }
+    else
+    {   // Hide options
+        ui->lblDecelPreset_2->setEnabled(false);
+        ui->cboAccelPreset_2->setCurrentIndex(ui->cboDecelPreset_2->findData(DDP_NONE));
+        ui->cboDecelPreset_2->setEnabled(false);
+        ui->lblDecelLevel_2->setEnabled(false);
+        ui->cboDecelLevel_2->setCurrentIndex(0);  // This will put it on item 1, which is default for Profile 2
+        ui->cboDecelLevel_2->setEnabled(false);
     }
 }
 void MainWindow::ShowHideBarrelSensitivity(bool isChecked)

@@ -251,8 +251,10 @@ private slots:
       void ShowHideNeutralTurnPct(bool);
       void ShowHideNeutralTurnAllowed(int);
       void ShowHideHalftrackTurn(int);
-      void ShowHideAccelOptions(bool);
-      void ShowHideDecelOptions(bool);
+      void ShowHideAccelOptions_1(bool);        // Profile 1
+      void ShowHideDecelOptions_1(bool);
+      void ShowHideAccelOptions_2(bool);        // Profile 2
+      void ShowHideDecelOptions_2(bool);
       void ShowHideBarrelStabilization(bool);
       void ShowHideBarrelSensitivity(bool);
       void ShowHideHillSensitivity(bool);

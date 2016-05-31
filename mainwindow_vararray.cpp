@@ -192,29 +192,36 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.SmokerIdleSpeed = VarArray.value(2212).toInt();                              // 2212 - Smoker idle speed
     DeviceData.SmokerFastIdleSpeed = VarArray.value(2213).toInt();                          // 2213 - Smoker fast idle speed (when transmission disengaged)
     DeviceData.SmokerMaxSpeed = VarArray.value(2214).toInt();                               // 2214 - Max smoker speed
+    DeviceData.SmokerDestroyedSpeed = VarArray.value(2215).toInt();                         // 2215 - Smoker speed when tank destroyed
 
     // Driving adjustments - 24xx
-    DeviceData.AccelRampEnabled = VarArray.value(2411).toUInt();                            // 2411 - Accel ramp enabled
-    DeviceData.AccelSkipNum = VarArray.value(2412).toUInt();                                // 2412 - Accel skip num
-    DeviceData.AccelPreset = VarArray.value(2413).toUInt();                                 // 2413 - Accel preset
-    DeviceData.DecelRampEnabled = VarArray.value(2414).toUInt();                            // 2414 - Decel ramp enabled
-    DeviceData.DecelSkipNum = VarArray.value(2415).toUInt();                                // 2415 - Decel skip num
-    DeviceData.DecelPreset = VarArray.value(2416).toUInt();                                 // 2416 - Decel preset
-    DeviceData.BrakeSensitivityPct = VarArray.value(2417).toUInt();                         // 2417 - Brake sensitivity percent
-    DeviceData.TimeToShift_mS = VarArray.value(2418).toUInt();                              // 2418 - Time to shift in milliseconds
-    DeviceData.EnginePauseTime_mS = VarArray.value(2419).toUInt();                          // 2419 - Engine pause time
-    DeviceData.TransmissionDelay_mS = VarArray.value(2420).toUInt();                        // 2420 - Transmission delay (length of time for engine startup sound)
-    DeviceData.NeutralTurnAllowed = VarArray.value(2421).toUInt();                          // 2421 - Neutral turn
-    DeviceData.NeutralTurnPct = VarArray.value(2422).toUInt();                              // 2422 - Neutral turn speed as percent of drive speed
-    DeviceData.TurnMode = VarArray.value(2423).toUInt();                                    // 2423 - Turn mode
-    DeviceData.DriveType = VarArray.value(2424).toUInt();                                   // 2424 - Drive type
-    DeviceData.MaxForwardSpeedPct = VarArray.value(2425).toUInt();                          // 2425 - Max forward speed
-    DeviceData.MaxReverseSpeedPct = VarArray.value(2426).toUInt();                          // 2426 - Max reverse speed
-    DeviceData.HalftrackTreadTurnPct = VarArray.value(2427).toUInt();                       // 2427 - Pct of turn applied to halftrack treads
-    DeviceData.EngineAutoStart = VarArray.value(2428).toUInt();                             // 2428 - Auto-start engine with throttle
-    DeviceData.EngineAutoStopTime_mS = VarArray.value(2429).toInt();                        // 2429 - Auto-stop engine after idle time
-    DeviceData.MotorNudgePct = VarArray.value(2430).toUInt();                               // 2430 - Motor nudge percent
-    DeviceData.NudgeTime_mS = VarArray.value(2431).toUInt();                                // 2431 - Nudge time in milliseconds
+    DeviceData.AccelRampEnabled_1 = VarArray.value(2411).toUInt();                          // 2411 - Accel ramp enabled (profile 1)
+    DeviceData.AccelSkipNum_1 = VarArray.value(2412).toUInt();                              // 2412 - Accel skip num (profile 1)
+    DeviceData.AccelPreset_1 = VarArray.value(2413).toUInt();                               // 2413 - Accel preset (profile 1)
+    DeviceData.DecelRampEnabled_1 = VarArray.value(2414).toUInt();                          // 2414 - Decel ramp enabled (profile 1)
+    DeviceData.DecelSkipNum_1 = VarArray.value(2415).toUInt();                              // 2415 - Decel skip num (profile 1)
+    DeviceData.DecelPreset_1 = VarArray.value(2416).toUInt();                               // 2416 - Decel preset (profile 1)
+    DeviceData.AccelRampEnabled_2 = VarArray.value(2417).toUInt();                          // 2417 - Accel ramp enabled (profile 2)
+    DeviceData.AccelSkipNum_2 = VarArray.value(2418).toUInt();                              // 2418 - Accel skip num (profile 2)
+    DeviceData.AccelPreset_2 = VarArray.value(2419).toUInt();                               // 2419 - Accel preset (profile 2)
+    DeviceData.DecelRampEnabled_2 = VarArray.value(2420).toUInt();                          // 2420 - Decel ramp enabled (profile 2)
+    DeviceData.DecelSkipNum_2 = VarArray.value(2421).toUInt();                              // 2421 - Decel skip num (profile 2)
+    DeviceData.DecelPreset_2 = VarArray.value(2422).toUInt();                               // 2422 - Decel preset (profile 2)
+    DeviceData.BrakeSensitivityPct = VarArray.value(2423).toUInt();                         // 2423 - Brake sensitivity percent
+    DeviceData.TimeToShift_mS = VarArray.value(2424).toUInt();                              // 2424 - Time to shift in milliseconds
+    DeviceData.EnginePauseTime_mS = VarArray.value(2425).toUInt();                          // 2425 - Engine pause time
+    DeviceData.TransmissionDelay_mS = VarArray.value(2426).toUInt();                        // 2426 - Transmission delay (length of time for engine startup sound)
+    DeviceData.NeutralTurnAllowed = VarArray.value(2427).toUInt();                          // 2427 - Neutral turn
+    DeviceData.NeutralTurnPct = VarArray.value(2428).toUInt();                              // 2428 - Neutral turn speed as percent of drive speed
+    DeviceData.TurnMode = VarArray.value(2429).toUInt();                                    // 2429 - Turn mode
+    DeviceData.DriveType = VarArray.value(2430).toUInt();                                   // 2430 - Drive type
+    DeviceData.MaxForwardSpeedPct = VarArray.value(2431).toUInt();                          // 2431 - Max forward speed
+    DeviceData.MaxReverseSpeedPct = VarArray.value(2432).toUInt();                          // 2432 - Max reverse speed
+    DeviceData.HalftrackTreadTurnPct = VarArray.value(2433).toUInt();                       // 2433 - Pct of turn applied to halftrack treads
+    DeviceData.EngineAutoStart = VarArray.value(2434).toUInt();                             // 2434 - Auto-start engine with throttle
+    DeviceData.EngineAutoStopTime_mS = VarArray.value(2435).toInt();                        // 2435 - Auto-stop engine after idle time
+    DeviceData.MotorNudgePct = VarArray.value(2436).toUInt();                               // 2436 - Motor nudge percent
+    DeviceData.NudgeTime_mS = VarArray.value(2437).toUInt();                                // 2437 - Nudge time in milliseconds
 
     // "Physics" Settings - 25xx
     DeviceData.EnableBarrelStabilize = VarArray.value(2511).toUInt();                       // 2511 - Enable barrel stabilization
@@ -469,29 +476,36 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2212, QByteArray::number(DeviceData.SmokerIdleSpeed));                          // 2212 - Smoker idle speed
     VarArray.insert(2213, QByteArray::number(DeviceData.SmokerFastIdleSpeed));                      // 2213 - Smoker fast idle speed (when transmission disengaged)
     VarArray.insert(2214, QByteArray::number(DeviceData.SmokerMaxSpeed));                           // 2214 - Max smoker speed
+    VarArray.insert(2215, QByteArray::number(DeviceData.SmokerDestroyedSpeed));                     // 2215 - Smoker speed when tank destroyed
 
     // Driving adjustments - 24xx
-    VarArray.insert(2411, QByteArray::number(DeviceData.AccelRampEnabled));                         // 2411 - Accel ramp enabled
-    VarArray.insert(2412, QByteArray::number(DeviceData.AccelSkipNum));                             // 2412 - Accel skip num
-    VarArray.insert(2413, QByteArray::number(DeviceData.AccelPreset));                              // 2413 - Accel preset
-    VarArray.insert(2414, QByteArray::number(DeviceData.DecelRampEnabled));                         // 2414 - Decel ramp enabled
-    VarArray.insert(2415, QByteArray::number(DeviceData.DecelSkipNum));                             // 2415 - Decel skip num
-    VarArray.insert(2416, QByteArray::number(DeviceData.DecelPreset));                              // 2416 - Decel preset
-    VarArray.insert(2417, QByteArray::number(DeviceData.BrakeSensitivityPct));                      // 2417 - Brake sensitivity percent
-    VarArray.insert(2418, QByteArray::number(DeviceData.TimeToShift_mS));                           // 2418 - Time to shift in milliseconds
-    VarArray.insert(2419, QByteArray::number(DeviceData.EnginePauseTime_mS));                       // 2419 - Engine pause time
-    VarArray.insert(2420, QByteArray::number(DeviceData.TransmissionDelay_mS));                     // 2420 - Transmission delay (length of time for engine startup sound)
-    VarArray.insert(2421, QByteArray::number(DeviceData.NeutralTurnAllowed));                       // 2421 - Neutral turn
-    VarArray.insert(2422, QByteArray::number(DeviceData.NeutralTurnPct));                           // 2422 - Neutral turn speed as percent of drive speed
-    VarArray.insert(2423, QByteArray::number(DeviceData.TurnMode));                                 // 2423 - Turn mode
-    VarArray.insert(2424, QByteArray::number(DeviceData.DriveType));                                // 2424 - Drive type
-    VarArray.insert(2425, QByteArray::number(DeviceData.MaxForwardSpeedPct));                       // 2425 - Max forward speed
-    VarArray.insert(2426, QByteArray::number(DeviceData.MaxReverseSpeedPct));                       // 2426 - Max reverse speed
-    VarArray.insert(2427, QByteArray::number(DeviceData.HalftrackTreadTurnPct));                    // 2427 - Pct of turn applied to halftrack treads
-    VarArray.insert(2428, QByteArray::number(DeviceData.EngineAutoStart));                          // 2428 - Auto-start engine with throttle
-    VarArray.insert(2429, QByteArray::number(DeviceData.EngineAutoStopTime_mS));                    // 2429 - Auto-stop engine after idle time
-    VarArray.insert(2430, QByteArray::number(DeviceData.MotorNudgePct));                            // 2430 - Motor nudge percent
-    VarArray.insert(2431, QByteArray::number(DeviceData.NudgeTime_mS));                             // 2431 - Nudge time in milliseconds
+    VarArray.insert(2411, QByteArray::number(DeviceData.AccelRampEnabled_1));                       // 2411 - Accel ramp enabled (profile 1)
+    VarArray.insert(2412, QByteArray::number(DeviceData.AccelSkipNum_1));                           // 2412 - Accel skip num (profile 1)
+    VarArray.insert(2413, QByteArray::number(DeviceData.AccelPreset_1));                            // 2413 - Accel preset (profile 1)
+    VarArray.insert(2414, QByteArray::number(DeviceData.DecelRampEnabled_1));                       // 2414 - Decel ramp enabled (profile 1)
+    VarArray.insert(2415, QByteArray::number(DeviceData.DecelSkipNum_1));                           // 2415 - Decel skip num (profile 1)
+    VarArray.insert(2416, QByteArray::number(DeviceData.DecelPreset_1));                            // 2416 - Decel preset (profile 1)
+    VarArray.insert(2417, QByteArray::number(DeviceData.AccelRampEnabled_2));                       // 2417 - Accel ramp enabled (profile 2)
+    VarArray.insert(2418, QByteArray::number(DeviceData.AccelSkipNum_2));                           // 2418 - Accel skip num (profile 2)
+    VarArray.insert(2419, QByteArray::number(DeviceData.AccelPreset_2));                            // 2419 - Accel preset (profile 2)
+    VarArray.insert(2420, QByteArray::number(DeviceData.DecelRampEnabled_2));                       // 2420 - Decel ramp enabled (profile 2)
+    VarArray.insert(2421, QByteArray::number(DeviceData.DecelSkipNum_2));                           // 2421 - Decel skip num (profile 2)
+    VarArray.insert(2422, QByteArray::number(DeviceData.DecelPreset_2));                            // 2422 - Decel preset (profile 2)
+    VarArray.insert(2423, QByteArray::number(DeviceData.BrakeSensitivityPct));                      // 2423 - Brake sensitivity percent
+    VarArray.insert(2424, QByteArray::number(DeviceData.TimeToShift_mS));                           // 2424 - Time to shift in milliseconds
+    VarArray.insert(2425, QByteArray::number(DeviceData.EnginePauseTime_mS));                       // 2425 - Engine pause time
+    VarArray.insert(2426, QByteArray::number(DeviceData.TransmissionDelay_mS));                     // 2426 - Transmission delay (length of time for engine startup sound)
+    VarArray.insert(2427, QByteArray::number(DeviceData.NeutralTurnAllowed));                       // 2427 - Neutral turn
+    VarArray.insert(2428, QByteArray::number(DeviceData.NeutralTurnPct));                           // 2428 - Neutral turn speed as percent of drive speed
+    VarArray.insert(2429, QByteArray::number(DeviceData.TurnMode));                                 // 2429 - Turn mode
+    VarArray.insert(2430, QByteArray::number(DeviceData.DriveType));                                // 2430 - Drive type
+    VarArray.insert(2431, QByteArray::number(DeviceData.MaxForwardSpeedPct));                       // 2431 - Max forward speed
+    VarArray.insert(2432, QByteArray::number(DeviceData.MaxReverseSpeedPct));                       // 2432 - Max reverse speed
+    VarArray.insert(2433, QByteArray::number(DeviceData.HalftrackTreadTurnPct));                    // 2433 - Pct of turn applied to halftrack treads
+    VarArray.insert(2434, QByteArray::number(DeviceData.EngineAutoStart));                          // 2434 - Auto-start engine with throttle
+    VarArray.insert(2435, QByteArray::number(DeviceData.EngineAutoStopTime_mS));                    // 2435 - Auto-stop engine after idle time
+    VarArray.insert(2436, QByteArray::number(DeviceData.MotorNudgePct));                            // 2436 - Motor nudge percent
+    VarArray.insert(2437, QByteArray::number(DeviceData.NudgeTime_mS));                             // 2437 - Nudge time in milliseconds
 
     // Accelerometer Settings - 25xx
     VarArray.insert(2511, QByteArray::number(DeviceData.EnableBarrelStabilize));                    // 2511 - Enable barrel stabilization

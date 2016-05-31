@@ -228,8 +228,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
       // "A QTimer with a timeout of 0 will time out as soon as all the events in the window system's event queue have been processed"
       QTimer::singleShot(0, this, SLOT(ProcessCommandLineArgs()));
 
-
-
 }
 
 

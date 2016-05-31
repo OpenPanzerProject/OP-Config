@@ -65,14 +65,21 @@ struct _device_data {
     int16_t SmokerIdleSpeed;
     int16_t SmokerFastIdleSpeed;
     int16_t SmokerMaxSpeed;
+    int16_t SmokerDestroyedSpeed;
 
 // Driving adjustments
-    boolean AccelRampEnabled;
-    ACCEL_DRIVE_PRESET AccelSkipNum;
-    DECEL_DRIVE_PRESET AccelPreset;
-    boolean DecelRampEnabled;
-    uint8_t DecelSkipNum;
-    uint8_t DecelPreset;
+    boolean AccelRampEnabled_1;                 // Profile 1 settings
+    uint8_t AccelSkipNum_1;
+    ACCEL_DRIVE_PRESET AccelPreset_1;
+    boolean DecelRampEnabled_1;
+    uint8_t DecelSkipNum_1;
+    DECEL_DRIVE_PRESET DecelPreset_1;
+    boolean AccelRampEnabled_2;                 // Profile 2 settings
+    uint8_t AccelSkipNum_2;
+    ACCEL_DRIVE_PRESET AccelPreset_2;
+    boolean DecelRampEnabled_2;
+    uint8_t DecelSkipNum_2;
+    DECEL_DRIVE_PRESET DecelPreset_2;
     uint8_t BrakeSensitivityPct;
     uint16_t TimeToShift_mS;
     uint16_t EnginePauseTime_mS;				 // How long to wait before we can turn the engine on/off since the last engine on/off

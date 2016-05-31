@@ -128,6 +128,9 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_NT_ENABLE, "Neutral Turn - Enable");
     _SF_ALL_QMAP.insert(SF_NT_DISABLE, "Neutral Turn - Disable");
     _SF_ALL_QMAP.insert(SF_NT_TOGGLE, "Neutral Turn - Toggle");
+    _SF_ALL_QMAP.insert(SF_DRIVEPROFILE_1, "Drive Profile - Set to 1");
+    _SF_ALL_QMAP.insert(SF_DRIVEPROFILE_2, "Drive Profile - Set to 2");
+    _SF_ALL_QMAP.insert(SF_DRIVEPROFILE_TOGGLE, "Drive Profile - Toggle");
     return _SF_ALL_QMAP;
 }
 
@@ -196,6 +199,9 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_NT_ENABLE, "Neutral Turn - Enable");
     _SF_DIGITAL_QMAP.insert(SF_NT_DISABLE, "Neutral Turn - Disable");
     _SF_DIGITAL_QMAP.insert(SF_NT_TOGGLE, "Neutral Turn - Toggle");
+    _SF_DIGITAL_QMAP.insert(SF_DRIVEPROFILE_1, "Drive Profile - Set to 1");
+    _SF_DIGITAL_QMAP.insert(SF_DRIVEPROFILE_2, "Drive Profile - Set to 2");
+    _SF_DIGITAL_QMAP.insert(SF_DRIVEPROFILE_TOGGLE, "Drive Profile - Toggle");
     return _SF_DIGITAL_QMAP;
 }
 

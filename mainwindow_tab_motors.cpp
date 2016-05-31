@@ -112,18 +112,26 @@ void MainWindow::ShowHideSmokerSettings()
 {
     if (ui->cboSmokerControl->currentData() == true)
     {   // Auto control - show the speed settings
+        // Show labels
         ui->lblSmokerIdle->setEnabled(true);
         ui->lblSmokerIdle2->setEnabled(true);
         ui->lblSmokerFastIdle->setEnabled(true);
         ui->lblSmokerFastIdle2->setEnabled(true);
         ui->lblSmokerMax->setEnabled(true);
         ui->lblSmokerMax2->setEnabled(true);
+        ui->lblSmokeDestroyed->setEnabled(true);
+        ui->lblSmokeDestroyed2->setEnabled(true);
+        ui->lblSmokeDestroyed3->setEnabled(true);
+        // Show spinners
         ui->spinSmokerIdle->setEnabled(true);
         ui->spinSmokerFastIdle->setEnabled(true);
         ui->spinSmokerMax->setEnabled(true);
+        ui->spinSmokeDestroyed->setEnabled(true);
+        // Set spinner vals
         ui->spinSmokerMax->setValue(qRound(static_cast<double>(DeviceData.SmokerMaxSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
         ui->spinSmokerIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
         ui->spinSmokerFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerFastIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
+        ui->spinSmokeDestroyed->setValue(qRound(static_cast<double>(DeviceData.SmokerDestroyedSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
         // Also in this case, we remove the manual smoker control function from the function list
         ui->cboSelectFunction->RemoveSF(SF_SMOKER);
         // Make sure we didn't already have a function trigger defined for it too
@@ -131,15 +139,21 @@ void MainWindow::ShowHideSmokerSettings()
     }
     else
     {   // Manual control - hide the speed settings
+        // Hide labels
         ui->lblSmokerIdle->setEnabled(false);
         ui->lblSmokerIdle2->setEnabled(false);
         ui->lblSmokerFastIdle->setEnabled(false);
         ui->lblSmokerFastIdle2->setEnabled(false);
         ui->lblSmokerMax->setEnabled(false);
         ui->lblSmokerMax2->setEnabled(false);
+        ui->lblSmokeDestroyed->setEnabled(false);
+        ui->lblSmokeDestroyed2->setEnabled(false);
+        ui->lblSmokeDestroyed3->setEnabled(false);
+        // Hide spinners
         ui->spinSmokerIdle->setEnabled(false);
         ui->spinSmokerFastIdle->setEnabled(false);
         ui->spinSmokerMax->setEnabled(false);
+        ui->spinSmokeDestroyed->setEnabled(false);
         // Manual control means we need to add the smoker control function to the function list
         // The add function will only add it if it isn't there already
         ui->cboSelectFunction->AddSF(SF_SMOKER);

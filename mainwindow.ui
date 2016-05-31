@@ -453,7 +453,7 @@ QSizeGrip {
             <rect>
              <x>10</x>
              <y>10</y>
-             <width>251</width>
+             <width>421</width>
              <height>31</height>
             </rect>
            </property>
@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -5162,9 +5162,9 @@ QSizeGrip {
                <widget class="FrameContent" name="frmRecoilSettings">
                 <property name="geometry">
                  <rect>
-                  <x>430</x>
+                  <x>10</x>
                   <y>390</y>
-                  <width>391</width>
+                  <width>401</width>
                   <height>161</height>
                  </rect>
                 </property>
@@ -5203,7 +5203,7 @@ QSizeGrip {
                   <rect>
                    <x>0</x>
                    <y>23</y>
-                   <width>391</width>
+                   <width>401</width>
                    <height>20</height>
                   </rect>
                  </property>
@@ -5292,7 +5292,7 @@ QSizeGrip {
                 <widget class="HelpButton" name="hpbRecoilServo">
                  <property name="geometry">
                   <rect>
-                   <x>360</x>
+                   <x>370</x>
                    <y>10</y>
                    <width>18</width>
                    <height>18</height>
@@ -5446,10 +5446,10 @@ QSizeGrip {
                <widget class="FrameContent" name="frmSmoker">
                 <property name="geometry">
                  <rect>
-                  <x>430</x>
-                  <y>220</y>
-                  <width>391</width>
-                  <height>161</height>
+                  <x>420</x>
+                  <y>340</y>
+                  <width>401</width>
+                  <height>211</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -5500,7 +5500,7 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinSmokerIdle">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
+                   <x>170</x>
                    <y>70</y>
                    <width>61</width>
                    <height>22</height>
@@ -5516,7 +5516,7 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinSmokerFastIdle">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
+                   <x>170</x>
                    <y>99</y>
                    <width>61</width>
                    <height>22</height>
@@ -5580,7 +5580,7 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinSmokerMax">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
+                   <x>170</x>
                    <y>130</y>
                    <width>61</width>
                    <height>22</height>
@@ -5601,7 +5601,7 @@ QSizeGrip {
                   <rect>
                    <x>0</x>
                    <y>23</y>
-                   <width>391</width>
+                   <width>401</width>
                    <height>20</height>
                   </rect>
                  </property>
@@ -5618,7 +5618,7 @@ QSizeGrip {
                 <widget class="HelpButton" name="hpbSmoker">
                  <property name="geometry">
                   <rect>
-                   <x>360</x>
+                   <x>370</x>
                    <y>10</y>
                    <width>18</width>
                    <height>18</height>
@@ -5637,7 +5637,7 @@ QSizeGrip {
                 <widget class="QLabel" name="lblSmokerIdle2">
                  <property name="geometry">
                   <rect>
-                   <x>220</x>
+                   <x>240</x>
                    <y>70</y>
                    <width>21</width>
                    <height>21</height>
@@ -5655,7 +5655,7 @@ QSizeGrip {
                 <widget class="QLabel" name="lblSmokerFastIdle2">
                  <property name="geometry">
                   <rect>
-                   <x>220</x>
+                   <x>240</x>
                    <y>100</y>
                    <width>21</width>
                    <height>21</height>
@@ -5673,7 +5673,7 @@ QSizeGrip {
                 <widget class="QLabel" name="lblSmokerMax2">
                  <property name="geometry">
                   <rect>
-                   <x>220</x>
+                   <x>240</x>
                    <y>130</y>
                    <width>21</width>
                    <height>21</height>
@@ -5709,11 +5709,84 @@ QSizeGrip {
                 <widget class="QComboBox" name="cboSmokerControl">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
+                   <x>170</x>
                    <y>40</y>
-                   <width>231</width>
+                   <width>221</width>
                    <height>22</height>
                   </rect>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokeDestroyed">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>160</y>
+                   <width>141</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Smoke when destroyed</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSmokeDestroyed">
+                 <property name="geometry">
+                  <rect>
+                   <x>170</x>
+                   <y>160</y>
+                   <width>61</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>100</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokeDestroyed2">
+                 <property name="geometry">
+                  <rect>
+                   <x>240</x>
+                   <y>160</y>
+                   <width>21</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokeDestroyed3">
+                 <property name="geometry">
+                  <rect>
+                   <x>270</x>
+                   <y>160</y>
+                   <width>81</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(0 to disable)</string>
                  </property>
                 </widget>
                </widget>
@@ -5722,7 +5795,7 @@ QSizeGrip {
                  <rect>
                   <x>10</x>
                   <y>220</y>
-                  <width>411</width>
+                  <width>401</width>
                   <height>161</height>
                  </rect>
                 </property>
@@ -5833,7 +5906,7 @@ QSizeGrip {
                 <widget class="HelpButton" name="hpbBarrel">
                  <property name="geometry">
                   <rect>
-                   <x>380</x>
+                   <x>370</x>
                    <y>7</y>
                    <width>18</width>
                    <height>18</height>
@@ -5878,7 +5951,7 @@ QSizeGrip {
                   <rect>
                    <x>0</x>
                    <y>23</y>
-                   <width>411</width>
+                   <width>401</width>
                    <height>20</height>
                   </rect>
                  </property>
@@ -5945,9 +6018,9 @@ QSizeGrip {
                <widget class="FrameContent" name="frmTurretSpeeds">
                 <property name="geometry">
                  <rect>
-                  <x>10</x>
-                  <y>390</y>
-                  <width>411</width>
+                  <x>420</x>
+                  <y>220</y>
+                  <width>401</width>
                   <height>111</height>
                  </rect>
                 </property>
@@ -5986,7 +6059,7 @@ QSizeGrip {
                   <rect>
                    <x>0</x>
                    <y>23</y>
-                   <width>411</width>
+                   <width>401</width>
                    <height>20</height>
                   </rect>
                  </property>
@@ -6021,7 +6094,7 @@ QSizeGrip {
                 <widget class="HelpButton" name="hpbTurret">
                  <property name="geometry">
                   <rect>
-                   <x>380</x>
+                   <x>370</x>
                    <y>10</y>
                    <width>18</width>
                    <height>18</height>
@@ -7701,31 +7774,499 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>440</x>
                   <y>0</y>
                   <width>391</width>
-                  <height>241</height>
+                  <height>281</height>
                  </rect>
                 </property>
                 <property name="frameShape">
                  <enum>QFrame::Box</enum>
                 </property>
-                <widget class="QLabel" name="label_74">
+                <widget class="HelpButton" name="hpbAccelDecel">
+                 <property name="geometry">
+                  <rect>
+                   <x>360</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QTabWidget" name="tabDrivingProfiles">
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>10</y>
-                   <width>171</width>
-                   <height>21</height>
+                   <y>40</y>
+                   <width>371</width>
+                   <height>231</height>
                   </rect>
                  </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>12</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
+                 <property name="styleSheet">
+                  <string notr="true"/>
                  </property>
-                 <property name="text">
-                  <string>Inertia / Momentum</string>
+                 <property name="currentIndex">
+                  <number>1</number>
                  </property>
+                 <widget class="QWidget" name="tabDrivingProfile1">
+                  <attribute name="title">
+                   <string>Profile 1 (Default)</string>
+                  </attribute>
+                  <widget class="DrivePresetComboBox" name="cboAccelPreset_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>70</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_79">
+                   <property name="geometry">
+                    <rect>
+                     <x>270</x>
+                     <y>10</y>
+                     <width>61</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>(&lt;i&gt;inertia&lt;/i&gt;)</string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_80">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>9</y>
+                     <width>241</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Enable Acceleration Constraint: </string>
+                   </property>
+                  </widget>
+                  <widget class="QCheckBox" name="chkAccelEnable_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>250</x>
+                     <y>13</y>
+                     <width>16</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblAccelPreset_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>70</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Preset</string>
+                   </property>
+                  </widget>
+                  <widget class="QComboBox" name="cboAccelLevel_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>40</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblAccelLevel_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>40</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Level</string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_86">
+                   <property name="geometry">
+                    <rect>
+                     <x>270</x>
+                     <y>110</y>
+                     <width>91</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>(&lt;i&gt;momentum&lt;/i&gt;)</string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_87">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>109</y>
+                     <width>241</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Enable Deceleration Constraint: </string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblDecelLevel_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>139</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Level</string>
+                   </property>
+                  </widget>
+                  <widget class="QComboBox" name="cboDecelLevel_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>139</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QCheckBox" name="chkDecelEnable_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>250</x>
+                     <y>113</y>
+                     <width>16</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblDecelPreset_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>169</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Preset</string>
+                   </property>
+                  </widget>
+                  <widget class="DrivePresetComboBox" name="cboDecelPreset_1">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>169</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                 </widget>
+                 <widget class="QWidget" name="tabDrivingProfile2">
+                  <attribute name="title">
+                   <string>Profile 2</string>
+                  </attribute>
+                  <widget class="QLabel" name="lblAccelLevel_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>40</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Level</string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_152">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>109</y>
+                     <width>241</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Enable Deceleration Constraint: </string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_153">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>9</y>
+                     <width>241</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Enable Acceleration Constraint: </string>
+                   </property>
+                  </widget>
+                  <widget class="QComboBox" name="cboAccelLevel_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>40</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblAccelPreset_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>70</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Preset</string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblDecelLevel_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>139</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Level</string>
+                   </property>
+                  </widget>
+                  <widget class="QCheckBox" name="chkDecelEnable_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>250</x>
+                     <y>113</y>
+                     <width>16</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QComboBox" name="cboDecelLevel_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>139</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QCheckBox" name="chkAccelEnable_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>250</x>
+                     <y>13</y>
+                     <width>16</width>
+                     <height>18</height>
+                    </rect>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="lblDecelPreset_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>20</x>
+                     <y>169</y>
+                     <width>51</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Preset</string>
+                   </property>
+                  </widget>
+                  <widget class="DrivePresetComboBox" name="cboAccelPreset_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>70</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="DrivePresetComboBox" name="cboDecelPreset_2">
+                   <property name="geometry">
+                    <rect>
+                     <x>80</x>
+                     <y>169</y>
+                     <width>111</width>
+                     <height>22</height>
+                    </rect>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_154">
+                   <property name="geometry">
+                    <rect>
+                     <x>270</x>
+                     <y>10</y>
+                     <width>61</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>(&lt;i&gt;inertia&lt;/i&gt;)</string>
+                   </property>
+                  </widget>
+                  <widget class="QLabel" name="label_155">
+                   <property name="geometry">
+                    <rect>
+                     <x>270</x>
+                     <y>110</y>
+                     <width>91</width>
+                     <height>21</height>
+                    </rect>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>(&lt;i&gt;momentum&lt;/i&gt;)</string>
+                   </property>
+                  </widget>
+                  <zorder>hpbAccelDecel</zorder>
+                  <zorder>lblAccelLevel_2</zorder>
+                  <zorder>label_152</zorder>
+                  <zorder>label_153</zorder>
+                  <zorder>cboAccelLevel_2</zorder>
+                  <zorder>lblAccelPreset_2</zorder>
+                  <zorder>lblDecelLevel_2</zorder>
+                  <zorder>chkDecelEnable_2</zorder>
+                  <zorder>cboDecelLevel_2</zorder>
+                  <zorder>chkAccelEnable_2</zorder>
+                  <zorder>lblDecelPreset_2</zorder>
+                  <zorder>cboAccelPreset_2</zorder>
+                  <zorder>cboDecelPreset_2</zorder>
+                  <zorder>label_154</zorder>
+                  <zorder>label_155</zorder>
+                 </widget>
                 </widget>
                 <widget class="QFrame" name="frame_14">
                  <property name="geometry">
@@ -7746,237 +8287,24 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <enum>QFrame::Plain</enum>
                  </property>
                 </widget>
-                <widget class="HelpButton" name="hpbAccelDecel">
+                <widget class="QLabel" name="label_74">
                  <property name="geometry">
                   <rect>
-                   <x>360</x>
+                   <x>10</x>
                    <y>10</y>
-                   <width>18</width>
-                   <height>18</height>
-                  </rect>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>18</width>
-                   <height>18</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="lblAccelLevel">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>70</y>
-                   <width>51</width>
+                   <width>171</width>
                    <height>21</height>
                   </rect>
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Level</string>
-                 </property>
-                </widget>
-                <widget class="QCheckBox" name="chkAccelEnable">
-                 <property name="geometry">
-                  <rect>
-                   <x>270</x>
-                   <y>43</y>
-                   <width>16</width>
-                   <height>18</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_79">
-                 <property name="geometry">
-                  <rect>
-                   <x>290</x>
-                   <y>40</y>
-                   <width>61</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>(&lt;i&gt;inertia&lt;/i&gt;)</string>
-                 </property>
-                </widget>
-                <widget class="DrivePresetComboBox" name="cboAccelPreset">
-                 <property name="geometry">
-                  <rect>
-                   <x>90</x>
-                   <y>100</y>
-                   <width>111</width>
-                   <height>22</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QComboBox" name="cboAccelLevel">
-                 <property name="geometry">
-                  <rect>
-                   <x>90</x>
-                   <y>70</y>
-                   <width>111</width>
-                   <height>22</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_80">
-                 <property name="geometry">
-                  <rect>
-                   <x>20</x>
-                   <y>39</y>
-                   <width>241</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
+                   <pointsize>12</pointsize>
                    <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Enable Acceleration Constraint: </string>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="lblAccelPreset">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>100</y>
-                   <width>51</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Preset</string>
-                 </property>
-                </widget>
-                <widget class="QCheckBox" name="chkDecelEnable">
-                 <property name="geometry">
-                  <rect>
-                   <x>270</x>
-                   <y>144</y>
-                   <width>16</width>
-                   <height>18</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_86">
-                 <property name="geometry">
-                  <rect>
-                   <x>290</x>
-                   <y>141</y>
-                   <width>91</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>(&lt;i&gt;momentum&lt;/i&gt;)</string>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label_87">
-                 <property name="geometry">
-                  <rect>
-                   <x>20</x>
-                   <y>140</y>
-                   <width>241</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                   <weight>75</weight>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Enable Deceleration Constraint: </string>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="lblDecelLevel">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>170</y>
-                   <width>51</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Level</string>
-                 </property>
-                </widget>
-                <widget class="QComboBox" name="cboDecelLevel">
-                 <property name="geometry">
-                  <rect>
-                   <x>90</x>
-                   <y>170</y>
-                   <width>111</width>
-                   <height>22</height>
-                  </rect>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="lblDecelPreset">
-                 <property name="geometry">
-                  <rect>
-                   <x>30</x>
-                   <y>200</y>
-                   <width>51</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Preset</string>
-                 </property>
-                </widget>
-                <widget class="DrivePresetComboBox" name="cboDecelPreset">
-                 <property name="geometry">
-                  <rect>
-                   <x>90</x>
-                   <y>200</y>
-                   <width>111</width>
-                   <height>22</height>
-                  </rect>
+                  <string>Inertia / Momentum</string>
                  </property>
                 </widget>
                </widget>
@@ -8869,7 +9197,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>440</x>
-                  <y>250</y>
+                  <y>410</y>
                   <width>391</width>
                   <height>181</height>
                  </rect>
@@ -11795,6 +12123,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
+              <zorder>stackedWidgetMain</zorder>
              </widget>
             </item>
            </layout>

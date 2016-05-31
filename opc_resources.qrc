@@ -37,6 +37,7 @@
         <file>images/opconfig.png</file>
         <file>images/opconfig_header.png</file>
         <file>images/tcb_subheader.png</file>
+        <file>css/drivingprofiletabs.qss</file>
     </qresource>
     <qresource prefix="/icons">
         <file>images/OP_Icon_16.png</file>

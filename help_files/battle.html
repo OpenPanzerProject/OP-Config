@@ -199,13 +199,102 @@
 	The TCB has capabilities that would make more creative and interesting Damage Definitions possible, but they are still under development.
 
 	<ul class="smalllist">
-		<li><b>Tamiya Spec:</b> Tamiya defines damage from incoming hits as a reduction in vehicle speed. The first hit always results in a 50% reduction in speed. Speed will remain at 50% for subsequent hits
+		<li>
+        <table class="center_aligned_table float_right">
+            <tr>
+                <td colspan="4" align="center" class="tabletitle">Tamiya Damage Specification</td>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Heavy</th>
+                <th>Medium</th>
+                <th>Light</th>
+            </tr>
+            <tr>
+                <td>1 hit</td>
+                <td>Speed 50%</td>
+                <td>Speed 50%</td>
+                <td>Speed 50%</td>
+            </tr>
+            <tr>
+                <td>2 hits</td>
+                <td>50%</td>
+                <td>50%</td>
+                <td>25%</td>
+            </tr>
+            <tr>
+                <td>3 hits</td>
+                <td>50%</td>
+                <td>50%</td>
+                <td>Destroyed</td>
+            </tr>
+            <tr>
+                <td>4 hits</td>
+                <td>50%</td>
+                <td>25%</td>
+                <td class="dark_cell">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>5 hits</td>
+                <td>25%</td>
+                <td>25%</td>
+                <td class="dark_cell">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>6 hits</td>
+                <td>25%</td>
+                <td>Destroyed</td>
+                <td class="dark_cell">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>7 hits</td>
+                <td>25%</td>
+                <td class="dark_cell">&nbsp;</td>
+                <td class="dark_cell">&nbsp;</td>
+            </tr>    
+            <tr>
+                <td>8 hits</td>
+                <td>25%</td>
+                <td class="dark_cell">&nbsp;</td>
+                <td class="dark_cell">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>9 hits</td>
+                <td>Destroyed</td>
+                <td class="dark_cell">&nbsp;</td>
+                <td class="dark_cell">&nbsp;</td>
+            </tr>
+        </table>
+        
+        <b>Tamiya Spec:</b> Tamiya defines damage from incoming hits as a reduction in vehicle speed. The first hit always results in a 50% reduction in speed. Speed will remain at 50% for subsequent hits
 		until the total number of of hits received equals approximately half of the number required to destroy the vehicle, at which point the speed will be reduced to 25%. Speed will then remain 
 		at 25% until the vehicle is destroyed. After being destroyed the tank is completely immobilized for 15 seconds, after which it automatically "recovers&quot; with full health.  The TCB 
-		accurately reproduces the Tamiya damage specification, and it will even apply the same rules to custom weight classes as well as account for machine gun hits.</li>
+		accurately reproduces the Tamiya damage specification, and it will even apply the same rules to custom weight classes as well as account for machine gun hits.<br><br>
+        
+        The table at right shows the Tamiya speed reductions for the three standard Tamiya weight classes.<br /><br />
+
+        For custom weight classes the same scale is applied. The exact formula is: <br>
+        - Speed reduced to 50% for Hit 1 though [(Number of Max Hits - 1) / 2]<br />
+        - Speed reduced to 25% for remaining hits through [Max Hits - 1]<br />
+        - Tank destroyed on hit = Max Hits<br /><br />
+        
+        The formula becomes more complex for all classes when machine gun damage is allowed. The same basic formula is applied but instead of being based on the number of hits, it is based on the 
+        percent of damage taken. Each cannon and machine gun hit imposes a percent of damage based on the maximum number of hits permitted:<br />
+        - Cannon damage percent per hit = 100% / Max Hits Cannon<br />
+        - Machine gun damage percent hit = 100% / Max Hits Machine Gun<br /><br />
+        
+        After each hit the total damage percent is incremented depending on which type of hit was received, and the speed reduction formula is then applied:<br />
+        - Speed reduced to 50% for damage &lt;= 50%<br />
+        - Speed reduced to 25% for damage &gt;50% and &lt;100%<br />
+        - Tank destroyed when damage = 100%<br /><br />
+                
+        <br />
+        </li>
+        
 		<li><b>Experimental:</b> Additional damage profiles are still under development. The Experimental option is for developers to use in testing. See the 
 		<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:operation:battle">Open Panzer Wiki - IR Battle</a> page for up to date information.</li>
 	</ul>
+
 
 </p>
 

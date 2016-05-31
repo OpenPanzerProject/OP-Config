@@ -270,14 +270,12 @@ div#toc {
 	margin-bottom: 7px;
 }
 
-/* Tables should show empty cells. */
 table
 {
-	empty-cells: show;
+	empty-cells: show;   /* Tables should show empty cells. */
 	/* We use border and outline to create a double border */
 /*	border: 2px solid #666; */
 	border-collapse: collapse;
-
 	border: 6px solid #E1E3E3;
 	outline: 1px solid #666;
 	outline-offset: -7px;
@@ -313,6 +311,17 @@ th
 	color: #330055;	
 }
 
+.center_aligned_table
+{
+    text-align: center;
+}
 
+.dark_cell
+{
+    background-color: #E1E3E3;
+}
 
-
+.float_right
+{
+    float: right;
+}

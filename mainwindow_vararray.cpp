@@ -21,6 +21,7 @@ void MainWindow::VarArray_to_Variables(void)
     // Therefore as each VarArray value gets applied to a variable, it has to be cast to the appropriate type.
     // Almost everything can be taken care of with a conversion to Int or UInt. Boolean can be converted with UInt.
     // But it is easy to miss the difference between "toInt()" and "toUInt()" so watch out and make sure they're right!
+    // The only time you need to use toInt is when the variable is signed.
 
     // Linear Channel Settings - 10xx
     DeviceData.Sticks.Throttle.Settings.channelNum = VarArray.value(1011).toUInt();         // 1011 - Throttle channel number

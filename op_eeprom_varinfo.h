@@ -242,7 +242,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {1488, 277, varUINT8, "0"},        // SF_Trigger[38].specialFunction
     {1489, 278, varUINT16, "0"},        // SF_Trigger[39].TriggerID
     {1490, 280, varUINT8, "0"},        // SF_Trigger[39].specialFunction
-    {1611, 281, varUINT8, "9"},        // DriveMotors
+    {1611, 281, varUINT8, "10"},        // DriveMotors
     {1612, 282, varUINT8, "11"},        // TurretRotationMotor
     {1613, 283, varUINT8, "11"},        // TurretElevationMotor
     {1811, 284, varINT16, "1000"},        // TurretElevation_EPMin

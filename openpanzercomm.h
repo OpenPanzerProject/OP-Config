@@ -104,7 +104,11 @@
 #define FIRST_BLITZ_TIME        2000    // Time in milliseconds between the first init string and how long we think the device takes to reboot (and get past bootloader)
 #define SECOND_BLITZ_TIME       500     // Time in milliseconds between spamming the device repeatedly with our INIT_STRING
 #define WATCHDOG_TIME           1000    // Time in milliseconds we will wait for a response from the device generally.
-#define STAY_AWAKE_BEEP_TIME    5000    // How often should we send a stay-awake signal to the device. Should be less than the device's timeout time.
+#define STAY_AWAKE_BEEP_TIME    4000    // How often should we send a stay-awake signal to the device. Should be less than the device's timeout time.
+                                        // In fact, best to set it to less than 1/2 the device's timeout time, so you always have at least 2 chances to get through
+                                        // before the device auto-disconnects. The TCB is set to timeout after 8.5 seconds of no signal.
+#define ALLOWED_STAY_AWAKE_MISSES 2     // How many stay awake commands will we allow to go by without a response from the device before we disconnect.
+                                        // All other types of commands we require a response to each one.
 #define RADIO_STREAM_OVER_TIME  800     // If we don't get a radio streaming sentence in this amount of time, consider streaming done.
 
 // Commands sent by PC
@@ -285,6 +289,8 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
           void TellDevice_Goodbye(void);
           QByteArray sentenceToByteArray(DataSentence _sentence);
           boolean _EEPROM_Written;
+          boolean StayAwakeJustSent;
+          uint8_t MissedStayAwakeCount;
 
         // Utilities
         // ---------------------------------------------------------------------------------------------------->>

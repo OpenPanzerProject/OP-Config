@@ -53,6 +53,7 @@ void OpenPanzerComm::begin()
     SentenceReceived = false;
     _EEPROM_Written = false;
     NumErrors = 0;
+    StayAwakeJustSent = false;
     ClearResponseData();
 
     CRCRequired = true; // Meaning, we only accept sentences that include, and match, a CRC
@@ -365,7 +366,9 @@ boolean OpenPanzerComm::sendSentence(DataSentence &_sentence)
     if (serial->isOpen() && serial->isWritable())
     {
         serial->write(bas);
-        emit AnyRequest();      // This lets us know we should start the watchdog timer for a response
+        emit AnyRequest();          // This lets us know we should start the watchdog timer for a response
+        StayAwakeJustSent = false;  // We might have just sent a stay awake command, but we'll let the calling routine set that flag.
+                                    // This way in all other cases it is automatically set to false.
 
         // You have to wait for bytes to be written or else it will skip!!
         if (!serial->waitForBytesWritten(50))
@@ -533,6 +536,12 @@ void OpenPanzerComm::readData()
                             emit ConnectionChanged(true);
                         }
                         emit NextSentence();
+                        // This is also the response to our stay awake command. If that is what we just sent, make sure
+                        // to reset the MissedStayAwakeCount to 0 since we have received a reply.
+                        if (StayAwakeJustSent)
+                        {
+                            MissedStayAwakeCount = 0;
+                        }
                     }
                     break;
 
@@ -751,7 +760,7 @@ void OpenPanzerComm::watchdogBark(void)
     // will start it once again. Of course, if the response is successfuly read the watchdog should be stopped but somehow it is not
     // successfully read. Maybe the PC can't keep up with every incoming sentence...
 
-    // If you send the "stop streaming" command after the streaming has really stopped, then it will always receive the response.
+    // If the PC sends the "stop streaming" command after the streaming has really stopped, then the PC will always receive the response.
     // So one hack around this would  be to send the stop streaming command twice, but I went with this hack instead. We now have
     // a global flag called SkipWatchdog. The stopStreamRadio() function sets the flag to true before sending the command
     // to stop streaming. Even though in startWatchdog() below we don't start the watchdog if skipWatchdog = true,
@@ -759,7 +768,6 @@ void OpenPanzerComm::watchdogBark(void)
 
     // So we do a second check here when the watchdog timer expires. If SkipWatchdog = true we just set it to false but ignore the
     // timeout.
-
 
     if (SkipWatchdog)
     {
@@ -770,9 +778,30 @@ void OpenPanzerComm::watchdogBark(void)
     else
     {
         // If this timer runs out, we were expecting a response from the device but didn't get it.
-        // We close the serial port and warn the user
-        closeSerial();
-        if (DEBUG_MSGS) qDebug() << "Watchdog Timer expired!";
+
+        // If the last communication with the device was just a "stay awake" command, we allow it to miss
+        // some number of times before we force a disconnect.
+        if (StayAwakeJustSent)
+        {
+            StayAwakeJustSent = false;      // Reset this flag
+
+            MissedStayAwakeCount += 1;      // Increment the count of stay awakes that have been missed
+
+            if (MissedStayAwakeCount > ALLOWED_STAY_AWAKE_MISSES)
+            {
+                MissedStayAwakeCount = 0;   // Reset for the next time we initiate comms
+                closeSerial();              // Force disconnect
+                if (DEBUG_MSGS) qDebug() << "Watchdog Timer expired!";
+            }
+        }
+        else
+        {
+            // If we were communicating anything other than just "stay awake", we don't allow the device to miss
+            // the response even one. In this case we sent some other command, got nothing back, so now
+            // we disconnect
+            closeSerial();
+            if (DEBUG_MSGS) qDebug() << "Watchdog Timer expired!";
+        }
     }
 }
 void OpenPanzerComm::startWatchdog(void)
@@ -805,6 +834,12 @@ void OpenPanzerComm::keepDeviceAwake(void)
     clearSentenceOUT();
     SentenceOUT.Command = SentenceOUT.ID = PCCMD_STAY_AWAKE;
     sendSentence(SentenceOUT);
+    // The stay awake command is different from other commands in one other way - we will allow
+    // the device to miss the response to it some number of times (the issue is probably more likely that the PC
+    // fails to read the response in the midst of radio streaming). To know that this is the last
+    // command sent, set this flag
+    StayAwakeJustSent = true;
+
 }
 void OpenPanzerComm::startStayAwakeTimer(void)
 {   // This is a repetitive timer that will keep triggering over and over until stopped

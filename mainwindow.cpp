@@ -158,8 +158,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     layout->insertSpacing(1,20);                                // Index 1 - spacing
     // Next - Index 2: Other status label
     otherStatusLabel = new QLabel(this);
-    otherStatusLabel->setMinimumWidth(170);
-    otherStatusLabel->setMaximumWidth(170);
+    otherStatusLabel->setMinimumWidth(200);
+    otherStatusLabel->setMaximumWidth(200);
     otherStatusLabel->setMinimumHeight(20);
     otherStatusLabel->setMaximumHeight(20);
     otherStatusLabel->setAlignment(Qt::AlignVCenter);
@@ -691,6 +691,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbLVC, SIGNAL(released()), signalMapper, SLOT(map()));                 // Low voltage cutoff
         connect(ui->hpbBaud, SIGNAL(released()), signalMapper, SLOT(map()));                // Baud rates
         connect(ui->hpbDebug, SIGNAL(released()), signalMapper, SLOT(map()));               // Debug
+        connect(ui->hpbSabertooth, SIGNAL(released()), signalMapper, SLOT(map()));          // Sabertooth configuration
         connect(ui->hpbPololu, SIGNAL(released()), signalMapper, SLOT(map()));              // Pololu configuration
     // Firmware tab
         connect(ui->hpbFirmware, SIGNAL(released()), signalMapper, SLOT(map()));            // Firmware
@@ -733,6 +734,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbLVC, "misc.html#lvc");                              // Low voltage cutoff
         signalMapper->setMapping(ui->hpbBaud, "misc.html#baud");                            // Baud rates
         signalMapper->setMapping(ui->hpbDebug, "misc.html#debug");                          // Debug
+        signalMapper->setMapping(ui->hpbSabertooth, "misc.html#sabertooth");                // Sabertooth configuration
         signalMapper->setMapping(ui->hpbPololu, "misc.html#pololu");                        // Pololu configuration
     // Firmware
         signalMapper->setMapping(ui->hpbFirmware, "firmware.html#flash");                   // Firmware

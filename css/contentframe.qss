@@ -25,6 +25,7 @@
 #frmBaudRates,
 #frmDebug,
 #frmPololu,
+#frmSabertooth,
 #frmFlash,
 #frmConsole
  {

@@ -53,6 +53,7 @@ void OpenPanzerComm::begin()
     SentenceReceived = false;
     _EEPROM_Written = false;
     NumErrors = 0;
+    WatchdogTimeout = WATCHDOG_TIME_DEFAULT;
     StayAwakeJustSent = false;
     ClearResponseData();
 
@@ -456,6 +457,17 @@ void OpenPanzerComm::requestFirmwareVersion(void)
     sendNullValueSentence(PCCMD_READ_VERSION);
 }
 
+void OpenPanzerComm::SetSabertoothBaudRate(uint8_t SabertoothBaud)
+{
+    clearSentenceOUT();
+    SentenceOUT.Command = PCCMD_SABERTOOTH_BAUD;
+    SentenceOUT.ID = SentenceOUT.Command;
+    SentenceOUT.Value = QByteArray::number(SabertoothBaud);
+    SentenceOUT.Checksum = 0;       // Checksum will get calculated by sendSentence
+    changeWatchdogTimeout(WATCHDOG_TIME_SABERTOOTH_SETUP);  // It takes longer to do this setup than our typical timeout, so we temporarily increase it.
+    sendSentence(SentenceOUT);                              // See "processNextSentence" in "mainwindow_device_rw.cpp" for where we set this back to default.
+}
+
 void OpenPanzerComm::ConfigurePololu_Drive(void)
 {
     sendNullValueSentence(PCCMD_CONFPOLOLU_DRIVE);
@@ -809,7 +821,7 @@ void OpenPanzerComm::startWatchdog(void)
     if (Connected & !SkipWatchdog)  // Don't start if SkipWatchdog = true
     {
         watchdogTimer->setSingleShot(true);
-        watchdogTimer->start(WATCHDOG_TIME);
+        watchdogTimer->start(WatchdogTimeout);
         stopStayAwakeTimer();   // This does NOT need to be running when we are communicating
     }
 }
@@ -817,8 +829,17 @@ void OpenPanzerComm::restartWatchdog(void)
 {
     if (Connected)
     {
-        watchdogTimer->start(WATCHDOG_TIME);    // Starting an already-running timer just re-starts it
+        watchdogTimer->start(WatchdogTimeout);    // Starting an already-running timer just re-starts it
     }
+}
+void OpenPanzerComm::changeWatchdogTimeout(int time)
+{
+    WatchdogTimeout = time;
+    restartWatchdog();
+}
+void OpenPanzerComm::defaultWatchdogTimeout(void)
+{
+    WatchdogTimeout = WATCHDOG_TIME_DEFAULT;
 }
 void OpenPanzerComm::stopWatchdog(void)
 {

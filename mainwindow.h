@@ -276,6 +276,8 @@ private slots:
       void ShowHideOtherSqueakSettings(bool);
 
       // Misc tab
+      void updateSabertoothBaudLabel(void);
+      void cmdSetSabertoothBaud_clicked(void);
       void cmdConfigurePololuDrive_clicked(void);
       void cmdConfigurePololuTurret_clicked(void);
 
@@ -450,6 +452,7 @@ private:
       boolean readAllSettings;                      // Flags
       boolean writeAllSettings;
       boolean writeSomeSettings;
+      boolean setSabertoothBaudRate;                // Flag set during Sabertooth configuration
       boolean configurePololuDrive;                 // Flags set during Pololu configuration
       boolean configurePololuTurret;
       uint16_t nextVarPos;                          // What position in the VarArray are we going to read/write next

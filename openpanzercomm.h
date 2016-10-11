@@ -103,7 +103,8 @@
 #define INIT_TIME               4100    // How much total time will we use to try to connect to the device
 #define FIRST_BLITZ_TIME        2000    // Time in milliseconds between the first init string and how long we think the device takes to reboot (and get past bootloader)
 #define SECOND_BLITZ_TIME       500     // Time in milliseconds between spamming the device repeatedly with our INIT_STRING
-#define WATCHDOG_TIME           1000    // Time in milliseconds we will wait for a response from the device generally.
+#define WATCHDOG_TIME_DEFAULT   1000    // Time in milliseconds we will wait for a response from the device generally.
+#define WATCHDOG_TIME_SABERTOOTH_SETUP 3000 // When we command a Sabertooth baud rate setup routine of the TCB, the response will take over 2 seconds, so we must increase the default watchdog timeout time
 #define STAY_AWAKE_BEEP_TIME    4000    // How often should we send a stay-awake signal to the device. Should be less than the device's timeout time.
                                         // In fact, best to set it to less than 1/2 the device's timeout time, so you always have at least 2 chances to get through
                                         // before the device auto-disconnects. The TCB is set to timeout after 8.5 seconds of no signal.
@@ -114,6 +115,7 @@
 // Commands sent by PC
 #define INIT_STRING				"OPZ\n"	// The initialization string to tell the device to start listening
 
+#define PCCMD_SABERTOOTH_BAUD   118     // PC wants us to set the baud rate on a Sabertooth V2 device connected to Serial 2
 #define PCCMD_CONFPOLOLU_DRIVE  119     // PC wants us to configure a Pololu device connected to Serial 2 for use with drive motors
 #define PCCMD_CONFPOLOLU_TURRET 120     // PC wants us to configure a Pololu device connected to Serial 2 for use with turret motors
 #define PCCMD_NUM_CHANNELS      121     // Tell the device to send us the number of utilized channels
@@ -211,6 +213,8 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void requestUtilizedRadioChannels(void);
         void startStreamRadio(void);
         void stopStreamRadio(void);
+        void SetSabertoothBaudRate(uint8_t SabertoothBaud);
+        void defaultWatchdogTimeout(void);                      // The Sabertooth setup takes a long time so we temporarily increase the watchdog timeout. This public function allows us to set it back when we're done.
         void ConfigurePololu_Drive(void);
         void ConfigurePololu_Turret(void);
 
@@ -270,6 +274,7 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
           DataSentence  SentenceIN;
           DataSentence  SentenceOUT;
           uint8_t       NumErrors;        // How many communication errors have we accumulated since connecting
+          int           WatchdogTimeout;
 
         // Connection
         // ---------------------------------------------------------------------------------------------------->>
@@ -316,6 +321,7 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
            void startRadioStreamingTimer(void);
            void reStartRadioStreamingTimer(void);
            void stopRadioStreamingTimer(void);
+           void changeWatchdogTimeout(int);
 
      // -------------------------------------------------------------------------------------------------------->>
      // PRIVATE SLOTS

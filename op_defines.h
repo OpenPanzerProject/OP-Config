@@ -113,6 +113,19 @@ SERVO_RECOIL = 14
 };
 
 
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
+// SABERTOOTH SETTINGS
+// From OP_Sabertooth.h
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
+#define SABERTOOTH_BAUD_2400        1       // Sabertooth baud value byte for 2400
+#define SABERTOOTH_BAUD_9600        2       // Sabertooth baud value byte for 9600
+#define SABERTOOTH_BAUD_19200       3       // Sabertooth baud value byte for 19200
+#define SABERTOOTH_BAUD_38400       4       // Sabertooth baud value byte for 38400
+#define SABERTOOTH_BAUD_115200      5       // Sabertooth baud value byte for 115200
+
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
 // WEIGHT CLASS, DAMAGE SETTINGS
 // From OP_Tank.h

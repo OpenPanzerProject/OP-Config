@@ -11,10 +11,13 @@ void BaudRateComboBox::setCategory(BaudCategory bc)
     switch (bc)
     {
         case bcMotorSerial:
+            insertItem(count(), "9600", 9600);
             insertItem(count(), "19200", 19200);
             insertItem(count(), "38400", 38400);
-            // Technically the Pololu controllers can run at 115200, and *some* of the Sabertooth can (not the 2x5 though).
-            // However we will leave it out.
+            insertItem(count(), "115200", 115200);
+            // The Pololu controllers can run at 115200, and *some* of the Sabertooth can (not the 2x5 though).
+            // We give the option but will write in the help files that unless the user knows what they're doing to leave it
+            // at the default of 38400
             break;
 
 

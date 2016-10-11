@@ -15,6 +15,7 @@
 			<li><a href="#lvc">Low Voltage Cutoff</a></li>
 			<li><a href="#baud">Baud Rates</a></li>
 			<li><a href="#debug">Debugging</a></li>	
+            <li><a href="sabertooth">Sabertooth Baud Rate Tool</li>
             <li><a href="#pololu">Pololu Qik Configuration</a></li>
 		</ul>
 	</div>
@@ -61,8 +62,9 @@
 	<h4 class="entry">Serial 2 - Serial Motor Controller</h4>
 	<p>
 	The Serial 2 port is dedicated to communication with serial motor controllers. It has its own 2-pin JST-PH header on the TCB board. It can only transmit serial data, it can
-	not read serial input. Only two baud rates can be selected, 19200 and 38400. The default is 38400 and unless you have a specific reason to change it you should leave it at the 
-	default. This rate is known to work well with the Dimension Engineering and Pololu dual motor controllers.
+	not read serial input. The default baud rate is 38400 and unless you have a specific reason to change it you should leave it at 38400. Slower rates typically perform worst. The higher rate of 
+    115200 is not compatible with all controllers. The Pololu Qiks will work at 115200 however only the "V2" Sabertooth controllers can (this does not include their popular 2x5 which maxes out at 38400). 
+    Almost all users will be best served by leaving the rate at 38400. 
 	</p>
 	
 	<h4 class="entry">Serial 3</h4>
@@ -92,16 +94,28 @@
 	
 
 
-	<h2 id="pololu">Pololu Qik Configuration</h2>
+	<h2 id="sabertooth">Sabertooth Baud Rate Tool</h2>
 	<p>
-	If you are using a Pololu Qik dual-motor serial controller (either the 2s12v10 or the 2s9v1), you may need to configure it for use with the TCB.
+	Not all Dimension Engineering controllers operate the same way. Some can automatically detect the baud rate of the master device (in this case the TCB). This includes the 
+    popular 2x5 controller which is probably the best suited for 1/16 RC tanks. If you have a 2x5 controller you do not need to do anything with regards to the baud rate and you can skip this section.
+    </p>
+    
+    <p>Most of the other Sabertooth models such as the 2x12, 2x25, and 2x60 must have the baud rate set through special serial commands. This requires a utility such as the one provided here. Once the baud rate has been 
+    set appropriately the Sabertooth will remember it, so the utility only needs to be run once. (Note: the Sabertooth 2x32 is a special case and its baud rate must be set with the DEScribe software provided
+    by Dimension Engineering). 
     </p>
     
     <p>
-    Unlike the Sabertooth serial motor controllers which can be configured by dip-switches on the actual device, the Pololu Qik controllers must be configured by 
-    sending special commands to them over serial. The default settings used by Pololu will work fine with the TCB so long as the Qik is used to control the main drive motors. 
-    But if you want to use a Pololu Qik controller to drive the turret motors, or if you have a Pololu Qik controller that had its default settings changed, you will need 
-    to re-configure it.
+    If you own one of the Sabertooth controllers that needs this setup, connect it to the TCB and then connect your TCB to your computer via USB, and finally open a connection to the TCB within OP Config. 
+    Select the baud rate you want for the Serial 2 port in the Baud Rates section. Most users should set this to 38400. Now click the "Set" button and the TCB will configure the Sabertooth to use that rate. 
+    </p>
+    
+
+	<h2 id="pololu">Pololu Qik Configuration</h2>
+	<p>
+    If you are using a Pololu Qik dual-motor serial controller (either the 2s12v10 or the 2s9v1), a one-time configuration routine may need to be run to configure it for use with the TCB. 
+    The default settings used by Pololu from the factory should work fine with the TCB so long as the Qik is used to control the main drive motors. But if you want to use a Pololu Qik 
+    controller to drive the turret motors, or if you have a Pololu Qik controller that had its default settings changed, you will need to re-configure it.
     </p>
     
     <p>

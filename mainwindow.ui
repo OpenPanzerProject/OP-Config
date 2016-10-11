@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>7</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -8251,21 +8251,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                     <string>(&lt;i&gt;momentum&lt;/i&gt;)</string>
                    </property>
                   </widget>
-                  <zorder>hpbAccelDecel</zorder>
-                  <zorder>lblAccelLevel_2</zorder>
-                  <zorder>label_152</zorder>
-                  <zorder>label_153</zorder>
-                  <zorder>cboAccelLevel_2</zorder>
-                  <zorder>lblAccelPreset_2</zorder>
-                  <zorder>lblDecelLevel_2</zorder>
-                  <zorder>chkDecelEnable_2</zorder>
-                  <zorder>cboDecelLevel_2</zorder>
-                  <zorder>chkAccelEnable_2</zorder>
-                  <zorder>lblDecelPreset_2</zorder>
-                  <zorder>cboAccelPreset_2</zorder>
-                  <zorder>cboDecelPreset_2</zorder>
-                  <zorder>label_154</zorder>
-                  <zorder>label_155</zorder>
                  </widget>
                 </widget>
                 <widget class="QFrame" name="frame_14">
@@ -11519,9 +11504,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="geometry">
                  <rect>
                   <x>360</x>
-                  <y>0</y>
+                  <y>120</y>
                   <width>341</width>
-                  <height>111</height>
+                  <height>121</height>
                  </rect>
                 </property>
                 <property name="minimumSize">
@@ -11605,7 +11590,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>40</y>
+                   <y>50</y>
                    <width>211</width>
                    <height>21</height>
                   </rect>
@@ -11623,7 +11608,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>70</y>
+                   <y>80</y>
                    <width>221</width>
                    <height>21</height>
                   </rect>
@@ -11640,8 +11625,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <widget class="QPushButton" name="cmdConfigPololuDrive">
                  <property name="geometry">
                   <rect>
-                   <x>240</x>
-                   <y>40</y>
+                   <x>250</x>
+                   <y>50</y>
                    <width>75</width>
                    <height>23</height>
                   </rect>
@@ -11653,14 +11638,135 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <widget class="QPushButton" name="cmdConfigPololuTurret">
                  <property name="geometry">
                   <rect>
-                   <x>240</x>
-                   <y>70</y>
+                   <x>250</x>
+                   <y>80</y>
                    <width>75</width>
                    <height>23</height>
                   </rect>
                  </property>
                  <property name="text">
                   <string>Configure</string>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="FrameContent" name="frmSabertooth">
+                <property name="geometry">
+                 <rect>
+                  <x>360</x>
+                  <y>0</y>
+                  <width>341</width>
+                  <height>111</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_39">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>341</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_156">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>291</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Sabertooth Baud Rate Tool</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbSabertooth">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSetSabertoothBaud">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>50</y>
+                   <width>211</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Set Sabertooth Baud Rate to: </string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdSetSabertoothBaud">
+                 <property name="geometry">
+                  <rect>
+                   <x>250</x>
+                   <y>50</y>
+                   <width>75</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Set</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </widget>
@@ -12123,7 +12229,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <zorder>stackedWidgetMain</zorder>
              </widget>
             </item>
            </layout>

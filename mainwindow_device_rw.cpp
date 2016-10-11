@@ -65,7 +65,8 @@ void MainWindow::ShowConnectionStatus(boolean connected)
         ui->cmdWriteDevice->setEnabled(true);   // Write device button enabled
         ui->cmdRadioStream->setEnabled(true);   // Radio streaming button is enabled
 
-        // Enable Pololu configuration buttons
+        // Enable serial motor controller configuration buttons on Misc tab
+        ui->cmdSetSabertoothBaud->setEnabled(true);
         ui->cmdConfigPololuDrive->setEnabled(true);
         ui->cmdConfigPololuTurret->setEnabled(true);
 
@@ -111,8 +112,11 @@ void MainWindow::ShowConnectionStatus(boolean connected)
         ui->cmdFlashHex->setEnabled(true);
         ui->cmdSnoop->setEnabled(true);
 
-        // Disable Pololu configuration buttons
-        ui->cmdConfigPololuDrive->setEnabled(false);
+        // Disable serial motor controller configuration buttons on Misc tab
+        ui->cmdSetSabertoothBaud->setEnabled(false);
+        ui->cmdSetSabertoothBaud->setChecked(false);    // Also make sure the Sabertooth button goes back to default
+        ui->cmdSetSabertoothBaud->setText("Set");
+        ui->cmdConfigPololuDrive->setEnabled(false);    // Pololu buttons
         ui->cmdConfigPololuTurret->setEnabled(false);
 
         // Reset radio streaming buttons in case we disconnected in the middle of a stream
@@ -423,12 +427,22 @@ void MainWindow::processNextSentence(void)
     }
 
     // Another case where we want to take action on NEXT_SENTENCE is when we asked the TCB to configure a
-    // Pololu device. This isn't very sophisticated for now - the TCB doesn't return success or failure,
+    // Sabertooth or Pololu device. This isn't very sophisticated for now - the TCB doesn't return success or failure,
     // because presently we aren't receiving serial commands from the motor controllers so it won't even know
-    // if it succeeded or failed. Basically all this is telling us is that we sent the commands to the Pololu
-    // and we hope they worked and now we're done, so notify the user that the process is over.
+    // if it succeeded or failed. Basically all this is telling us is that we sent the commands to the Sabertooth/Pololu
+    // and we hope they worked and now the TCB is done, so notify the user that the process is over.
     if (configurePololuDrive)  { configurePololuDrive  = false; SetStatusLabel(QString("Pololu Configured for Drive"), slNeutral); }
     if (configurePololuTurret) { configurePololuTurret = false; SetStatusLabel(QString("Pololu Configured for Turret"), slNeutral); }
+    if (setSabertoothBaudRate)
+    {
+        setSabertoothBaudRate = false;
+        ui->cmdSetSabertoothBaud->setChecked(false);
+        ui->cmdSetSabertoothBaud->setText(QString("Set"));
+        SetStatusLabel(QString("Sabertooth baud rate set to %1").arg(ui->cboMotorSerialBaud->currentData().toUInt()), slNeutral);
+        // We temporarily increased the watchdog timeout time to give the TCB time to perform the lengthy Sabertooth setup. Now it's over,
+        // we return the watchdog timeout to default
+        comm->defaultWatchdogTimeout();
+    }
 }
 
 //
@@ -450,7 +464,8 @@ void MainWindow::DisableDeviceActionsDuringReadWrite()
     ui->cmdSaveCenters->setEnabled(false);
     ui->cmdSaveMinMax->setEnabled(false);
 
-    // Disable Pololu configuration buttons during read/write
+    // Disable serial motor controller configuration buttons on Misc tab during read/write
+    ui->cmdSetSabertoothBaud->setEnabled(false);
     ui->cmdConfigPololuDrive->setEnabled(false);
     ui->cmdConfigPololuTurret->setEnabled(false);
 }
@@ -467,7 +482,8 @@ void MainWindow::EnableDeviceActionsAfterReadWrite()
     // And this
     ui->actionResetAllVals->setEnabled(true);
 
-    // Re-enable Pololu configuration buttons after read/write (we are still connected at this point)
+    // Re-enable serial motor controller configuration buttons on Misc tab after read/write (we are still connected at this point)
+    ui->cmdSetSabertoothBaud->setEnabled(true);
     ui->cmdConfigPololuDrive->setEnabled(true);
     ui->cmdConfigPololuTurret->setEnabled(true);
 

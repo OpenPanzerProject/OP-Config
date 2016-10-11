@@ -62,9 +62,9 @@
 	<h4 class="entry">Serial 2 - Serial Motor Controller</h4>
 	<p>
 	The Serial 2 port is dedicated to communication with serial motor controllers. It has its own 2-pin JST-PH header on the TCB board. It can only transmit serial data, it can
-	not read serial input. The default baud rate is 38400 and unless you have a specific reason to change it you should leave it at 38400. Slower rates typically perform worst. The higher rate of 
-    115200 is not compatible with all controllers. The Pololu Qiks will work at 115200 however only the "V2" Sabertooth controllers can (this does not include their popular 2x5 which maxes out at 38400). 
-    Almost all users will be best served by leaving the rate at 38400. 
+	not read serial input. The default baud rate is 38400 and unless you have a specific reason to change it you should leave it at 38400. Not all rates are compatible with all 
+    devices, but 38400 is known to work well with all. In general slower rates typically perform worst, but some controllers (such as the popular Sabertooth 2x5) are not compatible with 
+    the highest rate of 115200. Again, almost all users will be best served by leaving the rate at 38400. 
 	</p>
 	
 	<h4 class="entry">Serial 3</h4>

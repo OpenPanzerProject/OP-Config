@@ -8,9 +8,9 @@ OpenPanzerComm::OpenPanzerComm()
         // setSettingsRestoredOnClose will be deprecated in QT 6 and beyond. If setSettingsRestoredOnClose is true, it means QSerialPort
         // will restore the previous settings on close, which is the default. Some have found that if prior to opening the port that
         // DTR was low, QSerialPort will set DTR back to low on disconnect. In our case that is not really a terrible problem (it resets
-        // the device, which we *may* want to do anyway (depends). The bigger issue is resetting on connect, but we have sort of found a
+        // the device, which we *may* want to do anyway (depends)). The bigger issue is resetting on connect, but we have sort of found a
         // way to work around that. Sadly, regardless of what we put this setting to or any other, I can not get QSerialPort to behave
-        // consistently with regards to the state DTR on serial port open. Not to mention the crazy things Windows does with it when the
+        // consistently with regards to the state of DTR on serial port open. Not to mention the crazy things Windows does with it when the
         // port is closed as part of its "discovery" (basically toggle DTR every half second, keeping the TCB in a continual state of reset).
         serial->setSettingsRestoredOnClose(false);
 
@@ -95,16 +95,15 @@ void OpenPanzerComm::openSerial_forSnoop(void)
     setSerialSettings();    // Make sure these are updated
 
     // Close before opening, this actually shouldn't happen though.
-    // But if it does, we also throw in a "set DTR pin High" (false=high) just for good measure. (High means don't reset the device.)
-    if (serial->isOpen()) { serial->setDataTerminalReady(false); serial->close(); }
+    // But if it does, we also throw in a "set DTR pin High" just for good measure. (High means don't reset the device.)
+    if (serial->isOpen()) { serial->setDataTerminalReady(true); serial->close(); }
 
     if (serial->open(QIODevice::ReadWrite)) // This statement can take a while to complete
     {
 
         // Note, this can only be set after the serial port is open.
-        serial->setRequestToSend(true);      // Not sure this matters, but emotionally it makes a slight difference.
-        serial->setDataTerminalReady(false); // False here means "set DTR pin High." If possible, we want to avoid resetting the device,
-                                             // which occurs when you set DTR to low (read more in openSerial_forComms below)
+//        serial->setRequestToSend(true);      // Don't need to worry about RTS
+        serial->setDataTerminalReady(true); // True here means "set DTR pin High", ie don't reset device
 
         // If we are just snooping, all we need to do is open the serial port: which we've already done if we're at this statement.
         Snooping = true;
@@ -122,25 +121,25 @@ void OpenPanzerComm::openSerial_forComms(void)
     setSerialSettings();    // Make sure these are updated
 
     // Close before opening, this actually shouldn't happen though.
-    // But if it does, we also throw in a "set DTR pin High" (false=high) just for good measure. (High means don't reset the device.)
-    if (serial->isOpen()) { serial->setDataTerminalReady(false); serial->close(); }
+    // But if it does, we also throw in a "set DTR pin High" just for good measure. (High means don't reset the device.)
+    if (serial->isOpen()) { serial->setDataTerminalReady(true); serial->close(); }
 
     if (serial->open(QIODevice::ReadWrite)) // This statement can take a while to complete
     {   // When checking isDataTerminalReady(), a return value of true means DTR is high, return false means DTR is low.
-        // However, when using the setDataTerminalReady(bool) function, you set it to to high by passing false, and low by passing true.
-        // In other words, you use the opposite commands when setting. Although it does make sense given the terminology of the
-        // functions, it can be confusing. And yes, I've tested all this empirically with a voltmeter. setDataTerminalReady(false)
-        // WILL put DTR to low and it WILL cause the TCB to reset. This is fine if that's what we want to do, but we don't always.
+        // When using the setDataTerminalReady(bool) function, you set it to to high by passing true, and low by passing false.
+        // I've tested this empirically with a voltmeter. setDataTerminalReady(false) WILL put DTR to low and it WILL cause the
+        // TCB to reset. This is fine if that's what we want to do, but we don't always.
 
         // On the Arduino boards as well as the TCB, DTR is not used for flow control, instead it is capacitively coupled with the RESET pin
         // on the ATmega chip. Setting DTR low causes the RESET pin to go low, which causes a hardware reset.
-        // This can be useful, but if all we want is to communicate, we don't want the host (pc) to set DTR low (mean data terminal is ready) -
-        // because that will restart the board and we will never get to communicate. So we explicitly set data terminal NOT ready,
-        // which has the effect of putting DTR high.
+        // This can be useful in some situations, but in others we'd rather avoid a reset if we can. In practice, a reset seems unavoidable
+        // but the bigger issue is that for some reason DTR can be _held_ low during communication attempts, which will keep the chip
+        // in reset the entire time, making communication impossible. This seems to happen on occasion especially with bluetooth
+        // communication.
 
         // Note, this can only be set after the serial port is open.
-        serial->setRequestToSend(true);      // Not sure this matters, but emotionally it makes a slight difference.
-        serial->setDataTerminalReady(false); // False here means "set DTR pin High"
+//        serial->setRequestToSend(true);      // Don't need to worry about RTS
+        serial->setDataTerminalReady(true); // True here means "set DTR pin High", ie don't reset device
 
         // But - in testing, this doesn't seem to work consistently. QSerialPort seems to toggle DTR if it feels like it, probably based on
         // its prior state or who knows. So we try to keep it high, but we have to be prepared for the fact that connecting may
@@ -237,7 +236,7 @@ void OpenPanzerComm::closeSerial()
     // Close the port
     if (serial->isOpen())
     {   // Make sure DTR is high at the end, in case it makes any difference next time
-        serial->setDataTerminalReady(false); // False here means "set DTR pin High"
+        serial->setDataTerminalReady(true); // True here means "set DTR pin High"
         serial->close();
     }
     // If we disconnect while the radio is streaming, we want to emit the radio streaming
@@ -296,8 +295,8 @@ void OpenPanzerComm::resetDevice()
     {   if (DEBUG_MSGS) qDebug() << "Attempt to reset device.";
         // Yes, there is no pause between setting DTR low and putting it back to high.
         // Tested with a meter, it still gets set low momentarily, and it still resets the device.
-        serial->setDataTerminalReady(true);  // True here means "set DTR pin Low." This will cause device to reset.
-        serial->setDataTerminalReady(false); // False here means "set DTR pin High"
+        serial->setDataTerminalReady(false);  // False here means "set DTR pin Low." This will cause device to reset.
+        serial->setDataTerminalReady(true); // True here means "set DTR pin High"
     }
 }
 

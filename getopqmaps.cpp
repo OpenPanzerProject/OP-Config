@@ -131,6 +131,10 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_DRIVEPROFILE_1, "Drive Profile - Set to 1");
     _SF_ALL_QMAP.insert(SF_DRIVEPROFILE_2, "Drive Profile - Set to 2");
     _SF_ALL_QMAP.insert(SF_DRIVEPROFILE_TOGGLE, "Drive Profile - Toggle");
+    _SF_ALL_QMAP.insert(SF_SMOKER_ENABLE, "Smoker - Enable");
+    _SF_ALL_QMAP.insert(SF_SMOKER_DISABLE, "Smoker - Disable");
+    _SF_ALL_QMAP.insert(SF_SMOKER_TOGGLE, "Smoker - Toggle");
+
     return _SF_ALL_QMAP;
 }
 
@@ -202,6 +206,9 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_DRIVEPROFILE_1, "Drive Profile - Set to 1");
     _SF_DIGITAL_QMAP.insert(SF_DRIVEPROFILE_2, "Drive Profile - Set to 2");
     _SF_DIGITAL_QMAP.insert(SF_DRIVEPROFILE_TOGGLE, "Drive Profile - Toggle");
+    _SF_DIGITAL_QMAP.insert(SF_SMOKER_ENABLE, "Smoker - Enable");
+    _SF_DIGITAL_QMAP.insert(SF_SMOKER_DISABLE, "Smoker - Disable");
+    _SF_DIGITAL_QMAP.insert(SF_SMOKER_TOGGLE, "Smoker - Toggle");
     return _SF_DIGITAL_QMAP;
 }
 

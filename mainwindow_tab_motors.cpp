@@ -136,6 +136,11 @@ void MainWindow::ShowHideSmokerSettings()
         ui->cboSelectFunction->RemoveSF(SF_SMOKER);
         // Make sure we didn't already have a function trigger defined for it too
         if (FT_TableModel->removeFunctionFromList(SF_SMOKER)) { RemovedFunctionTriggersMsgBox(); }
+        // Auto control does mean however that we want the three enable/disable/toggle functions to be available in the function list
+        // The add function will only add it if it isn't there already
+        ui->cboSelectFunction->AddSF(SF_SMOKER_ENABLE);
+        ui->cboSelectFunction->AddSF(SF_SMOKER_DISABLE);
+        ui->cboSelectFunction->AddSF(SF_SMOKER_TOGGLE);
     }
     else
     {   // Manual control - hide the speed settings
@@ -157,6 +162,16 @@ void MainWindow::ShowHideSmokerSettings()
         // Manual control means we need to add the smoker control function to the function list
         // The add function will only add it if it isn't there already
         ui->cboSelectFunction->AddSF(SF_SMOKER);
+        // But it also means we want to remove the three enable/disable/toggle functions because those only
+        // apply to auto control
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER_ENABLE);
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER_DISABLE);
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER_TOGGLE);
+        // Make sure we didn't already have a function trigger defined for it too
+        if (FT_TableModel->removeFunctionFromList(SF_SMOKER_ENABLE) ||
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_DISABLE) ||
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_TOGGLE))
+            RemovedFunctionTriggersMsgBox();
     }
 }
 void MainWindow::ValidateMotorSelections()

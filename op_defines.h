@@ -246,7 +246,10 @@ enum _special_function : byte {
     SF_NT_TOGGLE        = 78,       // 78
     SF_DRIVEPROFILE_1   = 79,       // 79
     SF_DRIVEPROFILE_2   = 80,       // 80
-    SF_DRIVEPROFILE_TOGGLE = 81     // 81
+    SF_DRIVEPROFILE_TOGGLE = 81,    // 81
+    SF_SMOKER_ENABLE    = 82,       // 82
+    SF_SMOKER_DISABLE   = 83,       // 83
+    SF_SMOKER_TOGGLE    = 84        // 84
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

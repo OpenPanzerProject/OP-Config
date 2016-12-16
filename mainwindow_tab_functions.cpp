@@ -56,14 +56,29 @@ void MainWindow::SetupControls_FunctionsTab(void)
 }
 void MainWindow::UpdateTurretStickDelayOptions(boolean isTSPresent)
 {
-    if (isTSPresent)
+    if (isTSPresent)    // Meaning, is the turret stick present in the funciton list as a trigger
     {
-        ui->spinIgnoreTurretDelay->setEnabled(true);
-        ui->lblIgnoreTurretStickNote->hide();
+        if (ui->cboTurretElevationMotor->getCurrentDriveType() == DRIVE_DETACHED &&
+            ui->cboTurretRotationMotor->getCurrentDriveType()  == DRIVE_DETACHED)
+        {   // In this case, we do have functions assigned to the turret stick, but the turret stick is detached from any motor control.
+            // Therefore we can disable the turret stick delay
+            ui->spinIgnoreTurretDelay->setEnabled(false);
+            ui->lblIgnoreTurretStickNote->setText("(Ignored because turret stick detached<br />from turret motors)");
+            ui->lblIgnoreTurretStickNote->show();
+        }
+        else
+        {
+            // In this case we do have a turret stick trigger to a function, and the turret stick is also being used to control
+            // some motor, so we enable the option to add a delay
+            ui->spinIgnoreTurretDelay->setEnabled(true);
+            ui->lblIgnoreTurretStickNote->hide();
+        }
     }
     else
     {
+        // In this case we have no functions assigned to the turret stick, so no need to enable the delay
         ui->spinIgnoreTurretDelay->setEnabled(false);
+        ui->lblIgnoreTurretStickNote->setText("(Ignored because no turret stick<br />triggers are defined)");
         ui->lblIgnoreTurretStickNote->show();
     }
 }

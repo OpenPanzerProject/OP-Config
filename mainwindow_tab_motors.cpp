@@ -390,4 +390,9 @@ void MainWindow::ValidateMotorSelections()
     {
         ui->frmESCWarning->hide();
     }
+
+    // Finally, we may need to enable/disable the turret stick delay options, depending on whether the turret stick
+    // is set to control any motor or whether it has been detached.
+    UpdateTurretStickDelayOptions(FT_TableModel->isTurretStickPresent());
+
 }

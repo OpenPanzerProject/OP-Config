@@ -33,6 +33,12 @@ void DriveTypeComboBox::setCategory(MotorCategory mc)
     insertItem(count(), "Sabertooth Serial ESC", SABERTOOTH);
     insertItem(count(), "Pololu Serial ESC", POLOLU);
 
+    // So that it shows up last -
+    if (mc == mcTurretRotation || mc == mcTurretElevation)
+    {
+        insertItem(count(), "Detached", DRIVE_DETACHED);
+    }
+
     // Create our own custom signal
     connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(emitCurrentDriveTypeChanged()));
 }

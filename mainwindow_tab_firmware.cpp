@@ -96,12 +96,30 @@ void MainWindow::getWebHex()
 void MainWindow::checkHexVersion()
 {   // If we make it to here, we successfully retrieved the version.txt file from the web.
     // The contents are now held in a byte array member of the VersionDownloader
-    QString strVer = QString(VersionDownloader->downloadedData());
+    QString strIncoming = QString(VersionDownloader->downloadedData());
+
+    // The file should be two lines long
+    QStringList strList = strIncoming.split(QRegExp("\n|\r\n|\r"), QString::SkipEmptyParts);
+    QString strVer;
+    QString strDate;
+
+    // The version should be on the first line, and the release date on the second line
+    if (strList.size() > 0) strVer = strList.at(0);
+    if (strList.size() > 1) strDate = strList.at(1);
+
     DownloadedVersion= DecodeVersion(strVer);
     if (!isFirmwareVersionEmpty(DownloadedVersion))
     {
         QString version = "Version: ";
         version.append(strVer);
+
+        // Check if date is present as well
+        if (strDate != "")
+        {
+            version.append("       Date: " + strDate);
+        }
+
+        // Now show the version/date
         ui->lblHexVersion->setText(version);
         ui->lblHexVersion->show();
     }

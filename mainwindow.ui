@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>3</number>
+               <number>8</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -11929,7 +11929,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <rect>
                    <x>10</x>
                    <y>100</y>
-                   <width>271</width>
+                   <width>351</width>
                    <height>21</height>
                   </rect>
                  </property>

@@ -402,10 +402,16 @@ struct external_io{
 // SOUND
 // From OP_Sound.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-enum sound_devices : byte {
-    SD_BENEDINI_TBSMINI = 0,
-    SD_BEIER_USMRC2
-};
+//enum sound_devices : byte {
+//    SD_BENEDINI_TBSMINI = 0,
+//    SD_BEIER_USMRC2
+//};
+typedef char SOUND_DEVICE;
+#define SD_BENEDINI_TBSMINI     0
+#define SD_OP_TEENSY            1
+#define SD_BEIER_USMRC2         2
+#define SD_FIRST_SD             SD_BENEDINI_TBSMINI
+#define SD_LAST_SD              SD_BEIER_USMRC2
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>

@@ -11,10 +11,10 @@ class SoundDevicesComboBox : public QComboBox
 public:
     SoundDevicesComboBox(QWidget *parent = 0);
 
-    sound_devices getCurrentSoundDevice(void);
+    SOUND_DEVICE getCurrentSoundDevice(void);
 
 public slots:
-    void setCurrentSoundDevice(const sound_devices& sd);
+    void setCurrentSoundDevice(const SOUND_DEVICE& sd);
     void setCurrentSoundDevice(int sd);
 
 signals:

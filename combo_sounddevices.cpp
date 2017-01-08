@@ -3,8 +3,9 @@
 SoundDevicesComboBox::SoundDevicesComboBox(QWidget *parent) : QComboBox(parent)
 {
     insertItem(count(), "Benedini - TBS Mini", SD_BENEDINI_TBSMINI);
+    insertItem(count(), "Open Panzer Teensy Sound Card", SD_OP_TEENSY);
     // FOR FUTURE USE
-    //insertItem(count(), "Beier - USM-RC-2", SD_BEIER_USMRC2);
+    //insertItem(count(), "Beier USM-RC-2", SD_BEIER_USMRC2);
     // etc...
 
     // If either the text or index has changed, emit our custom signal
@@ -20,9 +21,9 @@ void SoundDevicesComboBox::CurrentDeviceChangedSlot()
 
 
 // This returns the current actual sound_device
-sound_devices SoundDevicesComboBox::getCurrentSoundDevice(void)
+SOUND_DEVICE SoundDevicesComboBox::getCurrentSoundDevice(void)
 {
-    return static_cast<sound_devices>(this->currentData().toInt());
+    return static_cast<SOUND_DEVICE>(this->currentData().toInt());
 }
 
 // We can programmatically set the combo box to a value by passing it directly the enum code
@@ -32,7 +33,7 @@ void SoundDevicesComboBox::setCurrentSoundDevice(int sd)
 }
 
 // We can programmatically set the combo box to a value by passing it a sound_devices enum member name
-void SoundDevicesComboBox::setCurrentSoundDevice(const sound_devices& sd)
+void SoundDevicesComboBox::setCurrentSoundDevice(const SOUND_DEVICE& sd)
 {
     this->setCurrentIndex(this->findData(sd));
 

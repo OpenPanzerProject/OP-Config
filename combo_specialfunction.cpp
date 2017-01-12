@@ -160,7 +160,6 @@ void SpecialFunctionComboBox::removeExternalOutputsB(void)
     }
 }
 
-
 void SpecialFunctionComboBox::addRCPassthrough(int rcOutput)
 {
     boolean rcOutputThere1 = false;

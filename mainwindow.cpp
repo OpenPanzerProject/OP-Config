@@ -128,7 +128,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(comm, SIGNAL(ConnectionChanged(boolean)), this, SLOT (ShowConnectionStatus(boolean)));
     connect(comm, SIGNAL(HereIsFirmwareVersion(QString)), this, SLOT(SerialStatus_displayFirmware(QString)));
     connect(comm, SIGNAL(HereIsValue(uint16_t, QByteArray, boolean)), this, SLOT(updateVarArray_fromSerial(uint16_t, QByteArray, boolean)));
-    connect(comm, SIGNAL(NextSentence()), this, SLOT(processNextSentence()));
+    connect(comm, SIGNAL(NextSentence(boolean)), this, SLOT(processNextSentence(boolean)));
     connect(comm, SIGNAL(CommError(QString, QSerialPort::SerialPortError)), this, SLOT(ProcessCommError(QString, QSerialPort::SerialPortError)));
     connect(comm, SIGNAL(HereAreNumChannels(uint8_t)), this, SLOT(SaveNumUtilizedChannels(uint8_t)));
     connect(comm, SIGNAL(HereArePulseWidths(int16_t*)), this, SLOT(ReadPulseWidths(int16_t*)));

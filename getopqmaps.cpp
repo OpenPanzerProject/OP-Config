@@ -83,12 +83,19 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_AUXOUT_TOGGLEBLINK, "Aux Output - Toggle Blink");
     _SF_ALL_QMAP.insert(SF_AUXOUT_REVOLVE, "Aux Output - Revolving Light");
     _SF_ALL_QMAP.insert(SF_AUXOUT_TOGGLEREVOLVE, "Aux Output - Toggle Revolving Light");
+    _SF_ALL_QMAP.insert(SF_SET_VOLUME, "Sound Card - Set Volume");
     _SF_ALL_QMAP.insert(SF_USER_SOUND1_ONCE, "User Sound 1 - Play once");
     _SF_ALL_QMAP.insert(SF_USER_SOUND1_RPT, "User Sound 1 - Repeat");
     _SF_ALL_QMAP.insert(SF_USER_SOUND1_OFF, "User Sound 1 - Stop");
     _SF_ALL_QMAP.insert(SF_USER_SOUND2_ONCE, "User Sound 2 - Play once");
     _SF_ALL_QMAP.insert(SF_USER_SOUND2_RPT, "User Sound 2 - Repeat");
     _SF_ALL_QMAP.insert(SF_USER_SOUND2_OFF, "User Sound 2 - Stop");
+    _SF_ALL_QMAP.insert(SF_USER_SOUND3_ONCE, "User Sound 3 - Play once");
+    _SF_ALL_QMAP.insert(SF_USER_SOUND3_RPT, "User Sound 3 - Repeat");
+    _SF_ALL_QMAP.insert(SF_USER_SOUND3_OFF, "User Sound 3 - Stop");
+    _SF_ALL_QMAP.insert(SF_USER_SOUND4_ONCE, "User Sound 4 - Play once");
+    _SF_ALL_QMAP.insert(SF_USER_SOUND4_RPT, "User Sound 4 - Repeat");
+    _SF_ALL_QMAP.insert(SF_USER_SOUND4_OFF, "User Sound 4 - Stop");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_TOGGLE, "External Output A - Toggle");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_ON, "External Output A - Turn On");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_OFF, "External Output A - Turn Off");
@@ -181,6 +188,12 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_USER_SOUND2_ONCE, "User Sound 2 - Play once");
     _SF_DIGITAL_QMAP.insert(SF_USER_SOUND2_RPT, "User Sound 2 - Repeat");
     _SF_DIGITAL_QMAP.insert(SF_USER_SOUND2_OFF, "User Sound 2 - Stop");
+    _SF_DIGITAL_QMAP.insert(SF_USER_SOUND3_ONCE, "User Sound 3 - Play once");
+    _SF_DIGITAL_QMAP.insert(SF_USER_SOUND3_RPT, "User Sound 3 - Repeat");
+    _SF_DIGITAL_QMAP.insert(SF_USER_SOUND3_OFF, "User Sound 3 - Stop");
+    _SF_DIGITAL_QMAP.insert(SF_USER_SOUND4_ONCE, "User Sound 4 - Play once");
+    _SF_DIGITAL_QMAP.insert(SF_USER_SOUND4_RPT, "User Sound 4 - Repeat");
+    _SF_DIGITAL_QMAP.insert(SF_USER_SOUND4_OFF, "User Sound 4 - Stop");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_TOGGLE, "External Output A - Toggle");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_ON, "Logic Level Output A - Turn On");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_OFF, "Logic Level Output A - Turn Off");
@@ -235,6 +248,7 @@ QMap<_special_function, QString> OP_QMaps::getAnalogSpecialFunctionsQMap()
 //    _SF_ANALOG_QMAP.insert(SF_HILLS_LEVEL, "Hill Physics - Set Sensitivity");
     _SF_ANALOG_QMAP.insert(SF_USER_ANLG_1, "Analog User Function 1");
     _SF_ANALOG_QMAP.insert(SF_USER_ANLG_2, "Analog User Function 2");
+    _SF_ANALOG_QMAP.insert(SF_SET_VOLUME, "Sound Card - Set Volume");
     return _SF_ANALOG_QMAP;
 }
 

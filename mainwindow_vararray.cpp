@@ -255,6 +255,17 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.MinSqueakSpeedPct = VarArray.value(2821).toUInt();                           // 2821 - Min vehicle movement before squeaks can begin
     DeviceData.HeadlightSound_Enabled = VarArray.value(2822).toUInt();                      // 2822 - Headlight sound enabled or not
     DeviceData.TurretSound_Enabled = VarArray.value(2823).toUInt();                         // 2823 - Turret rotation sound enabled or not
+    DeviceData.BarrelSound_Enabled = VarArray.value(2824).toUInt();                         // 2824 - Barrel elevation sound enabled or not
+    DeviceData.Squeak4_MinInterval_mS = VarArray.value(2825).toUInt();                      // 2825 - Minimum length of time between Squeak 4 intervals
+    DeviceData.Squeak4_MaxInterval_mS = VarArray.value(2826).toUInt();                      // 2826 - Maximum length of time between Squeak 4 intervals
+    DeviceData.Squeak5_MinInterval_mS = VarArray.value(2827).toUInt();                      // 2827 - Minimum length of time between Squeak 5 intervals
+    DeviceData.Squeak5_MaxInterval_mS = VarArray.value(2828).toUInt();                      // 2828 - Maximum length of time between Squeak 5 intervals
+    DeviceData.Squeak6_MinInterval_mS = VarArray.value(2829).toUInt();                      // 2829 - Minimum length of time between Squeak 6 intervals
+    DeviceData.Squeak6_MaxInterval_mS = VarArray.value(2830).toUInt();                      // 2830 - Maximum length of time between Squeak 6 intervals
+    DeviceData.Squeak4_Enabled = VarArray.value(2831).toUInt();                             // 2831 - Squeak4 enabled or not
+    DeviceData.Squeak5_Enabled = VarArray.value(2832).toUInt();                             // 2832 - Squeak5 enabled or not
+    DeviceData.Squeak6_Enabled = VarArray.value(2833).toUInt();                             // 2833 - Squeak6 enabled or not
+
 
     // Battle settings - 30xx
     DeviceData.IR_FireProtocol = VarArray.value(3011).toUInt();                             // 3011 - IR protocol to send when firing cannon
@@ -539,6 +550,16 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2821, QByteArray::number(DeviceData.MinSqueakSpeedPct));                        // 2821 - Min vehicle movement before squeaks can begin
     VarArray.insert(2822, QByteArray::number(DeviceData.HeadlightSound_Enabled));                   // 2822 - Headlight sound enabled or not
     VarArray.insert(2823, QByteArray::number(DeviceData.TurretSound_Enabled));                      // 2823 - Turret rotation sound enabled or not
+    VarArray.insert(2824, QByteArray::number(DeviceData.BarrelSound_Enabled));                      // 2824 - Barrel elevation sound enabled or not
+    VarArray.insert(2825, QByteArray::number(DeviceData.Squeak4_MinInterval_mS));                   // 2825 - Minimum length of time between Squeak 4 intervals
+    VarArray.insert(2826, QByteArray::number(DeviceData.Squeak4_MaxInterval_mS));                   // 2826 - Maximum length of time between Squeak 4 intervals
+    VarArray.insert(2827, QByteArray::number(DeviceData.Squeak5_MinInterval_mS));                   // 2827 - Minimum length of time between Squeak 5 intervals
+    VarArray.insert(2828, QByteArray::number(DeviceData.Squeak5_MaxInterval_mS));                   // 2828 - Maximum length of time between Squeak 5 intervals
+    VarArray.insert(2829, QByteArray::number(DeviceData.Squeak6_MinInterval_mS));                   // 2829 - Minimum length of time between Squeak 6 intervals
+    VarArray.insert(2830, QByteArray::number(DeviceData.Squeak6_MaxInterval_mS));                   // 2830 - Maximum length of time between Squeak 6 intervals
+    VarArray.insert(2831, QByteArray::number(DeviceData.Squeak4_Enabled));                          // 2831 - Squeak4 enabled or not
+    VarArray.insert(2832, QByteArray::number(DeviceData.Squeak5_Enabled));                          // 2832 - Squeak5 enabled or not
+    VarArray.insert(2833, QByteArray::number(DeviceData.Squeak6_Enabled));                          // 2833 - Squeak6 enabled or not
 
     // Battle settings - 30xx
     VarArray.insert(3011, QByteArray::number(DeviceData.IR_FireProtocol));                          // 3011 - IR protocol to send when firing cannon

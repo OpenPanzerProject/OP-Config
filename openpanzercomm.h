@@ -248,7 +248,7 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void HereArePulseWidths(int16_t *pulseWidths);  // Return an array of pulse widths
         void RadioNotReady(void);                       // If the radio is not ready/connected, this signal gets sent
         void RepeatSentence(void);                      // Repeat sentence signal
-        void NextSentence(void);                        // Next sentence signal
+        void NextSentence(boolean);                     // Next sentence signal
         void AnyData(void);                             // This doesn't necessarily mean a sentence has arrived, but we use this to restart the watchdog
         void NewData(const QByteArray &data);           // Used for the console functionality, this just returns a QByteArray of data that has come in
         void AnySentence(void);                         // A full sentence has arrived, we can use this to stop the watchdog timer

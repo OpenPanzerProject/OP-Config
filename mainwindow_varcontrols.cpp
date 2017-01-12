@@ -244,15 +244,30 @@ void MainWindow::Variables_to_Controls(void)
     ui->chkEnableSqueak3->setChecked(DeviceData.Squeak3_Enabled);
     ui->spinSqueak3Min->setValue(DeviceData.Squeak3_MinInterval_mS);
     ui->spinSqueak3Max->setValue(DeviceData.Squeak3_MaxInterval_mS);
+    ui->chkEnableSqueak4->setChecked(DeviceData.Squeak4_Enabled);
+    ui->spinSqueak4Min->setValue(DeviceData.Squeak4_MinInterval_mS);
+    ui->spinSqueak4Max->setValue(DeviceData.Squeak4_MaxInterval_mS);
+    ui->chkEnableSqueak5->setChecked(DeviceData.Squeak5_Enabled);
+    ui->spinSqueak5Min->setValue(DeviceData.Squeak5_MinInterval_mS);
+    ui->spinSqueak5Max->setValue(DeviceData.Squeak5_MaxInterval_mS);
+    ui->chkEnableSqueak6->setChecked(DeviceData.Squeak6_Enabled);
+    ui->spinSqueak6Min->setValue(DeviceData.Squeak6_MinInterval_mS);
+    ui->spinSqueak6Max->setValue(DeviceData.Squeak6_MaxInterval_mS);
     ui->spinMinSqueakSpeed->setValue(DeviceData.MinSqueakSpeedPct);
     ShowHideOtherSqueakSettings(false); // It doesn't matter what we pass to this function, it won't use the value anyway
     ShowHideSqueak1Settings(ui->chkEnableSqueak1->isChecked());
     ShowHideSqueak2Settings(ui->chkEnableSqueak2->isChecked());
     ShowHideSqueak3Settings(ui->chkEnableSqueak3->isChecked());
+    ShowHideSqueak4Settings(ui->chkEnableSqueak4->isChecked());
+    ShowHideSqueak5Settings(ui->chkEnableSqueak5->isChecked());
+    ShowHideSqueak6Settings(ui->chkEnableSqueak6->isChecked());
     // Other enables
-    ui->chkEnableTurretSound->setChecked(DeviceData.TurretSound_Enabled);
     ui->chkEnableHeadlightSound->setChecked(DeviceData.HeadlightSound_Enabled);
     ShowHideHeadlightSoundNote(ui->chkEnableHeadlightSound->isChecked());
+    ui->chkEnableTurretSound->setChecked(DeviceData.TurretSound_Enabled);
+    ui->chkEnableBarrelSound->setChecked(DeviceData.BarrelSound_Enabled);
+    // Final step
+    ShowHideSoundCardSettings();
 
     // Misc tab
     // ---------------------------------------------------------------------------------------------------------->>
@@ -460,10 +475,20 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.Squeak3_Enabled = ui->chkEnableSqueak3->isChecked();
     DeviceData.Squeak3_MinInterval_mS = ui->spinSqueak3Min->value();
     DeviceData.Squeak3_MaxInterval_mS = ui->spinSqueak3Max->value();
+    DeviceData.Squeak4_Enabled = ui->chkEnableSqueak4->isChecked();
+    DeviceData.Squeak4_MinInterval_mS = ui->spinSqueak4Min->value();
+    DeviceData.Squeak4_MaxInterval_mS = ui->spinSqueak4Max->value();
+    DeviceData.Squeak5_Enabled = ui->chkEnableSqueak5->isChecked();
+    DeviceData.Squeak5_MinInterval_mS = ui->spinSqueak5Min->value();
+    DeviceData.Squeak5_MaxInterval_mS = ui->spinSqueak5Max->value();
+    DeviceData.Squeak6_Enabled = ui->chkEnableSqueak6->isChecked();
+    DeviceData.Squeak6_MinInterval_mS = ui->spinSqueak6Min->value();
+    DeviceData.Squeak6_MaxInterval_mS = ui->spinSqueak6Max->value();
     DeviceData.MinSqueakSpeedPct = ui->spinMinSqueakSpeed->value();
     // Other enables
-    DeviceData.TurretSound_Enabled = ui->chkEnableTurretSound->isChecked();
     DeviceData.HeadlightSound_Enabled = ui->chkEnableHeadlightSound->isChecked();
+    DeviceData.TurretSound_Enabled = ui->chkEnableTurretSound->isChecked();
+    DeviceData.BarrelSound_Enabled = ui->chkEnableBarrelSound->isChecked();
 
     // Misc tab
     // ---------------------------------------------------------------------------------------------------------->>

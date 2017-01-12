@@ -9,7 +9,7 @@
 //=======================================================================================================================================>>
 // You must make sure this number equals the number of variables defined in the __eeprom_data struct (including the first var FirstVar)
 //
-    #define NUM_STORED_VARS			292
+    #define NUM_STORED_VARS			302
 
 //
 // The definition above, as well as the PROGMEM array below, can be generated from the Excel reference sheet
@@ -304,43 +304,53 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {2816, 363, varUINT16, "3000"},        // Squeak3_MinInterval_mS
     {2817, 365, varUINT16, "8000"},        // Squeak3_MaxInterval_mS
     {2818, 367, varBOOL, "1"},        // Squeak1_Enabled
-    {2819, 368, varBOOL, "1"},        // Squeak1_Enabled
-    {2820, 369, varBOOL, "1"},        // Squeak1_Enabled
+    {2819, 368, varBOOL, "1"},        // Squeak2_Enabled
+    {2820, 369, varBOOL, "1"},        // Squeak3_Enabled
     {2821, 370, varUINT8, "25"},        // MinSqueakSpeed
     {2822, 371, varBOOL, "1"},        // HeadlightSound_Enabled
     {2823, 372, varBOOL, "0"},        // TurretSound_Enabled
-    {3011, 373, varUINT8, "1"},        // IR_FireProtocol
-    {3012, 374, varUINT8, "0"},        // IR_HitProtocol_2
-    {3013, 375, varUINT8, "10"},        // IR_RepairProtocol
-    {3014, 376, varUINT8, "0"},        // IR_MGProtocol
-    {3015, 377, varBOOL, "0"},        // Use_MG_Protocol
-    {3016, 378, varBOOL, "0"},        // Accept_MG_Damage
-    {3017, 379, varUINT8, "0"},        // DamageProfile
-    {3018, 380, varUINT16, "1500"},        // CustomClassSettings.reloadTime
-    {3019, 382, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
-    {3020, 384, varUINT8, "1"},        // CustomClassSettings.maxHits
-    {3021, 385, varUINT8, "10"},        // CustomClassSettings.maxMGHits
-    {3022, 386, varBOOL, "FALSE"},        // SendTankID
-    {3023, 387, varUINT16, "1"},        // TankID
-    {3024, 389, varUINT8, "0"},        // IR_Team
-    {3211, 390, varUINT32, "115200"},        // USBSerialBaud
-    {3212, 394, varUINT32, "115200"},        // AuxSerialBaud
-    {3213, 398, varUINT32, "38400"},        // MotorSerialBaud
-    {3214, 402, varUINT32, "38400"},        // Serial3TxBaud
-    {3215, 406, varBOOL, "0"},        // LVC_Enabled
-    {3216, 407, varUINT16, "6400"},        // LVC_Cutoff_mV
-    {3411, 409, varBOOL, "0"},        // RunningLightsAlwaysOn
-    {3412, 410, varUINT8, "30"},        // RunningLightsDimLevelPct
-    {3413, 411, varBOOL, "0"},        // BrakesAutoOnAtStop
-    {3414, 412, varUINT16, "30"},        // AuxLightFlashTime_mS
-    {3415, 414, varUINT16, "30"},        // AuxLightBlinkOnTime_mS
-    {3416, 416, varUINT16, "30"},        // AuxLightBlinkOffTime_mS
-    {3417, 418, varUINT8, "30"},        // AuxLightPresetDim
-    {3418, 419, varUINT8, "30"},        // MGLightBlink_mS
-    {3419, 420, varBOOL, "1"},        // FlashLightsWhenSignalLost
-    {3420, 421, varBOOL, "1"},        // HiFlashWithCannon
-    {9011, 422, varBOOL, "1"},        // PrintDebug
-    {9999, 423, varUINT32, "43589"}        // InitStamp
+    {2824, 373, varBOOL, "0"},        // BarrelSound_Enabled
+    {2825, 374, varUINT16, "1000"},        // Squeak4_MinInterval_mS
+    {2826, 376, varUINT16, "2000"},        // Squeak4_MaxInterval_mS
+    {2827, 378, varUINT16, "3000"},        // Squeak5_MinInterval_mS
+    {2828, 380, varUINT16, "4000"},        // Squeak5_MaxInterval_mS
+    {2829, 382, varUINT16, "5000"},        // Squeak6_MinInterval_mS
+    {2830, 384, varUINT16, "6000"},        // Squeak6_MaxInterval_mS
+    {2831, 386, varBOOL, "0"},        // Squeak4_Enabled
+    {2832, 387, varBOOL, "0"},        // Squeak5_Enabled
+    {2833, 388, varBOOL, "0"},        // Squeak6_Enabled
+    {3011, 389, varUINT8, "1"},        // IR_FireProtocol
+    {3012, 390, varUINT8, "0"},        // IR_HitProtocol_2
+    {3013, 391, varUINT8, "10"},        // IR_RepairProtocol
+    {3014, 392, varUINT8, "0"},        // IR_MGProtocol
+    {3015, 393, varBOOL, "0"},        // Use_MG_Protocol
+    {3016, 394, varBOOL, "0"},        // Accept_MG_Damage
+    {3017, 395, varUINT8, "0"},        // DamageProfile
+    {3018, 396, varUINT16, "1500"},        // CustomClassSettings.reloadTime
+    {3019, 398, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
+    {3020, 400, varUINT8, "1"},        // CustomClassSettings.maxHits
+    {3021, 401, varUINT8, "10"},        // CustomClassSettings.maxMGHits
+    {3022, 402, varBOOL, "FALSE"},        // SendTankID
+    {3023, 403, varUINT16, "1"},        // TankID
+    {3024, 405, varUINT8, "0"},        // IR_Team
+    {3211, 406, varUINT32, "115200"},        // USBSerialBaud
+    {3212, 410, varUINT32, "115200"},        // AuxSerialBaud
+    {3213, 414, varUINT32, "38400"},        // MotorSerialBaud
+    {3214, 418, varUINT32, "38400"},        // Serial3TxBaud
+    {3215, 422, varBOOL, "0"},        // LVC_Enabled
+    {3216, 423, varUINT16, "6400"},        // LVC_Cutoff_mV
+    {3411, 425, varBOOL, "0"},        // RunningLightsAlwaysOn
+    {3412, 426, varUINT8, "30"},        // RunningLightsDimLevelPct
+    {3413, 427, varBOOL, "0"},        // BrakesAutoOnAtStop
+    {3414, 428, varUINT16, "30"},        // AuxLightFlashTime_mS
+    {3415, 430, varUINT16, "30"},        // AuxLightBlinkOnTime_mS
+    {3416, 432, varUINT16, "30"},        // AuxLightBlinkOffTime_mS
+    {3417, 434, varUINT8, "30"},        // AuxLightPresetDim
+    {3418, 435, varUINT8, "30"},        // MGLightBlink_mS
+    {3419, 436, varBOOL, "1"},        // FlashLightsWhenSignalLost
+    {3420, 437, varBOOL, "1"},        // HiFlashWithCannon
+    {9011, 438, varBOOL, "1"},        // PrintDebug
+    {9999, 439, varUINT32, "43589"}        // InitStamp
 };
 
 

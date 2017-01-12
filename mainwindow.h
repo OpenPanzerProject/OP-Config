@@ -192,7 +192,7 @@ private slots:
       void writeSomeSettingsToDevice(uint16_t startID, uint16_t endID);   // Write some settings to device
       void SerialStatus_displayFirmware(QString version);      // Display device firmware version in status bar
       void updateVarArray_fromSerial(uint16_t ID, QByteArray Value, boolean found);  // Process return message from device after requesting value.
-      void processNextSentence(void);               // When the device responds with a SERID_NEXT_SENTENCE request
+      void processNextSentence(boolean);            // When the device responds with a SERID_NEXT_SENTENCE request
 
     // Slots for reading/writing to XML file
     // ---------------------------------------------------------------------------------------------------->>
@@ -269,10 +269,14 @@ private slots:
       void ShowHideTankIDSettings(bool);
 
       // Sound tab
+      void ShowHideSoundCardSettings();
       void ShowHideHeadlightSoundNote(bool);
       void ShowHideSqueak1Settings(bool);
       void ShowHideSqueak2Settings(bool);
       void ShowHideSqueak3Settings(bool);
+      void ShowHideSqueak4Settings(bool);
+      void ShowHideSqueak5Settings(bool);
+      void ShowHideSqueak6Settings(bool);
       void ShowHideOtherSqueakSettings(bool);
 
       // Misc tab

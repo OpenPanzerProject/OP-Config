@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>8</number>
+               <number>6</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -10414,7 +10414,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <x>10</x>
                   <y>0</y>
                   <width>411</width>
-                  <height>381</height>
+                  <height>601</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -10581,7 +10581,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>332</y>
+                   <y>420</y>
                    <width>131</width>
                    <height>21</height>
                   </rect>
@@ -10599,7 +10599,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>302</y>
+                   <y>390</y>
                    <width>151</width>
                    <height>21</height>
                   </rect>
@@ -10617,7 +10617,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>335</y>
+                   <y>423</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10630,7 +10630,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>305</y>
+                   <y>393</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10795,7 +10795,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>194</y>
+                   <y>193</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10858,7 +10858,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>302</y>
+                   <y>390</y>
                    <width>181</width>
                    <height>21</height>
                   </rect>
@@ -10876,7 +10876,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>272</y>
+                   <y>360</y>
                    <width>241</width>
                    <height>21</height>
                   </rect>
@@ -10896,7 +10896,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>222</y>
+                   <y>310</y>
                    <width>201</width>
                    <height>21</height>
                   </rect>
@@ -10914,7 +10914,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>222</y>
+                   <y>310</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -10930,7 +10930,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>300</x>
-                   <y>222</y>
+                   <y>310</y>
                    <width>21</width>
                    <height>21</height>
                   </rect>
@@ -10976,6 +10976,226 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="text">
                   <string>Select sound device</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_157">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>250</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 5</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_158">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>220</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 4</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak5Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>250</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak4Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>220</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak4">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>223</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak5Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>250</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak6Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>280</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak4Min">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>220</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak6">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>282</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSqueak6Max">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>280</y>
+                   <width>81</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>500</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableSqueak5">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>253</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_159">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>280</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Squeak 6</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableBarrelSound">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>453</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_160">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>450</y>
+                   <width>131</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Enable barrel sound</string>
                  </property>
                 </widget>
                </widget>

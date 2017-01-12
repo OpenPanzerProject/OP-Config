@@ -3,7 +3,7 @@
 SoundDevicesComboBox::SoundDevicesComboBox(QWidget *parent) : QComboBox(parent)
 {
     insertItem(count(), "Benedini - TBS Mini", SD_BENEDINI_TBSMINI);
-    insertItem(count(), "Open Panzer Teensy Sound Card", SD_OP_TEENSY);
+    insertItem(count(), "Open Panzer Sound Card", SD_OP_SOUND_CARD);
     // FOR FUTURE USE
     //insertItem(count(), "Beier USM-RC-2", SD_BEIER_USMRC2);
     // etc...

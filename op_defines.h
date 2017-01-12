@@ -164,7 +164,7 @@ struct weightClassSettings{
                                                         // (multipler * port number) + 0/1 (off/on)
 #define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
 
-const byte COUNT_SPECFUNCTIONS  = 82;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 92;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -201,7 +201,7 @@ enum _special_function : byte {
     SF_AUXOUT_TOGGLEBLINK = 32,     // 32
     SF_AUXOUT_REVOLVE   = 33,       // 33
     SF_AUXOUT_TOGGLEREVOLVE = 34,   // 34
-    SF_USER_SOUND1_ONCE = 35,       // 35
+    SF_USER_SOUND1_ONCE = 35,       // 35   -- see also 86-91 for user sounds 3 & 4
     SF_USER_SOUND1_RPT  = 36,       // 36
     SF_USER_SOUND1_OFF  = 37,       // 37
     SF_USER_SOUND2_ONCE = 38,       // 38
@@ -250,7 +250,14 @@ enum _special_function : byte {
     SF_DRIVEPROFILE_TOGGLE = 81,    // 81
     SF_SMOKER_ENABLE    = 82,       // 82
     SF_SMOKER_DISABLE   = 83,       // 83
-    SF_SMOKER_TOGGLE    = 84        // 84
+    SF_SMOKER_TOGGLE    = 84,       // 84
+    SF_SET_VOLUME       = 85,       // 85
+    SF_USER_SOUND3_ONCE = 86,       // 86   -- see also 35-40 for user sounds 1 & 2
+    SF_USER_SOUND3_RPT  = 87,       // 87
+    SF_USER_SOUND3_OFF  = 88,       // 88
+    SF_USER_SOUND4_ONCE = 89,       // 89
+    SF_USER_SOUND4_RPT  = 90,       // 90
+    SF_USER_SOUND4_OFF  = 91        // 91
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -402,13 +409,9 @@ struct external_io{
 // SOUND
 // From OP_Sound.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-//enum sound_devices : byte {
-//    SD_BENEDINI_TBSMINI = 0,
-//    SD_BEIER_USMRC2
-//};
 typedef char SOUND_DEVICE;
 #define SD_BENEDINI_TBSMINI     0
-#define SD_OP_TEENSY            1
+#define SD_OP_SOUND_CARD        1
 #define SD_BEIER_USMRC2         2
 #define SD_FIRST_SD             SD_BENEDINI_TBSMINI
 #define SD_LAST_SD              SD_BEIER_USMRC2

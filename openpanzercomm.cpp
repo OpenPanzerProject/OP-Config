@@ -546,7 +546,14 @@ void OpenPanzerComm::readData()
                             if (blitzTimer->isActive()) blitzTimer->stop(); // Stop this one too.
                             emit ConnectionChanged(true);
                         }
-                        emit NextSentence();
+                        // Sometimes there will be a minor error that does not require a halt in whatever we're doing, but we still want to
+                        // know about. The TCB can send back "Next Sentence" but if the Value (which would typically be ignored) is not 0,
+                        // that means whatever we asked it to do previously didn't work. For now the only time this really comes into play
+                        // is if we asked it to save a value for a variable it couldn't find. The TCB will go ahead and ask us for the next
+                        // variable to save but let us know it was unable to save the last one. This happens very rarely and typically only
+                        // when the TCB firmware version has fallen behind an OP Config update.
+                        if (SentenceIN.Value.toUInt() == 0) emit NextSentence(false);   // No flag, no problem
+                        else                                emit NextSentence(true);    // Flag set
                         // This is also the response to our stay awake command. If that is what we just sent, make sure
                         // to reset the MissedStayAwakeCount to 0 since we have received a reply.
                         if (StayAwakeJustSent)

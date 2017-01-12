@@ -379,14 +379,24 @@ void MainWindow::sendWriteCommand_byPos(uint16_t VarPos)
     }
 }
 // When the device responds with a SERID_NEXT_SENTENCE request
-void MainWindow::processNextSentence(void)
+void MainWindow::processNextSentence(boolean priorFail)
 {
+    static int totalPossibleVars = 0;
+    double pctWritten = 0;
+    static int numFailed = 0;
+    static boolean writeSettingsBegun = false;
 
     // If we receive a next sentence request from the device, it is ready for next.
     // In some cases we don't need to do anything specifically here, but if
     // we are in the middle of writing all settings sequentially, proceed to next
     if (writeAllSettings || writeSomeSettings)
     {
+        // Flag so we know we've begun
+        if (writeSettingsBegun == false) { writeSettingsBegun = true; numFailed = 0; totalPossibleVars = endVarPos - startVarPos + 1;}
+
+        // Did the last write operation fail? We still continue if so, but record it so we know.
+        if (priorFail) { numFailed += 1; }
+
         if (nextVarPos <= endVarPos)
         {
             statusProgressBar->setValue(nextVarPos);    // Update progress bar
@@ -395,22 +405,50 @@ void MainWindow::processNextSentence(void)
         }
         else
         {
-            // If we make it here, by definition we wrote everything we wanted to
-            // But, we might want to display a different message depending on what was written
-            if (writeSomeSettings && Flag_RadioValuesChanged)
-            {
-                SetStatusLabel(QString("Radio settings saved"),slNeutral);
-                Flag_RadioValuesChanged = false;    // We're done
+            MouseRestore();
+
+            // If we make it here, by definition we completed writing everything we wanted to
+            // But, we might want to display a different message depending on what was written,
+            // and whether any failed to write.
+
+            if (numFailed > 0)
+            {   // In this case we did not successfully write every single variable
+                pctWritten = ((double)(totalPossibleVars - numFailed)/(double)totalPossibleVars)*100.0;
+
+                if (writeSomeSettings && Flag_RadioValuesChanged)
+                {   // In this case we were only writing radio settings
+                    Flag_RadioValuesChanged = false;    // We're done
+                    SetStatusLabel(QString("Radio settings saved"),slNeutral);
+                    msgBox(tr("Of %1 radio settings, %2 were unable to be written.<br>This usually indicates you need to update the TCB firmware.") .arg(totalPossibleVars).arg(numFailed), vbOkOnly, "Device Written", vbInformation);
+                }
+                else
+                {   // We were "Write All Settings"
+                    SetStatusLabel(QString("Partial settings written (%1%)").arg(QString::number(pctWritten,'f',0)),slNeutral);
+                    msgBox(tr("Of %1 settings, %2 were unable to be written.<br>This usually indicates you need to update the TCB firmware.") .arg(totalPossibleVars).arg(numFailed), vbOkOnly, "Device Written", vbInformation);
+                }
             }
             else
-            {   // We assume all other cases are "Write All Settings"
-                SetStatusLabel(QString("All settings written (100%)"),slGood);
+            {
+                // In this case we wrote all settings without error
+                if (writeSomeSettings && Flag_RadioValuesChanged)
+                {   // In this case we were only writing radio settings
+                    SetStatusLabel(QString("Radio settings saved"),slNeutral);
+                    Flag_RadioValuesChanged = false;    // We're done
+                }
+                else
+                {   // We were "Write All Settings"
+                    SetStatusLabel(QString("All settings written (100%)"),slGood);
+                }
             }
 
             // We're done writing settings no matter who called it
             writeAllSettings = false;
             writeSomeSettings = false;
             nextVarPos = 0;
+            writeSettingsBegun = false;
+
+            // Reset the fail count
+            numFailed = 0;
 
             // Done with progress bar
             statusProgressBar->hide();
@@ -421,8 +459,6 @@ void MainWindow::processNextSentence(void)
             ui->cmdWriteDevice->setChecked(false);
             ui->cmdSnoop->setEnabled(true);
             ui->cmdFlashHex->setEnabled(true);
-
-            MouseRestore();
         }
     }
 

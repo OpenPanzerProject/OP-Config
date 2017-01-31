@@ -686,7 +686,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbRepairIR, SIGNAL(released()), signalMapper, SLOT(map()));            // Repair IR
         connect(ui->hpbDamage, SIGNAL(released()), signalMapper, SLOT(map()));              // Damage settings
     // Sounds tab
-        connect(ui->hpbBenedini, SIGNAL(released()), signalMapper, SLOT(map()));            // Benidini sound
+        connect(ui->hpbGeneralSound, SIGNAL(released()), signalMapper, SLOT(map()));        // General sound options
     // Misc tab
         connect(ui->hpbLVC, SIGNAL(released()), signalMapper, SLOT(map()));                 // Low voltage cutoff
         connect(ui->hpbBaud, SIGNAL(released()), signalMapper, SLOT(map()));                // Baud rates
@@ -729,7 +729,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbRepairIR, "battle.html#repair");                    // Repair IR
         signalMapper->setMapping(ui->hpbDamage, "battle.html#damage");                      // Damage settings
     // Sounds
-        signalMapper->setMapping(ui->hpbBenedini, "sounds.html");                           // Sound tab
+        signalMapper->setMapping(ui->hpbGeneralSound, "sounds.html");                           // Sound tab
     // Misc
         signalMapper->setMapping(ui->hpbLVC, "misc.html#lvc");                              // Low voltage cutoff
         signalMapper->setMapping(ui->hpbBaud, "misc.html#baud");                            // Baud rates

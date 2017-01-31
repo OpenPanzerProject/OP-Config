@@ -254,7 +254,7 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinSqueak6Min->setValue(DeviceData.Squeak6_MinInterval_mS);
     ui->spinSqueak6Max->setValue(DeviceData.Squeak6_MaxInterval_mS);
     ui->spinMinSqueakSpeed->setValue(DeviceData.MinSqueakSpeedPct);
-    ShowHideOtherSqueakSettings(false); // It doesn't matter what we pass to this function, it won't use the value anyway
+    ShowHideOtherSqueakSettings();
     ShowHideSqueak1Settings(ui->chkEnableSqueak1->isChecked());
     ShowHideSqueak2Settings(ui->chkEnableSqueak2->isChecked());
     ShowHideSqueak3Settings(ui->chkEnableSqueak3->isChecked());

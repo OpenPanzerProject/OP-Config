@@ -277,7 +277,7 @@ private slots:
       void ShowHideSqueak4Settings(bool);
       void ShowHideSqueak5Settings(bool);
       void ShowHideSqueak6Settings(bool);
-      void ShowHideOtherSqueakSettings(bool);
+      void ShowHideOtherSqueakSettings();
 
       // Misc tab
       void updateSabertoothBaudLabel(void);
@@ -385,6 +385,7 @@ private:
         void FadeOutRadioStreaming(void);
       // Motor tab
         void SetupControls_MotorTab(void);
+        void ValidateRCPassthroughs(void);
       // Lights & IO tab
         void SetupControls_LightsIOTab(void);
       // Functions tab
@@ -398,6 +399,21 @@ private:
         void SetupControls_BattleTab(void);
       // Sound tab
         void SetupControls_SoundTab(void);
+        void EnableBarrelSoundSetting(void);
+        void DisableBarrelSoundSetting(void);
+        void EnableHeadlightSoundSetting(void);
+        void DisableHeadlightSoundSetting(void);
+        void AddVolumeFunction(void);
+        void AddUserSoundFunctions1_4(void);
+        void AddUserSoundFunctions1_2(void);
+        void RemoveVolumeUserSoundFunctions1_4(void);
+        void RemoveVolumeUserSoundFunctions3_4(void);
+        void EnableSqueaks1_3(void);
+        void EnableSqueaks4_6(void);
+        void DisableSqueaks1_3(void);
+        void DisableSqueaks4_6(void);
+        void EnableMinSqueakSpeed(void);
+        void DisableMinSqueakSpeed(void);
       // Misc tab
         void SetupControls_MiscTab(void);
       // Firmware tab

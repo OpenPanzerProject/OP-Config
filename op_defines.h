@@ -164,7 +164,7 @@ struct weightClassSettings{
                                                         // (multipler * port number) + 0/1 (off/on)
 #define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
 
-const byte COUNT_SPECFUNCTIONS  = 92;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 98;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -221,7 +221,7 @@ enum _special_function : byte {
     SF_SMOKER           = 52,       // 52   -- analog function
     SF_MOTOR_A          = 53,       // 53   -- analog function
     SF_MOTOR_B          = 54,       // 54   -- analog function
-    SF_RC1_PASS         = 55,       // 55   -- analog function ("PASS" for pass-through)
+    SF_RC1_PASS         = 55,       // 55   -- analog function ("PASS" for pass-through) -- see also 92-97 for pass-throughs 6-8
     SF_RC2_PASS         = 56,       // 56   -- analog function
     SF_RC3_PASS         = 57,       // 57   -- analog function
     SF_RC4_PASS         = 58,       // 58   -- analog function
@@ -257,7 +257,13 @@ enum _special_function : byte {
     SF_USER_SOUND3_OFF  = 88,       // 88
     SF_USER_SOUND4_ONCE = 89,       // 89
     SF_USER_SOUND4_RPT  = 90,       // 90
-    SF_USER_SOUND4_OFF  = 91        // 91
+    SF_USER_SOUND4_OFF  = 91,       // 91
+    SF_RC6_PASS         = 92,       // 92   -- analog function ("PASS" for pass-through) -- see also 55-62 for pass-throughs 1-4
+    SF_RC7_PASS         = 93,       // 93   -- analog function
+    SF_RC8_PASS         = 94,       // 94   -- analog function
+    SF_RC6_PASS_PAN     = 95,       // 95   -- analog function (Pan servo passthrough signal)
+    SF_RC7_PASS_PAN     = 96,       // 96   -- analog function
+    SF_RC8_PASS_PAN     = 97        // 97   -- analog function
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -412,7 +418,8 @@ struct external_io{
 typedef char SOUND_DEVICE;
 #define SD_BENEDINI_TBSMINI     0
 #define SD_OP_SOUND_CARD        1
-#define SD_BEIER_USMRC2         2
+#define SD_TAIGEN_SOUND         2
+#define SD_BEIER_USMRC2         3
 #define SD_FIRST_SD             SD_BENEDINI_TBSMINI
 #define SD_LAST_SD              SD_BEIER_USMRC2
 

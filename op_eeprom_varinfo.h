@@ -303,13 +303,13 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {2815, 361, varUINT16, "5000"},        // Squeak2_MaxInterval_mS
     {2816, 363, varUINT16, "3000"},        // Squeak3_MinInterval_mS
     {2817, 365, varUINT16, "8000"},        // Squeak3_MaxInterval_mS
-    {2818, 367, varBOOL, "1"},        // Squeak1_Enabled
-    {2819, 368, varBOOL, "1"},        // Squeak2_Enabled
-    {2820, 369, varBOOL, "1"},        // Squeak3_Enabled
+    {2818, 367, varBOOL, "0"},        // Squeak1_Enabled
+    {2819, 368, varBOOL, "0"},        // Squeak2_Enabled
+    {2820, 369, varBOOL, "0"},        // Squeak3_Enabled
     {2821, 370, varUINT8, "25"},        // MinSqueakSpeed
     {2822, 371, varBOOL, "1"},        // HeadlightSound_Enabled
-    {2823, 372, varBOOL, "0"},        // TurretSound_Enabled
-    {2824, 373, varBOOL, "0"},        // BarrelSound_Enabled
+    {2823, 372, varBOOL, "1"},        // TurretSound_Enabled
+    {2824, 373, varBOOL, "1"},        // BarrelSound_Enabled
     {2825, 374, varUINT16, "1000"},        // Squeak4_MinInterval_mS
     {2826, 376, varUINT16, "2000"},        // Squeak4_MaxInterval_mS
     {2827, 378, varUINT16, "3000"},        // Squeak5_MinInterval_mS

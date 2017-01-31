@@ -10330,8 +10330,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 </property>
                 <property name="geometry">
                  <rect>
-                  <x>430</x>
-                  <y>60</y>
+                  <x>580</x>
+                  <y>20</y>
                   <width>241</width>
                   <height>201</height>
                  </rect>
@@ -10424,7 +10424,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>100</y>
+                   <y>260</y>
                    <width>121</width>
                    <height>21</height>
                   </rect>
@@ -10445,7 +10445,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>116</y>
+                   <y>276</y>
                    <width>391</width>
                    <height>16</height>
                   </rect>
@@ -10461,7 +10461,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>130</y>
+                   <y>290</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -10479,7 +10479,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>102</y>
+                   <y>262</y>
                    <width>71</width>
                    <height>21</height>
                   </rect>
@@ -10496,7 +10496,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
-                <widget class="HelpButton" name="hpbBenedini">
+                <widget class="HelpButton" name="hpbGeneralSound">
                  <property name="geometry">
                   <rect>
                    <x>380</x>
@@ -10519,7 +10519,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>132</y>
+                   <y>292</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -10529,13 +10529,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="maximum">
                   <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinSqueak1Max">
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>132</y>
+                   <y>292</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -10545,6 +10548,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="maximum">
                   <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_55">
@@ -10570,9 +10576,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <widget class="SoundDevicesComboBox" name="cboSoundDevice">
                  <property name="geometry">
                   <rect>
-                   <x>200</x>
+                   <x>150</x>
                    <y>40</y>
-                   <width>191</width>
+                   <width>241</width>
                    <height>22</height>
                   </rect>
                  </property>
@@ -10581,7 +10587,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>420</y>
+                   <y>120</y>
                    <width>131</width>
                    <height>21</height>
                   </rect>
@@ -10599,7 +10605,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>390</y>
+                   <y>180</y>
                    <width>151</width>
                    <height>21</height>
                   </rect>
@@ -10617,7 +10623,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>423</y>
+                   <y>123</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10630,7 +10636,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>393</y>
+                   <y>183</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10643,7 +10649,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>102</y>
+                   <y>262</y>
                    <width>61</width>
                    <height>21</height>
                   </rect>
@@ -10664,7 +10670,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>163</x>
-                   <y>102</y>
+                   <y>262</y>
                    <width>51</width>
                    <height>21</height>
                   </rect>
@@ -10682,7 +10688,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>133</y>
+                   <y>293</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10695,7 +10701,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>80</y>
+                   <y>240</y>
                    <width>161</width>
                    <height>21</height>
                   </rect>
@@ -10716,7 +10722,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>92</y>
+                   <y>252</y>
                    <width>171</width>
                    <height>20</height>
                   </rect>
@@ -10732,7 +10738,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>163</y>
+                   <y>323</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10745,7 +10751,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>162</y>
+                   <y>322</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -10756,12 +10762,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QLabel" name="label_72">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>162</y>
+                   <y>322</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -10779,7 +10788,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>162</y>
+                   <y>322</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -10790,12 +10799,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QCheckBox" name="chkEnableSqueak3">
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>193</y>
+                   <y>353</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -10808,7 +10820,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>192</y>
+                   <y>352</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -10819,12 +10831,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QLabel" name="label_73">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>192</y>
+                   <y>352</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -10842,7 +10857,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>192</y>
+                   <y>352</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -10853,12 +10868,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QLabel" name="lblHeadlightSound">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>390</y>
+                   <y>180</y>
                    <width>181</width>
                    <height>21</height>
                   </rect>
@@ -10876,7 +10894,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>10</x>
-                   <y>360</y>
+                   <y>90</y>
                    <width>241</width>
                    <height>21</height>
                   </rect>
@@ -10889,14 +10907,14 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Other Sound Settings</string>
+                  <string>General Sound Settings</string>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblMinSqueakSpeed1">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>310</y>
+                   <y>470</y>
                    <width>201</width>
                    <height>21</height>
                   </rect>
@@ -10914,7 +10932,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>310</y>
+                   <y>470</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -10930,7 +10948,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>300</x>
-                   <y>310</y>
+                   <y>470</y>
                    <width>21</width>
                    <height>21</height>
                   </rect>
@@ -10982,7 +11000,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>250</y>
+                   <y>410</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -11000,7 +11018,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>220</y>
+                   <y>380</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -11018,7 +11036,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>250</y>
+                   <y>410</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -11028,13 +11046,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="maximum">
                   <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinSqueak4Max">
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>220</y>
+                   <y>380</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -11045,12 +11066,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QCheckBox" name="chkEnableSqueak4">
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>223</y>
+                   <y>383</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -11063,7 +11087,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>250</y>
+                   <y>410</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -11073,13 +11097,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="maximum">
                   <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinSqueak6Min">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>280</y>
+                   <y>440</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -11089,13 +11116,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="maximum">
                   <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>50</number>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinSqueak4Min">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
-                   <y>220</y>
+                   <y>380</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -11106,12 +11136,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QCheckBox" name="chkEnableSqueak6">
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>282</y>
+                   <y>442</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -11124,7 +11157,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>310</x>
-                   <y>280</y>
+                   <y>440</y>
                    <width>81</width>
                    <height>22</height>
                   </rect>
@@ -11135,12 +11168,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="maximum">
                   <number>10000</number>
                  </property>
+                 <property name="singleStep">
+                  <number>50</number>
+                 </property>
                 </widget>
                 <widget class="QCheckBox" name="chkEnableSqueak5">
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>253</y>
+                   <y>413</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -11153,7 +11189,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>280</y>
+                   <y>440</y>
                    <width>91</width>
                    <height>21</height>
                   </rect>
@@ -11171,7 +11207,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>180</x>
-                   <y>453</y>
+                   <y>153</y>
                    <width>16</width>
                    <height>18</height>
                   </rect>
@@ -11184,7 +11220,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>450</y>
+                   <y>150</y>
                    <width>131</width>
                    <height>21</height>
                   </rect>

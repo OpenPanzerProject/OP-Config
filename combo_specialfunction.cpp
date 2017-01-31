@@ -189,6 +189,21 @@ void SpecialFunctionComboBox::addRCPassthrough(int rcOutput)
         rcFunction2 = SF_RC4_PASS_PAN;
         _RCOutput4_Present = true;
         break;
+    case 6:
+        rcFunction1 = SF_RC6_PASS;
+        rcFunction2 = SF_RC6_PASS_PAN;
+        _RCOutput6_Present = true;
+        break;
+    case 7:
+        rcFunction1 = SF_RC7_PASS;
+        rcFunction2 = SF_RC7_PASS_PAN;
+        _RCOutput7_Present = true;
+        break;
+    case 8:
+        rcFunction1 = SF_RC8_PASS;
+        rcFunction2 = SF_RC8_PASS_PAN;
+        _RCOutput8_Present = true;
+        break;
     default:
         rcFunction1 = SF_NULL_FUNCTION;
         rcFunction2 = SF_NULL_FUNCTION;
@@ -242,6 +257,21 @@ void SpecialFunctionComboBox::removeRCPassthrough(int rcOutput)
         rcFunction2 = SF_RC4_PASS_PAN;
         _RCOutput4_Present = false;
         break;
+    case 6:
+        rcFunction1 = SF_RC6_PASS;
+        rcFunction2 = SF_RC6_PASS_PAN;
+        _RCOutput6_Present = false;
+        break;
+    case 7:
+        rcFunction1 = SF_RC7_PASS;
+        rcFunction2 = SF_RC7_PASS_PAN;
+        _RCOutput7_Present = false;
+        break;
+    case 8:
+        rcFunction1 = SF_RC8_PASS;
+        rcFunction2 = SF_RC8_PASS_PAN;
+        _RCOutput8_Present = false;
+        break;
     default:
         rcFunction1 = SF_NULL_FUNCTION;
         rcFunction2 = SF_NULL_FUNCTION;
@@ -262,6 +292,9 @@ void SpecialFunctionComboBox::removeAllRCPassthroughs(void)
     removeRCPassthrough(2);
     removeRCPassthrough(3);
     removeRCPassthrough(4);
+    removeRCPassthrough(6);
+    removeRCPassthrough(7);
+    removeRCPassthrough(8);
 }
 void SpecialFunctionComboBox::addAllRCPassthroughs(void)
 {
@@ -269,6 +302,9 @@ void SpecialFunctionComboBox::addAllRCPassthroughs(void)
     addRCPassthrough(2);
     addRCPassthrough(3);
     addRCPassthrough(4);
+    addRCPassthrough(6);
+    addRCPassthrough(7);
+    addRCPassthrough(8);
 }
 
 boolean SpecialFunctionComboBox::isRCPassthroughPresent(int rcOutput)
@@ -286,6 +322,15 @@ boolean SpecialFunctionComboBox::isRCPassthroughPresent(int rcOutput)
         break;
     case 4:
         return _RCOutput4_Present;
+        break;
+    case 6:
+        return _RCOutput6_Present;
+        break;
+    case 7:
+        return _RCOutput7_Present;
+        break;
+    case 8:
+        return _RCOutput8_Present;
         break;
     default:
         return false;

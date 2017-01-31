@@ -48,6 +48,7 @@ uint8_t OP_QMaps::GetSpecialFunctionExternalPortNum(_special_function sf)
 QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
 {
     // Create the full Special Function list
+    // These do not have to be in any specific order, unlike the list in op_defines.h
     _SF_ALL_QMAP.insert(SF_NULL_FUNCTION, "");  // No function
     _SF_ALL_QMAP.insert(SF_ENGINE_TOGGLE, "Engine - Toggle On/Off");
     _SF_ALL_QMAP.insert(SF_ENGINE_ON, "Engine - Turn On");
@@ -110,14 +111,20 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");                      // Analog
     _SF_ALL_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");                    // Analog
     _SF_ALL_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");                    // Analog
-    _SF_ALL_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through");                 // Analog   // No passthrough for 5 - that is always reserved for recoil
     _SF_ALL_QMAP.insert(SF_RC2_PASS, "RC Output 2 - Pass-through");                 // Analog
     _SF_ALL_QMAP.insert(SF_RC3_PASS, "RC Output 3 - Pass-through");                 // Analog
     _SF_ALL_QMAP.insert(SF_RC4_PASS, "RC Output 4 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC6_PASS, "RC Output 6 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC7_PASS, "RC Output 7 - Pass-through");                 // Analog
+    _SF_ALL_QMAP.insert(SF_RC8_PASS, "RC Output 8 - Pass-through");                 // Analog
     _SF_ALL_QMAP.insert(SF_RC1_PASS_PAN, "RC Output 1 - Pan Servo");                // Analog
     _SF_ALL_QMAP.insert(SF_RC2_PASS_PAN, "RC Output 2 - Pan Servo");                // Analog
     _SF_ALL_QMAP.insert(SF_RC3_PASS_PAN, "RC Output 3 - Pan Servo");                // Analog
     _SF_ALL_QMAP.insert(SF_RC4_PASS_PAN, "RC Output 4 - Pan Servo");                // Analog
+    _SF_ALL_QMAP.insert(SF_RC6_PASS_PAN, "RC Output 6 - Pan Servo");                // Analog
+    _SF_ALL_QMAP.insert(SF_RC7_PASS_PAN, "RC Output 7 - Pan Servo");                // Analog
+    _SF_ALL_QMAP.insert(SF_RC8_PASS_PAN, "RC Output 8 - Pan Servo");                // Analog
     // DISABLED FOR NOW
 //    _SF_ALL_QMAP.insert(SF_BARREL_ON, "Barrel Stabilization - Turn On");
 //    _SF_ALL_QMAP.insert(SF_BARREL_OFF, "Barrel Stabilization - Turn Off");
@@ -232,14 +239,20 @@ QMap<_special_function, QString> OP_QMaps::getAnalogSpecialFunctionsQMap()
     _SF_ANALOG_QMAP.insert(SF_AUXOUT_LEVEL, "Aux Output - Set Level");
     _SF_ANALOG_QMAP.insert(SF_ACCEL_LEVEL, "Set Acceleration Level");
     _SF_ANALOG_QMAP.insert(SF_DECEL_LEVEL, "Set Deceleration Level");
-    _SF_ANALOG_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through"); // No passthrough for 5 - that is always reserved for recoil
     _SF_ANALOG_QMAP.insert(SF_RC2_PASS, "RC Output 2 - Pass-through");
     _SF_ANALOG_QMAP.insert(SF_RC3_PASS, "RC Output 3 - Pass-through");
     _SF_ANALOG_QMAP.insert(SF_RC4_PASS, "RC Output 4 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC6_PASS, "RC Output 6 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC7_PASS, "RC Output 7 - Pass-through");
+    _SF_ANALOG_QMAP.insert(SF_RC8_PASS, "RC Output 8 - Pass-through");
     _SF_ANALOG_QMAP.insert(SF_RC1_PASS_PAN, "RC Output 1 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_RC2_PASS_PAN, "RC Output 2 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_RC3_PASS_PAN, "RC Output 3 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_RC4_PASS_PAN, "RC Output 4 - Pan Servo");
+    _SF_ANALOG_QMAP.insert(SF_RC6_PASS_PAN, "RC Output 6 - Pan Servo");
+    _SF_ANALOG_QMAP.insert(SF_RC7_PASS_PAN, "RC Output 7 - Pan Servo");
+    _SF_ANALOG_QMAP.insert(SF_RC8_PASS_PAN, "RC Output 8 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");
     _SF_ANALOG_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");
     _SF_ANALOG_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");

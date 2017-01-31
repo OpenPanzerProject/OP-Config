@@ -64,6 +64,9 @@ private:
   boolean _RCOutput2_Present = false;
   boolean _RCOutput3_Present = false;
   boolean _RCOutput4_Present = false;
+  boolean _RCOutput6_Present = false;
+  boolean _RCOutput7_Present = false;
+  boolean _RCOutput8_Present = false;
 };
 
 #endif // SPECIALFUNCTIONCOMBOBOX_H

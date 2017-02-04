@@ -9,8 +9,9 @@ void MainWindow::SetupControls_MotorTab(void)
 {
     // Setup the drive type combo
     ui->cboDriveType->insertItem(1, "Tank (Dual drive motors)", DT_TANK);
-    ui->cboDriveType->insertItem(2, "Halftrack (Dual drive motors + Steering servo)", DT_HALFTRACK);
-    ui->cboDriveType->insertItem(3, "Car (Single drive motor + Steering servo)", DT_CAR);
+    ui->cboDriveType->insertItem(2, "Tank (Single drive motor + steering motor, eg DKLM)", DT_DKLM);
+    ui->cboDriveType->insertItem(3, "Halftrack (Dual drive motors + Steering servo)", DT_HALFTRACK);
+    ui->cboDriveType->insertItem(4, "Car (Single drive motor + Steering servo)", DT_CAR);
     ui->cboDriveType->setCurrentIndex(0);
 
     // Setup the motor type combo boxes
@@ -239,7 +240,7 @@ void MainWindow::ValidateMotorSelections()
         }
         else
         {
-            // Drive type is Tank or Halftrack - remove both
+            // Drive type is Tank or Halftrack or DKLM - remove both onboard drivers
             ui->cboSelectFunction->RemoveSF(SF_MOTOR_A);
             ui->cboSelectFunction->RemoveSF(SF_MOTOR_B);
             if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A) || FT_TableModel->removeFunctionFromList(SF_MOTOR_B))
@@ -258,35 +259,95 @@ void MainWindow::ValidateMotorSelections()
         ui->lblSteeringServo->hide();
     }
     // Now the drive motor connection
+    // Drive motors driven by Serial
     if (ui->cboDriveMotors->isSerial())
-    {    switch (ui->cboDriveMotors->getCurrentDriveType())
+    {   if (ui->cboDriveType->currentData() == DT_HALFTRACK || ui->cboDriveType->currentData() == DT_TANK)
         {
-        case SABERTOOTH:
-            ui->lblDriveMotors->setText("Connect motors to Sabertooth: Left = \"M1\", Right = \"M2\"");
-            break;
-        case POLOLU:
-            ui->lblDriveMotors->setText("Connect motors to Pololu Qik: Left = \"M0\", Right = \"M1\"");
-            break;
-        case OP_SCOUT:
-            ui->lblDriveMotors->setText("Connect motors to Scout: Left = \"M1\", Right = \"M2\"");
-            break;
-        default:
-            ui->lblDriveMotors->setText("");
+            switch (ui->cboDriveMotors->getCurrentDriveType())
+            {
+            case SABERTOOTH:
+                ui->lblDriveMotors->setText("Connect motors to Sabertooth: Left = \"M1\", Right = \"M2\"");
+                break;
+            case POLOLU:
+                ui->lblDriveMotors->setText("Connect motors to Pololu Qik: Left = \"M0\", Right = \"M1\"");
+                break;
+            case OP_SCOUT:
+                ui->lblDriveMotors->setText("Connect motors to Scout: Left = \"M1\", Right = \"M2\"");
+                break;
+            default:
+                ui->lblDriveMotors->setText("");
+            }
+        }
+        else if (ui->cboDriveType->currentData() == DT_DKLM)
+        {
+            switch (ui->cboDriveMotors->getCurrentDriveType())
+            {
+            case SABERTOOTH:
+                ui->lblDriveMotors->setText("Connect motors to Sabertooth: Propulsion = \"M1\", Steering = \"M2\"");
+                break;
+            case POLOLU:
+                ui->lblDriveMotors->setText("Connect motors to Pololu Qik: Propulsion = \"M0\", Steering = \"M1\"");
+                break;
+            case OP_SCOUT:
+                ui->lblDriveMotors->setText("Connect motors to Scout: Propulsion = \"M1\", Steering = \"M2\"");
+                break;
+            default:
+                ui->lblDriveMotors->setText("");
+            }
+        }
+        else if (ui->cboDriveType->currentData() == DT_CAR)
+        {
+            switch (ui->cboDriveMotors->getCurrentDriveType())
+            {
+            case SABERTOOTH:
+                ui->lblDriveMotors->setText("Connect drive motor to Sabertooth \"M1\"");
+                break;
+            case POLOLU:
+                ui->lblDriveMotors->setText("Connect drive motor to Pololu Qik \"M0\"");
+                break;
+            case OP_SCOUT:
+                ui->lblDriveMotors->setText("Connect drive motor to Scout \"M1\"");
+                break;
+            default:
+                ui->lblDriveMotors->setText("");
+            }
         }
     }
+
+    // Drive motors driven by RC
     if (ui->cboDriveMotors->isRCOutput())
-        ui->lblDriveMotors->setText("Plug Left ESC into RC Output 1, Right ESC into RC Output 2");
+    {
+        if (ui->cboDriveType->currentData() == DT_HALFTRACK || ui->cboDriveType->currentData() == DT_TANK)
+        {
+            ui->lblDriveMotors->setText("Plug Left ESC into RC Output 1, Right ESC into RC Output 2");
+        }
+        else if (ui->cboDriveType->currentData() == DT_DKLM)
+        {
+            ui->lblDriveMotors->setText("Plug Propulsion ESC into RC Output 1, Steering ESC into RC Output 2");
+        }
+        else if (ui->cboDriveType->currentData() == DT_CAR)
+        {
+            ui->lblDriveMotors->setText("Plug motor ESC into RC Output 1, steering servo into RC Output 2");
+        }
+    }
+
+    // Drive motors driven by Onboard
     if (ui->cboDriveMotors->isOnboard())
     {
-        if (ui->cboDriveType->currentData() == DT_CAR)
-        {
-            ui->lblDriveMotors->setText("Connect drive motor to \"Motor A\" screw terminals on TCB");
-        }
-        else
+        if (ui->cboDriveType->currentData() == DT_HALFTRACK || ui->cboDriveType->currentData() == DT_TANK)
         {
             ui->lblDriveMotors->setText("Connect motors to terminals on TCB: Left = \"Motor A\", Right = \"Motor B\"");
         }
+        else if (ui->cboDriveType->currentData() == DT_DKLM)
+        {
+            ui->lblDriveMotors->setText("Connect propulsion motor to \"Motor A\", steering motor to \"Motor B\"");
+        }
+        else if (ui->cboDriveType->currentData() == DT_CAR)
+        {
+            ui->lblDriveMotors->setText("Connect drive motor to \"Motor A\" screw terminals on TCB");
+        }
     }
+
     // Now the turret rotation  motor
     if (ui->cboTurretRotationMotor->isSerial())
     {    switch (ui->cboTurretRotationMotor->getCurrentDriveType())

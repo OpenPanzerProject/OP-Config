@@ -40,16 +40,18 @@
 	
 	<h4 class="entry">Vehicle Type</h4>
 	<p>
-	There are three possible vehicle types, each with slightly different drive motor considerations. Select the one that matches your model:
+	There are four possible vehicle types, each with slightly different drive motor considerations. Select the one that matches your model:
 	<ul class="smalllist">
 		<li><b>Tank:</b> Tanks have two independent drive motors. Steering is accomplished through differential control of these motors.  </li>
-		<li><b>Halftrack:</b> Halftracks also have two independent drive motors. Steering is accomplished both through differential control of the drive motors <i>and</i> through a steering servo 
+        <li><b>Tank (DLKM style):</b> This type of tank has only a single drive motor. Steering is accomplished with a second motor through a clutch-style gearbox such as the DKLM RC Propulsion
+            Dynamics Steel Gearbox (PDSGB)</b></li>
+		<li><b>Halftrack:</b> Halftracks have two independent drive motors like conventional tanks. Steering is accomplished both through differential control of the drive motors <i>and</i> through a steering servo 
 		attached to the front wheels. (The proportion of steering applied to the treads and the servo can be adjusted on the <a href="driving.html">Driving tab</a> under the Turning section.)</li>
 		<li><b>Car:</b> A car has a single drive motor. Steering is accomplished through a steering servo. You could also use this mode for halftrack models that do not have independent tread motors.</li>
 	</ul>		
 	If you select Halftrack or Car, you will have a steering servo involved. This servo must be plugged into RC Output 2 (also labeled <b>Right</b> on the TCB). In the case of a Halftrack, because 
 	the steering servo is occupying the output that would typically be allocated to the "right" tread, the Halftrack drive motors must be driven by a dual-serial motor controller or the onboard motor controllers. 
-	In other words, it is not possible to use two hobby ESCs in Halftrack mode (but you can use hobby ESCs in Tank or Car mode). 
+	In other words, it is not possible to use two hobby ESCs in Halftrack mode (but you can use hobby ESCs for all other modes). 
 	</p>
 	
 	<h4 class="entry" id="drivemotorlist">Drive Motors</h4>

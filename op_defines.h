@@ -27,7 +27,8 @@ typedef char DRIVETYPE;
 #define DT_TANK		 	1
 #define DT_HALFTRACK	2
 #define DT_CAR			3
-#define LAST_DT			DT_CAR
+#define DT_DKLM         4           // For the unusual DKLM gearboxes that use a single motor for propulsion and a second motor for steering. Basically same as a car, but we give it a unique drive type.
+#define LAST_DT         DT_DKLM
 
 #define NUM_TURN_MODES			3	// How many turn modes are configured
 #define MAX_SKIP_NUM 			14  // What is the max accel/decel level (14 = 7 seconds - is that slow enough?)

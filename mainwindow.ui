@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>6</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -5033,7 +5033,7 @@ QSizeGrip {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Plug steering servo into Servo Output 2.</string>
+                  <string>Plug steering servo into RC Output 2.</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -8561,6 +8561,24 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                  <property name="text">
                   <string>(Unavailable in Halftrack mode)</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblNoTurnModeDKLM">
+                 <property name="geometry">
+                  <rect>
+                   <x>280</x>
+                   <y>40</y>
+                   <width>131</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(Unavailable for DKLM)</string>
                  </property>
                 </widget>
                </widget>

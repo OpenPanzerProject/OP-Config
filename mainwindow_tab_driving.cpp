@@ -87,12 +87,8 @@ void MainWindow::ShowHideNudgeTime(int nudgePct)
 
 void MainWindow::ShowHideNeutralTurnAllowed(int)
 {
-    if (ui->cboDriveType->currentData() == DT_TANK)
+    if (ui->cboDriveType->currentData() == DT_TANK || ui->cboDriveType->currentData() == DT_DKLM)
     {
-        // Enable the turn mode option
-        ui->lblTurnMode->setEnabled(true);
-        ui->cboTurnMode->setEnabled(true);
-
         // Enable the option for enabling/disabling neutral turns
         if (!ui->chkNeutralTurn->isEnabled())
         {
@@ -102,9 +98,6 @@ void MainWindow::ShowHideNeutralTurnAllowed(int)
             ui->chkNeutralTurn->setChecked(DeviceData.NeutralTurnAllowed);
             ShowHideNeutralTurnPct(DeviceData.NeutralTurnAllowed);
         }
-        // Hide these labels
-        ui->lblNoTurnSettingsForCars->hide();
-        ui->lblNoTurnSettingsForHalftracks->hide();
     }
     else
     {
@@ -115,23 +108,50 @@ void MainWindow::ShowHideNeutralTurnAllowed(int)
         ui->chkNeutralTurn->setChecked(false);
         ui->chkNeutralTurn->setEnabled(false);
         ShowHideNeutralTurnPct(DeviceData.NeutralTurnAllowed);
+    }
 
-        // Also, if this is a single rear-drive vehicle, disable the Turn Mode option as well
-        if (ui->cboDriveType->currentData() == DT_CAR)
-        {
-            ui->lblTurnMode->setEnabled(false);
-            ui->cboTurnMode->setEnabled(false);
-            // And show a helpful note
-            ui->lblNoTurnSettingsForCars->show();
-            ui->lblNoTurnSettingsForHalftracks->hide();
-        }
-        else
-        {
-            ui->lblTurnMode->setEnabled(true);
-            ui->cboTurnMode->setEnabled(true);
-            ui->lblNoTurnSettingsForCars->hide();
-            ui->lblNoTurnSettingsForHalftracks->show();
-        }
+
+    // Set also turn mode selection availability, and helpful messages
+    if (ui->cboDriveType->currentData() == DT_TANK)
+    {
+        // Enable turn mode options
+        ui->lblTurnMode->setEnabled(true);
+        ui->cboTurnMode->setEnabled(true);
+
+        // Hide these labels
+        ui->lblNoTurnModeDKLM->hide();
+        ui->lblNoTurnSettingsForCars->hide();
+        ui->lblNoTurnSettingsForHalftracks->hide();
+    }
+    else if (ui->cboDriveType->currentData() == DT_HALFTRACK)
+    {
+        // Enable turn mode options
+        ui->lblTurnMode->setEnabled(true);
+        ui->cboTurnMode->setEnabled(true);
+
+        ui->lblNoTurnModeDKLM->hide();
+        ui->lblNoTurnSettingsForCars->hide();
+        ui->lblNoTurnSettingsForHalftracks->show(); // Show - no neutral turns for halftracks
+    }
+    else if (ui->cboDriveType->currentData() == DT_CAR)
+    {
+        // Disable turn mode options for cars
+        ui->lblTurnMode->setEnabled(false);
+        ui->cboTurnMode->setEnabled(false);
+
+        ui->lblNoTurnModeDKLM->hide();
+        ui->lblNoTurnSettingsForCars->show();       // Show - no turn settings at all for cars
+        ui->lblNoTurnSettingsForHalftracks->hide();
+    }
+    else if (ui->cboDriveType->currentData() == DT_DKLM)
+    {
+        // Disable turn modes for clutch-type gearboxes
+        ui->lblTurnMode->setEnabled(false);
+        ui->cboTurnMode->setEnabled(false);
+
+        ui->lblNoTurnModeDKLM->show();              // Show - no turn modes for DKLM
+        ui->lblNoTurnSettingsForCars->hide();
+        ui->lblNoTurnSettingsForHalftracks->hide();
     }
 }
 void MainWindow::ShowHideNeutralTurnPct(bool checked)

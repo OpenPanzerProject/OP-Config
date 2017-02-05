@@ -191,6 +191,7 @@ private slots:
       void writeAllSettingsToDevice();              // Write all settings to device
       void writeSomeSettingsToDevice(uint16_t startID, uint16_t endID);   // Write some settings to device
       void SerialStatus_displayFirmware(QString version);      // Display device firmware version in status bar
+      void ProcessMinOPCVersion(QString);           // The TCB will tell us the minimum OP Config version it requires, if it is greater than this version ask user to update.
       void updateVarArray_fromSerial(uint16_t ID, QByteArray Value, boolean found);  // Process return message from device after requesting value.
       void processNextSentence(boolean);            // When the device responds with a SERID_NEXT_SENTENCE request
 
@@ -419,11 +420,14 @@ private:
       // Firmware tab
         void SetupControls_FirmwareTab(void);
         FirmwareVersion DownloadedVersion;
+        QString DownloadedVersionDate;
         void ClearFirmwareVersion(FirmwareVersion);
         FirmwareVersion DecodeVersion(QString);
         FirmwareVersion DecodeVersion(QByteArray);
         QString FirmwareVersionToString(FirmwareVersion);
         boolean isFirmwareVersionEmpty(FirmwareVersion);
+        FirmwareVersion GetMinTCBVersion(void);
+        boolean FirmwareGreaterThanComparison(FirmwareVersion, FirmwareVersion);
         Downloader *VersionDownloader;
         Downloader *HexDownloader;
         boolean AttemptFlash;

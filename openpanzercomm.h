@@ -123,8 +123,9 @@
 #define PCCMD_STOPSTREAM_RADIO	123		// Tell the device to stop streaming pulse-widths
 #define PCCMD_UPDATE_EEPROM	  	124
 #define PCCMD_READ_EEPROM	    126
-#define PCCMD_READ_VERSION		128
+#define PCCMD_READ_VERSION		128     // Request the TCB to tell us what version of firmware it is running
 #define PCCMD_STAY_AWAKE        129
+#define PCCMD_MINOPC_VERSION    130     // Request the TCB to tell us the minimum version of OP Config its version of firmware requires
 #define PCCMD_DISCONNECT      	31
 
 // Return "Commands" (identifiers) from Device
@@ -210,6 +211,7 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void closeSerial(void); // Close serial port and tell device Goodbye
         void Snoop(void);       // This opens the serial port but doesn't attempt to establish communication with the device
         void requestFirmwareVersion(void);
+        void requestMinOPCVersion(void);
         void requestUtilizedRadioChannels(void);
         void startStreamRadio(void);
         void stopStreamRadio(void);
@@ -243,6 +245,7 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void SnoopingChanged(boolean snooping);         // Signal for anytime we open or close port for the purpose of snooping
         void RadioStreamingChanged(boolean streaming);  // Radio streaming has started or stopped
         void HereIsFirmwareVersion(QString version);    // Signal for providing firmware version
+        void HereIsMinOPCVersion(QString version);      // Signal for providing the minimum OP Config version the TCB expects
         void HereIsValue(uint16_t ID, QByteArray Value, boolean found);// Signal for providing value read from device
         void HereAreNumChannels(uint8_t numChannels);   // Return the number of utilized radio channels
         void HereArePulseWidths(int16_t *pulseWidths);  // Return an array of pulse widths

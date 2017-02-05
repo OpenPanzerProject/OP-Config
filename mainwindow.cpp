@@ -127,6 +127,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Connections to the OpenPanzerComm object (there are some other set on SetupControls_FirmwareTab for snooping/console features)
     connect(comm, SIGNAL(ConnectionChanged(boolean)), this, SLOT (ShowConnectionStatus(boolean)));
     connect(comm, SIGNAL(HereIsFirmwareVersion(QString)), this, SLOT(SerialStatus_displayFirmware(QString)));
+    connect(comm, SIGNAL(HereIsMinOPCVersion(QString)), this, SLOT(ProcessMinOPCVersion(QString)));
     connect(comm, SIGNAL(HereIsValue(uint16_t, QByteArray, boolean)), this, SLOT(updateVarArray_fromSerial(uint16_t, QByteArray, boolean)));
     connect(comm, SIGNAL(NextSentence(boolean)), this, SLOT(processNextSentence(boolean)));
     connect(comm, SIGNAL(CommError(QString, QSerialPort::SerialPortError)), this, SLOT(ProcessCommError(QString, QSerialPort::SerialPortError)));
@@ -466,7 +467,73 @@ void MainWindow::SerialStatus_SetConnected()
 }
 void MainWindow::SerialStatus_displayFirmware(QString version)
 {
+    // This slot gets called after the TCB returns to us its version number, which is the first request we send to it
+    // after connecting. Now display the version number in the status area at the bottom of the screen as well as the fact
+    // we are connected.
     serialStatusLabel->setText(tr("Connected to %1 (%2)   Firmware: %3") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate).arg(version));
+
+    // We also want to check the TCB version against the minimum TCB version this version of OP Config expects to work with.
+    // This minimum TCB version is defined in version.h
+    FirmwareVersion FVCurrent = DecodeVersion(version);   // This is the version of TCB firmware it just told us it has
+    FirmwareVersion FVReqd = GetMinTCBVersion();          // This is the minimum version of TCB firmware we want to use
+    if (FirmwareGreaterThanComparison(FVReqd, FVCurrent))
+    {   // OP Config needs the TCB to be a later version. Warn the user
+        QString warn = "Your TCB firmware needs to be updated!<br /><br />";
+        warn.append("Please go to the Firmware tab, download the<br />");
+        warn.append("latest release, and flash it to your TCB.");
+        warn.append("<hr />");
+        warn.append("<span style='font-size: 12px;'>");
+        warn.append("<table><tr>");
+        warn.append("<td>Current TCB Firmware: </td><td>");
+        warn.append(version);
+        warn.append("</td></tr>");
+        warn.append("<tr><td>Minimum TCB version required:&nbsp;&nbsp;</td><td>");
+        warn.append(static_cast<QString>(VER_MINTCB_STR));
+        warn.append("</td></tr></table></span>");
+        msgBox(warn, vbOkOnly, "TCB Update Required", vbExclamation);
+    }
+
+    // The next thing we do is ask the TCB to tell us what version of OP Config it expects.
+    // But we only send the request if TCB firmware is greater than 00.90.99 because the
+    // the TCB only obtained the capability of responding to this request with 00.91.
+    FirmwareVersion FVStart;
+    FVStart.Major = 0;
+    FVStart.Minor = 90;
+    FVStart.Patch = 99;
+    if (FirmwareGreaterThanComparison(FVCurrent, FVStart))
+    {
+        comm->requestMinOPCVersion();
+    }
+}
+void MainWindow::ProcessMinOPCVersion(QString version)
+{
+    // The TCB will tell us the minimum version of OP Config that it requires
+    // If that minimum version is greater than the version of OP Config we are using now,
+    // request the user to update.
+
+    FirmwareVersion FVReqd = DecodeVersion(version);
+    FirmwareVersion FVCurrent = DecodeVersion(static_cast<QString>(VER_PRODUCTVERSION_STR));  // This is our OP Config version from version.h
+    if (FirmwareGreaterThanComparison(FVReqd, FVCurrent))
+    {   // OP Config needs to be updated. Warn the user
+        QString warn = "<b>OP Config needs to be updated!</b><br /><br />";
+        warn.append("Your TCB expects a newer version of OP Config.<br />");
+        warn.append(" Would you like to check for an update now?");
+        warn.append("<hr />");
+        warn.append("<span style='font-size: 12px;'>");
+        warn.append("<table><tr>");
+        warn.append("<td>Current OP Config version: </td><td>");
+        warn.append(static_cast<QString>(VER_PRODUCTVERSION_STR));
+        warn.append("</td></tr>");
+        warn.append("<tr><td>Minimum OP Config version required:&nbsp;&nbsp;</td><td>");
+        warn.append(version);
+        warn.append("</td></tr></table></span>");
+
+        if (msgBox(warn, vbYesNo, "OP Config Update Required", vbExclamation) == QMessageBox::Yes)
+        {
+            comm->closeSerial();                        // Close the serial port
+            ui->actionCheck_for_Updates->trigger();     // Go check for updates
+        }
+    }
 }
 void MainWindow::SerialStatus_SetAttemptFlash()
 {

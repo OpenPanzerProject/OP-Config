@@ -11,6 +11,7 @@ void MainWindow::SetupControls_FirmwareTab(void)
     GotWebHex = false;          // We haven't gotten a hex from the internet yet
     WebHexFilePath = "";        // We don't have a local path to it either
     ClearFirmwareVersion(DownloadedVersion);    // We don't know what version is out there
+    DownloadedVersionDate = ""; // Don't know the date of the downloaded version either
     AttemptFlash = false;       // We aren't attempting to flash yet
     ui->lblHexVersion->hide();  // Don't show this label yet
     ui->ltxtHexPath->clear();   // Clear hex path textbox
@@ -61,6 +62,7 @@ void MainWindow::getWebHex()
         {
             QString version = "Version: ";
             version.append(FirmwareVersionToString(DownloadedVersion));
+            if (DownloadedVersionDate != "") version.append("       Date: " + DownloadedVersionDate);
             ui->lblHexVersion->setText(version);
             // Show the special message again
             QString stat = "Release ";
@@ -82,6 +84,7 @@ void MainWindow::getWebHex()
         ui->lblHexVersion->hide();                  // Hide version label
         WebHexFilePath = "";                        // We don't know the final path
         ClearFirmwareVersion(DownloadedVersion);    // We don't know the version
+        DownloadedVersionDate = "";                 // Or this
         ui->cmdWebHexPicker->setChecked(true);      // Check our button
         ui->cmdWebHexPicker->setText("Checking OpenPanzer.org...");
         ui->cmdWebHexPicker->setEnabled(false);     // And prevent user from clicking it
@@ -116,6 +119,7 @@ void MainWindow::checkHexVersion()
         // Check if date is present as well
         if (strDate != "")
         {
+            DownloadedVersionDate = strDate;
             version.append("       Date: " + strDate);
         }
 
@@ -212,7 +216,7 @@ void MainWindow::SaveWebHexFailed()
     GotWebHex = false;              // We do NOT have the file
     WebHexFilePath = "";            // There is no path to the non-existent file
     ClearFirmwareVersion(DownloadedVersion);    // Clear the version
-
+    DownloadedVersionDate = "";     // And its date
     ui->cmdWebHexPicker->setText("Get Latest Release"); // Restore button text
     ui->cmdWebHexPicker->setChecked(false);             // Uncheck
     ui->cmdWebHexPicker->setEnabled(true);              // Re-enable
@@ -228,6 +232,28 @@ boolean MainWindow::isFirmwareVersionEmpty(FirmwareVersion fv)
 {
     if (fv.Major > 0 || fv.Minor > 0 || fv.Patch > 0) return false;
     else return true;
+}
+boolean MainWindow::FirmwareGreaterThanComparison(FirmwareVersion FVCheck, FirmwareVersion FVCompare)
+{
+    // Returns true if check version is greater than compare version
+    if      (FVCheck.Major > FVCompare.Major) return true;
+    else if (FVCheck.Major < FVCompare.Major) return false;
+    else // Same major version
+    {
+        if      (FVCheck.Minor > FVCompare.Minor) return true;
+        else if (FVCheck.Minor < FVCompare.Minor) return false;
+        else // Same major and minor version
+        {
+            if   (FVCheck.Patch > FVCompare.Patch) return true;
+            else                               return false;
+        }
+    }
+}
+FirmwareVersion MainWindow::GetMinTCBVersion(void)
+{
+    // The definition is specified in version.h
+    // It represents the minimum version of TCB firmware this version of OP Config requires
+    return DecodeVersion(static_cast<QString>(VER_MINTCB_STR));
 }
 FirmwareVersion MainWindow::DecodeVersion(QString strVersion)
 {
@@ -246,9 +272,9 @@ FirmwareVersion MainWindow::DecodeVersion(QByteArray qbav)
 
     ClearFirmwareVersion(fv);   // Clear to start
 
-    if (qbav.size() == 8 && qbav[2] == '.' && qbav[5] == '.')
+    if (qbav.size() == 8 && qbav[2] == '.' && qbav[5] == '.')           // Format xx.xx.xx
     {
-        if (isCharNumeric(qbav[0]))
+        if (isCharNumeric(qbav[0])) // Double digit major
         {
             num = qbav[0] - '0';
             fv.Major = num * 10;
@@ -269,6 +295,28 @@ FirmwareVersion MainWindow::DecodeVersion(QByteArray qbav)
         }
         if (isCharNumeric(qbav[7])) fv.Patch += qbav[7] - '0';
     }
+    else if (qbav.size() == 7 && qbav[1] == '.' && qbav[4] == '.')      // Format x.xx.xx
+    {
+        if (isCharNumeric(qbav[0])) // Single digit major
+        {
+            num = qbav[0] - '0';
+            fv.Major = num;
+        }
+
+        if (isCharNumeric(qbav[2]))
+        {
+            num = qbav[2] - '0';
+            fv.Minor = num * 10;
+        }
+        if (isCharNumeric(qbav[3])) fv.Minor += qbav[3] - '0';
+
+        if (isCharNumeric(qbav[5]))
+        {
+            num = qbav[5] - '0';
+            fv.Patch = num * 10;
+        }
+        if (isCharNumeric(qbav[6])) fv.Patch += qbav[6] - '0';
+    }
     if (fv.Major > 99) fv.Major = 99;
     if (fv.Minor > 99) fv.Minor = 99;
     if (fv.Patch > 99) fv.Patch = 99;
@@ -282,12 +330,11 @@ boolean MainWindow::isCharNumeric(char c)
 }
 QString MainWindow::FirmwareVersionToString(FirmwareVersion fv)
 {   // This will return a string of the firmware version with periods in the correct place
-    // and numbers padded with zero if they are less than 10
+    // and numbers padded with zero if they are less than 10 (except for major)
 
     QString sfv;
     ClearFirmwareVersion(fv);
 
-    if (fv.Major < 10)  sfv.append("0");
     sfv.append(QString::number(fv.Major));
     sfv.append(".");
     if (fv.Minor < 10)  sfv.append("0");

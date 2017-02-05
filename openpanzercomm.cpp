@@ -456,6 +456,11 @@ void OpenPanzerComm::requestFirmwareVersion(void)
     sendNullValueSentence(PCCMD_READ_VERSION);
 }
 
+void OpenPanzerComm::requestMinOPCVersion(void)
+{
+    sendNullValueSentence(PCCMD_MINOPC_VERSION);
+}
+
 void OpenPanzerComm::SetSabertoothBaudRate(uint8_t SabertoothBaud)
 {
     clearSentenceOUT();
@@ -582,6 +587,12 @@ void OpenPanzerComm::readData()
                             // Value will be firmware version
                             case PCCMD_READ_VERSION:
                                 emit HereIsFirmwareVersion(SentenceIN.Value);
+                                break;
+
+                            // Value will be the minimum version of OP Config the TCB expects.
+                            // We can use this to alert the user if they need to update OP Config
+                            case PCCMD_MINOPC_VERSION:
+                                emit HereIsMinOPCVersion(SentenceIN.Value);
                                 break;
 
                             // Returns number of utilized channels

@@ -180,18 +180,19 @@ void MainWindow::RemoveVolumeUserSoundFunctions1_4()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
     // Make sure we didn't already have a function trigger defined for any of them either
-    if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_ONCE) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_RPT) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_OFF) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND2_ONCE) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND2_RPT) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND2_OFF) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_ONCE) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_RPT) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_OFF) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT) ||
+    // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+    if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND2_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND2_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND2_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF))
         RemovedFunctionTriggersMsgBox();
 }
@@ -207,12 +208,13 @@ void MainWindow::RemoveVolumeUserSoundFunctions3_4()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
     // Make sure we didn't already have a function trigger defined for any of them either
-    if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_ONCE) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_RPT) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_OFF) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) ||
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT) ||
+    // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+    if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF))
         RemovedFunctionTriggersMsgBox();
 }

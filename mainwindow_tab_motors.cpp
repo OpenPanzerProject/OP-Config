@@ -169,8 +169,9 @@ void MainWindow::ShowHideSmokerSettings()
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_DISABLE);
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_TOGGLE);
         // Make sure we didn't already have a function trigger defined for it too
-        if (FT_TableModel->removeFunctionFromList(SF_SMOKER_ENABLE) ||
-            FT_TableModel->removeFunctionFromList(SF_SMOKER_DISABLE) ||
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_SMOKER_ENABLE)  |
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_DISABLE) |
             FT_TableModel->removeFunctionFromList(SF_SMOKER_TOGGLE))
             RemovedFunctionTriggersMsgBox();
     }
@@ -199,6 +200,42 @@ void MainWindow::ValidateMotorSelections()
     // We will however allow both turret and drive motors to be driven by serial, but the user will need to make
     // some kind of Y-harness and assign each serial ESC a unique address
 
+
+    // Another restriction is that turn modes are disabled for cars (obviously) as well as clutch-style tank gearboxes.
+    // First, make sure they are all already there (AddSF will only add them if they are not)
+    ui->cboSelectFunction->AddSF(SF_TURNMODE_1);
+    ui->cboSelectFunction->AddSF(SF_TURNMODE_2);
+    ui->cboSelectFunction->AddSF(SF_TURNMODE_3);
+    // Now remove them if necessary
+    if (ui->cboDriveType->currentData() == DT_CAR || ui->cboDriveType->currentData() == DT_DKLM)
+    {
+        ui->cboSelectFunction->RemoveSF(SF_TURNMODE_1);
+        ui->cboSelectFunction->RemoveSF(SF_TURNMODE_2);
+        ui->cboSelectFunction->RemoveSF(SF_TURNMODE_3);
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_TURNMODE_1) |
+            FT_TableModel->removeFunctionFromList(SF_TURNMODE_2) |
+            FT_TableModel->removeFunctionFromList(SF_TURNMODE_3))
+            RemovedFunctionTriggersMsgBox();
+    }
+
+    // Neutral turns are not allowed for Cars and Halftracks, so remove that function if necessary
+    // First, make sure they are all already there (AddSF will only add them if they are not)
+    ui->cboSelectFunction->AddSF(SF_NT_ENABLE);
+    ui->cboSelectFunction->AddSF(SF_NT_DISABLE);
+    ui->cboSelectFunction->AddSF(SF_NT_TOGGLE);
+    // Now remove them if necessary
+    if (ui->cboDriveType->currentData() == DT_CAR || ui->cboDriveType->currentData() == DT_HALFTRACK)
+    {
+        ui->cboSelectFunction->RemoveSF(SF_NT_ENABLE);
+        ui->cboSelectFunction->RemoveSF(SF_NT_DISABLE);
+        ui->cboSelectFunction->RemoveSF(SF_NT_TOGGLE);
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_NT_ENABLE) |
+            FT_TableModel->removeFunctionFromList(SF_NT_DISABLE) |
+            FT_TableModel->removeFunctionFromList(SF_NT_TOGGLE))
+            RemovedFunctionTriggersMsgBox();
+    }
 
     // If the turret elevation motor is set to SERVO_PAN we enable the option to implement barrel stabilization (on the Driving tab).
     // Otherwise if it is any other setting, stabilization is unavailable
@@ -243,7 +280,8 @@ void MainWindow::ValidateMotorSelections()
             // Drive type is Tank or Halftrack or DKLM - remove both onboard drivers
             ui->cboSelectFunction->RemoveSF(SF_MOTOR_A);
             ui->cboSelectFunction->RemoveSF(SF_MOTOR_B);
-            if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A) || FT_TableModel->removeFunctionFromList(SF_MOTOR_B))
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A) | FT_TableModel->removeFunctionFromList(SF_MOTOR_B))
                 RemovedFunctionTriggersMsgBox();
         }
     }
@@ -447,9 +485,10 @@ void MainWindow::ValidateRCPassthroughs()
         ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
 
         // Now make sure these aren't in our function triggers
-        if (FT_TableModel->removeFunctionFromList(SF_RC1_PASS) ||
-            FT_TableModel->removeFunctionFromList(SF_RC1_PASS_PAN) ||
-            FT_TableModel->removeFunctionFromList(SF_RC2_PASS) ||
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_RC1_PASS)     |
+            FT_TableModel->removeFunctionFromList(SF_RC1_PASS_PAN) |
+            FT_TableModel->removeFunctionFromList(SF_RC2_PASS)     |
             FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
@@ -460,7 +499,8 @@ void MainWindow::ValidateRCPassthroughs()
             // a steering servo, which we will if this is a halftrack or car
             ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
             // Now make sure this isn't in our function trigger list
-            if (FT_TableModel->removeFunctionFromList(SF_RC2_PASS) ||
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_RC2_PASS) |
                 FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN))
                 RemovedFunctionTriggersMsgBox();
         }
@@ -470,7 +510,8 @@ void MainWindow::ValidateRCPassthroughs()
     {
         ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETROTATION);
         // Now make sure this isn't in our function trigger list
-        if (FT_TableModel->removeFunctionFromList(SF_RC3_PASS) ||
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_RC3_PASS) |
             FT_TableModel->removeFunctionFromList(SF_RC3_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
@@ -479,7 +520,8 @@ void MainWindow::ValidateRCPassthroughs()
     {
         ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETELEVATION);
         // Now make sure this isn't in our function trigger list
-        if (FT_TableModel->removeFunctionFromList(SF_RC4_PASS) ||
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_RC4_PASS) |
             FT_TableModel->removeFunctionFromList(SF_RC4_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
@@ -495,11 +537,12 @@ void MainWindow::ValidateRCPassthroughs()
             ui->cboSelectFunction->removeRCPassthrough(7);
             ui->cboSelectFunction->removeRCPassthrough(8);
             // Now make sure this isn't in our function trigger list
-            if (FT_TableModel->removeFunctionFromList(SF_RC6_PASS) ||
-                FT_TableModel->removeFunctionFromList(SF_RC6_PASS_PAN) ||
-                FT_TableModel->removeFunctionFromList(SF_RC7_PASS) ||
-                FT_TableModel->removeFunctionFromList(SF_RC7_PASS_PAN) ||
-                FT_TableModel->removeFunctionFromList(SF_RC8_PASS) ||
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_RC6_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC6_PASS_PAN) |
+                FT_TableModel->removeFunctionFromList(SF_RC7_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC7_PASS_PAN) |
+                FT_TableModel->removeFunctionFromList(SF_RC8_PASS)     |
                 FT_TableModel->removeFunctionFromList(SF_RC8_PASS_PAN))
                 RemovedFunctionTriggersMsgBox();
             break;
@@ -508,7 +551,8 @@ void MainWindow::ValidateRCPassthroughs()
             // The Taigen sound card only needs output 8, the other two are free for general use
             ui->cboSelectFunction->removeRCPassthrough(8);
             // Now make sure this isn't in our function trigger list
-            if (FT_TableModel->removeFunctionFromList(SF_RC8_PASS) ||
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_RC8_PASS) |
                 FT_TableModel->removeFunctionFromList(SF_RC8_PASS_PAN))
                 RemovedFunctionTriggersMsgBox();
             break;

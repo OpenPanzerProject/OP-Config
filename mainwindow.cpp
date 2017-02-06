@@ -118,7 +118,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // Connect/Read/Write buttons
     ui->cmdConnect->setChecked(false);      // Start not connected
-    ui->cmdReadDevice->setEnabled(false);   // Can't read until connected
+    ui->cmdReadDevice->setEnabled(true);    // We actually allow the user to click Read even if not connected, but it will try to connect first
+    oneClickRead = false;                   // We call this oneClickRead and this flag indicates we are in the midst of that process. Initialize to false.
     ui->cmdWriteDevice->setEnabled(false);  // Can't write until connected
     connect(ui->cmdConnect, SIGNAL(clicked(bool)), this, SLOT(toggleDeviceConnection()));
     connect(ui->cmdReadDevice, SIGNAL(clicked(bool)), this, SLOT(readSettingsFromDevice()));
@@ -410,7 +411,7 @@ void MainWindow::cmdTest2_Click()
 
 
 //------------------------------------------------------------------------------------------------------------------------>>
-// FORM CONTROLS - TOP SECTION - COM, BAUD, CONNECT, READ DEVICE, WRITE DEVICE
+// FORM CONTROLS - TOP SECTION - COM, BAUD
 //------------------------------------------------------------------------------------------------------------------------>>
 void MainWindow::fillPortsInfo()
 {
@@ -445,7 +446,7 @@ void MainWindow::setBaudRate()
 
 
 //------------------------------------------------------------------------------------------------------------------------>>
-// FORM CONTROLS - SERIAL STATUS LABEL (In bottom status bar)
+// FORM CONTROLS - SERIAL STATUS LABEL (In bottom status bar), INITIAL CONNECTION FIRMWARE CHECKS
 //------------------------------------------------------------------------------------------------------------------------>>
 
 void MainWindow::SerialStatus_SetAttemptConnect()
@@ -491,6 +492,10 @@ void MainWindow::SerialStatus_displayFirmware(QString version)
         warn.append(static_cast<QString>(VER_MINTCB_STR));
         warn.append("</td></tr></table></span>");
         msgBox(warn, vbOkOnly, "TCB Update Required", vbExclamation);
+
+        // Also, if we had connected with the intent of reading immediately, we cancel the read.
+        // The user can still read but they will have to click the read button a second time
+        ResetOneClickRead();    // See mainwindow_device_rw.cpp
     }
 
     // The next thing we do is ask the TCB to tell us what version of OP Config it expects.
@@ -503,6 +508,10 @@ void MainWindow::SerialStatus_displayFirmware(QString version)
     if (FirmwareGreaterThanComparison(FVCurrent, FVStart))
     {
         comm->requestMinOPCVersion();
+    }
+    else
+    {   // If we're done connecting, and the user wanted to perform a read, kick it off
+        if (oneClickRead) readSettingsFromDevice();
     }
 }
 void MainWindow::ProcessMinOPCVersion(QString version)
@@ -533,7 +542,14 @@ void MainWindow::ProcessMinOPCVersion(QString version)
             comm->closeSerial();                        // Close the serial port
             ui->actionCheck_for_Updates->trigger();     // Go check for updates
         }
+
+        // If we had connected with the intent of reading immediately, we cancel the read.
+        // The user can still read but they will have to click the read button a second time
+        ResetOneClickRead();    // See mainwindow_device_rw.cpp
     }
+
+    // If we're done connecting, and the user wanted to perform a read, kick it off
+    if (oneClickRead) readSettingsFromDevice();
 }
 void MainWindow::SerialStatus_SetAttemptFlash()
 {

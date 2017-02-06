@@ -100,7 +100,7 @@ void MainWindow::ShowConnectionStatus(boolean connected)
             ui->cmdConnect->setText("Connect"); //
                 ui->cmdConnect->setEnabled(true);
         ui->actionRead->setEnabled(false);      // Read action disabled
-        ui->cmdReadDevice->setEnabled(false);   // Read device button disabled
+        ui->cmdReadDevice->setEnabled(true);    // We allow the user to click this even if not connected, but it will try to connect first
         ui->cmdReadDevice->setChecked(false);   // Button un-checked
         ui->actionWrite->setEnabled(false);     // Write action disabled
         ui->cmdWriteDevice->setEnabled(false);  // Write device button disabled
@@ -277,25 +277,45 @@ void MainWindow::updateVarArray_fromSerial(uint16_t ID, QByteArray value, boolea
 // This reads all settings sequentially
 void MainWindow::readSettingsFromDevice(void)
 {
-    MouseWait();
-    ui->cmdReadDevice->setChecked(true);
-    ui->cmdSnoop->setEnabled(false);
-    ui->cmdFlashHex->setEnabled(false);
+    if (comm->isConnected())
+    {
+        MouseWait();
+        oneClickRead  = false;  // This flag may have been set, clear it now.
+        ui->cmdReadDevice->setChecked(true);
+        ui->cmdSnoop->setEnabled(false);
+        ui->cmdFlashHex->setEnabled(false);
 
-    // Show and initialize the progress bar
-    statusProgressBar->show();
-            qApp->processEvents();
-    statusProgressBar->setRange(1, NUM_STORED_VARS);
-    statusProgressBar->setValue(1);
+        // Show and initialize the progress bar
+        statusProgressBar->show();
+                qApp->processEvents();
+        statusProgressBar->setRange(1, NUM_STORED_VARS);
+        statusProgressBar->setValue(1);
 
-    // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
-    DisableDeviceActionsDuringReadWrite();
+        // Don't allow user to disconnect/read/write while we are in the midst of reading/writing
+        DisableDeviceActionsDuringReadWrite();
 
-    nextVarPos = 2;                         // Next one will be number 2
-    readAllSettings = true;                 // Set the read all flag
-    sendReadCommand_byPos(1);               // Read the first value
-    // Now when the value is read, the readAllSettings flag will cause the read routine to request
-    // the next variable, until they have finally all been read. This will be done in updateVarArray_fromSerial
+        nextVarPos = 2;                         // Next one will be number 2
+        readAllSettings = true;                 // Set the read all flag
+        sendReadCommand_byPos(1);               // Read the first value
+        // Now when the value is read, the readAllSettings flag will cause the read routine to request
+        // the next variable, until they have finally all been read. This will be done in updateVarArray_fromSerial
+    }
+    else
+    {
+        // In this case we are not connected but the user has clicked the Read settings from device button.
+        // We set a flag so we remember the user wants to read settings, then first we go try to connect.
+        // If connection is successful and if we don't need to update firmware, after the connection
+        // read settings will automatically be started (see two functions in mainwindow.cpp:
+        // SerialStatus_displayFirmware() and ProcessMinOPCVersion()
+        ui->cmdReadDevice->setChecked(true);
+        oneClickRead = true;
+        toggleDeviceConnection();
+    }
+}
+void MainWindow::ResetOneClickRead()
+{
+    if (oneClickRead) oneClickRead = false;
+    ui->cmdReadDevice->setChecked(false);
 }
 // Send a command to device to return a value
 void MainWindow::sendReadCommand_byPos(uint16_t VarPos)

@@ -476,6 +476,8 @@ private:
       boolean readAllSettings;                      // Flags
       boolean writeAllSettings;
       boolean writeSomeSettings;
+      boolean oneClickRead;                         // When the user clicks the read from device button but the device isn't yet connected
+      void ResetOneClickRead(void);                 //
       boolean setSabertoothBaudRate;                // Flag set during Sabertooth configuration
       boolean configurePololuDrive;                 // Flags set during Pololu configuration
       boolean configurePololuTurret;

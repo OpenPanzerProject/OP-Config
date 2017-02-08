@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>8</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -6392,7 +6392,7 @@ QSizeGrip {
                 <property name="geometry">
                  <rect>
                   <x>360</x>
-                  <y>170</y>
+                  <y>220</y>
                   <width>331</width>
                   <height>151</height>
                  </rect>
@@ -6596,7 +6596,7 @@ QSizeGrip {
                   <x>360</x>
                   <y>0</y>
                   <width>331</width>
-                  <height>161</height>
+                  <height>211</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -6668,7 +6668,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>100</y>
+                   <y>150</y>
                    <width>51</width>
                    <height>21</height>
                   </rect>
@@ -6688,7 +6688,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>70</x>
-                   <y>100</y>
+                   <y>150</y>
                    <width>61</width>
                    <height>21</height>
                   </rect>
@@ -6706,8 +6706,8 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinAuxBlinkOn_mS">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
-                   <y>100</y>
+                   <x>160</x>
+                   <y>150</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -6722,8 +6722,8 @@ QSizeGrip {
                 <widget class="QLabel" name="label_102">
                  <property name="geometry">
                   <rect>
-                   <x>230</x>
-                   <y>100</y>
+                   <x>240</x>
+                   <y>150</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -6740,8 +6740,8 @@ QSizeGrip {
                 <widget class="QLabel" name="label_103">
                  <property name="geometry">
                   <rect>
-                   <x>230</x>
-                   <y>130</y>
+                   <x>240</x>
+                   <y>180</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -6759,7 +6759,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>70</x>
-                   <y>130</y>
+                   <y>180</y>
                    <width>61</width>
                    <height>21</height>
                   </rect>
@@ -6776,8 +6776,8 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinAuxBlinkOff_mS">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
-                   <y>130</y>
+                   <x>160</x>
+                   <y>180</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -6810,7 +6810,7 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinAuxPresetDim">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
+                   <x>160</x>
                    <y>40</y>
                    <width>71</width>
                    <height>22</height>
@@ -6826,7 +6826,7 @@ QSizeGrip {
                 <widget class="QLabel" name="label_90">
                  <property name="geometry">
                   <rect>
-                   <x>230</x>
+                   <x>240</x>
                    <y>40</y>
                    <width>21</width>
                    <height>21</height>
@@ -6845,7 +6845,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>70</y>
+                   <y>80</y>
                    <width>51</width>
                    <height>21</height>
                   </rect>
@@ -6864,8 +6864,8 @@ QSizeGrip {
                 <widget class="QLabel" name="label_123">
                  <property name="geometry">
                   <rect>
-                   <x>230</x>
-                   <y>70</y>
+                   <x>240</x>
+                   <y>80</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -6882,8 +6882,8 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinAuxFlash_mS">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
-                   <y>70</y>
+                   <x>160</x>
+                   <y>80</y>
                    <width>71</width>
                    <height>22</height>
                   </rect>
@@ -6899,7 +6899,7 @@ QSizeGrip {
                  <property name="geometry">
                   <rect>
                    <x>70</x>
-                   <y>70</y>
+                   <y>80</y>
                    <width>61</width>
                    <height>21</height>
                   </rect>
@@ -6930,6 +6930,39 @@ QSizeGrip {
                  </property>
                  <property name="text">
                   <string>Preset Level</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_161">
+                 <property name="geometry">
+                  <rect>
+                   <x>70</x>
+                   <y>109</y>
+                   <width>141</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Auto Flash with Cannon</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkAuxFlashWithCannon">
+                 <property name="geometry">
+                  <rect>
+                   <x>219</x>
+                   <y>110</y>
+                   <width>21</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
                  </property>
                 </widget>
                </widget>
@@ -12790,6 +12823,268 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <header location="global">combo_recoilservopreset.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>cmdRefreshCOMs</tabstop>
+  <tabstop>cboCOMPorts</tabstop>
+  <tabstop>cboConsoleBaud</tabstop>
+  <tabstop>cmdConnect</tabstop>
+  <tabstop>cmdReadDevice</tabstop>
+  <tabstop>cmdWriteDevice</tabstop>
+  <tabstop>hpbRadio</tabstop>
+  <tabstop>cboThrottleChannelNum</tabstop>
+  <tabstop>spinThrottleDeadband</tabstop>
+  <tabstop>chkThrottleReversed</tabstop>
+  <tabstop>cboTurnChannelNum</tabstop>
+  <tabstop>spinTurnDeadband</tabstop>
+  <tabstop>chkTurnReversed</tabstop>
+  <tabstop>cboElevationChannelNum</tabstop>
+  <tabstop>spinElevationDeadband</tabstop>
+  <tabstop>chkElevationReversed</tabstop>
+  <tabstop>cboAzimuthChannelNum</tabstop>
+  <tabstop>spinAzimuthDeadband</tabstop>
+  <tabstop>chkRotationReversed</tabstop>
+  <tabstop>cboAux1ChannelNum</tabstop>
+  <tabstop>cboAux1Type</tabstop>
+  <tabstop>cboAux1NumSwitchPos</tabstop>
+  <tabstop>chkAux1_Reversed</tabstop>
+  <tabstop>cboAux2ChannelNum</tabstop>
+  <tabstop>cboAux2Type</tabstop>
+  <tabstop>cboAux2NumSwitchPos</tabstop>
+  <tabstop>chkAux2_Reversed</tabstop>
+  <tabstop>cboAux3ChannelNum</tabstop>
+  <tabstop>cboAux3Type</tabstop>
+  <tabstop>cboAux3NumSwitchPos</tabstop>
+  <tabstop>chkAux3_Reversed</tabstop>
+  <tabstop>cboAux4ChannelNum</tabstop>
+  <tabstop>cboAux4Type</tabstop>
+  <tabstop>cboAux4NumSwitchPos</tabstop>
+  <tabstop>chkAux4_Reversed</tabstop>
+  <tabstop>cboAux5ChannelNum</tabstop>
+  <tabstop>cboAux5Type</tabstop>
+  <tabstop>cboAux5NumSwitchPos</tabstop>
+  <tabstop>chkAux5_Reversed</tabstop>
+  <tabstop>cboAux6ChannelNum</tabstop>
+  <tabstop>cboAux6Type</tabstop>
+  <tabstop>cboAux6NumSwitchPos</tabstop>
+  <tabstop>chkAux6_Reversed</tabstop>
+  <tabstop>cboAux7ChannelNum</tabstop>
+  <tabstop>cboAux7Type</tabstop>
+  <tabstop>cboAux7NumSwitchPos</tabstop>
+  <tabstop>chkAux7_Reversed</tabstop>
+  <tabstop>cboAux8ChannelNum</tabstop>
+  <tabstop>cboAux8Type</tabstop>
+  <tabstop>cboAux8NumSwitchPos</tabstop>
+  <tabstop>chkAux8_Reversed</tabstop>
+  <tabstop>cboAux9ChannelNum</tabstop>
+  <tabstop>cboAux9Type</tabstop>
+  <tabstop>cboAux9NumSwitchPos</tabstop>
+  <tabstop>chkAux9_Reversed</tabstop>
+  <tabstop>cboAux10ChannelNum</tabstop>
+  <tabstop>cboAux10Type</tabstop>
+  <tabstop>cboAux10NumSwitchPos</tabstop>
+  <tabstop>chkAux10_Reversed</tabstop>
+  <tabstop>cboAux11ChannelNum</tabstop>
+  <tabstop>cboAux11Type</tabstop>
+  <tabstop>cboAux11NumSwitchPos</tabstop>
+  <tabstop>chkAux11_Reversed</tabstop>
+  <tabstop>cboAux12ChannelNum</tabstop>
+  <tabstop>cboAux12Type</tabstop>
+  <tabstop>cboAux12NumSwitchPos</tabstop>
+  <tabstop>chkAux12_Reversed</tabstop>
+  <tabstop>cmdRadioStream</tabstop>
+  <tabstop>cmdSaveCenters</tabstop>
+  <tabstop>cmdSaveMinMax</tabstop>
+  <tabstop>sliderThrottleLow</tabstop>
+  <tabstop>sliderThrottleHigh</tabstop>
+  <tabstop>sliderSteeringLow</tabstop>
+  <tabstop>sliderSteeringHigh</tabstop>
+  <tabstop>sliderElevationLow</tabstop>
+  <tabstop>sliderElevationHigh</tabstop>
+  <tabstop>sliderRotationLow</tabstop>
+  <tabstop>sliderRotationHigh</tabstop>
+  <tabstop>sliderAux1Low</tabstop>
+  <tabstop>sliderAux1High</tabstop>
+  <tabstop>sliderAux2Low</tabstop>
+  <tabstop>sliderAux2High</tabstop>
+  <tabstop>sliderAux3Low</tabstop>
+  <tabstop>sliderAux3High</tabstop>
+  <tabstop>sliderAux4Low</tabstop>
+  <tabstop>sliderAux4High</tabstop>
+  <tabstop>sliderAux5Low</tabstop>
+  <tabstop>sliderAux5High</tabstop>
+  <tabstop>sliderAux6Low</tabstop>
+  <tabstop>sliderAux6High</tabstop>
+  <tabstop>sliderAux7Low</tabstop>
+  <tabstop>sliderAux7High</tabstop>
+  <tabstop>sliderAux8Low</tabstop>
+  <tabstop>sliderAux8High</tabstop>
+  <tabstop>sliderAux9Low</tabstop>
+  <tabstop>sliderAux9High</tabstop>
+  <tabstop>sliderAux10Low</tabstop>
+  <tabstop>sliderAux10High</tabstop>
+  <tabstop>sliderAux11Low</tabstop>
+  <tabstop>sliderAux11High</tabstop>
+  <tabstop>sliderAux12Low</tabstop>
+  <tabstop>sliderAux12High</tabstop>
+  <tabstop>cmdTest1</tabstop>
+  <tabstop>cmdTest2</tabstop>
+  <tabstop>listViewWest</tabstop>
+  <tabstop>hpbMotorSelection</tabstop>
+  <tabstop>cboDriveType</tabstop>
+  <tabstop>cboDriveMotors</tabstop>
+  <tabstop>cboTurretRotationMotor</tabstop>
+  <tabstop>cboTurretElevationMotor</tabstop>
+  <tabstop>hpbBarrel</tabstop>
+  <tabstop>chkEnableMechBarrel</tabstop>
+  <tabstop>cboMechBarrelType</tabstop>
+  <tabstop>spinRecoilDelay</tabstop>
+  <tabstop>hpbRecoilServo</tabstop>
+  <tabstop>chkEnableRecoilServo</tabstop>
+  <tabstop>chkRecoilServoReversed</tabstop>
+  <tabstop>spinRecoilTimeToRecoil</tabstop>
+  <tabstop>spinRecoilTimeToReturn</tabstop>
+  <tabstop>cboRecoilServoPreset</tabstop>
+  <tabstop>hpbTurret</tabstop>
+  <tabstop>spinTurretRotationSpeed</tabstop>
+  <tabstop>spinBarrelElevationSpeed</tabstop>
+  <tabstop>hpbSmoker</tabstop>
+  <tabstop>cboSmokerControl</tabstop>
+  <tabstop>spinSmokerIdle</tabstop>
+  <tabstop>spinSmokerFastIdle</tabstop>
+  <tabstop>spinSmokerMax</tabstop>
+  <tabstop>spinSmokeDestroyed</tabstop>
+  <tabstop>hpbBrakeLights</tabstop>
+  <tabstop>chkBrakesOnAtStop</tabstop>
+  <tabstop>spinRunningLightsDimLevel</tabstop>
+  <tabstop>chkRunningLightsAlwaysOn</tabstop>
+  <tabstop>hpbMachineGun</tabstop>
+  <tabstop>spinMGBlink_mS</tabstop>
+  <tabstop>hpbIndicatorLights</tabstop>
+  <tabstop>chkBlinkSignalLost</tabstop>
+  <tabstop>hpbHiFlash</tabstop>
+  <tabstop>chkHiFlashWithCannon</tabstop>
+  <tabstop>hpbAuxOutput</tabstop>
+  <tabstop>spinAuxPresetDim</tabstop>
+  <tabstop>spinAuxFlash_mS</tabstop>
+  <tabstop>chkAuxFlashWithCannon</tabstop>
+  <tabstop>spinAuxBlinkOn_mS</tabstop>
+  <tabstop>spinAuxBlinkOff_mS</tabstop>
+  <tabstop>hpbPortsAB</tabstop>
+  <tabstop>cboPortADataDirection</tabstop>
+  <tabstop>cboPortA_InputType</tabstop>
+  <tabstop>cboPortBDataDirection</tabstop>
+  <tabstop>cboPortB_InputType</tabstop>
+  <tabstop>hpbFunctions</tabstop>
+  <tabstop>cboSelectFunction</tabstop>
+  <tabstop>cboTriggerSource</tabstop>
+  <tabstop>cboTriggerAction</tabstop>
+  <tabstop>cmdAddFunctionTrigger</tabstop>
+  <tabstop>hpbIgnoreTurret</tabstop>
+  <tabstop>spinIgnoreTurretDelay</tabstop>
+  <tabstop>tblFunctionTriggers</tabstop>
+  <tabstop>cmdRemoveFunctionTrigger</tabstop>
+  <tabstop>hpbDriving</tabstop>
+  <tabstop>chkEngineAutoStart</tabstop>
+  <tabstop>dspinEngineAutoStop</tabstop>
+  <tabstop>spinReverseSpeed</tabstop>
+  <tabstop>spinForwardSpeed</tabstop>
+  <tabstop>spinNudgePercent</tabstop>
+  <tabstop>spinNudgeTime</tabstop>
+  <tabstop>dspinTransDelay</tabstop>
+  <tabstop>dspinEngineDelay</tabstop>
+  <tabstop>dspinShiftTime</tabstop>
+  <tabstop>hpbTurning</tabstop>
+  <tabstop>cboTurnMode</tabstop>
+  <tabstop>chkNeutralTurn</tabstop>
+  <tabstop>spinNeutralTurnSpeed</tabstop>
+  <tabstop>spinHalftrackTurnPct</tabstop>
+  <tabstop>hpbAccelDecel</tabstop>
+  <tabstop>tabDrivingProfiles</tabstop>
+  <tabstop>chkAccelEnable_1</tabstop>
+  <tabstop>cboAccelLevel_1</tabstop>
+  <tabstop>cboAccelPreset_1</tabstop>
+  <tabstop>chkDecelEnable_1</tabstop>
+  <tabstop>cboDecelLevel_1</tabstop>
+  <tabstop>cboDecelPreset_1</tabstop>
+  <tabstop>chkAccelEnable_2</tabstop>
+  <tabstop>cboAccelLevel_2</tabstop>
+  <tabstop>cboAccelPreset_2</tabstop>
+  <tabstop>chkDecelEnable_2</tabstop>
+  <tabstop>cboDecelLevel_2</tabstop>
+  <tabstop>cboDecelPreset_2</tabstop>
+  <tabstop>hpbIMU</tabstop>
+  <tabstop>chkEnableBarrel</tabstop>
+  <tabstop>spinBarrelSensitivity</tabstop>
+  <tabstop>chkEnableHills</tabstop>
+  <tabstop>spinHillSensitivity</tabstop>
+  <tabstop>hpbWeightClass</tabstop>
+  <tabstop>spinMaxHits</tabstop>
+  <tabstop>dspinReloadTime</tabstop>
+  <tabstop>dspinRecoveryTime</tabstop>
+  <tabstop>hpbCannonIR</tabstop>
+  <tabstop>cboFireProtocol</tabstop>
+  <tabstop>cboTeam</tabstop>
+  <tabstop>cboHitProtocol_2</tabstop>
+  <tabstop>chkSendTankID</tabstop>
+  <tabstop>spinTankID</tabstop>
+  <tabstop>hpbMGIR</tabstop>
+  <tabstop>cboMGProtocol</tabstop>
+  <tabstop>chkUseMG</tabstop>
+  <tabstop>chkAcceptMG</tabstop>
+  <tabstop>spinMaxMGHits</tabstop>
+  <tabstop>hpbRepairIR</tabstop>
+  <tabstop>cboRepairProtocol</tabstop>
+  <tabstop>hpbDamage</tabstop>
+  <tabstop>cboDamageProfile</tabstop>
+  <tabstop>hpbGeneralSound</tabstop>
+  <tabstop>cboSoundDevice</tabstop>
+  <tabstop>chkEnableTurretSound</tabstop>
+  <tabstop>chkEnableBarrelSound</tabstop>
+  <tabstop>chkEnableHeadlightSound</tabstop>
+  <tabstop>chkEnableSqueak1</tabstop>
+  <tabstop>spinSqueak1Min</tabstop>
+  <tabstop>spinSqueak1Max</tabstop>
+  <tabstop>chkEnableSqueak2</tabstop>
+  <tabstop>spinSqueak2Min</tabstop>
+  <tabstop>spinSqueak2Max</tabstop>
+  <tabstop>chkEnableSqueak3</tabstop>
+  <tabstop>spinSqueak3Min</tabstop>
+  <tabstop>spinSqueak3Max</tabstop>
+  <tabstop>chkEnableSqueak4</tabstop>
+  <tabstop>spinSqueak4Min</tabstop>
+  <tabstop>spinSqueak4Max</tabstop>
+  <tabstop>chkEnableSqueak5</tabstop>
+  <tabstop>spinSqueak5Min</tabstop>
+  <tabstop>spinSqueak5Max</tabstop>
+  <tabstop>chkEnableSqueak6</tabstop>
+  <tabstop>spinSqueak6Min</tabstop>
+  <tabstop>spinSqueak6Max</tabstop>
+  <tabstop>spinMinSqueakSpeed</tabstop>
+  <tabstop>hpbLVC</tabstop>
+  <tabstop>chkLVCEnabled</tabstop>
+  <tabstop>dspinLVCVoltage</tabstop>
+  <tabstop>hpbBaud</tabstop>
+  <tabstop>cboAuxSerialBaud</tabstop>
+  <tabstop>cboMotorSerialBaud</tabstop>
+  <tabstop>cboSer3Baud</tabstop>
+  <tabstop>hpbDebug</tabstop>
+  <tabstop>chkDebug</tabstop>
+  <tabstop>hpbSabertooth</tabstop>
+  <tabstop>cmdSetSabertoothBaud</tabstop>
+  <tabstop>hpbPololu</tabstop>
+  <tabstop>cmdConfigPololuDrive</tabstop>
+  <tabstop>cmdConfigPololuTurret</tabstop>
+  <tabstop>hpbFirmware</tabstop>
+  <tabstop>cmdWebHexPicker</tabstop>
+  <tabstop>cmdLocalHexPicker</tabstop>
+  <tabstop>ltxtHexPath</tabstop>
+  <tabstop>cmdFlashHex</tabstop>
+  <tabstop>hpbConsole</tabstop>
+  <tabstop>cmdSnoop</tabstop>
+  <tabstop>cmdClearConsole</tabstop>
+  <tabstop>chkAutoscroll</tabstop>
+  <tabstop>txtConsole</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

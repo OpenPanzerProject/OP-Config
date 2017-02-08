@@ -126,6 +126,7 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinAuxBlinkOn_mS->setValue(DeviceData.AuxLightBlinkOnTime_mS);
     ui->spinAuxBlinkOff_mS->setValue(DeviceData.AuxLightBlinkOffTime_mS);
     ui->spinAuxPresetDim->setValue(DeviceData.AuxLightPresetDim);
+    ui->chkAuxFlashWithCannon->setChecked(DeviceData.AuxFlashWithCannon);
     // External I/O - set the combo to our user data, which means, we can't go directly to index
     // This sets the input type (analog or digital). Only applies if the data direction is input
     ui->cboPortA_InputType->setCurrentIndex(ui->cboPortA_InputType->findData(DeviceData.PortA.Settings.Digital));
@@ -369,6 +370,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.AuxLightBlinkOnTime_mS = ui->spinAuxBlinkOn_mS->value();
     DeviceData.AuxLightBlinkOffTime_mS = ui->spinAuxBlinkOff_mS->value();
     DeviceData.AuxLightPresetDim = ui->spinAuxPresetDim->value();
+    DeviceData.AuxFlashWithCannon = ui->chkAuxFlashWithCannon->isChecked();
     // High-Intensity Flash Unit
     DeviceData.HiFlashWithCannon = ui->chkHiFlashWithCannon->isChecked();
     // External I/O - Save the user data, not the index, but we must convert the QVariant to UInt/bool

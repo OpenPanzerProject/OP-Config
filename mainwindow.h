@@ -404,11 +404,14 @@ private:
         void DisableBarrelSoundSetting(void);
         void EnableHeadlightSoundSetting(void);
         void DisableHeadlightSoundSetting(void);
-        void AddVolumeFunction(void);
-        void AddUserSoundFunctions1_4(void);
+        void AddSetVolumeFunction(void);
+        void AddStepVolumeFunctions(void);
         void AddUserSoundFunctions1_2(void);
+        void AddUserSoundFunctions1_3(void);
+        void AddUserSoundFunctions1_4(void);
         void RemoveVolumeUserSoundFunctions1_4(void);
-        void RemoveVolumeUserSoundFunctions3_4(void);
+        void RemoveSetVolumeUserSoundFunction4(void);
+        void RemoveStepVolumeFunctions(void);
         void EnableSqueaks1_3(void);
         void EnableSqueaks4_6(void);
         void DisableSqueaks1_3(void);

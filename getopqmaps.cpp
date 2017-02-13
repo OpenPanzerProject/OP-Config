@@ -85,6 +85,8 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_AUXOUT_REVOLVE, "Aux Output - Revolving Light");
     _SF_ALL_QMAP.insert(SF_AUXOUT_TOGGLEREVOLVE, "Aux Output - Toggle Revolving Light");
     _SF_ALL_QMAP.insert(SF_SET_VOLUME, "Sound Card - Set Volume");
+    _SF_ALL_QMAP.insert(SF_INCR_VOLUME, "Sound Card - Increase Volume");
+    _SF_ALL_QMAP.insert(SF_DECR_VOLUME, "Sound Card - Decrease Volume");
     _SF_ALL_QMAP.insert(SF_USER_SOUND1_ONCE, "User Sound 1 - Play once");
     _SF_ALL_QMAP.insert(SF_USER_SOUND1_RPT, "User Sound 1 - Repeat");
     _SF_ALL_QMAP.insert(SF_USER_SOUND1_OFF, "User Sound 1 - Stop");
@@ -189,6 +191,8 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_TOGGLEBLINK, "Aux Output - Toggle Blink");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_REVOLVE, "Aux Output - Revolving Light");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_TOGGLEREVOLVE, "Aux Output - Toggle Revolving Light");
+    _SF_DIGITAL_QMAP.insert(SF_INCR_VOLUME, "Sound Card - Increase Volume");
+    _SF_DIGITAL_QMAP.insert(SF_DECR_VOLUME, "Sound Card - Decrease Volume");
     _SF_DIGITAL_QMAP.insert(SF_USER_SOUND1_ONCE, "User Sound 1 - Play once");
     _SF_DIGITAL_QMAP.insert(SF_USER_SOUND1_RPT, "User Sound 1 - Repeat");
     _SF_DIGITAL_QMAP.insert(SF_USER_SOUND1_OFF, "User Sound 1 - Stop");

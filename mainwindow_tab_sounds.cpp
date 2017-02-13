@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+// The tab gets a 10 out of 10 for craptastic...
 
 //------------------------------------------------------------------------------------------------------------------------>>
 // FORM CONTROLS - SOUND TAB
@@ -41,17 +42,16 @@ void MainWindow::ShowHideSoundCardSettings()
     {
         case SD_BENEDINI_TBSMINI:
             // REMOVE
-            // Remove the volume control function and user sounds 3 & 4 functions, they are not compatible.
-            RemoveVolumeUserSoundFunctions3_4();
+            // Remove the variable volume control function and user sound 4 functions, they are not compatible.
+            RemoveSetVolumeUserSoundFunction4();
             // Remove squeaks 4-6
             DisableSqueaks4_6();
-            // Remove barrel sound option
-            DisableBarrelSoundSetting();
+            // ADD
+            AddUserSoundFunctions1_3();
+            AddStepVolumeFunctions();
             // ENABLE
-            // Enable squeaks 1-3
             EnableSqueaks1_3();
             EnableMinSqueakSpeed();
-            // Enable Headlight sound option
             EnableHeadlightSoundSetting();
             break;
 
@@ -59,14 +59,14 @@ void MainWindow::ShowHideSoundCardSettings()
         case SD_OP_SOUND_CARD:
             // Add volume control functions and all user sound functions.
             // The add function will only add it if it isn't there already.
-            AddVolumeFunction();
+            AddSetVolumeFunction();         // This is the variable control, which we want
+            RemoveStepVolumeFunctions();    // These are the step-wise controls, which we don't
             AddUserSoundFunctions1_4();
 
             // Enable everything
             EnableSqueaks1_3();
             EnableSqueaks4_6();
             EnableMinSqueakSpeed();
-            EnableBarrelSoundSetting();
             EnableHeadlightSoundSetting();
             break;
 
@@ -80,9 +80,6 @@ void MainWindow::ShowHideSoundCardSettings()
             DisableSqueaks4_6();
             DisableMinSqueakSpeed();
             DisableHeadlightSoundSetting();
-
-            // But we do enable barrel sound option
-            EnableBarrelSoundSetting();
             break;
 
         // Not yet implemented
@@ -126,15 +123,46 @@ void MainWindow::DisableHeadlightSoundSetting()
     ui->lblHeadlightSound->hide();
 }
 
-void MainWindow::AddVolumeFunction()
+void MainWindow::AddSetVolumeFunction()
 {
     // Add volume control function
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_SET_VOLUME);
 }
 
+void MainWindow::AddStepVolumeFunctions()
+{
+    // Add the digital increment/decrement volume functions
+    // The add function will only add a function if it isn't there already.
+    ui->cboSelectFunction->AddSF(SF_INCR_VOLUME);
+    ui->cboSelectFunction->AddSF(SF_DECR_VOLUME);
+}
+
+void MainWindow::RemoveStepVolumeFunctions()
+{
+    ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
+    // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+    if (FT_TableModel->removeFunctionFromList(SF_INCR_VOLUME)      |
+        FT_TableModel->removeFunctionFromList(SF_DECR_VOLUME))
+        RemovedFunctionTriggersMsgBox();
+}
+
 void MainWindow::AddUserSoundFunctions1_4()
 {
+    // Remove them all first, then add them, so they show up together
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_ONCE);
@@ -151,9 +179,18 @@ void MainWindow::AddUserSoundFunctions1_4()
     ui->cboSelectFunction->AddSF(SF_USER_SOUND4_OFF);
 }
 
-void MainWindow::AddUserSoundFunctions1_2()
-{
-    // Add user sound functions 1 & 2
+void MainWindow::AddUserSoundFunctions1_3()
+{   // Remove them all first, then add them, so they show up together
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_OFF);
+    // Add user sound functions 1 - 3
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_RPT);
@@ -161,12 +198,18 @@ void MainWindow::AddUserSoundFunctions1_2()
     ui->cboSelectFunction->AddSF(SF_USER_SOUND2_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND2_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND2_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_OFF);
 }
 
 void MainWindow::RemoveVolumeUserSoundFunctions1_4()
 {
     // We remove the volume control and all user sound functions
+    // Used for Taigen sound cards
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
@@ -182,6 +225,8 @@ void MainWindow::RemoveVolumeUserSoundFunctions1_4()
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
+        FT_TableModel->removeFunctionFromList(SF_INCR_VOLUME)      |
+        FT_TableModel->removeFunctionFromList(SF_DECR_VOLUME)      |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_ONCE) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_RPT)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_OFF)  |
@@ -197,22 +242,17 @@ void MainWindow::RemoveVolumeUserSoundFunctions1_4()
         RemovedFunctionTriggersMsgBox();
 }
 
-void MainWindow::RemoveVolumeUserSoundFunctions3_4()
+void MainWindow::RemoveSetVolumeUserSoundFunction4()
 {
-    // We remove the volume control and all user sound functions
+    // We remove the variable volume control and user sound function 4
+    // We use this for the TBS Mini
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_ONCE);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_RPT);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_OFF);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_ONCE) |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_RPT)  |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_OFF)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF))

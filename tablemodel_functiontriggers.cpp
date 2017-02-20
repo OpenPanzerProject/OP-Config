@@ -350,6 +350,8 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
             case 8: ts = TS_AUX8;   break;
             case 9: ts = TS_AUX9;   break;
             case 10: ts = TS_AUX10;   break;
+            case 11: ts = TS_AUX11;   break;
+            case 12: ts = TS_AUX12;   break;
         }
         // This gives us something like "Aux Channel 1"
         TriggerDescription = TSQMap.value(ts);

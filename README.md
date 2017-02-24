@@ -5,7 +5,7 @@
   * OP Config is a desktop application used to configure the many options on the TCB and to simplify flashing new firmware to the TCB. The repository you are in now contains the source code for the OP Config application. It was written in C++ using the open source application development software called ["Qt"](http://www.qt.io/developers/). Specifically we used Qt Creator 3.4.1 using Qt 5.4.2. 
 
 ## Resources
-  * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://www.openpanzer.org/wiki).
+  * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://wiki.openpanzer.org).
   * To discuss the project, feel free to join the [Open Panzer Community](http://openpanzer.org/forum/index.php?action=forum).
   * To download a compiled version of OP Config for installation in Windows, see the [Open Panzer Downloads page](http://www.openpanzer.org/downloads). 
 

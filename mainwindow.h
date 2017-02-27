@@ -75,6 +75,9 @@ enum StatusLabelStatus{slGood, slBad, slNeutral};   // We use these to decide wh
 #define RADIO_STREAM_FADEOUT_TIME   4000            // How long does the fade out effect take
 #define RADIO_STREAM_FADEIN_TIME    150             // How long does the fade in effect take
 
+// How often to poll the COM ports list (mS)
+#define CHECK_COM_PORTS_TIME        800             // Every 0.8 seconds
+
 // Define the index numbers of the various tabs
 #define TAB_INDEX_RADIO             0
 #define TAB_INDEX_MOTORS            1
@@ -176,6 +179,7 @@ private slots:
     // Slots for connecting/disconnecting/error handling the device
     // ---------------------------------------------------------------------------------------------------->>
       void fillPortsInfo();                         // Updates the list of detected COM ports
+      void pollCOMPorts();                          // Calls fillPortsInfo but only if not already connected
       void setCOMPort();                            // Sets the current COM port
       void setBaudRate();                           // Sets the current baud rate
       void toggleDeviceConnection();                // Connect/disconnect from device
@@ -355,6 +359,11 @@ private:
       void SerialStatus_SetConnected();
       void SerialStatus_SetNotConnected();
       void SerialStatus_SetAttemptFlash();
+
+    // COM Check timer
+      QTimer *COMCheckTimer;             // This timer will be used to poll the COM ports and update the list if any new devices are found
+      void startCOMChecker(void);
+      void stopCOMChecker(void);
 
     // Tab-specific
     // ---------------------------------------------------------------------------------------------------->>

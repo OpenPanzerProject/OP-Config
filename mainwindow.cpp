@@ -33,6 +33,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // This fills our combo box with the list of detected COM ports
     fillPortsInfo();
+    // We also create a timer to periodically update the list so as new devices are plugged in they automatically get added to the list (or removed)
+    COMCheckTimer = new QTimer(this);
+    connect(COMCheckTimer, SIGNAL(timeout()), this, SLOT(pollCOMPorts())); // Every time the COMCheckTimer pings, update the list of COM ports
+    startCOMChecker(); // This starts the timer
+
     // We also initialize the baud rate combo. Note this baud rate is what the desktop app uses to communicate with the device,
     // but changing this will NOT change the device's baud rate.
     ui->cboConsoleBaud->setCategory(bcConsole);
@@ -413,10 +418,30 @@ void MainWindow::cmdTest2_Click()
 //------------------------------------------------------------------------------------------------------------------------>>
 // FORM CONTROLS - TOP SECTION - COM, BAUD
 //------------------------------------------------------------------------------------------------------------------------>>
+void MainWindow::startCOMChecker(void)
+{   // This is a repetitive timer that will keep triggering over and over until stopped
+    // Each time it trips it will run the pollCOMPorts() function below (setup by signals and slots
+    // in MainWindow:MainWindow constructor)
+    if (COMCheckTimer->isActive() == false)
+    {
+        COMCheckTimer->start(CHECK_COM_PORTS_TIME);
+    }
+}
+void MainWindow::stopCOMChecker(void)
+{
+    COMCheckTimer->stop();
+}
+void MainWindow::pollCOMPorts()
+{
+    // We only update the COM ports list while not connected
+    if (!comm->isConnected()) fillPortsInfo();
+}
 void MainWindow::fillPortsInfo()
 {
     // This updates the COM port dropdown with all the detected COM ports. The user can refresh the list by clicking the
     // button next to the COM port box.
+    QString currentCOM = ui->cboCOMPorts->currentText();
+
     ui->cboCOMPorts->clear();
     ui->cboCOMPorts->setInsertPolicy(QComboBox::InsertAlphabetically);
 
@@ -426,15 +451,20 @@ void MainWindow::fillPortsInfo()
         list.append(info.portName());
     }
     list.sort();    // Keep them in order
-
     for (int i = 0; i < list.size(); ++i)
         ui->cboCOMPorts->addItem(list.at(i));
+
+    // Set the selection back to the previous entry if it still exists
+    if (currentCOM != "" && ui->cboCOMPorts->findText(currentCOM) != -1)
+    {
+        ui->cboCOMPorts->setCurrentIndex(ui->cboCOMPorts->findText(currentCOM));
+    }
 }
 void MainWindow::setCOMPort()
 {   // Whenever the COM port changes, update the comm object
     // We also include the baud rate
     QSerialPort::BaudRate br = static_cast<QSerialPort::BaudRate>(ui->cboConsoleBaud->itemData(ui->cboConsoleBaud->currentIndex()).toInt());
-    comm->updatePortSettings(ui->cboCOMPorts->currentText(), br);
+    comm->updatePortSettings(ui->cboCOMPorts->currentText(),  br);
 }
 void MainWindow::setBaudRate()
 {   // Whenever the Baud rate changes, update the comm object

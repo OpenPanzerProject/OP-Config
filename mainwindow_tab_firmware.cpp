@@ -48,9 +48,12 @@ void MainWindow::SetupControls_FirmwareTab(void)
 void MainWindow::getWebHex()
 {   // This attempts to download a hex file from the Open Panzer latest release folder on the web
     // Inside that folder should always be two files:
-    // optcbmk1.hex
+    // tcbmk1.hex
     // version.txt
 
+    // We use this to skip downloading the file if we've already downloaded it this session
+    // It is not likely the release changed in the last few minutes. However for testing when
+    // the release is changing every five seconds, this can get to be annoying...
     if (GotWebHex)
     {
         // We already downloaded the hex file
@@ -126,6 +129,15 @@ void MainWindow::checkHexVersion()
         // Now show the version/date
         ui->lblHexVersion->setText(version);
         ui->lblHexVersion->show();
+
+        // We could also show release notes in the console textbox if we add them to the file after line 2
+        if (strList.size() > 2)
+        {
+            ui->txtConsole->clear();
+            ui->txtConsole->setText(strIncoming);
+            // If Autoscroll is checked, keep the text scrolled down
+            if (ui->chkAutoscroll->isChecked()) ui->txtConsole->verticalScrollBar()->setValue(ui->txtConsole->verticalScrollBar()->maximum());
+        }
     }
     else
     {

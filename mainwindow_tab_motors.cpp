@@ -133,10 +133,16 @@ void MainWindow::ShowHideSmokerSettings()
         ui->spinSmokerIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
         ui->spinSmokerFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerFastIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
         ui->spinSmokeDestroyed->setValue(qRound(static_cast<double>(DeviceData.SmokerDestroyedSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
-        // Also in this case, we remove the manual smoker control function from the function list
-        ui->cboSelectFunction->RemoveSF(SF_SMOKER);
+        // Also in this case, we remove the manual smoker control functions from the function list
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER);     // This is an analog function for manual control of the speed (voltage)
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER_ON);  // This is a digital function that allows manual control on
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER_OFF); // This is a digital function that allows manual control off
         // Make sure we didn't already have a function trigger defined for it too
-        if (FT_TableModel->removeFunctionFromList(SF_SMOKER)) { RemovedFunctionTriggersMsgBox(); }
+        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+        if (FT_TableModel->removeFunctionFromList(SF_SMOKER)    |
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_ON) |
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_OFF))
+            { RemovedFunctionTriggersMsgBox(); }
         // Auto control does mean however that we want the three enable/disable/toggle functions to be available in the function list
         // The add function will only add it if it isn't there already
         ui->cboSelectFunction->AddSF(SF_SMOKER_ENABLE);
@@ -160,9 +166,11 @@ void MainWindow::ShowHideSmokerSettings()
         ui->spinSmokerFastIdle->setEnabled(false);
         ui->spinSmokerMax->setEnabled(false);
         ui->spinSmokeDestroyed->setEnabled(false);
-        // Manual control means we need to add the smoker control function to the function list
+        // Manual control means we need to add the smoker control functions to the function list
         // The add function will only add it if it isn't there already
-        ui->cboSelectFunction->AddSF(SF_SMOKER);
+        ui->cboSelectFunction->AddSF(SF_SMOKER);    // This is an analog function for manual control of the speed (voltage)
+        ui->cboSelectFunction->AddSF(SF_SMOKER_ON); // This is a digital function that allows manual control on
+        ui->cboSelectFunction->AddSF(SF_SMOKER_OFF);// This is a digital function that allows manual control off
         // But it also means we want to remove the three enable/disable/toggle functions because those only
         // apply to auto control
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_ENABLE);

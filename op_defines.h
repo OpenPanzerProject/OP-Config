@@ -165,7 +165,7 @@ struct weightClassSettings{
                                                         // (multipler * port number) + 0/1 (off/on)
 #define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
 
-const byte COUNT_SPECFUNCTIONS  = 101;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 103;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -219,7 +219,7 @@ enum _special_function : byte {
     SF_TURNMODE_1       = 49,       // 49
     SF_TURNMODE_2       = 50,       // 50
     SF_TURNMODE_3       = 51,       // 51
-    SF_SMOKER           = 52,       // 52   -- analog function
+    SF_SMOKER           = 52,       // 52   -- analog function -- see also 101-102 for digital on/off manual control of the smoker output
     SF_MOTOR_A          = 53,       // 53   -- analog function
     SF_MOTOR_B          = 54,       // 54   -- analog function
     SF_RC1_PASS         = 55,       // 55   -- analog function ("PASS" for pass-through) -- see also 92-97 for pass-throughs 6-8
@@ -267,7 +267,9 @@ enum _special_function : byte {
     SF_RC8_PASS_PAN     = 97,       // 97   -- analog function
     SF_INCR_VOLUME      = 98,       // 98
     SF_DECR_VOLUME      = 99,       // 99
-    SF_STOP_VOLUME      = 100       // 100
+    SF_STOP_VOLUME      = 100,      // 100
+    SF_SMOKER_ON        = 101,      // 101  -- see also 52 for analag manual control of the smoker output speed
+    SF_SMOKER_OFF       = 102       // 102
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

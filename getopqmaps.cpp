@@ -111,7 +111,9 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_TURNMODE_1, "Set Turn Mode = 1");
     _SF_ALL_QMAP.insert(SF_TURNMODE_2, "Set Turn Mode = 2");
     _SF_ALL_QMAP.insert(SF_TURNMODE_3, "Set Turn Mode = 3");
-    _SF_ALL_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");                      // Analog
+    _SF_ALL_QMAP.insert(SF_SMOKER, "Smoker - Manual Speed");                      // Analog
+    _SF_ALL_QMAP.insert(SF_SMOKER_ON, "Smoker - Manual On");
+    _SF_ALL_QMAP.insert(SF_SMOKER_OFF, "Smoker - Manual Off");
     _SF_ALL_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");                    // Analog
     _SF_ALL_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");                    // Analog
     _SF_ALL_QMAP.insert(SF_RC1_PASS, "RC Output 1 - Pass-through");                 // Analog   // No passthrough for 5 - that is always reserved for recoil
@@ -216,6 +218,8 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_TURNMODE_1, "Set Turn Mode = 1");
     _SF_DIGITAL_QMAP.insert(SF_TURNMODE_2, "Set Turn Mode = 2");
     _SF_DIGITAL_QMAP.insert(SF_TURNMODE_3, "Set Turn Mode = 3");
+    _SF_DIGITAL_QMAP.insert(SF_SMOKER_ON, "Smoker - Manual On");
+    _SF_DIGITAL_QMAP.insert(SF_SMOKER_OFF, "Smoker - Manual Off");
 // DISABLED FOR NOW
 //    _SF_DIGITAL_QMAP.insert(SF_BARREL_ON, "Barrel Stabilization - Turn On");
 //    _SF_DIGITAL_QMAP.insert(SF_BARREL_OFF, "Barrel Stabilization - Turn Off");
@@ -259,7 +263,7 @@ QMap<_special_function, QString> OP_QMaps::getAnalogSpecialFunctionsQMap()
     _SF_ANALOG_QMAP.insert(SF_RC6_PASS_PAN, "RC Output 6 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_RC7_PASS_PAN, "RC Output 7 - Pan Servo");
     _SF_ANALOG_QMAP.insert(SF_RC8_PASS_PAN, "RC Output 8 - Pan Servo");
-    _SF_ANALOG_QMAP.insert(SF_SMOKER, "Smoker - Manual Control");
+    _SF_ANALOG_QMAP.insert(SF_SMOKER, "Smoker - Manual Speed");
     _SF_ANALOG_QMAP.insert(SF_MOTOR_A, "Motor A - Manual Control");
     _SF_ANALOG_QMAP.insert(SF_MOTOR_B, "Motor B - Manual Control");
 // DISABLED FOR NOW

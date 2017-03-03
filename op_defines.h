@@ -159,12 +159,6 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-#define trigger_id_multiplier_auxchannel 	1000		// Aux channel trigger ID is defined as:
-                                                        // (multiplier * channel number) + (number of switch positions * switch_pos_multiplier) + switch position (1-5)
-#define trigger_id_multiplier_ports         100         // External ports input trigger ID is defined as:
-                                                        // (multipler * port number) + 0/1 (off/on)
-#define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
-
 const byte COUNT_SPECFUNCTIONS  = 103;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
@@ -279,6 +273,30 @@ struct _functionTrigger {
     _special_function specialFunction;
 };
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
+// TRIGGERS
+// From OP_FunctionsTriggers.h
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
+// Some range definitions
+#define trigger_id_multiplier_ports         100         // External ports input trigger ID is defined as: (multipler_ports * port number) + 0/1 (off/on)
+
+#define trigger_id_multiplier_auxchannel    1000        // Aux channel trigger ID is defined as:
+                                                        // (multiplier_auxchannel * channel number) + (number of switch positions * switch_pos_multiplier) + switch position (1-5)
+#define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
+
+#define trigger_id_adhoc_start              19000       // Trigger IDs for ad-hoc events. Range FROM trigger_id_adhoc_start TO (trigger_id_adhoc_start + trigger_id_adhoc_range - 1)
+#define trigger_id_adhoc_range              1000
+
+#define trigger_id_speed_increase           20000       // Trigger IDs for speed rising above  a set level. Range FROM trigger_id_speed_increase TO (trigger_id_speed_increase + trigger_id_speed_range - 1)
+#define trigger_id_speed_decrease           21000       // Trigger IDs for speed falling below a set level. Range FROM trigger_id_speed_decrease TO (trigger_id_speed_decrease + trigger_id_speed_range - 1)
+#define trigger_id_speed_range              1000
+
+#define COUNT_ADHOC_TRIGGERS            1               // This number can not get higher than 16 unless you want to change some methods in the sketch
+// Ad-Hoc trigger Flag Masks
+#define ADHOCT_BIT_BRAKES_APPLIED       0               // Brakes just applied
+// Ad-Hoc trigger Triggger IDs
+#define ADHOC_TRIGGER_BRAKES_APPLIED    trigger_id_adhoc_start + ADHOCT_BIT_BRAKES_APPLIED
+
 enum _trigger_source : byte {
     TS_NULL_TRIGGER = 0,   // no trigger
     TS_TURRET_STICK = 1,   // Turret stick
@@ -295,7 +313,10 @@ enum _trigger_source : byte {
     TS_AUX11,              // Aux channel 11
     TS_AUX12,              // Aux channel 12
     TS_INPUT_A,            // External input A (if set to input)
-    TS_INPUT_B             // External input B (if set to input)
+    TS_INPUT_B,            // External input B (if set to input)
+    TS_SPEED_INCR,         // Vehicle speed increases beyond a set point
+    TS_SPEED_DECR,         // Vehicle speed decreased below  a set point
+    TS_ADHC_BRAKES         // Ad-hoc - brakes just applied
 };
 
 

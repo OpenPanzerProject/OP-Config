@@ -300,83 +300,74 @@ QMap<_special_function, QString> OP_QMaps::getEmptySpecialFunctionsQMap()
 // ---------------------------------------------------------------------------------------------------------->>
 // TRIGGER SOURCES
 // ---------------------------------------------------------------------------------------------------------->>
-boolean OP_QMaps::isTriggerSourceAuxChannel(_trigger_source ts)
-{
-    // Check this function against all in the digital list
-    QMap<_trigger_source, QString> TSA;
-    TSA = getAuxChannelTriggerSourcesQMap();
-    QMapIterator<_trigger_source, QString> i(TSA);
-    while (i.hasNext())
-    {
-        i.next();
-        if (i.key() == ts) return true;
-    }
-    return false;
-}
-
 QMap<_trigger_source, QString> OP_QMaps::getAllTriggerSourcesQMap()
 {
     // Create the trigger list
-    _OPT_ALL_QMAP.insert(TS_NULL_TRIGGER, "");                 // no trigger
-    _OPT_ALL_QMAP.insert(TS_TURRET_STICK, "Turret Stick");     // Turret stick
-    _OPT_ALL_QMAP.insert(TS_AUX1, "Aux Channel 1");            // Aux channel 1
-    _OPT_ALL_QMAP.insert(TS_AUX2, "Aux Channel 2");            // Aux channel 2
-    _OPT_ALL_QMAP.insert(TS_AUX3, "Aux Channel 3");            // Aux channel 3
-    _OPT_ALL_QMAP.insert(TS_AUX4, "Aux Channel 4");            // Aux channel 4
-    _OPT_ALL_QMAP.insert(TS_AUX5, "Aux Channel 5");            // Aux channel 5
-    _OPT_ALL_QMAP.insert(TS_AUX6, "Aux Channel 6");            // Aux channel 6
-    _OPT_ALL_QMAP.insert(TS_AUX7, "Aux Channel 7");            // Aux channel 7
-    _OPT_ALL_QMAP.insert(TS_AUX8, "Aux Channel 8");            // Aux channel 8
-    _OPT_ALL_QMAP.insert(TS_AUX9, "Aux Channel 9");            // Aux channel 9
-    _OPT_ALL_QMAP.insert(TS_AUX10, "Aux Channel 10");          // Aux channel 10
-    _OPT_ALL_QMAP.insert(TS_AUX11, "Aux Channel 11");          // Aux channel 11
-    _OPT_ALL_QMAP.insert(TS_AUX12, "Aux Channel 12");          // Aux channel 12
-    _OPT_ALL_QMAP.insert(TS_INPUT_A, "External Input A");      // External input A (if set to input)
-    _OPT_ALL_QMAP.insert(TS_INPUT_B, "External Input B");      // External input B (if set to input)
+    _OPT_ALL_QMAP.insert(TS_NULL_TRIGGER, "");                                  // no trigger
+    _OPT_ALL_QMAP.insert(TS_TURRET_STICK, "Turret Stick");                      // Turret stick
+    _OPT_ALL_QMAP.insert(TS_AUX1, "Aux Channel 1");                             // Aux channel 1
+    _OPT_ALL_QMAP.insert(TS_AUX2, "Aux Channel 2");                             // Aux channel 2
+    _OPT_ALL_QMAP.insert(TS_AUX3, "Aux Channel 3");                             // Aux channel 3
+    _OPT_ALL_QMAP.insert(TS_AUX4, "Aux Channel 4");                             // Aux channel 4
+    _OPT_ALL_QMAP.insert(TS_AUX5, "Aux Channel 5");                             // Aux channel 5
+    _OPT_ALL_QMAP.insert(TS_AUX6, "Aux Channel 6");                             // Aux channel 6
+    _OPT_ALL_QMAP.insert(TS_AUX7, "Aux Channel 7");                             // Aux channel 7
+    _OPT_ALL_QMAP.insert(TS_AUX8, "Aux Channel 8");                             // Aux channel 8
+    _OPT_ALL_QMAP.insert(TS_AUX9, "Aux Channel 9");                             // Aux channel 9
+    _OPT_ALL_QMAP.insert(TS_AUX10, "Aux Channel 10");                           // Aux channel 10
+    _OPT_ALL_QMAP.insert(TS_AUX11, "Aux Channel 11");                           // Aux channel 11
+    _OPT_ALL_QMAP.insert(TS_AUX12, "Aux Channel 12");                           // Aux channel 12
+    _OPT_ALL_QMAP.insert(TS_INPUT_A, "External Input A");                       // External input A (if set to input)
+    _OPT_ALL_QMAP.insert(TS_INPUT_B, "External Input B");                       // External input B (if set to input)
+    _OPT_ALL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Increases Above:");      // Speed increases above level trigger
+    _OPT_ALL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Decreases Below:");      // Speed falls below level trigger
+    _OPT_ALL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                     // Ad-Hoc - brakes applied
     return _OPT_ALL_QMAP;
 }
 
 QMap<_trigger_source, QString> OP_QMaps::getDigitalTriggerSourcesQMap()
 {
     // Create the trigger list, digital only.
-    _OPT_DIGITAL_QMAP.insert(TS_NULL_TRIGGER, "");                 // no trigger
-    _OPT_DIGITAL_QMAP.insert(TS_TURRET_STICK, "Turret Stick");     // Turret stick
-    _OPT_DIGITAL_QMAP.insert(TS_AUX1, "Aux Channel 1");            // Aux channel 1
-    _OPT_DIGITAL_QMAP.insert(TS_AUX2, "Aux Channel 2");            // Aux channel 2
-    _OPT_DIGITAL_QMAP.insert(TS_AUX3, "Aux Channel 3");            // Aux channel 3
-    _OPT_DIGITAL_QMAP.insert(TS_AUX4, "Aux Channel 4");            // Aux channel 4
-    _OPT_DIGITAL_QMAP.insert(TS_AUX5, "Aux Channel 5");            // Aux channel 5
-    _OPT_DIGITAL_QMAP.insert(TS_AUX6, "Aux Channel 6");            // Aux channel 6
-    _OPT_DIGITAL_QMAP.insert(TS_AUX7, "Aux Channel 7");            // Aux channel 7
-    _OPT_DIGITAL_QMAP.insert(TS_AUX8, "Aux Channel 8");            // Aux channel 8
-    _OPT_DIGITAL_QMAP.insert(TS_AUX9, "Aux Channel 9");            // Aux channel 9
-    _OPT_DIGITAL_QMAP.insert(TS_AUX10, "Aux Channel 10");          // Aux channel 10
-    _OPT_DIGITAL_QMAP.insert(TS_AUX11, "Aux Channel 11");          // Aux channel 11
-    _OPT_DIGITAL_QMAP.insert(TS_AUX12, "Aux Channel 12");          // Aux channel 12
-    _OPT_DIGITAL_QMAP.insert(TS_INPUT_A, "External Input A");      // External input A (if set to input)
-    _OPT_DIGITAL_QMAP.insert(TS_INPUT_B, "External Input B");      // External input B (if set to input)
+    _OPT_DIGITAL_QMAP.insert(TS_NULL_TRIGGER, "");                              // no trigger
+    _OPT_DIGITAL_QMAP.insert(TS_TURRET_STICK, "Turret Stick");                  // Turret stick
+    _OPT_DIGITAL_QMAP.insert(TS_AUX1, "Aux Channel 1");                         // Aux channel 1
+    _OPT_DIGITAL_QMAP.insert(TS_AUX2, "Aux Channel 2");                         // Aux channel 2
+    _OPT_DIGITAL_QMAP.insert(TS_AUX3, "Aux Channel 3");                         // Aux channel 3
+    _OPT_DIGITAL_QMAP.insert(TS_AUX4, "Aux Channel 4");                         // Aux channel 4
+    _OPT_DIGITAL_QMAP.insert(TS_AUX5, "Aux Channel 5");                         // Aux channel 5
+    _OPT_DIGITAL_QMAP.insert(TS_AUX6, "Aux Channel 6");                         // Aux channel 6
+    _OPT_DIGITAL_QMAP.insert(TS_AUX7, "Aux Channel 7");                         // Aux channel 7
+    _OPT_DIGITAL_QMAP.insert(TS_AUX8, "Aux Channel 8");                         // Aux channel 8
+    _OPT_DIGITAL_QMAP.insert(TS_AUX9, "Aux Channel 9");                         // Aux channel 9
+    _OPT_DIGITAL_QMAP.insert(TS_AUX10, "Aux Channel 10");                       // Aux channel 10
+    _OPT_DIGITAL_QMAP.insert(TS_AUX11, "Aux Channel 11");                       // Aux channel 11
+    _OPT_DIGITAL_QMAP.insert(TS_AUX12, "Aux Channel 12");                       // Aux channel 12
+    _OPT_DIGITAL_QMAP.insert(TS_INPUT_A, "External Input A");                   // External input A (if set to input)
+    _OPT_DIGITAL_QMAP.insert(TS_INPUT_B, "External Input B");                   // External input B (if set to input)
+    _OPT_DIGITAL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Increases Above:");  // Speed increases above level trigger
+    _OPT_DIGITAL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Decreases Below:");  // Speed falls below level trigger
+    _OPT_DIGITAL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                 // Ad-Hoc - brakes applied
     return _OPT_DIGITAL_QMAP;
 }
 
 QMap<_trigger_source, QString> OP_QMaps::getAnalogTriggerSourcesQMap()
 {
     // Create the trigger list
-    _OPT_ANALOG_QMAP.insert(TS_NULL_TRIGGER, "");                 // no trigger
-    //_OPT_ANALOG_QMAP.insert(TS_TURRET_STICK, "Turret Stick");     // Turret stick - can't be analog
-    _OPT_ANALOG_QMAP.insert(TS_AUX1, "Aux Channel 1");            // Aux channel 1
-    _OPT_ANALOG_QMAP.insert(TS_AUX2, "Aux Channel 2");            // Aux channel 2
-    _OPT_ANALOG_QMAP.insert(TS_AUX3, "Aux Channel 3");            // Aux channel 3
-    _OPT_ANALOG_QMAP.insert(TS_AUX4, "Aux Channel 4");            // Aux channel 4
-    _OPT_ANALOG_QMAP.insert(TS_AUX5, "Aux Channel 5");            // Aux channel 5
-    _OPT_ANALOG_QMAP.insert(TS_AUX6, "Aux Channel 6");            // Aux channel 6
-    _OPT_ANALOG_QMAP.insert(TS_AUX7, "Aux Channel 7");            // Aux channel 7
-    _OPT_ANALOG_QMAP.insert(TS_AUX8, "Aux Channel 8");            // Aux channel 8
-    _OPT_ANALOG_QMAP.insert(TS_AUX9, "Aux Channel 9");            // Aux channel 9
-    _OPT_ANALOG_QMAP.insert(TS_AUX10, "Aux Channel 10");          // Aux channel 10
-    _OPT_ANALOG_QMAP.insert(TS_AUX11, "Aux Channel 11");          // Aux channel 11
-    _OPT_ANALOG_QMAP.insert(TS_AUX12, "Aux Channel 12");          // Aux channel 12
-    _OPT_ANALOG_QMAP.insert(TS_INPUT_A, "External Input A");      // External input A (if set to input)
-    _OPT_ANALOG_QMAP.insert(TS_INPUT_B, "External Input B");      // External input B (if set to input)
+    _OPT_ANALOG_QMAP.insert(TS_NULL_TRIGGER, "");                               // no trigger
+    _OPT_ANALOG_QMAP.insert(TS_AUX1, "Aux Channel 1");                          // Aux channel 1
+    _OPT_ANALOG_QMAP.insert(TS_AUX2, "Aux Channel 2");                          // Aux channel 2
+    _OPT_ANALOG_QMAP.insert(TS_AUX3, "Aux Channel 3");                          // Aux channel 3
+    _OPT_ANALOG_QMAP.insert(TS_AUX4, "Aux Channel 4");                          // Aux channel 4
+    _OPT_ANALOG_QMAP.insert(TS_AUX5, "Aux Channel 5");                          // Aux channel 5
+    _OPT_ANALOG_QMAP.insert(TS_AUX6, "Aux Channel 6");                          // Aux channel 6
+    _OPT_ANALOG_QMAP.insert(TS_AUX7, "Aux Channel 7");                          // Aux channel 7
+    _OPT_ANALOG_QMAP.insert(TS_AUX8, "Aux Channel 8");                          // Aux channel 8
+    _OPT_ANALOG_QMAP.insert(TS_AUX9, "Aux Channel 9");                          // Aux channel 9
+    _OPT_ANALOG_QMAP.insert(TS_AUX10, "Aux Channel 10");                        // Aux channel 10
+    _OPT_ANALOG_QMAP.insert(TS_AUX11, "Aux Channel 11");                        // Aux channel 11
+    _OPT_ANALOG_QMAP.insert(TS_AUX12, "Aux Channel 12");                        // Aux channel 12
+    _OPT_ANALOG_QMAP.insert(TS_INPUT_A, "External Input A");                    // External input A (if set to input)
+    _OPT_ANALOG_QMAP.insert(TS_INPUT_B, "External Input B");                    // External input B (if set to input)
     return _OPT_ANALOG_QMAP;
 }
 
@@ -403,6 +394,20 @@ QMap<_trigger_source, QString> OP_QMaps::getEmptyTriggerSourcesQMap()
     // Create the trigger list
     _OPT_EMPTY_QMAP.insert(TS_NULL_TRIGGER, "");                 // no trigger
     return _OPT_EMPTY_QMAP;
+}
+
+boolean OP_QMaps::isTriggerSourceAuxChannel(_trigger_source ts)
+{
+    // Check this function against all in the aux channel list
+    QMap<_trigger_source, QString> TSA;
+    TSA = getAuxChannelTriggerSourcesQMap();
+    QMapIterator<_trigger_source, QString> i(TSA);
+    while (i.hasNext())
+    {
+        i.next();
+        if (i.key() == ts) return true;
+    }
+    return false;
 }
 
 

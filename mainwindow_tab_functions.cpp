@@ -134,6 +134,11 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input A", TS_INPUT_A);
             if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.Digital == true)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input B", TS_INPUT_B);
+            // Speed-based triggers
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Speed Increases Above:", TS_SPEED_INCR );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Speed Decreases Below:", TS_SPEED_DECR );
+            // Ad-Hoc Triggers
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Brakes Applied", TS_ADHC_BRAKES );
         }
         else
         {   // In this case we only want to show analog inputs
@@ -191,6 +196,7 @@ void MainWindow::SetupTriggerActions(int)
         if (ui->cboSelectFunction->isFunctionDigital(static_cast<_special_function>(ui->cboSelectFunction->currentData().toUInt())))
         {
             ui->cboTriggerAction->insertItem(0, "", -1);
+
             // Trigger source is Turret Stick (digital input)
             if (ui->cboTriggerSource->currentData()==TS_TURRET_STICK)
             {
@@ -273,13 +279,48 @@ void MainWindow::SetupTriggerActions(int)
                 }
             }
             // Trigger source is External Port (digital input)
-            else
+            else if (ui->cboTriggerSource->currentData() == TS_INPUT_A ||
+                     ui->cboTriggerSource->currentData() == TS_INPUT_B)
             {
-                // Trigger source must be External IO port
                 // These can only be on/off (if digital)
                 ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "On", 1);
                 ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Off", 0);
             }
+            // Speed increase trigger
+            else if (ui->cboTriggerSource->currentData() == TS_SPEED_INCR)
+            {
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), " 0%", 0);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "10%", 10);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "20%", 20);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "30%", 30);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "40%", 40);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "50%", 50);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "60%", 60);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "70%", 70);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "80%", 80);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "90%", 90);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "99%", 99);
+            }
+            // Speed decrease trigger
+            else if (ui->cboTriggerSource->currentData() == TS_SPEED_DECR)
+            {
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), " 1%", 1);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "10%", 10);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "20%", 20);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "30%", 30);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "40%", 40);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "50%", 50);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "60%", 60);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "70%", 70);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "80%", 80);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "90%", 90);
+                ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "100%", 100);
+            }
+            // AD-HOC TRIGGERS
+            // For now none of these need any specific source information beyond the trigger itself
+//            else if (ui->cboTriggerSource->currentData() == TS_ADHC_BRAKES)
+//            {
+//            }
         }
         // Trigger source is Analog of some kind (doesn't matter whether Aux channel or External Port
         else
@@ -395,10 +436,44 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
                 if (sf_digital) TriggerID += ta;
                 break;
 
+            // SPEED INCREASE/DECREASE TRIGGERS
+            // ---------------------------------------------------------------------------->>
+            // These are specific IDs plus a number from 0-100 to indicate the set level
+            case TS_SPEED_INCR:
+                TriggerID = trigger_id_speed_increase;
+                if (sf_digital) TriggerID += ta;    // Trigger ID is the ID plus the set level
+                break;
+            case TS_SPEED_DECR:
+                TriggerID = trigger_id_speed_decrease;
+                if (sf_digital) TriggerID += ta;    // Trigger ID is the ID plus the set level
+                break;
+
+            // AD-HOC
+            // ---------------------------------------------------------------------------->>
+            // See below - v
+
+
             // UNKNOWN
             // ---------------------------------------------------------------------------->>
             default:
                 TriggerID = 0;
+        }
+    }
+    // AD-HOC
+    // ------------------------------------------------------------------------------------>>
+    // But wait! Ad-Hoc functions may not have a trigger action (strPos will = "")
+    // But this is fine. So handle them separately here
+    else if (sf != SF_NULL_FUNCTION && ts != TS_NULL_TRIGGER) //  && strPos != "")
+    {
+        // Now construct the trigger ID
+        switch (ts)
+        {
+        // These are just hard-coded to a specific ID. For now none have actual ta (trigger actions)
+        case TS_ADHC_BRAKES:
+            TriggerID = ADHOC_TRIGGER_BRAKES_APPLIED;
+            break;
+        default:
+            TriggerID = 0;
         }
     }
 

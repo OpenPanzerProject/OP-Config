@@ -334,7 +334,7 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
             TriggerDescription.append("Variable");
         }
     }
-    else if (TriggerID >= trigger_id_multiplier_auxchannel)
+    else if (TriggerID >= trigger_id_multiplier_auxchannel && TriggerID < trigger_id_adhoc_start)
     {
         // Aux RC channel inputs
         int channelNum = TriggerID / trigger_id_multiplier_auxchannel;
@@ -390,6 +390,35 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
         {
             TriggerDescription.append("Variable");
         }
+    }
+    // Ad-Hoc Triggers
+    else if (TriggerID >= trigger_id_adhoc_start && TriggerID < (trigger_id_adhoc_start + trigger_id_adhoc_range))
+    {   // The only way to do these is hand-code them, that is why they are called "ad-hoc"
+        switch (TriggerID)
+        {
+            case ADHOC_TRIGGER_BRAKES_APPLIED:
+                ts = TS_ADHC_BRAKES;
+                TriggerDescription = "Brakes Applied";
+                break;
+        }
+    }
+    // Vehicle speed triggers - increasing speed
+    else if (TriggerID >= trigger_id_speed_increase && TriggerID < (trigger_id_speed_increase + trigger_id_speed_range))
+    {
+        uint8_t triggerSpeed = TriggerID - trigger_id_speed_increase;  // The remainder is the percent we want to check against
+        // This also works
+        // TriggerAction = getTriggerActionFromTriggerID(TriggerID);
+        ts = TS_SPEED_INCR;
+        TriggerDescription = "Vehicle Speed Increases Above ";
+        TriggerDescription.append(QString("%1\%").arg(triggerSpeed));
+    }
+    // Vehicle speed triggers - decreasing speed
+    else if (TriggerID >= trigger_id_speed_decrease && TriggerID < (trigger_id_speed_decrease + trigger_id_speed_range))
+    {
+        uint8_t triggerSpeed = TriggerID - trigger_id_speed_decrease;  // The remainder is the percent we want to check against
+        ts = TS_SPEED_DECR;
+        TriggerDescription = "Vehicle Speed Decreases Below ";
+        TriggerDescription.append(QString("%1\%").arg(triggerSpeed));
     }
 
     return TriggerDescription;
@@ -448,7 +477,7 @@ uint8_t FunctionTriggerTableModel::getTriggerActionFromTriggerID(uint16_t Trigge
     }
 
     // Aux Channel switches - this is the tricky case that we have this function for in the first place
-    if (TriggerID >= trigger_id_multiplier_auxchannel)
+    if (TriggerID >= trigger_id_multiplier_auxchannel && TriggerID < trigger_id_adhoc_start)
     {
         // We will walk through an example as we calculate these values.
         // Assume the Trigger ID is 4035
@@ -463,6 +492,18 @@ uint8_t FunctionTriggerTableModel::getTriggerActionFromTriggerID(uint16_t Trigge
         TriggerAction = NumPos_CurPos - (NumPositions * switch_pos_multiplier);
         return TriggerAction;
     }
+
+    // Ad-Hoc - no actions
+    if (TriggerID >= trigger_id_adhoc_start && TriggerID < (trigger_id_adhoc_start + trigger_id_adhoc_range))
+        return 0;
+
+    // Vehicle speed triggers - increasing speed
+    if (TriggerID >= trigger_id_speed_increase && TriggerID < (trigger_id_speed_increase + trigger_id_speed_range))
+        return (TriggerID - trigger_id_speed_increase);  // The remainder is the percent we want to check against, ie, the action
+
+    // Vehicle speed triggers - decreasing speed
+    else if (TriggerID >= trigger_id_speed_decrease && TriggerID < (trigger_id_speed_decrease + trigger_id_speed_range))
+        return (TriggerID - trigger_id_speed_decrease);  // The remainder is the percent we want to check against, ie, the action
 
     // Any other case, return 0
     return 0;

@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>8</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -9485,6 +9485,133 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </property>
                 </widget>
                </widget>
+               <widget class="FrameContent" name="frmFreewheel">
+                <property name="geometry">
+                 <rect>
+                  <x>440</x>
+                  <y>290</y>
+                  <width>391</width>
+                  <height>111</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <widget class="HelpButton" name="hpbFreewheel">
+                 <property name="geometry">
+                  <rect>
+                   <x>360</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QFrame" name="frame_16">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>391</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_176">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>211</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Freewheeling Gearboxes</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkFreewheelGearbox">
+                 <property name="geometry">
+                  <rect>
+                   <x>305</x>
+                   <y>59</y>
+                   <width>21</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblFreewheel1">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>40</y>
+                   <width>301</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Attempt to compensate for free-wheeling&lt;br&gt;
+gearboxes by dragging inner track during turns:</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblFreewheel2">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>80</y>
+                   <width>321</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(Only available with Scout ESC)</string>
+                 </property>
+                </widget>
+                <zorder>hpbFreewheel</zorder>
+                <zorder>frame_16</zorder>
+                <zorder>label_176</zorder>
+                <zorder>lblFreewheel1</zorder>
+                <zorder>chkFreewheelGearbox</zorder>
+                <zorder>lblFreewheel2</zorder>
+               </widget>
               </widget>
               <widget class="QWidget" name="pgBattle">
                <widget class="FrameContent" name="frmIR">
@@ -10471,7 +10598,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                 <property name="frameShape">
                  <enum>QFrame::Box</enum>
                 </property>
-                <widget class="QLabel" name="label_59">
+                <widget class="QLabel" name="lblSqueakHeader1">
                  <property name="geometry">
                   <rect>
                    <x>10</x>
@@ -10492,7 +10619,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>Squeak Settings</string>
                  </property>
                 </widget>
-                <widget class="QFrame" name="frame_15">
+                <widget class="QFrame" name="frmSqueakHeader2">
                  <property name="geometry">
                   <rect>
                    <x>10</x>
@@ -10508,7 +10635,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <enum>QFrame::Plain</enum>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_62">
+                <widget class="QLabel" name="lblSqueak1">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -10526,7 +10653,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>Squeak 1</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_64">
+                <widget class="QLabel" name="lblSqueakHeader4">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
@@ -10652,7 +10779,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>Enable turret sound</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_68">
+                <widget class="QLabel" name="lblHeadlightSound">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -10696,7 +10823,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string/>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_69">
+                <widget class="QLabel" name="lblSqueakHeader5">
                  <property name="geometry">
                   <rect>
                    <x>310</x>
@@ -10717,7 +10844,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_70">
+                <widget class="QLabel" name="lblSqueakHeader2">
                  <property name="geometry">
                   <rect>
                    <x>163</x>
@@ -10748,7 +10875,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string/>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_71">
+                <widget class="QLabel" name="lblSqueakHeader3">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
@@ -10769,7 +10896,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
-                <widget class="QFrame" name="frame_16">
+                <widget class="QFrame" name="frmSqueakHeader1">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
@@ -10817,7 +10944,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <number>50</number>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_72">
+                <widget class="QLabel" name="lblSqueak2">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -10886,7 +11013,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <number>50</number>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_73">
+                <widget class="QLabel" name="lblSqueak3">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -10923,7 +11050,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <number>50</number>
                  </property>
                 </widget>
-                <widget class="QLabel" name="lblHeadlightSound">
+                <widget class="QLabel" name="lblHeadlightSoundNote">
                  <property name="geometry">
                   <rect>
                    <x>220</x>
@@ -11047,7 +11174,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>Select sound device</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_157">
+                <widget class="QLabel" name="lblSqueak5">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -11065,7 +11192,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>Squeak 5</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_158">
+                <widget class="QLabel" name="lblSqueak4">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -11236,7 +11363,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string/>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_159">
+                <widget class="QLabel" name="lblSqueak6">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -12536,6 +12663,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
+              <zorder>stackedWidgetMain</zorder>
              </widget>
             </item>
            </layout>

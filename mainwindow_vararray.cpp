@@ -223,6 +223,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.EngineAutoStopTime_mS = VarArray.value(2435).toInt();                        // 2435 - Auto-stop engine after idle time
     DeviceData.MotorNudgePct = VarArray.value(2436).toUInt();                               // 2436 - Motor nudge percent
     DeviceData.NudgeTime_mS = VarArray.value(2437).toUInt();                                // 2437 - Nudge time in milliseconds
+    DeviceData.DragInnerTrack = VarArray.value(2438).toUInt();                              // 2438 - Drag inner track (OP Scout only)
 
     // "Physics" Settings - 25xx
     DeviceData.EnableBarrelStabilize = VarArray.value(2511).toUInt();                       // 2511 - Enable barrel stabilization
@@ -519,6 +520,7 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2435, QByteArray::number(DeviceData.EngineAutoStopTime_mS));                    // 2435 - Auto-stop engine after idle time
     VarArray.insert(2436, QByteArray::number(DeviceData.MotorNudgePct));                            // 2436 - Motor nudge percent
     VarArray.insert(2437, QByteArray::number(DeviceData.NudgeTime_mS));                             // 2437 - Nudge time in milliseconds
+    VarArray.insert(2438, QByteArray::number(DeviceData.DragInnerTrack));                           // 2438 - Drag inner track (OP Scout only)
 
     // Accelerometer Settings - 25xx
     VarArray.insert(2511, QByteArray::number(DeviceData.EnableBarrelStabilize));                    // 2511 - Enable barrel stabilization

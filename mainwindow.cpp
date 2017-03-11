@@ -792,6 +792,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbTurning, SIGNAL(released()), signalMapper, SLOT(map()));             // Turning
         connect(ui->hpbAccelDecel, SIGNAL(released()), signalMapper, SLOT(map()));          // Acceleration/deceleration
         connect(ui->hpbIMU, SIGNAL(released()), signalMapper, SLOT(map()));                 // IMU
+        connect(ui->hpbFreewheel, SIGNAL(released()), signalMapper, SLOT(map()));           // Freewheeling gearbox options
     // Battle tab
         connect(ui->hpbWeightClass, SIGNAL(released()), signalMapper, SLOT(map()));         // Custom weight class
         connect(ui->hpbCannonIR, SIGNAL(released()), signalMapper, SLOT(map()));            // Cannon IR
@@ -835,6 +836,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbTurning, "driving.html#turning");                   // Turning
         signalMapper->setMapping(ui->hpbAccelDecel, "driving.html#acceldecel");             // Acceleration/deceleration
         signalMapper->setMapping(ui->hpbIMU, "driving.html#imu");                           // IMU
+        signalMapper->setMapping(ui->hpbFreewheel, "driving.html#freewheel");               // Freewheeling gearbox options
     // Battle
         signalMapper->setMapping(ui->hpbWeightClass, "battle.html#weightclass");            // Custom weight class
         signalMapper->setMapping(ui->hpbCannonIR, "battle.html#cannon");                    // Cannon IR

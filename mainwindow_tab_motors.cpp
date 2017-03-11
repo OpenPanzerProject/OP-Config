@@ -245,6 +245,12 @@ void MainWindow::ValidateMotorSelections()
             RemovedFunctionTriggersMsgBox();
     }
 
+    // If the drive motor type is set to the Scout ESC, we allow a special setting on the Driving tab that, if enabled, tells the
+    // Scout to attempt to drag the slower moving (inner) track during turns. This can be used for heavy models with wide tracks
+    // that are driven with free-wheeling gearboxes such as the Taigen V2 Steel 3:1 and 4:1 gearboxes that otherwise do not want to
+    // slow down in a turn and make it in fact very difficult to turn the model at all.
+    ValidateFreewheelingGearboxOptions();
+
     // If the turret elevation motor is set to SERVO_PAN we enable the option to implement barrel stabilization (on the Driving tab).
     // Otherwise if it is any other setting, stabilization is unavailable
     if (ui->cboTurretElevationMotor->getCurrentDriveType() == SERVO_PAN)

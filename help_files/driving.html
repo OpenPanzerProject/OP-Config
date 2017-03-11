@@ -16,6 +16,7 @@
 			<li><a href="#turning">Turning Adjustments</a></li>			
 			<li><a href="#acceldecel">Inertia &amp; Momentum</a></li>
 			<!-- <li><a href="#imu">Inertial Measurement Unit (IMU)</a></li> -->
+            <li><a href="#freewheel">Freewheeling Gearboxes</a></li>
 		</ul>
 	</div>
 		
@@ -250,7 +251,32 @@
 	</p>		
 -->
 
-
+	<h2 id="freewheel">Freewheeling Gearboxes</h2>
+	<h4 class="entry">Attempt to compensate for freewheeling gearboxes by dragging inner track during turns</h4>
+	<p>
+    Certain gearboxes such as the notorious Taigen "V2" Steel 3:1 and 4:1 gearboxes don't have adequate internal friction to 
+    keep from free-wheeling when any kind of external force is applied to them. This is a big problem in a vehicle such as a tank that
+    requires the speed of one track to be slower than the other in order to steer or turn. Most speed controllers reduce the speed of a motor by simply reducing the 
+    voltage to the motor, but if spins too easily the other track will simply drag it along and no steering will be possible. This inability to turn all but 
+    renders these gearboxes useless and the effect is most pronounced in heavy models with wide tracks such as the King Tiger, Jagdtiger, Panther, Jagdpanther, etc... 
+    They will keep on driving straight ahead even when only a single track is powered - sometimes the only way to turn them is to come to a complete stop and perform a spin turn.
+    </p>
+    
+    <p>
+    If you encounter this issue the best option may be to upgrade to a better gearbox, but this can be expensive. If you are using the Scout ESC you can enable this option and it
+    will attempt to proportionally drag the slower (inner) track during turns by pulsing that motor with brief brake commands many times per second. In somne cases this can 
+    solve the freewheeling issue, but results may vary by the weight of your specific model and the gearbox you are using. 
+    </p>
+    
+    <p>
+    If you don't have problems turning or steering, leave this option unchecked.
+    </p>
+    
+    <p>
+    Also remember this option will only be enabled if the selected Vehicle Type on the Motors tab is set to Tank or Halftrack, and only if the Drive Motor type is set to Scout ESC. 
+	</p>	
+    
+    
 <br />
 <br />
 <br />

@@ -197,6 +197,9 @@ void MainWindow::Variables_to_Controls(void)
     ShowHideHillSensitivity(ui->chkEnableHills->isChecked());
     if (DeviceData.TurretElevationMotor == SERVO_PAN) ShowHideBarrelStabilization(true);
     else ShowHideBarrelStabilization(false);
+    // Freewheeling Gearbox
+    ui->chkFreewheelGearbox->setChecked(DeviceData.DragInnerTrack);
+    ValidateFreewheelingGearboxOptions();
 
     // Battle tab
     // ---------------------------------------------------------------------------------------------------------->>
@@ -440,6 +443,8 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.BarrelSensitivity = ui->spinBarrelSensitivity->value();
     DeviceData.EnableHillPhysics = ui->chkEnableHills->isChecked();
     DeviceData.HillSensitivity = ui->spinHillSensitivity->value();
+    // Freewheeling gearbox
+    DeviceData.DragInnerTrack = ui->chkFreewheelGearbox->isChecked();
 
     // Battle tab
     // ---------------------------------------------------------------------------------------------------------->>

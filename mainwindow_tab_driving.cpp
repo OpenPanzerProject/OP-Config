@@ -318,3 +318,44 @@ void MainWindow::ShowHideBarrelStabilization(bool isEnabled)
     }
 }
 
+void MainWindow::ValidateFreewheelingGearboxOptions(void)
+{
+    // Certain gearboxes such as the notorious Taigen "V2" Steel 3:1 and 4:1 gearboxes don't have adequate internal friction to
+    // keep from free-wheeling when any kind of external force is applied to them. This is a big problem in a tank given that
+    // reducing the speed of one track relative to another is the only way to accomplish steering, but with one of these gearboxes,
+    // especially in a heavy model with wide tracks such as the Jagdpanther, Jadgtiger, King Tiger, Panther, etc, the outer track
+    // has more than enough power and contact with the ground to drive the tank completely straight even if power is reduced or
+    // turned off completely from the inner track. In other words, you can't steer.
+
+    // The Scout ESC has a mode that can compensate for this kind of defective gearbox, by "dragging" the inner track with pulsed
+    // brake commands. This option is only available on the Scout, and only if the vehicle type is set to Tank or Halftrack, and even
+    // then  most users shouldn't need it unless they find themselves with the condition described above.
+
+    if (ui->cboDriveType->currentData() == DT_TANK || ui->cboDriveType->currentData() == DT_HALFTRACK)
+    {
+        if (ui->cboDriveMotors->currentData() == OP_SCOUT)
+        {
+            ui->chkFreewheelGearbox->setChecked(DeviceData.DragInnerTrack);
+            ui->chkFreewheelGearbox->setEnabled(true);
+            ui->lblFreewheel2->hide();
+        }
+        else
+        {   // It's a tank, but not driven by the Scout
+            DeviceData.DragInnerTrack = false;
+            ui->chkFreewheelGearbox->setChecked(DeviceData.DragInnerTrack);
+            ui->chkFreewheelGearbox->setEnabled(false);
+            ui->lblFreewheel2->setText("(Only available with Scout ESC)");
+            ui->lblFreewheel2->show();
+        }
+    }
+    else
+    {
+        // It might be driven by the Scout, but it's not a tank
+        DeviceData.DragInnerTrack = false;
+        ui->chkFreewheelGearbox->setChecked(DeviceData.DragInnerTrack);
+        ui->chkFreewheelGearbox->setEnabled(false);
+        ui->lblFreewheel2->setText("(Only available for tanks and halftracks)");
+        ui->lblFreewheel2->show();
+    }
+}
+

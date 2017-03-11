@@ -405,6 +405,7 @@ private:
         void RemovedFunctionTriggersMsgBox(void);
       // Driving tab
         void SetupControls_DrivingTab(void);
+        void ValidateFreewheelingGearboxOptions(void);
       // Battle tab
         void SetupControls_BattleTab(void);
       // Sound tab

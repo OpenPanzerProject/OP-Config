@@ -413,20 +413,23 @@ private:
         void DisableBarrelSoundSetting(void);
         void EnableHeadlightSoundSetting(void);
         void DisableHeadlightSoundSetting(void);
-        void AddSetVolumeFunction(void);
-        void AddStepVolumeFunctions(void);
-        void AddUserSoundFunctions1_2(void);
-        void AddUserSoundFunctions1_3(void);
-        void AddUserSoundFunctions1_4(void);
-        void RemoveVolumeUserSoundFunctions1_4(void);
-        void RemoveSetVolumeUserSoundFunction4(void);
-        void RemoveStepVolumeFunctions(void);
+        void RemoveVolumeFunctionsStep(void);
+        void AddSoundFunctionsOP(void);
+        void RemoveSoundFunctionsTaigen(void);
+        void RemoveSoundFunctionsBenedini(void);
+        void AddSoundFunctionsBenedini(void);
+        void UpdateSoundFunctionsBenedini(void);
         void EnableSqueaks1_3(void);
         void EnableSqueaks4_6(void);
         void DisableSqueaks1_3(void);
         void DisableSqueaks4_6(void);
         void EnableMinSqueakSpeed(void);
         void DisableMinSqueakSpeed(void);
+        void SqueakSettingsMoveUp(void);
+        void SqueakSettingsMoveDown(void);
+        void HideSqueakHeader(void);
+        void ShowSqueakHeader(void);
+
       // Misc tab
         void SetupControls_MiscTab(void);
       // Firmware tab

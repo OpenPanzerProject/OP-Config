@@ -41,44 +41,47 @@ void MainWindow::ShowHideSoundCardSettings()
     switch (ui->cboSoundDevice->getCurrentSoundDevice())
     {
         case SD_BENEDINI_TBSMINI:
-            // REMOVE
-            // Remove the variable volume control function and user sound 4 functions, they are not compatible.
-            RemoveSetVolumeUserSoundFunction4();
-            // Remove squeaks 4-6
-            DisableSqueaks4_6();
-            // ADD
-            AddUserSoundFunctions1_3();
-            AddStepVolumeFunctions();
-            // ENABLE
+            // Remove functions not applicable
+            RemoveSoundFunctionsBenedini();
+            // Add those that are
+            AddSoundFunctionsBenedini();
+            // Enable 3 squeaks
+            ShowSqueakHeader();
             EnableSqueaks1_3();
+            DisableSqueaks4_6();
             EnableMinSqueakSpeed();
+            SqueakSettingsMoveUp();
+            // Enable headlight option
             EnableHeadlightSoundSetting();
             break;
 
 
         case SD_OP_SOUND_CARD:
-            // Add volume control functions and all user sound functions.
-            // The add function will only add it if it isn't there already.
-            AddSetVolumeFunction();         // This is the variable control, which we want
-            RemoveStepVolumeFunctions();    // These are the step-wise controls, which we don't
-            AddUserSoundFunctions1_4();
-
-            // Enable everything
+            // The only functions we need to remove for this card are the stepwise volume control functions,
+            // since we can instead control volume directly
+            RemoveVolumeFunctionsStep();
+            // But that's it, otherwise make sure all options are available.
+            AddSoundFunctionsOP();
+            // Enable all squeaks
+            ShowSqueakHeader();
             EnableSqueaks1_3();
             EnableSqueaks4_6();
             EnableMinSqueakSpeed();
+            SqueakSettingsMoveDown();
+            // Enable headlight option
             EnableHeadlightSoundSetting();
             break;
 
 
         case SD_TAIGEN_SOUND:
             // We remove the volume control and all user sound functions
-            RemoveVolumeUserSoundFunctions1_4();
-
-            // Disable all squeaks and the headlight options
+            RemoveSoundFunctionsTaigen();
+            // Disable and hide all squeak options
+            HideSqueakHeader();
             DisableSqueaks1_3();
             DisableSqueaks4_6();
             DisableMinSqueakSpeed();
+            // Disable and hide headlight option
             DisableHeadlightSoundSetting();
             break;
 
@@ -101,7 +104,6 @@ void MainWindow::EnableBarrelSoundSetting()
     ui->chkEnableBarrelSound->setEnabled(true);
     ui->chkEnableBarrelSound->setChecked(DeviceData.BarrelSound_Enabled);
 }
-
 void MainWindow::DisableBarrelSoundSetting()
 {
     ui->chkEnableBarrelSound->setChecked(false);
@@ -113,44 +115,43 @@ void MainWindow::EnableHeadlightSoundSetting()
     // Enable headlight sound option
     ui->chkEnableHeadlightSound->setEnabled(true);
     ui->chkEnableHeadlightSound->setChecked(DeviceData.HeadlightSound_Enabled);
+    // Show
+    ui->lblHeadlightSound->show();
+    ui->chkEnableHeadlightSound->show();
     ShowHideHeadlightSoundNote(ui->chkEnableHeadlightSound->isChecked());
 }
-
 void MainWindow::DisableHeadlightSoundSetting()
 {
     ui->chkEnableHeadlightSound->setChecked(false);
     ui->chkEnableHeadlightSound->setEnabled(false);
+    // Hide all
     ui->lblHeadlightSound->hide();
+    ui->chkEnableHeadlightSound->hide();
+    ui->lblHeadlightSoundNote->hide();
 }
-
-void MainWindow::AddSetVolumeFunction()
+void MainWindow::ShowHideHeadlightSoundNote(bool isChecked)
 {
-    // Add volume control function
-    // The add function will only add a function if it isn't there already.
-    ui->cboSelectFunction->AddSF(SF_SET_VOLUME);
+    if (isChecked) ui->lblHeadlightSoundNote->show();
+    else ui->lblHeadlightSoundNote->hide();
 }
 
-void MainWindow::AddStepVolumeFunctions()
-{
-    // Add the digital increment/decrement volume functions
-    // The add function will only add a function if it isn't there already.
-    ui->cboSelectFunction->AddSF(SF_INCR_VOLUME);
-    ui->cboSelectFunction->AddSF(SF_DECR_VOLUME);
-}
-
-void MainWindow::RemoveStepVolumeFunctions()
+void MainWindow::RemoveVolumeFunctionsStep()
 {
     ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_STOP_VOLUME);
+    // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
-    if (FT_TableModel->removeFunctionFromList(SF_INCR_VOLUME)      |
-        FT_TableModel->removeFunctionFromList(SF_DECR_VOLUME))
-        RemovedFunctionTriggersMsgBox();
+    if (FT_TableModel->removeFunctionFromList(SF_INCR_VOLUME) |
+        FT_TableModel->removeFunctionFromList(SF_DECR_VOLUME)|
+        FT_TableModel->removeFunctionFromList(SF_STOP_VOLUME))
+            RemovedFunctionTriggersMsgBox();
 }
 
-void MainWindow::AddUserSoundFunctions1_4()
+void MainWindow::AddSoundFunctionsOP()
 {
     // Remove them all first, then add them, so they show up together
+    ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
@@ -163,8 +164,15 @@ void MainWindow::AddUserSoundFunctions1_4()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
+    ui->cboSelectFunction->AddSF(SF_SET_VOLUME);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_OFF);
@@ -177,39 +185,21 @@ void MainWindow::AddUserSoundFunctions1_4()
     ui->cboSelectFunction->AddSF(SF_USER_SOUND4_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND4_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND5_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND5_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND5_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND6_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND6_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND6_OFF);
 }
 
-void MainWindow::AddUserSoundFunctions1_3()
-{   // Remove them all first, then add them, so they show up together
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_ONCE);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_RPT);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_OFF);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_ONCE);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_RPT);
-    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_OFF);
-    // Add user sound functions 1 - 3
-    // The add function will only add a function if it isn't there already.
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND1_ONCE);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND1_RPT);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND1_OFF);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND2_ONCE);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND2_RPT);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND2_OFF);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_ONCE);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_RPT);
-    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_OFF);
-}
-
-void MainWindow::RemoveVolumeUserSoundFunctions1_4()
+void MainWindow::RemoveSoundFunctionsTaigen()
 {
-    // We remove the volume control and all user sound functions
-    // Used for Taigen sound cards
+    // Remove all user sound functions and volume adjustment functions
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_STOP_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
@@ -222,11 +212,18 @@ void MainWindow::RemoveVolumeUserSoundFunctions1_4()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
         FT_TableModel->removeFunctionFromList(SF_INCR_VOLUME)      |
         FT_TableModel->removeFunctionFromList(SF_DECR_VOLUME)      |
+        FT_TableModel->removeFunctionFromList(SF_STOP_VOLUME)      |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_ONCE) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_RPT)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND1_OFF)  |
@@ -238,25 +235,133 @@ void MainWindow::RemoveVolumeUserSoundFunctions1_4()
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND3_OFF)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT)  |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF))
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_OFF))
         RemovedFunctionTriggersMsgBox();
 }
-
-void MainWindow::RemoveSetVolumeUserSoundFunction4()
+void MainWindow::RemoveSoundFunctionsBenedini()
 {
-    // We remove the variable volume control and user sound function 4
-    // We use this for the TBS Mini
+    uint8_t removed = 0;
+
+    // Remove the analog volume adjustment function,
+    // and also user sound functions 4-6 if instead those are being used for squeaks
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
+    if (ui->chkEnableSqueak1->isChecked())
+    {
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
+    }
+    if (ui->chkEnableSqueak2->isChecked())
+    {
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_ONCE);
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_RPT);
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_OFF);
+    }
+    if (ui->chkEnableSqueak3->isChecked())
+    {
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
+        ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
+    }
+    // Make sure we didn't already have a function trigger defined for any of them either
+    // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+    if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)) removed += 1;
+    if (ui->chkEnableSqueak1->isChecked())
+    {
+        if (FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
+            FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT)  |
+            FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF))
+            removed += 1;
+    }
+    if (ui->chkEnableSqueak2->isChecked())
+    {
+        if (FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_ONCE) |
+            FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_RPT)  |
+            FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_OFF))
+            removed += 1;
+    }
+    if (ui->chkEnableSqueak3->isChecked())
+    {
+        if (FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_ONCE) |
+            FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_RPT)  |
+            FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_OFF))
+            removed += 1;
+    }
+
+    if (removed > 0) RemovedFunctionTriggersMsgBox();
+}
+void MainWindow::AddSoundFunctionsBenedini()
+{
+    ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_STOP_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND2_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND3_OFF);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_OFF);
-    // Make sure we didn't already have a function trigger defined for any of them either
-    // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
-    if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_RPT)  |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_OFF))
-        RemovedFunctionTriggersMsgBox();
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND5_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
+    // Add all user sound functions.
+    // The add function will only add a function if it isn't there already.
+    ui->cboSelectFunction->AddSF(SF_INCR_VOLUME);
+    ui->cboSelectFunction->AddSF(SF_DECR_VOLUME);
+    ui->cboSelectFunction->AddSF(SF_STOP_VOLUME);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND1_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND1_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND1_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND2_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND2_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND2_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND3_OFF);
+    if (!ui->chkEnableSqueak1->isChecked())
+    {
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND4_ONCE);
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND4_RPT);
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND4_OFF);
+    }
+    if (!ui->chkEnableSqueak2->isChecked())
+    {
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND5_ONCE);
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND5_RPT);
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND5_OFF);
+    }
+    if (!ui->chkEnableSqueak3->isChecked())
+    {
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND6_ONCE);
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND6_RPT);
+        ui->cboSelectFunction->AddSF(SF_USER_SOUND6_OFF);
+    }
+}
+void MainWindow::UpdateSoundFunctionsBenedini()
+{
+    // If we are using the Benedini sound card the presence of users sound functions 5-6
+    // will depend on whether the user has enabled squeaks 1-3 or not
+    if (ui->cboSoundDevice->getCurrentSoundDevice() == SD_BENEDINI_TBSMINI)
+    {
+        RemoveSoundFunctionsBenedini(); // This removes any user functions if they are reserved for squeaks instead
+        AddSoundFunctionsBenedini();    // This makes sure all appropriate Benedini functions are added in order
+    }
+
 }
 
 void MainWindow::EnableSqueaks1_3()
@@ -284,8 +389,24 @@ void MainWindow::EnableSqueaks1_3()
     ShowHideSqueak1Settings(ui->chkEnableSqueak1->isChecked());
     ShowHideSqueak2Settings(ui->chkEnableSqueak2->isChecked());
     ShowHideSqueak3Settings(ui->chkEnableSqueak3->isChecked());
+    // Now show them
+    ui->lblSqueak1->show();
+    ui->lblSqueak2->show();
+    ui->lblSqueak3->show();
+    ui->chkEnableSqueak1->show();
+    ui->chkEnableSqueak2->show();
+    ui->chkEnableSqueak3->show();
+    ui->spinSqueak1Min->show();
+    ui->spinSqueak1Max->show();
+    ui->spinSqueak2Min->show();
+    ui->spinSqueak2Max->show();
+    ui->spinSqueak3Min->show();
+    ui->spinSqueak3Max->show();
+    // If we are showing squeaks 1-3 we also will need the squeak settings
+    ui->lblMinSqueakSpeed1->show();
+    ui->lblMinSqueakSpeed2->show();
+    ui->spinMinSqueakSpeed->show();
 }
-
 void MainWindow::EnableSqueaks4_6()
 {
     // Enable Squeaks 4 - 6
@@ -311,6 +432,19 @@ void MainWindow::EnableSqueaks4_6()
     ShowHideSqueak4Settings(ui->chkEnableSqueak4->isChecked());
     ShowHideSqueak5Settings(ui->chkEnableSqueak5->isChecked());
     ShowHideSqueak6Settings(ui->chkEnableSqueak6->isChecked());
+    // Now show them
+    ui->lblSqueak4->show();
+    ui->lblSqueak5->show();
+    ui->lblSqueak6->show();
+    ui->chkEnableSqueak4->show();
+    ui->chkEnableSqueak5->show();
+    ui->chkEnableSqueak6->show();
+    ui->spinSqueak4Min->show();
+    ui->spinSqueak4Max->show();
+    ui->spinSqueak5Min->show();
+    ui->spinSqueak5Max->show();
+    ui->spinSqueak6Min->show();
+    ui->spinSqueak6Max->show();
 }
 
 void MainWindow::DisableSqueaks1_3()
@@ -335,8 +469,24 @@ void MainWindow::DisableSqueaks1_3()
     ui->chkEnableSqueak1->setEnabled(false);                            // Now disable
     ui->chkEnableSqueak2->setEnabled(false);
     ui->chkEnableSqueak3->setEnabled(false);
+    // Now hide them
+    ui->lblSqueak1->hide();
+    ui->lblSqueak2->hide();
+    ui->lblSqueak3->hide();
+    ui->chkEnableSqueak1->hide();
+    ui->chkEnableSqueak2->hide();
+    ui->chkEnableSqueak3->hide();
+    ui->spinSqueak1Min->hide();
+    ui->spinSqueak1Max->hide();
+    ui->spinSqueak2Min->hide();
+    ui->spinSqueak2Max->hide();
+    ui->spinSqueak3Min->hide();
+    ui->spinSqueak3Max->hide();
+    // If we are getting rid of squeaks 1-3 we also don't need the squeak settings
+    ui->lblMinSqueakSpeed1->hide();
+    ui->lblMinSqueakSpeed2->hide();
+    ui->spinMinSqueakSpeed->hide();
 }
-
 void MainWindow::DisableSqueaks4_6()
 {
     ui->spinSqueak4Min->setValue(DeviceData.Squeak4_MinInterval_mS);    // Set the values to default
@@ -359,6 +509,19 @@ void MainWindow::DisableSqueaks4_6()
     ui->chkEnableSqueak4->setEnabled(false);                            // Now disable
     ui->chkEnableSqueak5->setEnabled(false);
     ui->chkEnableSqueak6->setEnabled(false);
+    // Now hide them
+    ui->lblSqueak4->hide();
+    ui->lblSqueak5->hide();
+    ui->lblSqueak6->hide();
+    ui->chkEnableSqueak4->hide();
+    ui->chkEnableSqueak5->hide();
+    ui->chkEnableSqueak6->hide();
+    ui->spinSqueak4Min->hide();
+    ui->spinSqueak4Max->hide();
+    ui->spinSqueak5Min->hide();
+    ui->spinSqueak5Max->hide();
+    ui->spinSqueak6Min->hide();
+    ui->spinSqueak6Max->hide();
 }
 
 void MainWindow::EnableMinSqueakSpeed()
@@ -366,11 +529,48 @@ void MainWindow::EnableMinSqueakSpeed()
     ui->spinMinSqueakSpeed->setEnabled(true);
     ui->spinMinSqueakSpeed->setValue(DeviceData.MinSqueakSpeedPct);
 }
-
 void MainWindow::DisableMinSqueakSpeed()
 {
     ui->spinMinSqueakSpeed->setValue(DeviceData.MinSqueakSpeedPct);
     ui->spinMinSqueakSpeed->setEnabled(false);
+}
+
+void MainWindow::SqueakSettingsMoveUp(void)
+{   // We want the squeak settings to show up below the last visible individual squeak settings,
+    // so we index the top of the controls to that one
+    int newTop = ui->chkEnableSqueak3->y()+28;
+    ui->lblMinSqueakSpeed1->move(ui->lblMinSqueakSpeed1->x(), newTop);
+    ui->lblMinSqueakSpeed2->move(ui->lblMinSqueakSpeed2->x(), newTop);
+    ui->spinMinSqueakSpeed->move(ui->spinMinSqueakSpeed->x(), newTop);
+}
+void MainWindow::SqueakSettingsMoveDown(void)
+{   // We want the squeak settings to show up below the last visible individual squeak settings,
+    // so we index the top of the controls to that one
+    int newTop = ui->chkEnableSqueak6->y()+28;
+    ui->lblMinSqueakSpeed1->move(ui->lblMinSqueakSpeed1->x(), newTop);
+    ui->lblMinSqueakSpeed2->move(ui->lblMinSqueakSpeed2->x(), newTop);
+    ui->spinMinSqueakSpeed->move(ui->spinMinSqueakSpeed->x(), newTop);
+}
+
+void MainWindow::HideSqueakHeader(void)
+{
+    ui->lblSqueakHeader1->hide();
+    ui->lblSqueakHeader2->hide();
+    ui->lblSqueakHeader3->hide();
+    ui->lblSqueakHeader4->hide();
+    ui->lblSqueakHeader5->hide();
+    ui->frmSqueakHeader1->hide();
+    ui->frmSqueakHeader2->hide();
+}
+void MainWindow::ShowSqueakHeader(void)
+{
+    ui->lblSqueakHeader1->show();
+    ui->lblSqueakHeader2->show();
+    ui->lblSqueakHeader3->show();
+    ui->lblSqueakHeader4->show();
+    ui->lblSqueakHeader5->show();
+    ui->frmSqueakHeader1->show();
+    ui->frmSqueakHeader2->show();
 }
 
 void MainWindow::ShowHideSqueak1Settings(bool isChecked)
@@ -385,6 +585,11 @@ void MainWindow::ShowHideSqueak1Settings(bool isChecked)
         ui->spinSqueak1Min->setEnabled(false);
         ui->spinSqueak1Max->setEnabled(false);
     }
+
+    // In the case of the Benedini card only, if this squeak is enabled it takes
+    // the place of a user sound, but if disabled we add the user sound option
+    if (ui->cboSoundDevice->getCurrentSoundDevice() == SD_BENEDINI_TBSMINI)
+        UpdateSoundFunctionsBenedini();
 }
 void MainWindow::ShowHideSqueak2Settings(bool isChecked)
 {
@@ -398,6 +603,11 @@ void MainWindow::ShowHideSqueak2Settings(bool isChecked)
         ui->spinSqueak2Min->setEnabled(false);
         ui->spinSqueak2Max->setEnabled(false);
     }
+
+    // In the case of the Benedini card only, if this squeak is enabled it takes
+    // the place of a user sound, but if disabled we add the user sound option
+    if (ui->cboSoundDevice->getCurrentSoundDevice() == SD_BENEDINI_TBSMINI)
+        UpdateSoundFunctionsBenedini();
 }
 void MainWindow::ShowHideSqueak3Settings(bool isChecked)
 {
@@ -411,6 +621,11 @@ void MainWindow::ShowHideSqueak3Settings(bool isChecked)
         ui->spinSqueak3Min->setEnabled(false);
         ui->spinSqueak3Max->setEnabled(false);
     }
+
+    // In the case of the Benedini card only, if this squeak is enabled it takes
+    // the place of a user sound, but if disabled we add the user sound option
+    if (ui->cboSoundDevice->getCurrentSoundDevice() == SD_BENEDINI_TBSMINI)
+        UpdateSoundFunctionsBenedini();
 }
 void MainWindow::ShowHideSqueak4Settings(bool isChecked)
 {
@@ -476,8 +691,5 @@ void MainWindow::ShowHideOtherSqueakSettings(void)
     }
 }
 
-void MainWindow::ShowHideHeadlightSoundNote(bool isChecked)
-{
-    if (isChecked) ui->lblHeadlightSound->show();
-    else ui->lblHeadlightSound->hide();
-}
+
+

@@ -159,7 +159,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 103;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 109;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -196,7 +196,7 @@ enum _special_function : byte {
     SF_AUXOUT_TOGGLEBLINK = 32,     // 32
     SF_AUXOUT_REVOLVE   = 33,       // 33
     SF_AUXOUT_TOGGLEREVOLVE = 34,   // 34
-    SF_USER_SOUND1_ONCE = 35,       // 35   -- see also 86-91 for user sounds 3 & 4
+    SF_USER_SOUND1_ONCE = 35,       // 35   -- see also 86-91 for user sounds 3 & 4 and 103-108 for user sounds 5 & 6
     SF_USER_SOUND1_RPT  = 36,       // 36
     SF_USER_SOUND1_OFF  = 37,       // 37
     SF_USER_SOUND2_ONCE = 38,       // 38
@@ -247,7 +247,7 @@ enum _special_function : byte {
     SF_SMOKER_DISABLE   = 83,       // 83
     SF_SMOKER_TOGGLE    = 84,       // 84
     SF_SET_VOLUME       = 85,       // 85
-    SF_USER_SOUND3_ONCE = 86,       // 86   -- see also 35-40 for user sounds 1 & 2
+    SF_USER_SOUND3_ONCE = 86,       // 86   -- see also 35-40 for user sounds 1 & 2 and 103-108 for user sounds 5 & 6
     SF_USER_SOUND3_RPT  = 87,       // 87
     SF_USER_SOUND3_OFF  = 88,       // 88
     SF_USER_SOUND4_ONCE = 89,       // 89
@@ -263,7 +263,13 @@ enum _special_function : byte {
     SF_DECR_VOLUME      = 99,       // 99
     SF_STOP_VOLUME      = 100,      // 100
     SF_SMOKER_ON        = 101,      // 101  -- see also 52 for analag manual control of the smoker output speed
-    SF_SMOKER_OFF       = 102       // 102
+    SF_SMOKER_OFF       = 102,      // 102
+    SF_USER_SOUND5_ONCE = 103,      // 103  -- see also 35-40 for user sounds 1 & 2 and 86-91 for user sounds 3 & 4
+    SF_USER_SOUND5_RPT  = 104,      // 104
+    SF_USER_SOUND5_OFF  = 105,      // 105
+    SF_USER_SOUND6_ONCE = 106,      // 106
+    SF_USER_SOUND6_RPT  = 107,      // 107
+    SF_USER_SOUND6_OFF  = 108       // 108
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

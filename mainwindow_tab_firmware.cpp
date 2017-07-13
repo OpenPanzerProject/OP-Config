@@ -608,10 +608,11 @@ void MainWindow::ShowSnoopStatus(boolean snooping)
         // While snooping, the device is actually what we consider "disconnected" (not deliberately communicating).
         // The disconnect signal will have been sent before the snooping one, so ShowConnectionStatus will already
         // have updated a bunch of things. But, it will have left the Connect button enabled (to reconnect)
-        // wherease we don't want the user to be able to use the Connect button while snooping.
-        ui->cmdConnect->setEnabled(false);
-        ui->actionConnect->setEnabled(false);   // Disable connect action, we are snooping
-        ui->actionDisconnect->setEnabled(true); // Enable disconnect action (same as clicking Snoop again - closeSerial)
+        // whereas we don't want the user to be able to use the Connect button while snooping.
+        // EDIT: Actually, we do want to be able to connect from Snooping, this could help bypass Windows handshaking issues
+//        ui->cmdConnect->setEnabled(false);
+//        ui->actionConnect->setEnabled(false);   // Disable connect action, we are snooping
+//        ui->actionDisconnect->setEnabled(true); // Enable disconnect action (same as clicking Snoop again - closeSerial)
 
         // We also don't want the user changing the COM port and Baud rate while snooping, although it wouldn't hurt if they did
         ui->cboCOMPorts->setEnabled(false);

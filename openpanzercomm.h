@@ -210,6 +210,7 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
         void openSerial_forSnoop(void);  // Open serial port, and that's it.
         void closeSerial(void); // Close serial port and tell device Goodbye
         void Snoop(void);       // This opens the serial port but doesn't attempt to establish communication with the device
+        void ConnectFromSnoop(void);        // Attempt to connect after we have already opened the serial port for snooping
         void requestFirmwareVersion(void);
         void requestMinOPCVersion(void);
         void requestUtilizedRadioChannels(void);

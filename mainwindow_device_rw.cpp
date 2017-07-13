@@ -35,8 +35,18 @@ void MainWindow::toggleDeviceConnection()
         ui->cmdFlashHex->setEnabled(false);
         AttemptConnect = true;             // Set a flag to indicate a connection attempt is underway
         SerialStatus_SetAttemptConnect();  // Set the serial status label
-        connectToDevice();                 // Now try to connect. Either it will succeed, and button will be re-enabled with
-     }                                     // text of "Disconnect", or it will fail and button will be re-enabled with text of "Connect"
+
+        // Two different ways to connect
+        if (comm->isSnooping())
+        {
+            // We are alread snooping and now we're trying to connect - go straight to it
+            comm->ConnectFromSnoop();
+        }
+        else
+        {                                     // Confusingly, this is not comm->ConnectToDevice, this is a local function called connectToDevice
+            connectToDevice();                // Now try to connect. Either it will succeed, and button will be re-enabled with
+        }                                     // text of "Disconnect", or it will fail and button will be re-enabled with text of "Connect"
+    }
 }
 void MainWindow::connectToDevice()
 {

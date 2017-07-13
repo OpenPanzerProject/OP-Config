@@ -152,6 +152,17 @@ void OpenPanzerComm::openSerial_forComms(void)
         //qDebug() << serial->errorString();
     }
 }
+void OpenPanzerComm::ConnectFromSnoop(void)
+{
+    // Here we assume the serial is open because we are already snooping. Instead of closing/opening the port,
+    // we leave it open and try to connect directly from here.
+    if (serial->isOpen())
+    {
+        Snooping = false;               // Stop snooping
+        emit SnoopingChanged(Snooping); // Emit the signal to let us know what happened
+        ConnectToDevice();              // Go straight to connect
+    }
+}
 
 void OpenPanzerComm::ConnectToDevice(void)
 {
@@ -176,7 +187,7 @@ void OpenPanzerComm::ConnectToDevice(void)
 
     initTimer->setSingleShot(true);
     initTimer->start(INIT_TIME);        // 1. Start this first, because sendInit() will only do anything if initTimer is active
-    startBlitz = false;                 // 2. We are not read to blitz, just send the init string once
+    startBlitz = false;                 // 2. We are not ready to blitz, just send the init string once
     sendInit();                         // 3. Send the first init string in the hope that we connect right away. This will also set startBlitz to true
     blitzTimer->setSingleShot(true);    // 4. Because it probably won't connect, start the blitz timer.
     blitzTimer->start(FIRST_BLITZ_TIME);//    The first time is single shot, second and subsequent times will be configured by sendInit()

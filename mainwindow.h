@@ -236,8 +236,8 @@ private slots:
 
       // Lights & IO tab
       void SetHiFlashAuto(bool);
-      void ShowHideInputAType(int);
-      void ShowHideInputBType(int);
+      void SetupInputAType(int);
+      void SetupInputBType(int);
       void SavePortA_InputType(int);
       void SavePortB_InputType(int);
       void SetupPortAFunctionTrigger(int);

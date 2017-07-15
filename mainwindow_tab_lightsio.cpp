@@ -12,6 +12,10 @@ void MainWindow::SetupControls_LightsIOTab(void)
     ui->cboPortADataDirection->insertItem(1, "Output",DD_OUTPUT); // Arduino data-direction flag is 1 for output
     ui->cboPortBDataDirection->insertItem(0, "Input", DD_INPUT); // Arduino data-direction flag is 0 for input
     ui->cboPortBDataDirection->insertItem(1, "Output",DD_OUTPUT); // Arduino data-direction flag is 1 for output
+    ui->cboPortA_DataType->insertItem(0, "Analog (variable)", 0);   // Initialize to types under Analog direction
+    ui->cboPortA_DataType->insertItem(1, "Digital (on/off)",1);     // but they can be changed later if direction
+    ui->cboPortB_DataType->insertItem(0, "Analog (variable)", 0);   // is changed
+    ui->cboPortB_DataType->insertItem(1, "Digital (on/off)",1);
 
     // Signals and slots
     // This adds/removes the manual High Intensity flash function from the list depending on if the user wants to trigger
@@ -19,8 +23,8 @@ void MainWindow::SetupControls_LightsIOTab(void)
     connect(ui->chkHiFlashWithCannon, SIGNAL(clicked(bool)), this, SLOT(SetHiFlashAuto(bool)));
     // If external I/O is set to output, hide the input type combo, or show it if set to input
     // Also save the current setting to our variable
-    connect(ui->cboPortADataDirection, SIGNAL(currentIndexChanged(int)), this, SLOT(ShowHideInputAType(int)));
-    connect(ui->cboPortBDataDirection, SIGNAL(currentIndexChanged(int)), this, SLOT(ShowHideInputBType(int)));
+    connect(ui->cboPortADataDirection, SIGNAL(currentIndexChanged(int)), this, SLOT(SetupInputAType(int)));
+    connect(ui->cboPortBDataDirection, SIGNAL(currentIndexChanged(int)), this, SLOT(SetupInputBType(int)));
     // On any input type change, save setting to variable
     connect(ui->cboPortA_DataType, SIGNAL(currentIndexChanged(int)), this, SLOT(SavePortA_InputType(int)));
     connect(ui->cboPortB_DataType, SIGNAL(currentIndexChanged(int)), this, SLOT(SavePortB_InputType(int)));
@@ -50,7 +54,7 @@ void MainWindow::SetHiFlashAuto(bool isChecked)
         ui->cboSelectFunction->AddSF(SF_HI_FLASH);
     }
 }
-void MainWindow::ShowHideInputAType(int indexnum)
+void MainWindow::SetupInputAType(int indexnum)
 {
     // Any change, save to our variable
     DeviceData.PortA.Settings.dataDirection = ui->cboPortADataDirection->itemData(indexnum).toUInt();
@@ -59,22 +63,14 @@ void MainWindow::ShowHideInputAType(int indexnum)
     if (DeviceData.PortA.Settings.dataDirection == 1)  // 1 means output
     {
         // Port A data direction is set to output:
-        // Remove the two old entries
-        ui->cboPortA_DataType->removeItem(ui->cboPortA_DataType->findText("Analog (variable)"));
-        ui->cboPortA_DataType->removeItem(ui->cboPortA_DataType->findText("Digital (on/off)"));
-        // Create the two new entries (if they don't exist)
-        if (ui->cboPortA_DataType->findText("Default High") == -1) ui->cboPortA_DataType->insertItem(1, "Default High",1);
-        if (ui->cboPortA_DataType->findText("Default Low") == -1) ui->cboPortA_DataType->insertItem(0, "Default Low", 0);
+        ui->cboPortA_DataType->setItemText(0, "Default Low");
+        ui->cboPortA_DataType->setItemText(1, "Default High");
     }
     else
     {
         // Port A data direction is set to input:
-        // Remove the two old entries
-        ui->cboPortA_DataType->removeItem(ui->cboPortA_DataType->findText("Default High"));
-        ui->cboPortA_DataType->removeItem(ui->cboPortA_DataType->findText("Default Low"));
-        // Create the two new entries (if they don't exist)
-        if (ui->cboPortA_DataType->findText("Analog (variable)") == -1) ui->cboPortA_DataType->insertItem(0, "Analog (variable)", 0);
-        if (ui->cboPortA_DataType->findText("Digital (on/off)") == -1) ui->cboPortA_DataType->insertItem(1, "Digital (on/off)",1);
+        ui->cboPortA_DataType->setItemText(0, "Analog (variable)");
+        ui->cboPortA_DataType->setItemText(1, "Digital (on/off)");
     }
 
     // Set the type to the actual number in variable
@@ -87,13 +83,13 @@ void MainWindow::ShowHideInputAType(int indexnum)
 void MainWindow::SavePortA_InputType(int indexnum)
 {
     // Any change, save to our variable
-    DeviceData.PortA.Settings.dataType = ui->cboPortA_DataType->itemData(indexnum).toBool();
+    DeviceData.PortA.Settings.dataType = ui->cboPortA_DataType->itemData(indexnum).toUInt();
 
     // We also need to check this change against our function triggers in case any are no longer valid
     if (FT_TableModel->checkExternalPortInputTypeAgainstFunctionTriggers(1, DeviceData.PortA.Settings.dataType))
         RemovedFunctionTriggersMsgBox();
 }
-void MainWindow::ShowHideInputBType(int indexnum)
+void MainWindow::SetupInputBType(int indexnum)
 {
     // Any change, save to our variable
     DeviceData.PortB.Settings.dataDirection = ui->cboPortBDataDirection->itemData(indexnum).toUInt();
@@ -102,22 +98,14 @@ void MainWindow::ShowHideInputBType(int indexnum)
     if (DeviceData.PortB.Settings.dataDirection == 1)  // 1 means output
     {
         // Port B data direction is set to output:
-        // Remove the two old entries
-        ui->cboPortB_DataType->removeItem(ui->cboPortB_DataType->findText("Analog (variable)"));
-        ui->cboPortB_DataType->removeItem(ui->cboPortB_DataType->findText("Digital (on/off)"));
-        // Create the two new entries (if they don't exist)
-        if (ui->cboPortB_DataType->findText("Default High") == -1) ui->cboPortB_DataType->insertItem(1, "Default High",1);
-        if (ui->cboPortB_DataType->findText("Default Low") == -1) ui->cboPortB_DataType->insertItem(0, "Default Low", 0);
+        ui->cboPortB_DataType->setItemText(0, "Default Low");
+        ui->cboPortB_DataType->setItemText(1, "Default High");
     }
     else
     {
         // Port B data direction is set to input:
-        // Remove the two old entries
-        ui->cboPortB_DataType->removeItem(ui->cboPortB_DataType->findText("Default High"));
-        ui->cboPortB_DataType->removeItem(ui->cboPortB_DataType->findText("Default Low"));
-        // Create the two new entries (if they don't exist)
-        if (ui->cboPortB_DataType->findText("Analog (variable)") == -1) ui->cboPortB_DataType->insertItem(0, "Analog (variable)", 0);
-        if (ui->cboPortB_DataType->findText("Digital (on/off)") == -1) ui->cboPortB_DataType->insertItem(1, "Digital (on/off)",1);
+        ui->cboPortB_DataType->setItemText(0, "Analog (variable)");
+        ui->cboPortB_DataType->setItemText(1, "Digital (on/off)");
     }
 
     // Set the type to the actual number in variable
@@ -130,7 +118,7 @@ void MainWindow::ShowHideInputBType(int indexnum)
 void MainWindow::SavePortB_InputType(int indexnum)
 {
     // Any change, save to our variable
-    DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(indexnum).toBool();
+    DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(indexnum).toUInt();
 
     // We also need to check this change against our function triggers in case any are no longer valid
     if (FT_TableModel->checkExternalPortInputTypeAgainstFunctionTriggers(2, DeviceData.PortA.Settings.dataType))

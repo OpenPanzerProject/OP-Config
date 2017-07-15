@@ -128,18 +128,18 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinAuxPresetDim->setValue(DeviceData.AuxLightPresetDim);
     ui->chkAuxFlashWithCannon->setChecked(DeviceData.AuxFlashWithCannon);
     // External I/O - set the combo to our user data, which means, we can't go directly to index
-    // This sets the input type (analog or digital). Only applies if the data direction is input
+    // First set the data direction
+    ui->cboPortADataDirection->setCurrentIndex(ui->cboPortADataDirection->findData(DeviceData.PortA.Settings.dataDirection));
+    ui->cboPortBDataDirection->setCurrentIndex(ui->cboPortBDataDirection->findData(DeviceData.PortB.Settings.dataDirection));
+    // Next setup the type combos with the appropriate names (this also sets the combo to the dataType from array)
+    SetupInputAType(ui->cboPortADataDirection->currentIndex());
+    SetupInputBType(ui->cboPortBDataDirection->currentIndex());
+    // This sets the input type (analog or digital if input, or default High/Low if Output)
     ui->cboPortA_DataType->setCurrentIndex(ui->cboPortA_DataType->findData(DeviceData.PortA.Settings.dataType));
     ui->cboPortB_DataType->setCurrentIndex(ui->cboPortB_DataType->findData(DeviceData.PortB.Settings.dataType));
     // This will validate the input types against our function triggers
     SavePortA_InputType(ui->cboPortA_DataType->currentIndex());
     SavePortB_InputType(ui->cboPortB_DataType->currentIndex());
-    // Now we set the data direction
-    ui->cboPortADataDirection->setCurrentIndex(ui->cboPortADataDirection->findData(DeviceData.PortA.Settings.dataDirection));
-    ui->cboPortBDataDirection->setCurrentIndex(ui->cboPortBDataDirection->findData(DeviceData.PortB.Settings.dataDirection));
-    // Now we hide the input type if the data direction is actually an output
-    ShowHideInputAType(ui->cboPortADataDirection->currentIndex());
-    ShowHideInputBType(ui->cboPortBDataDirection->currentIndex());
     // Validate external I/O selections
     SetupPortAFunctionTrigger(ui->cboPortADataDirection->currentIndex());
     SetupPortBFunctionTrigger(ui->cboPortBDataDirection->currentIndex());
@@ -379,8 +379,8 @@ void MainWindow::Controls_to_Variables(void)
     // External I/O - Save the user data, not the index, but we must convert the QVariant to UInt/bool
     DeviceData.PortA.Settings.dataDirection = ui->cboPortADataDirection->itemData(ui->cboPortADataDirection->currentIndex()).toUInt();
     DeviceData.PortB.Settings.dataDirection = ui->cboPortBDataDirection->itemData(ui->cboPortBDataDirection->currentIndex()).toUInt();
-    DeviceData.PortA.Settings.dataType = ui->cboPortA_DataType->itemData(ui->cboPortA_DataType->currentIndex()).toBool();
-    DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(ui->cboPortB_DataType->currentIndex()).toBool();
+    DeviceData.PortA.Settings.dataType = ui->cboPortA_DataType->itemData(ui->cboPortA_DataType->currentIndex()).toUInt();
+    DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(ui->cboPortB_DataType->currentIndex()).toUInt();
 
     // Functions tab
     // ---------------------------------------------------------------------------------------------------------->>

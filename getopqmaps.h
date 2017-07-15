@@ -14,7 +14,6 @@ public:
     QMap<_special_function, QString> getAllSpecialFunctionsQMap();
     QMap<_special_function, QString> getDigitalSpecialFunctionsQMap();
     QMap<_special_function, QString> getAnalogSpecialFunctionsQMap();
-    QMap<_special_function, QString> getExternalPortSpecialFunctionsQMap();
     QMap<_special_function, QString> getEmptySpecialFunctionsQMap();
     boolean isSpecialFunctionDigital(_special_function sf);
     uint8_t GetSpecialFunctionExternalPortNum(_special_function sf);

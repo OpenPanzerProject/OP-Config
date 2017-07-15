@@ -151,9 +151,9 @@ void MainWindow::VarArray_to_Variables(void)
 
     // External I/O Ports
     DeviceData.PortA.Settings.dataDirection = VarArray.value(1311).toUInt();                // 1311 - PortA data direction
-    DeviceData.PortA.Settings.Digital = VarArray.value(1312).toUInt();                      // 1312 - PortA digital true/false
+    DeviceData.PortA.Settings.dataType = VarArray.value(1312).toUInt();                     // 1312 - PortA digital true/false if input, normally high/low if output
     DeviceData.PortB.Settings.dataDirection = VarArray.value(1313).toUInt();                // 1313 - PortB data direction
-    DeviceData.PortB.Settings.Digital = VarArray.value(1314).toUInt();                      // 1314 - PortB digital true/false
+    DeviceData.PortB.Settings.dataType = VarArray.value(1314).toUInt();                     // 1314 - PortB digital true/false if input, normally high/low if output
 
     // Special Function Triggers - 14xx
     int j = 0;
@@ -448,9 +448,9 @@ void MainWindow::Variables_to_VarArray(void)
 
     // External I/O Ports
     VarArray.insert(1311, QByteArray::number(DeviceData.PortA.Settings.dataDirection));             // 1311 - PortA data direction
-    VarArray.insert(1312, QByteArray::number(DeviceData.PortA.Settings.Digital));                   // 1312 - PortA digital true/false
+    VarArray.insert(1312, QByteArray::number(DeviceData.PortA.Settings.dataType));                  // 1312 - PortA digital true/false if input, normally high/low if output
     VarArray.insert(1313, QByteArray::number(DeviceData.PortB.Settings.dataDirection));             // 1313 - PortB data direction
-    VarArray.insert(1314, QByteArray::number(DeviceData.PortB.Settings.Digital));                   // 1314 - PortB digital true/false
+    VarArray.insert(1314, QByteArray::number(DeviceData.PortB.Settings.dataType));                  // 1314 - PortB digital true/false if input, normally high/low if output
 
     // Special Function Triggers - 14xx
     int j = 0;

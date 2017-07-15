@@ -6502,7 +6502,7 @@ QSizeGrip {
                   <string>Port B</string>
                  </property>
                 </widget>
-                <widget class="QComboBox" name="cboPortA_InputType">
+                <widget class="QComboBox" name="cboPortA_DataType">
                  <property name="geometry">
                   <rect>
                    <x>180</x>
@@ -6573,7 +6573,7 @@ QSizeGrip {
                   <string/>
                  </property>
                 </widget>
-                <widget class="QComboBox" name="cboPortB_InputType">
+                <widget class="QComboBox" name="cboPortB_DataType">
                  <property name="geometry">
                   <rect>
                    <x>180</x>
@@ -13099,9 +13099,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   <tabstop>spinAuxBlinkOff_mS</tabstop>
   <tabstop>hpbPortsAB</tabstop>
   <tabstop>cboPortADataDirection</tabstop>
-  <tabstop>cboPortA_InputType</tabstop>
+  <tabstop>cboPortA_DataType</tabstop>
   <tabstop>cboPortBDataDirection</tabstop>
-  <tabstop>cboPortB_InputType</tabstop>
+  <tabstop>cboPortB_DataType</tabstop>
   <tabstop>hpbFunctions</tabstop>
   <tabstop>cboSelectFunction</tabstop>
   <tabstop>cboTriggerSource</tabstop>

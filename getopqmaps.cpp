@@ -31,11 +31,13 @@ uint8_t OP_QMaps::GetSpecialFunctionExternalPortNum(_special_function sf)
         case SF_OUTPUT_A_TOGGLE:
         case SF_OUTPUT_A_ON:
         case SF_OUTPUT_A_OFF:
+        case SF_OUTPUT_A_PULSE:
             return 1;
             break;
         case SF_OUTPUT_B_TOGGLE:
         case SF_OUTPUT_B_ON:
         case SF_OUTPUT_B_OFF:
+        case SF_OUTPUT_B_PULSE:
             return 2;
             break;
 
@@ -109,9 +111,11 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_TOGGLE, "External Output A - Toggle");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_ON, "External Output A - Turn On");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_OFF, "External Output A - Turn Off");
+    _SF_ALL_QMAP.insert(SF_OUTPUT_A_PULSE, "External Output A - Pulse");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_TOGGLE, "External Output B - Toggle");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_ON, "External Output B - Turn On");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_OFF, "External Output B - Turn Off");
+    _SF_ALL_QMAP.insert(SF_OUTPUT_B_PULSE, "External Output B - Pulse");
     _SF_ALL_QMAP.insert(SF_ACCEL_LEVEL, "Set Acceleration Level");                  // Analog
     _SF_ALL_QMAP.insert(SF_DECEL_LEVEL, "Set Deceleration Level");                  // Analog
     _SF_ALL_QMAP.insert(SF_TURNMODE_1, "Set Turn Mode = 1");
@@ -224,9 +228,11 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_TOGGLE, "External Output A - Toggle");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_ON, "Logic Level Output A - Turn On");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_OFF, "Logic Level Output A - Turn Off");
+    _SF_DIGITAL_QMAP.insert(SF_OUTPUT_A_PULSE, "External Output A - Pulse");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_B_TOGGLE, "Logic Level Output B - Toggle");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_B_ON, "Logic Level Output B - Turn On");
     _SF_DIGITAL_QMAP.insert(SF_OUTPUT_B_OFF, "Logicl Level Output B - Turn Off");
+    _SF_DIGITAL_QMAP.insert(SF_OUTPUT_B_PULSE, "External Output B - Pulse");
     _SF_DIGITAL_QMAP.insert(SF_TURNMODE_1, "Set Turn Mode = 1");
     _SF_DIGITAL_QMAP.insert(SF_TURNMODE_2, "Set Turn Mode = 2");
     _SF_DIGITAL_QMAP.insert(SF_TURNMODE_3, "Set Turn Mode = 3");
@@ -287,20 +293,6 @@ QMap<_special_function, QString> OP_QMaps::getAnalogSpecialFunctionsQMap()
     return _SF_ANALOG_QMAP;
 }
 
-QMap<_special_function, QString> OP_QMaps::getExternalPortSpecialFunctionsQMap()
-{
-    // Return a list of special functions related to the external outputs
-    _SF_PORTS_QMAP.insert(SF_NULL_FUNCTION, "");  // No function
-    _SF_PORTS_QMAP.insert(SF_OUTPUT_A_TOGGLE, "Logic Level Output A - Toggle");
-    _SF_PORTS_QMAP.insert(SF_OUTPUT_A_ON, "Logic Level Output A - Turn On");
-    _SF_PORTS_QMAP.insert(SF_OUTPUT_A_OFF, "Logic Level Output A - Turn Off");
-    _SF_PORTS_QMAP.insert(SF_OUTPUT_B_TOGGLE, "Logic Level Output B - Toggle");
-    _SF_PORTS_QMAP.insert(SF_OUTPUT_B_ON, "Logic Level Output B - Turn On");
-    _SF_PORTS_QMAP.insert(SF_OUTPUT_B_OFF, "Logic Level Output B - Turn Off");
-    return _SF_PORTS_QMAP;
-}
-
-
 QMap<_special_function, QString> OP_QMaps::getEmptySpecialFunctionsQMap()
 {
     // Just give a single blank value
@@ -334,6 +326,8 @@ QMap<_trigger_source, QString> OP_QMaps::getAllTriggerSourcesQMap()
     _OPT_ALL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Increases Above:");      // Speed increases above level trigger
     _OPT_ALL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Decreases Below:");      // Speed falls below level trigger
     _OPT_ALL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                     // Ad-Hoc - brakes applied
+    _OPT_ALL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                      // Ad-Hoc - received cannon hit
+    _OPT_ALL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");               // Ad-Hoc - vehicle destroyed
     return _OPT_ALL_QMAP;
 }
 
@@ -359,6 +353,8 @@ QMap<_trigger_source, QString> OP_QMaps::getDigitalTriggerSourcesQMap()
     _OPT_DIGITAL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Increases Above:");  // Speed increases above level trigger
     _OPT_DIGITAL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Decreases Below:");  // Speed falls below level trigger
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                 // Ad-Hoc - brakes applied
+    _OPT_DIGITAL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                  // Ad-Hoc - received cannon hit
+    _OPT_DIGITAL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");           // Ad-Hoc - vehicle destroyed
     return _OPT_DIGITAL_QMAP;
 }
 

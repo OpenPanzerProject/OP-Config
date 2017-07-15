@@ -129,11 +129,11 @@ void MainWindow::Variables_to_Controls(void)
     ui->chkAuxFlashWithCannon->setChecked(DeviceData.AuxFlashWithCannon);
     // External I/O - set the combo to our user data, which means, we can't go directly to index
     // This sets the input type (analog or digital). Only applies if the data direction is input
-    ui->cboPortA_InputType->setCurrentIndex(ui->cboPortA_InputType->findData(DeviceData.PortA.Settings.Digital));
-    ui->cboPortB_InputType->setCurrentIndex(ui->cboPortB_InputType->findData(DeviceData.PortB.Settings.Digital));
+    ui->cboPortA_DataType->setCurrentIndex(ui->cboPortA_DataType->findData(DeviceData.PortA.Settings.dataType));
+    ui->cboPortB_DataType->setCurrentIndex(ui->cboPortB_DataType->findData(DeviceData.PortB.Settings.dataType));
     // This will validate the input types against our function triggers
-    SavePortA_InputType(ui->cboPortA_InputType->currentIndex());
-    SavePortB_InputType(ui->cboPortB_InputType->currentIndex());
+    SavePortA_InputType(ui->cboPortA_DataType->currentIndex());
+    SavePortB_InputType(ui->cboPortB_DataType->currentIndex());
     // Now we set the data direction
     ui->cboPortADataDirection->setCurrentIndex(ui->cboPortADataDirection->findData(DeviceData.PortA.Settings.dataDirection));
     ui->cboPortBDataDirection->setCurrentIndex(ui->cboPortBDataDirection->findData(DeviceData.PortB.Settings.dataDirection));
@@ -379,8 +379,8 @@ void MainWindow::Controls_to_Variables(void)
     // External I/O - Save the user data, not the index, but we must convert the QVariant to UInt/bool
     DeviceData.PortA.Settings.dataDirection = ui->cboPortADataDirection->itemData(ui->cboPortADataDirection->currentIndex()).toUInt();
     DeviceData.PortB.Settings.dataDirection = ui->cboPortBDataDirection->itemData(ui->cboPortBDataDirection->currentIndex()).toUInt();
-    DeviceData.PortA.Settings.Digital = ui->cboPortA_InputType->itemData(ui->cboPortA_InputType->currentIndex()).toBool();
-    DeviceData.PortB.Settings.Digital = ui->cboPortB_InputType->itemData(ui->cboPortB_InputType->currentIndex()).toBool();
+    DeviceData.PortA.Settings.dataType = ui->cboPortA_DataType->itemData(ui->cboPortA_DataType->currentIndex()).toBool();
+    DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(ui->cboPortB_DataType->currentIndex()).toBool();
 
     // Functions tab
     // ---------------------------------------------------------------------------------------------------------->>

@@ -159,7 +159,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 109;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 111;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -202,10 +202,10 @@ enum _special_function : byte {
     SF_USER_SOUND2_ONCE = 38,       // 38
     SF_USER_SOUND2_RPT  = 39,       // 39
     SF_USER_SOUND2_OFF  = 40,       // 40
-    SF_OUTPUT_A_TOGGLE  = 41,       // 41
+    SF_OUTPUT_A_TOGGLE  = 41,       // 41   -- see also 109 for pulse
     SF_OUTPUT_A_ON      = 42,       // 42
     SF_OUTPUT_A_OFF     = 43,       // 43
-    SF_OUTPUT_B_TOGGLE  = 44,       // 44
+    SF_OUTPUT_B_TOGGLE  = 44,       // 44   -- see also 110 for pulse
     SF_OUTPUT_B_ON      = 45,       // 45
     SF_OUTPUT_B_OFF     = 46,       // 46
     SF_ACCEL_LEVEL      = 47,       // 47   -- analog function
@@ -269,7 +269,9 @@ enum _special_function : byte {
     SF_USER_SOUND5_OFF  = 105,      // 105
     SF_USER_SOUND6_ONCE = 106,      // 106
     SF_USER_SOUND6_RPT  = 107,      // 107
-    SF_USER_SOUND6_OFF  = 108       // 108
+    SF_USER_SOUND6_OFF  = 108,      // 108
+    SF_OUTPUT_A_PULSE   = 109,      // 109   -- see also 41-43 for other OUTPUT_A functions
+    SF_OUTPUT_B_PULSE   = 110       // 110   -- see also 44-46 for other OUTPUT_B functions
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -297,11 +299,16 @@ struct _functionTrigger {
 #define trigger_id_speed_decrease           21000       // Trigger IDs for speed falling below a set level. Range FROM trigger_id_speed_decrease TO (trigger_id_speed_decrease + trigger_id_speed_range - 1)
 #define trigger_id_speed_range              1000
 
-#define COUNT_ADHOC_TRIGGERS            1               // This number can not get higher than 16 unless you want to change some methods in the sketch
+#define COUNT_ADHOC_TRIGGERS            3               // This number can not get higher than 16 unless you want to change some methods in the sketch
 // Ad-Hoc trigger Flag Masks
 #define ADHOCT_BIT_BRAKES_APPLIED       0               // Brakes just applied
+#define ADHOCT_BIT_CANNON_HIT           1               // Vehicle received cannon hit
+#define ADHOCT_BIT_VEHICLE_DESTROYED    2               // Vehicle destroyed
+
 // Ad-Hoc trigger Triggger IDs
-#define ADHOC_TRIGGER_BRAKES_APPLIED    trigger_id_adhoc_start + ADHOCT_BIT_BRAKES_APPLIED
+#define ADHOC_TRIGGER_BRAKES_APPLIED    trigger_id_adhoc_start + ADHOCT_BIT_BRAKES_APPLIED      // Ad-Hoc Trigger ID  1 - brakes just applied   19000
+#define ADHOC_TRIGGER_CANNON_HIT        trigger_id_adhoc_start + ADHOCT_BIT_CANNON_HIT          // Ad-Hoc Trigger ID  2 - received cannon hit   19001
+#define ADHOC_TRIGGER_VEHICLE_DESTROYED trigger_id_adhoc_start + ADHOCT_BIT_VEHICLE_DESTROYED   // Ad-Hoc Trigger ID  3 - vehicle destroyed     19002
 
 enum _trigger_source : byte {
     TS_NULL_TRIGGER = 0,   // no trigger
@@ -322,7 +329,9 @@ enum _trigger_source : byte {
     TS_INPUT_B,            // External input B (if set to input)
     TS_SPEED_INCR,         // Vehicle speed increases beyond a set point
     TS_SPEED_DECR,         // Vehicle speed decreased below  a set point
-    TS_ADHC_BRAKES         // Ad-hoc - brakes just applied
+    TS_ADHC_BRAKES,        // Ad-hoc - brakes applied
+    TS_ADHC_CANNONHIT,     // Ad-hoc - received cannon hit
+    TS_ADHC_DESTROYED      // Ad-hoc - vehicle destroyed
 };
 
 
@@ -432,7 +441,7 @@ enum turretStick_positions : byte {
 
 struct external_io_settings{
     uint8_t dataDirection;	// 1 = output, 0 = input
-    boolean Digital;		// If input, is this on/off or analog
+    boolean dataType;		// If input, 1 = "digital" (on/off only), 0 = analog (variable), default to digital. If Output, 1 = normally high, 0 = normally low, default normally high.
 };
 
 struct external_io{

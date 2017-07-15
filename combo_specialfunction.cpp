@@ -79,6 +79,7 @@ void SpecialFunctionComboBox::addExternalOutputsA(void)
     boolean toggleThere = false;
     boolean onThere = false;
     boolean offThere = false;
+    boolean pulseThere = false;
 
     // We won't know until we've been through every item of the list, which ones are present
     // Assume none are, run through each item, set a flag if it already exists
@@ -87,15 +88,17 @@ void SpecialFunctionComboBox::addExternalOutputsA(void)
         if (this->itemData(i) == SF_OUTPUT_A_TOGGLE) toggleThere = true;
         if (this->itemData(i) == SF_OUTPUT_A_ON) onThere = true;
         if (this->itemData(i) == SF_OUTPUT_A_OFF) offThere = true;
+        if (this->itemData(i) == SF_OUTPUT_A_PULSE) pulseThere = true;
     }
 
     // If any don't exists, add them
     if (!toggleThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_A_TOGGLE), SF_OUTPUT_A_TOGGLE);
     if (!onThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_A_ON), SF_OUTPUT_A_ON);
     if (!offThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_A_OFF), SF_OUTPUT_A_OFF);
+    if (!pulseThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_A_PULSE), SF_OUTPUT_A_PULSE);
 
     // If any were added, emit the signal
-    if (!toggleThere || !onThere || !offThere)
+    if (!toggleThere || !onThere || !offThere || !pulseThere)
     {
         _EOA_Present = true;
         emit externalOutputsA_Added();    // Let the world know this has been added
@@ -107,6 +110,7 @@ void SpecialFunctionComboBox::addExternalOutputsB(void)
     boolean toggleThere = false;
     boolean onThere = false;
     boolean offThere = false;
+    boolean pulseThere = false;
 
     // We won't know until we've been through every item of the list, which ones are present
     // Assume none are, run through each item, set a flag if it already exists
@@ -115,15 +119,17 @@ void SpecialFunctionComboBox::addExternalOutputsB(void)
         if (this->itemData(i) == SF_OUTPUT_B_TOGGLE) toggleThere = true;
         if (this->itemData(i) == SF_OUTPUT_B_ON) onThere = true;
         if (this->itemData(i) == SF_OUTPUT_B_OFF) offThere = true;
+        if (this->itemData(i) == SF_OUTPUT_B_PULSE) pulseThere = true;
     }
 
     // If any don't exists, add them
     if (!toggleThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_B_TOGGLE), SF_OUTPUT_B_TOGGLE);
     if (!onThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_B_ON), SF_OUTPUT_B_ON);
     if (!offThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_B_OFF), SF_OUTPUT_B_OFF);
+    if (!pulseThere) this->insertItem(count(), SFQMap.value(SF_OUTPUT_B_PULSE), SF_OUTPUT_B_PULSE);
 
     // If any were added, emit the signal
-    if (!toggleThere || !onThere || !offThere)
+    if (!toggleThere || !onThere || !offThere || !pulseThere)
     {
         _EOB_Present = true;
         emit externalOutputsB_Added();    // Let the world know this has been added
@@ -147,6 +153,7 @@ void SpecialFunctionComboBox::removeExternalOutputsA(void)
         if (this->itemData(i) == SF_OUTPUT_A_TOGGLE) { this->removeItem(i); _EOA_Present = false; }
         if (this->itemData(i) == SF_OUTPUT_A_ON) { this->removeItem(i);  _EOA_Present = false; }
         if (this->itemData(i) == SF_OUTPUT_A_OFF) { this->removeItem(i);  _EOA_Present = false; }
+        if (this->itemData(i) == SF_OUTPUT_A_PULSE) { this->removeItem(i);  _EOA_Present = false; }
     }
 }
 
@@ -157,6 +164,7 @@ void SpecialFunctionComboBox::removeExternalOutputsB(void)
         if (this->itemData(i) == SF_OUTPUT_B_TOGGLE) { this->removeItem(i); _EOB_Present = false; }
         if (this->itemData(i) == SF_OUTPUT_B_ON) { this->removeItem(i); _EOB_Present = false; }
         if (this->itemData(i) == SF_OUTPUT_B_OFF) { this->removeItem(i); _EOB_Present = false; }
+        if (this->itemData(i) == SF_OUTPUT_B_PULSE) { this->removeItem(i); _EOB_Present = false; }
     }
 }
 

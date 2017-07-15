@@ -130,15 +130,17 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
             if (DeviceData.AuxChannel[11].Settings.Digital && DeviceData.AuxChannel[11].Settings.channelNum > 0)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Aux Channel 12", TS_AUX12 );
             // External I/O ports only if they are set to inputs (triggers) and digital
-            if (DeviceData.PortA.Settings.dataDirection == DD_INPUT && DeviceData.PortA.Settings.Digital == true)
+            if (DeviceData.PortA.Settings.dataDirection == DD_INPUT && DeviceData.PortA.Settings.dataType == true)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input A", TS_INPUT_A);
-            if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.Digital == true)
+            if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.dataType == true)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input B", TS_INPUT_B);
             // Speed-based triggers
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Speed Increases Above:", TS_SPEED_INCR );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Speed Decreases Below:", TS_SPEED_DECR );
             // Ad-Hoc Triggers
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Brakes Applied", TS_ADHC_BRAKES );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Cannon Hit", TS_ADHC_CANNONHIT );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Destroyed", TS_ADHC_DESTROYED );
         }
         else
         {   // In this case we only want to show analog inputs
@@ -168,9 +170,9 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
             if (!DeviceData.AuxChannel[11].Settings.Digital && DeviceData.AuxChannel[11].Settings.channelNum > 0)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Aux Channel 12", TS_AUX12 );
             // External I/O ports only if they are set to inputs (triggers) and analog
-            if (DeviceData.PortA.Settings.dataDirection == DD_INPUT && DeviceData.PortA.Settings.Digital == false)
+            if (DeviceData.PortA.Settings.dataDirection == DD_INPUT && DeviceData.PortA.Settings.dataType == false)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input A", TS_INPUT_A);
-            if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.Digital == false)
+            if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.dataType == false)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input B", TS_INPUT_B);
         }
     }
@@ -471,6 +473,12 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
         // These are just hard-coded to a specific ID. For now none have actual ta (trigger actions)
         case TS_ADHC_BRAKES:
             TriggerID = ADHOC_TRIGGER_BRAKES_APPLIED;
+            break;
+        case TS_ADHC_CANNONHIT:
+            TriggerID = ADHOC_TRIGGER_CANNON_HIT;
+            break;
+        case TS_ADHC_DESTROYED:
+            TriggerID = ADHOC_TRIGGER_VEHICLE_DESTROYED;
             break;
         default:
             TriggerID = 0;

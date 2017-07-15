@@ -82,6 +82,7 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_AUXOUT_LEVEL, "Aux Output - Set Level");                 // Analog
     _SF_ALL_QMAP.insert(SF_AUXOUT_PRESETDIM, "Aux Output - Preset Dim Level");
     _SF_ALL_QMAP.insert(SF_AUXOUT_FLASH, "Aux Output - Flash");
+    _SF_ALL_QMAP.insert(SF_AUXOUT_INV_FLASH, "Aux Output - Inverse Flash");
     _SF_ALL_QMAP.insert(SF_AUXOUT_BLINK, "Aux Output - Blink");
     _SF_ALL_QMAP.insert(SF_AUXOUT_TOGGLEBLINK, "Aux Output - Toggle Blink");
     _SF_ALL_QMAP.insert(SF_AUXOUT_REVOLVE, "Aux Output - Revolving Light");
@@ -200,6 +201,7 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_OFF, "Aux Output - Turn Off");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_PRESETDIM, "Aux Output - Preset Dim Level");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_FLASH, "Aux Output - Flash");
+    _SF_DIGITAL_QMAP.insert(SF_AUXOUT_INV_FLASH, "Aux Output - Inverse Flash");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_BLINK, "Aux Output - Blink");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_TOGGLEBLINK, "Aux Output - Toggle Blink");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_REVOLVE, "Aux Output - Revolving Light");

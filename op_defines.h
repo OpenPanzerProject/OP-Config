@@ -159,7 +159,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 111;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 112;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -191,7 +191,7 @@ enum _special_function : byte {
     SF_AUXOUT_OFF       = 27,       // 27
     SF_AUXOUT_LEVEL     = 28,       // 28   -- analog function
     SF_AUXOUT_PRESETDIM = 29,       // 29
-    SF_AUXOUT_FLASH     = 30,       // 30
+    SF_AUXOUT_FLASH     = 30,       // 30   -- see also 111 for inverse flash
     SF_AUXOUT_BLINK     = 31,       // 31
     SF_AUXOUT_TOGGLEBLINK = 32,     // 32
     SF_AUXOUT_REVOLVE   = 33,       // 33
@@ -271,7 +271,8 @@ enum _special_function : byte {
     SF_USER_SOUND6_RPT  = 107,      // 107
     SF_USER_SOUND6_OFF  = 108,      // 108
     SF_OUTPUT_A_PULSE   = 109,      // 109   -- see also 41-43 for other OUTPUT_A functions
-    SF_OUTPUT_B_PULSE   = 110       // 110   -- see also 44-46 for other OUTPUT_B functions
+    SF_OUTPUT_B_PULSE   = 110,      // 110   -- see also 44-46 for other OUTPUT_B functions
+    SF_AUXOUT_INV_FLASH = 111       // 111   -- see also 30 for regular flash
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

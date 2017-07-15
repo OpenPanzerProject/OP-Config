@@ -120,16 +120,17 @@
 	preset dim level you specify here instead of to 100%.
 	</p>
 
-	<h4 class="entry">Flash - On Time</h4>
+	<h4 class="entry">Flash - Time</h4>
 	<p>		
-	The Aux Output has a function called <b>Aux Output - Flash</b>. If you trigger this function, it will turn the Aux Output on for the length of time in milliseconds that you specify here
-	(1,000 mS = 1 second), after which it will automatically turn off. 
+	The Aux Output has two flash functions called <b>Aux Output - Flash</b> and <b>Aux Output - Inverse Flash</b>. The first function will cause the Aux output to be held low normally, 
+    and the Flash function will briefly bring the output high. The Inverse Flash function does the opposite, it sets the output high by default, and when the Inverse Flash function is called the output
+    is held to ground briefly. In either case, the output will be "flashed" for the length of time in milliseconds that you specify here (1,000 mS = 1 second). 
 	</p>
 	<h4 class="entry">Auto Flash with Cannon</h4>
 	<p>		
-	If this box is checked, the Aux Output will automatically be flashed whenever the cannon is fired, no function trigger needs to be created. If your muzzle flash is a simple LED, 
+	If this box is checked, the Aux Output will automatically be flashed (output brought high) whenever the cannon is fired, no function trigger needs to be created. If your muzzle flash is a simple LED, 
     connect it to the Aux Output and check this option. But if you are using a Taigen High Intensity Flash unit, connect it to the 
-    <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:hiflash">dedicated Flash port</a> on the TCB. 
+    <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:hiflash">dedicated Flash port</a> on the TCB instead, in which case this Aux output can be used for other purposes. 
 	</p>
 	
 	<h4 class="entry">Blink - On and Off Time</h4>
@@ -155,7 +156,7 @@
 	
 	<h4 class="entry">Using the I/O as Inputs</h4>
 	<p>
-	If you set A or B to input they will show up in the Trigger Source list and you can use them to trigger any function.
+	If you set Port A or B to input they will show up in the Trigger Source list and you can use them to trigger any function.
 	</p>
 
 	<p>
@@ -172,20 +173,28 @@
 	
 	<h4 class="entry">Using the I/O as Outputs</h4>
 	<p>
-	If you set A or B to output there will now be created several functions that you can trigger. If for example you set Port A to output, the following three functions will be added to the 
-	Function List: <br>
-	- External Output A - Toggle<br>
- 	- External Output A - Turn On<br>
-	- External Output A - Turn Off
+	Alternatively the A &amp; B ports can be set to Output. In this case you have the option of setting their default state, either High (pin at +5 volts) or Low (pin held to Ground). 
+    When set to output, several new functions will be created in the Function List: <br>
+	- External Output A/B - Toggle<br>
+ 	- External Output A/B - Turn On<br>
+	- External Output A/B - Turn Off<br>
+    - External Output A/B - Pulse
 	</p>
 
 	<p>
-	You can then assign any of these functions to other triggers such as switches on your transmitter. What you do with the output is up to you, but remember these are <b>logic-level</b>
-	outputs! That means they can <i>not source</i> enough current to actually power something, not even an LED! Instead consider the outputs like signals, and the signals can tell some
-	other more powerful circuit to do something, or they could be used as direct inputs into another microcontroller (such as another Arduino).<br>
+	You can then assign a trigger to these functions and in so doing control the output of these ports. The first three functions are self-explanatory, the fourth function, "Pulse," will briefly
+    set the output pin to the state opposite its default. For example, if you had set Port A to Output with Default High, the pin will be kept high (+5 volts) normally and the Pulse command would 
+    cause it to briefly be held Low (to Ground). This feature can be used to emulate a button press to some external device.<br>
+    <br>
+    
+    What you do with these outputs is up to you, but remember these are <b>logic-level</b> outputs! That means they can <i>not source</i> enough current to actually power something, 
+    not even an LED! Instead consider the outputs like signals, and the signals can tell some other more powerful circuit to do something, or they could be used as direct inputs into 
+    another microcontroller (such as another Arduino).<br>
 	<br>
-	If you want to use these outputs to turn on a lamp, or a relay, you will need to use a driver circuit. You can find a schematic for a MOSFET driver adapter on the Open Panzer Wiki 
-	designed specifically for this puropose, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page. 
+    
+	If you want to use these outputs to turn on a lamp, or a relay, or some other object that draws current, you will need to use a driver circuit. You can find a schematic for a MOSFET 
+    driver adapter on the Open Panzer Wiki designed specifically for this purpose, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page. 
+    Alternatively you may want to use the Aux Output (see above) which <i>is</i> capable of driving a load directly. 
 	</p>
 
 

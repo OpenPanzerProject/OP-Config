@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>2</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -6911,7 +6911,7 @@ QSizeGrip {
                   </font>
                  </property>
                  <property name="text">
-                  <string>On Time</string>
+                  <string>Time</string>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_125">
@@ -12663,7 +12663,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <zorder>stackedWidgetMain</zorder>
              </widget>
             </item>
            </layout>

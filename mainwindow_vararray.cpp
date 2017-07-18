@@ -176,6 +176,9 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.TurretElevation_Reversed = VarArray.value(1813).toUInt();                    // 1813 - Turret elevation motor reversed
     DeviceData.TurretElevation_MaxSpeedPct = VarArray.value(1814).toUInt();                 // 1814 - Barrel elevation motor speed as percent of maximum
     DeviceData.TurretRotation_MaxSpeedPct = VarArray.value(1815).toUInt();                  // 1815 - Turret rotation motor speed as percent of maximum
+    DeviceData.TurretRotation_EPMin = VarArray.value(1816).toInt();                         // 1816 - Turret rotation end-point minimum
+    DeviceData.TurretRotation_EPMax = VarArray.value(1817).toInt();                         // 1817 - Turret rotation end-point maximum
+    DeviceData.TurretRotation_Reversed = VarArray.value(1818).toUInt();                     // 1818 - Turret rotation motor reversed
 
     // Mechanical Barrel and Recoil Servo settings - 20xx
     DeviceData.Airsoft = VarArray.value(2011).toUInt();                                     // 2011 - Airsoft true/false
@@ -473,6 +476,9 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(1813, QByteArray::number(DeviceData.TurretElevation_Reversed));                 // 1813 - Turret elevation motor reversed
     VarArray.insert(1814, QByteArray::number(DeviceData.TurretElevation_MaxSpeedPct));              // 1814 - Barrel elevation motor speed as percent of maximum
     VarArray.insert(1815, QByteArray::number(DeviceData.TurretRotation_MaxSpeedPct));               // 1815 - Turret rotation motor speed as percent of maximum
+    VarArray.insert(1816, QByteArray::number(DeviceData.TurretRotation_EPMin));                     // 1816 - Turret rotation end-point minimum
+    VarArray.insert(1817, QByteArray::number(DeviceData.TurretRotation_EPMax));                     // 1817 - Turret rotation end-point maximum
+    VarArray.insert(1818, QByteArray::number(DeviceData.TurretRotation_Reversed));                  // 1818 - Turret rotation motor reversed
 
     // Mechanical Barrel and Recoil Servo settings - 20xx
     VarArray.insert(2011, QByteArray::number(DeviceData.Airsoft));                                  // 2011 - Airsoft true/false

@@ -19,6 +19,7 @@ void DriveTypeComboBox::setCategory(MotorCategory mc)
 
         case mcTurretRotation:
             insertItem(count(), "RC Output", SERVO_ESC);
+            insertItem(count(), "Servo - Pan Effect", SERVO_PAN);
             insertItem(count(), "Built-in Driver (Motor A)", ONBOARD);
             break;
 

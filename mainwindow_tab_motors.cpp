@@ -420,7 +420,12 @@ void MainWindow::ValidateMotorSelections()
         }
     }
     if (ui->cboTurretRotationMotor->isRCOutput())
-        ui->lblRotationMotor->setText("Connect turret rotation Servo/ESC to RC Output 3");
+    {
+        if (ui->cboTurretRotationMotor->getCurrentDriveType() == SERVO_ESC)
+        {   ui->lblRotationMotor->setText("Connect turret rotation Servo/ESC to RC Output 3"); }
+        else if (ui->cboTurretRotationMotor->getCurrentDriveType() == SERVO_PAN)
+        {   ui->lblRotationMotor->setText("Connect turret rotation Servo to RC Output 3"); }
+    }
     if (ui->cboTurretRotationMotor->isOnboard())
         ui->lblRotationMotor->setText("Connect turret rotation motor to \"Motor A\" screw terminals on TCB");
     // Do this last or it doesn't apply somehow

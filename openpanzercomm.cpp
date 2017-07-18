@@ -17,6 +17,7 @@ OpenPanzerComm::OpenPanzerComm()
         // Timers
         initTimer = new QTimer(this);
         blitzTimer = new QTimer(this);
+        connectionWaitTimer = new QTimer(this);
         watchdogTimer = new QTimer(this);
         stayAwakeTimer = new QTimer(this);
         radioStreamingTimer = new QTimer(this);
@@ -28,6 +29,7 @@ OpenPanzerComm::OpenPanzerComm()
     // Timer connections
         connect(initTimer, SIGNAL(timeout()), this, SLOT(connectionFailed()));      // If initTimer times out, we were unable to connect
         connect(blitzTimer, SIGNAL(timeout()), this, SLOT(sendInit()));             // Send the INIT_STRING
+        connect(connectionWaitTimer, SIGNAL(timeout()), this, SLOT(closePortOnly()));
         connect(watchdogTimer, SIGNAL(timeout()), this, SLOT(watchdogBark()));      // If the watchdog timer runs out, it will bark.
         connect(stayAwakeTimer, SIGNAL(timeout()), this, SLOT(keepDeviceAwake()));  // Every time the stayAwakeTimer pulses, we will send a stay-awake signal to device.
         connect(radioStreamingTimer, SIGNAL(timeout()), this, SLOT(radioStreamingTimeout())); // When the radio streaming timer expires, it means the device has quit streaming radio data.
@@ -121,8 +123,10 @@ void OpenPanzerComm::openSerial_forComms(void)
     setSerialSettings();    // Make sure these are updated
 
     // Close before opening, this actually shouldn't happen though.
+    // EDIT: We no longer want to do this, because we are leaving the port open in the background temporarily to make it more likely
+    // second connection attempts will succeed, but if we close the port to begin with that defeats the purpose.
     // But if it does, we also throw in a "set DTR pin High" just for good measure. (High means don't reset the device.)
-    if (serial->isOpen()) { serial->setDataTerminalReady(true); serial->close(); }
+//    if (serial->isOpen()) { serial->setDataTerminalReady(true); serial->close(); }
 
     if (serial->open(QIODevice::ReadWrite)) // This statement can take a while to complete
     {   // When checking isDataTerminalReady(), a return value of true means DTR is high, return false means DTR is low.
@@ -181,6 +185,12 @@ void OpenPanzerComm::ConnectToDevice(void)
     //    over and over). This continues until the device responds or else our original initTimer expires and we give up trying.
     // 6. If the device does respond at any time, both initTimer and blitzTimer are stopped in readData(). So we only keep blitzing as long as
     //    we need, but no longer.
+    // 7. Added 7/18/2017 - User Code501 was able to connect only after initiating a Snoop connection, but not with the regular connection. Both used
+    //    precisely the same process, except we wait longer with snoop. Now we have added a connctionWaitTimer. When (if) the initial connection attempt
+    //    fails, we notify the main form of the connection change so the typical messages can be displayed, and the connection button reset - however
+    //    we don't actually close the serial port, we leave it open until connectionWait expires. This means that on a _subsequent_ attempt within the
+    //    alloted time, the port is already open and all we're doing is sending the connection commands. In other words we have now mimicked the route
+    //    of connecting via Snoop.
 
     //  Yes, it's convoluted, but this is the only way I've found to reliably connect. If issues arise, probably the first thing to try would
     //  be tweaking the values of FIRST and SECOND blitz times, rather than changing the concept generally, which I think is sound.
@@ -191,6 +201,9 @@ void OpenPanzerComm::ConnectToDevice(void)
     sendInit();                         // 3. Send the first init string in the hope that we connect right away. This will also set startBlitz to true
     blitzTimer->setSingleShot(true);    // 4. Because it probably won't connect, start the blitz timer.
     blitzTimer->start(FIRST_BLITZ_TIME);//    The first time is single shot, second and subsequent times will be configured by sendInit()
+
+    // If we are connecting a second time, stop this, it will get restarted later when initTimer expires
+    if (connectionWaitTimer->isActive()) connectionWaitTimer->stop();
 }
 
 void OpenPanzerComm::sendInit()
@@ -233,7 +246,27 @@ void OpenPanzerComm::sendInit()
 
 void OpenPanzerComm::connectionFailed()
 {   // We come here if initTimer expires. That means we were unable to connect.
-    closeSerial();
+
+    // closeSerial();   // We no longer close the serial port here
+
+    Connected = false;  // We still notify the form that the connection attempt failed.
+    emit ConnectionChanged(Connected);
+
+    connectionWaitTimer->setSingleShot(true);        // But we leave the port open for some length of time, so that subsequent
+    connectionWaitTimer->start(KEEP_PORT_OPEN_TIME); // attempts may have a better chance of connecting. No reset should occur on
+}                                                    // on the second try because the port is already open.
+
+
+void OpenPanzerComm::closePortOnly()
+{   // We come here if connectionWaitTimer expires. It means the user failed to connect and is done re-trying.
+
+    // Close the port. We don't need to notify anybody of anything because that was already taken care of in connectionFailed
+    if (serial->isOpen())
+    {   // Make sure DTR is high at the end, in case it makes any difference next time
+        serial->setDataTerminalReady(true); // True here means "set DTR pin High"
+        serial->close();
+        // qDebug() << "PORT CLOSED";
+    }
 }
 
 void OpenPanzerComm::closeSerial()
@@ -560,6 +593,7 @@ void OpenPanzerComm::readData()
                             Connected = true;
                             if (initTimer->isActive()) initTimer->stop();   // We don't want initTimer to expire, because that means we failed to connect. So stop it.
                             if (blitzTimer->isActive()) blitzTimer->stop(); // Stop this one too.
+                            if (connectionWaitTimer->isActive()) connectionWaitTimer->stop();   // Good grief, and this one too!
                             emit ConnectionChanged(true);
                         }
                         // Sometimes there will be a minor error that does not require a halt in whatever we're doing, but we still want to

@@ -64,6 +64,8 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_HI_FLASH, "High Intensity Flash");
     _SF_ALL_QMAP.insert(SF_MG_FIRE, "Machine Gun - Fire");
     _SF_ALL_QMAP.insert(SF_MG_OFF, "Machine Gun - Stop");
+    _SF_ALL_QMAP.insert(SF_MG2_FIRE, "2nd Machine Gun - Fire");
+    _SF_ALL_QMAP.insert(SF_MG2_OFF, "2nd Machine Gun - Stop");
     _SF_ALL_QMAP.insert(SF_BARREL_ENABLE, "Airsoft/Mech Recoil - Enable");
     _SF_ALL_QMAP.insert(SF_BARREL_DISABLE, "Airsoft/Mech Recoil - Disable");
     _SF_ALL_QMAP.insert(SF_BARREL_TOGGLE, "Airsoft/Mech Recoil - Toggle");
@@ -184,6 +186,8 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_HI_FLASH, "High Intensity Flash");
     _SF_DIGITAL_QMAP.insert(SF_MG_FIRE, "Machine Gun - Fire");
     _SF_DIGITAL_QMAP.insert(SF_MG_OFF, "Machine Gun - Stop");
+    _SF_DIGITAL_QMAP.insert(SF_MG2_FIRE, "2nd Machine Gun - Fire");
+    _SF_DIGITAL_QMAP.insert(SF_MG2_OFF, "2nd Machine Gun - Stop");
     _SF_DIGITAL_QMAP.insert(SF_BARREL_ENABLE, "Airsoft/Mech Recoil - Enable");
     _SF_DIGITAL_QMAP.insert(SF_BARREL_DISABLE, "Airsoft/Mech Recoil - Disable");
     _SF_DIGITAL_QMAP.insert(SF_BARREL_TOGGLE, "Airsoft/Mech Recoil - Toggle");

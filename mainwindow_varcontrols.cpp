@@ -114,8 +114,9 @@ void MainWindow::Variables_to_Controls(void)
     ui->chkBrakesOnAtStop->setChecked(DeviceData.BrakesAutoOnAtStop);
     ui->spinRunningLightsDimLevel->setValue(DeviceData.RunningLightsDimLevelPct);
     ui->chkRunningLightsAlwaysOn->setChecked(DeviceData.RunningLightsAlwaysOn);
-    // Machine Gun blinking
+    // Machine Guns blink rates
     ui->spinMGBlink_mS->setValue(DeviceData.MGLightBlink_mS);
+    ui->spinSecondMGBlink_mS->setValue(DeviceData.SecondMGLightBlink_mS);
     // Blink lights when radio signal lost
     ui->chkBlinkSignalLost->setChecked(DeviceData.FlashLightsWhenSignalLost);
     // High Intensity Flash Unit
@@ -364,8 +365,9 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.BrakesAutoOnAtStop = ui->chkBrakesOnAtStop->isChecked();
     DeviceData.RunningLightsDimLevelPct = ui->spinRunningLightsDimLevel->value();
     DeviceData.RunningLightsAlwaysOn = ui->chkRunningLightsAlwaysOn->isChecked();
-    // Machine Gun blinking
+    // Machine Guns blink rates
     DeviceData.MGLightBlink_mS = ui->spinMGBlink_mS->value();
+    DeviceData.SecondMGLightBlink_mS = ui->spinSecondMGBlink_mS->value();
     // Blink lights if radio signal lost
     DeviceData.FlashLightsWhenSignalLost = ui->chkBlinkSignalLost->isChecked();
     // Aux Output Settings

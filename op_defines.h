@@ -159,7 +159,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 112;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 114;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -272,7 +272,9 @@ enum _special_function : byte {
     SF_USER_SOUND6_OFF  = 108,      // 108
     SF_OUTPUT_A_PULSE   = 109,      // 109   -- see also 41-43 for other OUTPUT_A functions
     SF_OUTPUT_B_PULSE   = 110,      // 110   -- see also 44-46 for other OUTPUT_B functions
-    SF_AUXOUT_INV_FLASH = 111       // 111   -- see also 30 for regular flash
+    SF_AUXOUT_INV_FLASH = 111,      // 111   -- see also 30 for regular flash
+    SF_MG2_FIRE         = 112,      // 112   -- Second machine gun (L2 output)
+    SF_MG2_OFF          = 113       // 113
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

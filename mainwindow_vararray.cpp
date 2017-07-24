@@ -307,6 +307,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.FlashLightsWhenSignalLost = VarArray.value(3419).toUInt();                   // 3419 - Flash lights if radio signal lost
     DeviceData.HiFlashWithCannon = VarArray.value(3420).toUInt();                           // 3420 - Trigger high-intensity flash with cannon
     DeviceData.AuxFlashWithCannon = VarArray.value(3421).toUInt();                          // 3421 - Trigger aux light output with cannon
+    DeviceData.SecondMGLightBlink_mS = VarArray.value(3422).toUInt();                       // 3422 - Second machine gun blink interval
 
     // Program setting - 90xx
     DeviceData.PrintDebug = VarArray.value(9011).toUInt();                                  // 9011 - Debug
@@ -606,6 +607,7 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(3419, QByteArray::number(DeviceData.FlashLightsWhenSignalLost));                // 3419 - Flash lights if radio signal lost
     VarArray.insert(3420, QByteArray::number(DeviceData.HiFlashWithCannon));                        // 3420 - Trigger high-intensity flash with cannon
     VarArray.insert(3421, QByteArray::number(DeviceData.AuxFlashWithCannon));                       // 3421 - Trigger aux light output with cannon
+    VarArray.insert(3422, QByteArray::number(DeviceData.SecondMGLightBlink_mS));                    // 3422 - Second machine gun blink interval
 
     // Program setting - 90xx
     VarArray.insert(9011, QByteArray::number(DeviceData.PrintDebug));                                // 9011 - Debug

@@ -103,7 +103,6 @@
 #define INIT_TIME               4100    // How much total time will we use to try to connect to the device
 #define FIRST_BLITZ_TIME        2000    // Time in milliseconds between the first init string and how long we think the device takes to reboot (and get past bootloader)
 #define SECOND_BLITZ_TIME       500     // Time in milliseconds between spamming the device repeatedly with our INIT_STRING
-#define KEEP_PORT_OPEN_TIME     20000   // Time in milliseconds to keep the serial port open in the background after a failed attempt, to help kickstart a second attempt
 #define WATCHDOG_TIME_DEFAULT   1000    // Time in milliseconds we will wait for a response from the device generally.
 #define WATCHDOG_TIME_SABERTOOTH_SETUP 3000 // When we command a Sabertooth baud rate setup routine of the TCB, the response will take over 2 seconds, so we must increase the default watchdog timeout time
 #define STAY_AWAKE_BEEP_TIME    4000    // How often should we send a stay-awake signal to the device. Should be less than the device's timeout time.
@@ -318,7 +317,6 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
            boolean SkipWatchdog;               // We can set this to true to skip a watchdog-response timer for one sentence
            QTimer *initTimer;                  // This timer will run wile we try to connect to the device.
            QTimer *blitzTimer;                 // This timer will repeatedly send the INIT_STRING until either we get a response, or initTimer expires
-           QTimer *connectionWaitTimer;        // Added 7/18/17. We will leave the serial port open after a failed connection for some length of time, to improve the chances of a successful connection on subsequent attempts
            QTimer *watchdogTimer;              // This timer will alert us if we don't get a response from the device
            QTimer *stayAwakeTimer;             // This timer will be used to remain connected to the device even when we aren't actively doing anything with it.
            void startStayAwakeTimer(void);
@@ -344,7 +342,6 @@ class OpenPanzerComm : public QObject // By inheriting from QObject, the class c
            void ProcessConnectionChange(boolean connected);  // If true we start the watchdog timer, if false we clear it.
            void ProcessSnoopingChange(boolean snooping);     //
            void sendInit(void);
-           void closePortOnly(void);       // This closes the serial port after failed connection attempt, we can skip a bunch of other steps that would take place on a normal disconnection
            void connectionFailed(void);
            void watchdogBark(void);
            void keepDeviceAwake(void);

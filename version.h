@@ -1,18 +1,18 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-// LAST UPDATE: 7/14/2017
+// LAST UPDATE: 7/25/2017           // We have chosen to skip 0.92.07 in order to stay in line with TCB firmware, to avoid confusion
 
-#define VER_FILEVERSION              0,92,06,00
-#define VER_FILEVERSION_STR         "0.92.06.00\0"
+#define VER_FILEVERSION              0,92,08,00
+#define VER_FILEVERSION_STR         "0.92.08.00\0"
 
 // THIS IS THE VERSION THAT WILL BE CHECKED AGAINST the appcast.xml version on the downloads page.
 // YOU MUST ALSO RUN QMAKE for this to update.
-#define VER_PRODUCTVERSION           0,92,06,00
-#define VER_PRODUCTVERSION_STR      "0.92.06\0"
+#define VER_PRODUCTVERSION           0,92,08,00
+#define VER_PRODUCTVERSION_STR      "0.92.08\0"
 
 // THIS VERSION IS THE MINIMUM VERSION OF TCB FIRMWARE NEEDED FOR THIS VERSION OF OP CONFIG:
-#define VER_MINTCB_STR              "0.92.07\0"
+#define VER_MINTCB_STR              "0.92.08\0"
 
 #define VER_COPYRIGHT_YEAR_STR      "2017"      // Change it below as well v
 #define VER_COMPANYNAME_STR         "OpenPanzer.org"

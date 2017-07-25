@@ -15,6 +15,7 @@ public:
     QMap<_special_function, QString> getDigitalSpecialFunctionsQMap();
     QMap<_special_function, QString> getAnalogSpecialFunctionsQMap();
     QMap<_special_function, QString> getEmptySpecialFunctionsQMap();
+    QList<_special_function> getAllSpecialFunctionsSortOrder();
     boolean isSpecialFunctionDigital(_special_function sf);
     uint8_t GetSpecialFunctionExternalPortNum(_special_function sf);
 
@@ -38,6 +39,7 @@ private:
     QMap<_special_function, QString> _SF_ANALOG_QMAP;
     QMap<_special_function, QString> _SF_PORTS_QMAP;
     QMap<_special_function, QString> _SF_EMPTY_QMAP;
+    QList<_special_function> _SF_ALL_QMAP_SORT;
 
     // Trigger sources
     QMap<_trigger_source, QString> _OPT_ALL_QMAP;

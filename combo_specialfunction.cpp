@@ -6,15 +6,36 @@ SpecialFunctionComboBox::SpecialFunctionComboBox(QWidget *parent) : QComboBox(pa
     // We get these key/value pairs from our OP_QMaps class (it holds a bunch of maps of interest)
     OPQMap = new OP_QMaps;
     SFQMap = OPQMap->getAllSpecialFunctionsQMap();
+    QList<_special_function> SFQMap_Sort = OPQMap->getAllSpecialFunctionsSortOrder();
     SFDigitalQMap = OPQMap->getDigitalSpecialFunctionsQMap();
     SFAnalogQMap = OPQMap->getAnalogSpecialFunctionsQMap();
 
     // Populate the combo box
-    QMapIterator<_special_function, QString> i(SFQMap);
-    while (i.hasNext())
+    // UNFORTUNATELY, QMaps can only be accessed by sorted key, that is the way they are designed. But we want to
+    // display these in arbitrary order, because we may add new special functions in time that we want grouped with
+    // earlier ones. We probably should have used a QHash instead but at this point I am leery of changing that.
+//    QMapIterator<_special_function, QString> i(SFQMap);
+//    while (i.hasNext())
+//    {
+//        i.next();
+//        qDebug() << i.value();
+//        insertItem(count(), i.value(), i.key());    // QMap key in this case is the ID of the special function. Value is the name.
+//    }
+
+    // Instead what we've done is create a distinct QList of special functions in the order we would like them to appear.
+    // We iterate through the sort list and use it to pick the items we want from the QMap to insert into the combo box.
+    _special_function sf;
+    QString qs;
+    QListIterator<_special_function> i(SFQMap_Sort);
+    while(i.hasNext())
     {
-        i.next();
-        insertItem(count(), i.value(), i.key());
+        sf = i.next();                          // This is the _special_function byte
+        qs = SFQMap.value(sf);                  // This is the special function name from our QMap
+        if (sf == SF_NULL_FUNCTION || qs !="")  // Not every special function may be active. Ignore it if it returns blank except
+        {                                       // for the first one which we already know is blank and we want to keep in the list.
+            // qDebug() << qs;
+            insertItem(count(), qs, sf);
+        }
     }
 
     // Because it will be less coding, we first add everything, then remove the external outputs after

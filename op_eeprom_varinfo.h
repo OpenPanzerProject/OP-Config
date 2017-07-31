@@ -253,7 +253,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {1816, 291, varINT16, "1000"},        // TurretRotation_EPMin
     {1817, 293, varINT16, "2000"},        // TurretRotation_EPMax
     {1818, 295, varBOOL, "0"},        // TurretRotation_Reversed
-    {2011, 296, varBOOL, "1"},        // Airsoft
+    {2011, 296, varBOOL, "0"},        // Airsoft
     {2012, 297, varBOOL, "1"},        // MechanicalBarrelWithCannon
     {2013, 298, varINT16, "0"},        // RecoilDelay
     {2014, 300, varBOOL, "1"},        // RecoilReversed

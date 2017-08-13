@@ -283,6 +283,9 @@ private slots:
       void ShowHideSqueak5Settings(bool);
       void ShowHideSqueak6Settings(bool);
       void ShowHideOtherSqueakSettings();
+      void UpdateEngineVolumeLabel(int);
+      void UpdateOverlayVolumeLabel(int);
+      void UpdateEffectsVolumeLabel(int);
 
       // Misc tab
       void updateSabertoothBaudLabel(void);

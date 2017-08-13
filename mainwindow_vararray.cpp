@@ -269,7 +269,9 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.Squeak4_Enabled = VarArray.value(2831).toUInt();                             // 2831 - Squeak4 enabled or not
     DeviceData.Squeak5_Enabled = VarArray.value(2832).toUInt();                             // 2832 - Squeak5 enabled or not
     DeviceData.Squeak6_Enabled = VarArray.value(2833).toUInt();                             // 2833 - Squeak6 enabled or not
-
+    DeviceData.VolumeEngine = VarArray.value(2834).toUInt();                                // 2834 - Engine volume level
+    DeviceData.VolumeTrackOverlay = VarArray.value(2835).toUInt();                          // 2835 - Track overlay volume level
+    DeviceData.VolumeEffects = VarArray.value(2836).toUInt();                               // 2836 - Effects volume level
 
     // Battle settings - 30xx
     DeviceData.IR_FireProtocol = VarArray.value(3011).toUInt();                             // 3011 - IR protocol to send when firing cannon
@@ -570,6 +572,9 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2831, QByteArray::number(DeviceData.Squeak4_Enabled));                          // 2831 - Squeak4 enabled or not
     VarArray.insert(2832, QByteArray::number(DeviceData.Squeak5_Enabled));                          // 2832 - Squeak5 enabled or not
     VarArray.insert(2833, QByteArray::number(DeviceData.Squeak6_Enabled));                          // 2833 - Squeak6 enabled or not
+    VarArray.insert(2834, QByteArray::number(DeviceData.VolumeEngine));                             // 2834 - Engine volume level
+    VarArray.insert(2835, QByteArray::number(DeviceData.VolumeTrackOverlay));                       // 2835 - Track overlay volume level
+    VarArray.insert(2836, QByteArray::number(DeviceData.VolumeEffects));                            // 2836 - Effects volume level
 
     // Battle settings - 30xx
     VarArray.insert(3011, QByteArray::number(DeviceData.IR_FireProtocol));                          // 3011 - IR protocol to send when firing cannon

@@ -266,6 +266,10 @@ void MainWindow::Variables_to_Controls(void)
     ShowHideSqueak4Settings(ui->chkEnableSqueak4->isChecked());
     ShowHideSqueak5Settings(ui->chkEnableSqueak5->isChecked());
     ShowHideSqueak6Settings(ui->chkEnableSqueak6->isChecked());
+    // Volumes
+    ui->sliderEngineVolume->setValue(DeviceData.VolumeEngine);
+    ui->sliderOverlayVolume->setValue(DeviceData.VolumeTrackOverlay);
+    ui->sliderEffectsVolume->setValue(DeviceData.VolumeEffects);
     // Other enables
     ui->chkEnableHeadlightSound->setChecked(DeviceData.HeadlightSound_Enabled);
     ShowHideHeadlightSoundNote(ui->chkEnableHeadlightSound->isChecked());
@@ -494,6 +498,10 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.Squeak6_MinInterval_mS = ui->spinSqueak6Min->value();
     DeviceData.Squeak6_MaxInterval_mS = ui->spinSqueak6Max->value();
     DeviceData.MinSqueakSpeedPct = ui->spinMinSqueakSpeed->value();
+    // Volumes
+    DeviceData.VolumeEngine = ui->sliderEngineVolume->value();
+    DeviceData.VolumeTrackOverlay = ui->sliderOverlayVolume->value();
+    DeviceData.VolumeEffects = ui->sliderEffectsVolume->value();
     // Other enables
     DeviceData.HeadlightSound_Enabled = ui->chkEnableHeadlightSound->isChecked();
     DeviceData.TurretSound_Enabled = ui->chkEnableTurretSound->isChecked();

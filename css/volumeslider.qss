@@ -1,0 +1,69 @@
+QSlider::groove:horizontal 
+{
+    border: 1px solid #666666;
+    background: white;
+    height: 8px;
+    border-radius: 0px;
+}
+
+/* Handle */
+QSlider::handle:horizontal 
+{
+    background: #39085A;    /* purple */
+    width: 8px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    border-radius: 0px;
+}
+
+/* Handle - hover */
+QSlider::handle:horizontal:hover 
+{
+    background: #39085A;    /* purple */
+    border-radius: 0px;
+}
+
+/* sub-page is the amount that has been passed */
+/* ie, before the handle */
+QSlider::sub-page:horizontal 
+{
+	/* background: #454F65;	/* grey */   
+    /* background: #39085A;    /* purple */
+    /* background: #E4E4F1;    /* light purple */
+    /* background: #E1E3E3;    /* light grey */
+    background: #C1CADE;
+    border: 1px solid #666;
+    height: 10px;
+    border-radius: 0px;
+}
+
+/* add-page is the amount that is left */
+/* ie, after the handle */
+QSlider::add-page:horizontal 
+{
+    background: #FFF;	/* white */    
+    border: 1px solid #666;
+    height: 10px;
+    border-radius: 0px;
+}
+
+QSlider::sub-page:horizontal:disabled 
+{
+    background: #bbb;
+    border-color: #999;
+}
+
+QSlider::add-page:horizontal:disabled 
+{
+    background: #eee;
+    border-color: #999;
+}
+
+QSlider::handle:horizontal:disabled 
+{
+    background: #eee;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+

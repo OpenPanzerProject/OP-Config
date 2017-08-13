@@ -35,17 +35,55 @@ void MainWindow::SetupControls_SoundTab(void)
     connect(ui->chkEnableSqueak4, SIGNAL(clicked()), this, SLOT(ShowHideOtherSqueakSettings()));
     connect(ui->chkEnableSqueak5, SIGNAL(clicked()), this, SLOT(ShowHideOtherSqueakSettings()));
     connect(ui->chkEnableSqueak6, SIGNAL(clicked()), this, SLOT(ShowHideOtherSqueakSettings()));
+
+    // Apply css to the volume sliders
+    QFile file(":/css/volumeslider.qss");
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        ui->sliderEngineVolume->setStyleSheet(file.readAll());
+        file.seek(0);   // Return to beginning of file
+        ui->sliderOverlayVolume->setStyleSheet(file.readAll());
+        file.seek(0);   // Return to beginning of file
+        ui->sliderEffectsVolume->setStyleSheet(file.readAll());
+        file.close();
+    }
+
+    // Signals and slots for volume sliders
+    connect(ui->sliderEngineVolume, SIGNAL(valueChanged(int)), this, SLOT(UpdateEngineVolumeLabel(int)));
+    connect(ui->sliderOverlayVolume, SIGNAL(valueChanged(int)), this, SLOT(UpdateOverlayVolumeLabel(int)));
+    connect(ui->sliderEffectsVolume, SIGNAL(valueChanged(int)), this, SLOT(UpdateEffectsVolumeLabel(int)));
+
 }
+
+void MainWindow::UpdateEngineVolumeLabel(int v)
+{
+    ui->lblEngineVolume->setText(QString("%1%").arg(v));
+}
+
+void MainWindow::UpdateOverlayVolumeLabel(int v)
+{
+    ui->lblOverlayVolume->setText(QString("%1%").arg(v));
+}
+
+void MainWindow::UpdateEffectsVolumeLabel(int v)
+{
+    ui->lblEffectsVolume->setText(QString("%1%").arg(v));
+}
+
 void MainWindow::ShowHideSoundCardSettings()
 {
     switch (ui->cboSoundDevice->getCurrentSoundDevice())
     {
         case SD_BENEDINI_TBSMINI:
+            // Hide volumes
+            ui->frmVolume->hide();
             // Remove functions not applicable
             RemoveSoundFunctionsBenedini();
             // Add those that are
             AddSoundFunctionsBenedini();
             // Enable 3 squeaks
+            ui->frmSqueaks->show();
+            ui->frmSqueaks->resize(411,241);
             ShowSqueakHeader();
             EnableSqueaks1_3();
             DisableSqueaks4_6();
@@ -62,7 +100,11 @@ void MainWindow::ShowHideSoundCardSettings()
             RemoveVolumeFunctionsStep();
             // But that's it, otherwise make sure all options are available.
             AddSoundFunctionsOP();
+            // Show volume
+            ui->frmVolume->show();
             // Enable all squeaks
+            ui->frmSqueaks->show();
+            ui->frmSqueaks->resize(411,331);
             ShowSqueakHeader();
             EnableSqueaks1_3();
             EnableSqueaks4_6();
@@ -76,6 +118,8 @@ void MainWindow::ShowHideSoundCardSettings()
         case SD_TAIGEN_SOUND:
             // We remove the volume control and all user sound functions
             RemoveSoundFunctionsTaigen();
+            ui->frmVolume->hide();
+            ui->frmSqueaks->hide();
             // Disable and hide all squeak options
             HideSqueakHeader();
             DisableSqueaks1_3();
@@ -152,6 +196,8 @@ void MainWindow::AddSoundFunctionsOP()
 {
     // Remove them all first, then add them, so they show up together
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_OVERLAY_ENABLE);
+    ui->cboSelectFunction->RemoveSF(SF_OVERLAY_DISABLE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND1_OFF);
@@ -173,6 +219,8 @@ void MainWindow::AddSoundFunctionsOP()
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_SET_VOLUME);
+    ui->cboSelectFunction->AddSF(SF_OVERLAY_ENABLE);
+    ui->cboSelectFunction->AddSF(SF_OVERLAY_DISABLE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND1_OFF);
@@ -197,6 +245,8 @@ void MainWindow::RemoveSoundFunctionsTaigen()
 {
     // Remove all user sound functions and volume adjustment functions
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_OVERLAY_ENABLE);
+    ui->cboSelectFunction->RemoveSF(SF_OVERLAY_DISABLE);
     ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_STOP_VOLUME);
@@ -221,6 +271,8 @@ void MainWindow::RemoveSoundFunctionsTaigen()
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
+        FT_TableModel->removeFunctionFromList(SF_OVERLAY_ENABLE)   |
+        FT_TableModel->removeFunctionFromList(SF_OVERLAY_DISABLE)  |
         FT_TableModel->removeFunctionFromList(SF_INCR_VOLUME)      |
         FT_TableModel->removeFunctionFromList(SF_DECR_VOLUME)      |
         FT_TableModel->removeFunctionFromList(SF_STOP_VOLUME)      |
@@ -251,6 +303,8 @@ void MainWindow::RemoveSoundFunctionsBenedini()
     // Remove the analog volume adjustment function,
     // and also user sound functions 4-6 if instead those are being used for squeaks
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
+    ui->cboSelectFunction->RemoveSF(SF_OVERLAY_ENABLE);
+    ui->cboSelectFunction->RemoveSF(SF_OVERLAY_DISABLE);
     if (ui->chkEnableSqueak1->isChecked())
     {
         ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
@@ -272,6 +326,8 @@ void MainWindow::RemoveSoundFunctionsBenedini()
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)) removed += 1;
+    if (FT_TableModel->removeFunctionFromList(SF_OVERLAY_ENABLE)) removed += 1;
+    if (FT_TableModel->removeFunctionFromList(SF_OVERLAY_DISABLE)) removed += 1;
     if (ui->chkEnableSqueak1->isChecked())
     {
         if (FT_TableModel->removeFunctionFromList(SF_USER_SOUND4_ONCE) |
@@ -554,7 +610,7 @@ void MainWindow::SqueakSettingsMoveDown(void)
 
 void MainWindow::HideSqueakHeader(void)
 {
-    ui->lblSqueakHeader1->hide();
+//    ui->lblSqueakHeader1->hide();
     ui->lblSqueakHeader2->hide();
     ui->lblSqueakHeader3->hide();
     ui->lblSqueakHeader4->hide();
@@ -564,7 +620,7 @@ void MainWindow::HideSqueakHeader(void)
 }
 void MainWindow::ShowSqueakHeader(void)
 {
-    ui->lblSqueakHeader1->show();
+//    ui->lblSqueakHeader1->show();
     ui->lblSqueakHeader2->show();
     ui->lblSqueakHeader3->show();
     ui->lblSqueakHeader4->show();

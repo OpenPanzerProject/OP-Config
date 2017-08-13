@@ -22,6 +22,8 @@
 #frmRepairIR,
 #frmDamage,
 #frmSoundDevice,
+#frmSqueaks,
+#frmVolume,
 #frmLVC,
 #frmBaudRates,
 #frmDebug,

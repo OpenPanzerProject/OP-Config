@@ -263,6 +263,7 @@ private slots:
       void ShowHideBarrelStabilization(bool);
       void ShowHideBarrelSensitivity(bool);
       void ShowHideHillSensitivity(bool);
+      void ShowHideTrackRecoil(bool);
 
       // Battle tab
       void ShowHideCannonIRSettings(int);

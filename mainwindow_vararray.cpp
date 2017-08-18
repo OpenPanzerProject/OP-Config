@@ -227,6 +227,9 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.MotorNudgePct = VarArray.value(2436).toUInt();                               // 2436 - Motor nudge percent
     DeviceData.NudgeTime_mS = VarArray.value(2437).toUInt();                                // 2437 - Nudge time in milliseconds
     DeviceData.DragInnerTrack = VarArray.value(2438).toUInt();                              // 2438 - Drag inner track (OP Scout only)
+    DeviceData.EnableTrackRecoil = VarArray.value(2439).toUInt();                           // 2439 - Enable track recoil
+    DeviceData.TrackRecoilKickbackSpeed = VarArray.value(2440).toUInt();                    // 2440 - Initial kickback speed percent 0-100
+    DeviceData.TrackRecoilDecelerateFactor = VarArray.value(2441).toUInt();                 // 2441 - Deceleration factor
 
     // "Physics" Settings - 25xx
     DeviceData.EnableBarrelStabilize = VarArray.value(2511).toUInt();                       // 2511 - Enable barrel stabilization
@@ -530,6 +533,9 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2436, QByteArray::number(DeviceData.MotorNudgePct));                            // 2436 - Motor nudge percent
     VarArray.insert(2437, QByteArray::number(DeviceData.NudgeTime_mS));                             // 2437 - Nudge time in milliseconds
     VarArray.insert(2438, QByteArray::number(DeviceData.DragInnerTrack));                           // 2438 - Drag inner track (OP Scout only)
+    VarArray.insert(2439, QByteArray::number(DeviceData.EnableTrackRecoil));                        // 2439 - Enable track recoil
+    VarArray.insert(2440, QByteArray::number(DeviceData.TrackRecoilKickbackSpeed));                 // 2440 - Initial kickback speed percent 0-100
+    VarArray.insert(2441, QByteArray::number(DeviceData.TrackRecoilDecelerateFactor));              // 2441 - Deceleration factor
 
     // Accelerometer Settings - 25xx
     VarArray.insert(2511, QByteArray::number(DeviceData.EnableBarrelStabilize));                    // 2511 - Enable barrel stabilization

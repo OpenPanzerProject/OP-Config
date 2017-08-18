@@ -791,7 +791,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbDriving, SIGNAL(released()), signalMapper, SLOT(map()));             // Driving
         connect(ui->hpbTurning, SIGNAL(released()), signalMapper, SLOT(map()));             // Turning
         connect(ui->hpbAccelDecel, SIGNAL(released()), signalMapper, SLOT(map()));          // Acceleration/deceleration
-        connect(ui->hpbIMU, SIGNAL(released()), signalMapper, SLOT(map()));                 // IMU
+        connect(ui->hpbTrackRecoil, SIGNAL(released()), signalMapper, SLOT(map()));         // Track recoil
         connect(ui->hpbFreewheel, SIGNAL(released()), signalMapper, SLOT(map()));           // Freewheeling gearbox options
     // Battle tab
         connect(ui->hpbWeightClass, SIGNAL(released()), signalMapper, SLOT(map()));         // Custom weight class
@@ -809,6 +809,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbDebug, SIGNAL(released()), signalMapper, SLOT(map()));               // Debug
         connect(ui->hpbSabertooth, SIGNAL(released()), signalMapper, SLOT(map()));          // Sabertooth configuration
         connect(ui->hpbPololu, SIGNAL(released()), signalMapper, SLOT(map()));              // Pololu configuration
+        connect(ui->hpbIMU, SIGNAL(released()), signalMapper, SLOT(map()));                 // IMU
     // Firmware tab
         connect(ui->hpbFirmware, SIGNAL(released()), signalMapper, SLOT(map()));            // Firmware
         connect(ui->hpbConsole, SIGNAL(released()), signalMapper, SLOT(map()));             // Console
@@ -837,7 +838,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbDriving, "driving.html#driving");                   // Driving
         signalMapper->setMapping(ui->hpbTurning, "driving.html#turning");                   // Turning
         signalMapper->setMapping(ui->hpbAccelDecel, "driving.html#acceldecel");             // Acceleration/deceleration
-        signalMapper->setMapping(ui->hpbIMU, "driving.html#imu");                           // IMU
+        signalMapper->setMapping(ui->hpbTrackRecoil, "driving.html#trackrecoil");           // Track recoil
         signalMapper->setMapping(ui->hpbFreewheel, "driving.html#freewheel");               // Freewheeling gearbox options
     // Battle
         signalMapper->setMapping(ui->hpbWeightClass, "battle.html#weightclass");            // Custom weight class
@@ -855,6 +856,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbDebug, "misc.html#debug");                          // Debug
         signalMapper->setMapping(ui->hpbSabertooth, "misc.html#sabertooth");                // Sabertooth configuration
         signalMapper->setMapping(ui->hpbPololu, "misc.html#pololu");                        // Pololu configuration
+        signalMapper->setMapping(ui->hpbIMU, "misc.html#imu");                              // IMU
     // Firmware
         signalMapper->setMapping(ui->hpbFirmware, "firmware.html#flash");                   // Firmware
         signalMapper->setMapping(ui->hpbConsole, "firmware.html#console");                  // Console

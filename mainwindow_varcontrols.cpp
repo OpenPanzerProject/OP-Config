@@ -198,6 +198,11 @@ void MainWindow::Variables_to_Controls(void)
     ShowHideHillSensitivity(ui->chkEnableHills->isChecked());
     if (DeviceData.TurretElevationMotor == SERVO_PAN) ShowHideBarrelStabilization(true);
     else ShowHideBarrelStabilization(false);
+    // Track recoil
+    ui->chkEnableTrackRecoil->setChecked(DeviceData.EnableTrackRecoil);
+    ui->spinKickbackSpeed->setValue(DeviceData.TrackRecoilKickbackSpeed);
+    ui->spinDecelerateFactor->setValue(DeviceData.TrackRecoilDecelerateFactor);
+    ShowHideTrackRecoil(ui->chkEnableTrackRecoil->isChecked());
     // Freewheeling Gearbox
     ui->chkFreewheelGearbox->setChecked(DeviceData.DragInnerTrack);
     ValidateFreewheelingGearboxOptions();
@@ -449,6 +454,10 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.BarrelSensitivity = ui->spinBarrelSensitivity->value();
     DeviceData.EnableHillPhysics = ui->chkEnableHills->isChecked();
     DeviceData.HillSensitivity = ui->spinHillSensitivity->value();
+    // Track Recoil
+    DeviceData.EnableTrackRecoil = ui->chkEnableTrackRecoil->isChecked();
+    DeviceData.TrackRecoilKickbackSpeed = ui->spinKickbackSpeed->value();
+    DeviceData.TrackRecoilDecelerateFactor = ui->spinDecelerateFactor->value();
     // Freewheeling gearbox
     DeviceData.DragInnerTrack = ui->chkFreewheelGearbox->isChecked();
 

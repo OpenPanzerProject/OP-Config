@@ -15,6 +15,7 @@
 #frmAccelDecel,
 #frmTurning,
 #frmFreewheel,
+#frmTrackRecoil,
 #frmIMU,
 #frmWeightClass,
 #frmIR,

@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>6</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -10859,7 +10859,7 @@ gearboxes by dragging inner track during turns:</string>
                   <rect>
                    <x>10</x>
                    <y>10</y>
-                   <width>181</width>
+                   <width>261</width>
                    <height>21</height>
                   </rect>
                  </property>
@@ -10871,7 +10871,7 @@ gearboxes by dragging inner track during turns:</string>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Relative Volumes</string>
+                  <string>Individual Maximum Volumes</string>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_162">
@@ -10896,7 +10896,7 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>90</y>
+                   <y>130</y>
                    <width>131</width>
                    <height>21</height>
                   </rect>
@@ -10914,7 +10914,7 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="geometry">
                   <rect>
                    <x>20</x>
-                   <y>130</y>
+                   <y>90</y>
                    <width>121</width>
                    <height>21</height>
                   </rect>
@@ -10972,7 +10972,7 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="geometry">
                   <rect>
                    <x>120</x>
-                   <y>134</y>
+                   <y>94</y>
                    <width>160</width>
                    <height>16</height>
                   </rect>
@@ -10994,7 +10994,7 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="geometry">
                   <rect>
                    <x>120</x>
-                   <y>94</y>
+                   <y>134</y>
                    <width>160</width>
                    <height>16</height>
                   </rect>
@@ -11016,7 +11016,7 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="geometry">
                   <rect>
                    <x>300</x>
-                   <y>90</y>
+                   <y>130</y>
                    <width>41</width>
                    <height>21</height>
                   </rect>
@@ -11034,7 +11034,7 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="geometry">
                   <rect>
                    <x>300</x>
-                   <y>130</y>
+                   <y>90</y>
                    <width>41</width>
                    <height>21</height>
                   </rect>

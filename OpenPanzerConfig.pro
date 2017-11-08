@@ -73,7 +73,8 @@ SOURCES += main.cpp\
     mainwindow_file_rw.cpp \
     mainwindow_tab_radio.cpp \
     singleapplication.cpp \
-    combo_recoilservopreset.cpp
+    combo_recoilservopreset.cpp \
+    combo_devices.cpp
 
 HEADERS  += mainwindow.h \
     deviceselect.h \
@@ -108,7 +109,8 @@ HEADERS  += mainwindow.h \
     winsparkle-version.h \
     resources.rc \
     singleapplication.h \
-    combo_recoilservopreset.h
+    combo_recoilservopreset.h \
+    combo_devices.h
 
 FORMS    += mainwindow.ui \
         deviceselect.ui

@@ -33,6 +33,7 @@ void MainWindow::toggleDeviceConnection()
         ui->cboConsoleBaud->setEnabled(false);
         ui->cmdSnoop->setEnabled(false);
         ui->cmdFlashHex->setEnabled(false);
+        ui->cboFlashDevice->setEnabled(false);
         AttemptConnect = true;             // Set a flag to indicate a connection attempt is underway
         SerialStatus_SetAttemptConnect();  // Set the serial status label
 
@@ -85,8 +86,9 @@ void MainWindow::ShowConnectionStatus(boolean connected)
         ui->cboConsoleBaud->setEnabled(false);
 
         // However we do re-enabled the Snoop and Flash buttons. If they are clicked they will cause a disconnect, but that's ok
-        ui->cmdFlashHex->setEnabled(true);
         ui->cmdSnoop->setEnabled(true);
+        ui->cmdFlashHex->setEnabled(true);
+        ui->cboFlashDevice->setEnabled(true);
 
         statusProgressBar->hide();
             qApp->processEvents();
@@ -120,6 +122,7 @@ void MainWindow::ShowConnectionStatus(boolean connected)
         ui->cboCOMPorts->setEnabled(true);
         ui->cboConsoleBaud->setEnabled(true);
         ui->cmdFlashHex->setEnabled(true);
+        ui->cboFlashDevice->setEnabled(true);
         ui->cmdSnoop->setEnabled(true);
 
         // Disable serial motor controller configuration buttons on Misc tab
@@ -342,6 +345,7 @@ void MainWindow::writeAllSettingsToDevice()
     ui->cmdWriteDevice->setChecked(true);
     ui->cmdSnoop->setEnabled(false);
     ui->cmdFlashHex->setEnabled(false);
+    ui->cboFlashDevice->setEnabled(false);
     writeAllSettings = true;        // Set the write all flag
     startVarPos = 1;                // We are writing all vars, so start at 1 and got to NUM_STORED_VARS - 2
     endVarPos = NUM_STORED_VARS - 2;// Minus 2 because: -1 because the array is zero-based and NUM_STORED_VARS is the actual count
@@ -489,6 +493,7 @@ void MainWindow::processNextSentence(boolean priorFail)
             ui->cmdWriteDevice->setChecked(false);
             ui->cmdSnoop->setEnabled(true);
             ui->cmdFlashHex->setEnabled(true);
+            ui->cboFlashDevice->setEnabled(true);
         }
     }
 

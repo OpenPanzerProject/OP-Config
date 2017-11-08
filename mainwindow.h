@@ -91,8 +91,14 @@ enum StatusLabelStatus{slGood, slBad, slNeutral};   // We use these to decide wh
 
 // Not very sophisticated. Here we store the URLs to the TCB latest release hex and version files, and we
 // assume they will never change in a million years.
-#define LATEST_RELEASE_VERSION_URL  "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL      "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
+#define LATEST_RELEASE_VERSION_URL_TCB      "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TCB          "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
+
+#define LATEST_RELEASE_VERSION_URL_SCOUT    "http://openpanzer.org/downloads/scout/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_SCOUT        "http://openpanzer.org/downloads/scout/firmware/opscout.hex"
+
+#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND    "http://openpanzer.org/downloads/soundcard/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TEENSYSOUND        "http://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
 
 // Struct for firmware version info
 struct FirmwareVersion{
@@ -302,6 +308,7 @@ private slots:
       void readyReadStandardError();                // Won't be using this one after all
       void getLocalHex();
       void getWebHex();
+      void clearGotHex();
       void checkHexVersion();
       void SaveWebHexToLocal();
       void SaveWebHexFailed();
@@ -310,6 +317,7 @@ private slots:
       void ClearConsole();
       void toggleSnoop();
       void putDataToConsole(const QByteArray &data);
+      void stopTeensyTimer(void);                   // Teensy flash has timed-out
 
       // Status bar (along the bottom)
       void StartStatusLabelOnDelay(void);           // During this delay, the status label is visible
@@ -453,6 +461,10 @@ private:
         boolean AttemptFlash;
         QString strAVRDUDEOutput;
         QProcess *AVRDUDEProcess;
+        QString strTeensyLoaderOutput;
+        QProcess *TeensyLoaderProcess;
+        QTimer *TeensyTimeoutTimer;                 // This timer will be used to exit the Teensy flash operation if no chip is detected after a certain amount of time
+        void startTeensyTimer(void);
         boolean GotWebHex;                          // If we've downloaded a hex from the web set this flag, so if the user tries again it's instantaneous
         QString WebHexFilePath;                     // If we've downloaded the hex from the web, this is the full path (including file name) where we saved it.
         boolean isCharNumeric(char);                // Is this a character from 0 to 9

@@ -39,17 +39,43 @@ void MainWindow::SetupControls_FirmwareTab(void)
     connect(AVRDUDEProcess,SIGNAL(readyReadStandardOutput()),this,SLOT(readyReadStandardOutput()));
     connect(AVRDUDEProcess, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
 
+    // Teensy Loader process and signals
+    TeensyLoaderProcess = new QProcess(this);
+    connect(TeensyLoaderProcess, SIGNAL(started()), this, SLOT(flashStarted()));
+    connect(TeensyLoaderProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(flashFinished()));
+    connect(TeensyLoaderProcess,SIGNAL(readyReadStandardOutput()),this,SLOT(readyReadStandardOutput()));
+    connect(TeensyLoaderProcess, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
+    // We also use a timer to exit the Teensy flash operation if no chip is detected after a certain amount of time,
+    // otherwise it can hang forever (there is no intrinsic timeout feature the way there is with AVRDUDE)
+    TeensyTimeoutTimer = new QTimer(this);
+    connect(TeensyTimeoutTimer, SIGNAL(timeout()), this, SLOT(stopTeensyTimer()));
+
     // Console slots and signals
     connect(ui->cmdSnoop, SIGNAL(clicked(bool)), this, SLOT(toggleSnoop()));
     connect(ui->cmdClearConsole, SIGNAL(clicked(bool)), this, SLOT(ClearConsole()));
     connect(comm, SIGNAL(NewData(QByteArray)), this, SLOT(putDataToConsole(QByteArray)));
     connect(comm, SIGNAL(SnoopingChanged(boolean)), this, SLOT(ShowSnoopStatus(boolean)));
+
+    // When we change the Device type to Flash, clear our memory of the last hex
+    connect(ui->cboFlashDevice, SIGNAL(currentIndexChanged(int)), this, SLOT(clearGotHex()));
+}
+void MainWindow::clearGotHex()
+{
+    GotWebHex = false;
+    ClearConsole();                             // Remove text from the console window
+    ui->ltxtHexPath->clear();                   // Clear the path text box
+    ui->lblHexVersion->clear();                 // Clear version label
+    WebHexFilePath = "";                        // We don't know the final path
+    ClearFirmwareVersion(DownloadedVersion);    // We don't know the version
+    DownloadedVersionDate = "";                 // Or this
+
 }
 void MainWindow::getWebHex()
-{   // This attempts to download a hex file from the Open Panzer latest release folder on the web
-    // Inside that folder should always be two files:
-    // tcbmk1.hex
-    // version.txt
+{
+QString versionfile;
+    // This attempts to download a hex file from one of the Open Panzer firmware folders on the web
+    // depending on the device selected. Inside the firmware folder should always be two files,
+    // version.txt and a hex file. URLs to these files are defined at the top of MainWindow.h
 
     // We use this to skip downloading the file if we've already downloaded it this session
     // It is not likely the release changed in the last few minutes. However for testing when
@@ -84,19 +110,22 @@ void MainWindow::getWebHex()
     {
         // Ok, we are going to try to download the hex file from the web
         // First, init some stuff
-        ui->lblHexVersion->hide();                  // Hide version label
-        WebHexFilePath = "";                        // We don't know the final path
-        ClearFirmwareVersion(DownloadedVersion);    // We don't know the version
-        DownloadedVersionDate = "";                 // Or this
+        clearGotHex();
         ui->cmdWebHexPicker->setChecked(true);      // Check our button
-        ui->cmdWebHexPicker->setText("Checking OpenPanzer.org...");
+        ui->lblHexVersion->setText("Connecting to OpenPanzer.org...");
         ui->cmdWebHexPicker->setEnabled(false);     // And prevent user from clicking it
+        ui->cboFlashDevice->setEnabled(false);      // Prevent changing device too until we're done
         MouseWait();
 
-        // Now we kick off the download. It is two part, and we start off by trying to get the version file
-        VersionDownloader->startDownload(LATEST_RELEASE_VERSION_URL);
-            // Release version URL is defined in MainWindow.h:
-            //LATEST_RELEASE_VERSION_URL  "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
+        // Now we kick off the download. It is two part, and we start off by trying to get the version file.
+        // Release version URLs are defined at the top of MainWindow.h
+        switch (ui->cboFlashDevice->currentData().toInt())
+        {
+            case DEVICE_TCB:          versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
+            case DEVICE_SCOUT:        versionfile = LATEST_RELEASE_VERSION_URL_SCOUT;       break;
+            case DEVICE_TEENSYSOUND:  versionfile = LATEST_RELEASE_VERSION_URL_TEENSYSOUND; break;
+        }
+        VersionDownloader->startDownload(versionfile);
     }
 }
 void MainWindow::checkHexVersion()
@@ -148,12 +177,18 @@ void MainWindow::checkHexVersion()
     }
 
     // Now we have the version, let's download the actual hex file
-    HexDownloader->startDownload(LATEST_RELEASE_HEX_URL);
-        //Hex URL is defined in MainWindow.h:
-        //LATEST_RELEASE_HEX_URL      "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
+    //Hex URL is defined in MainWindow.h
+    QString hexfile;
+    switch (ui->cboFlashDevice->currentData().toInt())
+    {
+        case DEVICE_TCB:          hexfile = LATEST_RELEASE_HEX_URL_TCB;         break;
+        case DEVICE_SCOUT:        hexfile = LATEST_RELEASE_HEX_URL_SCOUT;       break;
+        case DEVICE_TEENSYSOUND:  hexfile = LATEST_RELEASE_HEX_URL_TEENSYSOUND; break;
+    }
+    HexDownloader->startDownload(hexfile);
 }
 void MainWindow::SaveWebHexToLocal()
-{   // If we make it to here, we successfully downloaded the tcbmk1.hex file from the web.
+{   // If we make it to here, we successfully downloaded the device hex file from the web.
     // The contents are now held in a byte array member of the HexDownloader.
     // We will save it to a file on the disk
 
@@ -161,7 +196,13 @@ void MainWindow::SaveWebHexToLocal()
     QString formattedVersion = FirmwareVersionToString(DownloadedVersion);
     formattedVersion.replace(".","-");  // When saving the file name, we changed "." to "-"
     QString hexFileFolder = QString("%1/firmware/").arg(QCoreApplication::applicationDirPath());
-    QString hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);
+    QString hexFilePath;
+    switch (ui->cboFlashDevice->currentData().toInt())
+    {
+        case DEVICE_TCB:          hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);    break;
+        case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);   break;
+        case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);   break;
+    }
     //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
 
     // Make sure the firmware folder exists as a sub-directory of the application directory path
@@ -187,7 +228,7 @@ void MainWindow::SaveWebHexToLocal()
 
         // Ok, we successfully saved the file
         delete file;            // We are not deleting a file, we are deleting this variable that we don't need
-        GotWebHex = true;       // Set this flag to true so we don't have to download it again so long as the program remains open
+        GotWebHex = true;       // Set this flag to true so we don't have to download it again so long as the program remains open and device unchanged
         WebHexFilePath = hexFilePath;
         ui->ltxtHexPath->setText(hexFilePath);  // Show the path.
         ui->ltxtHexPath->setCursorPosition(0);
@@ -217,6 +258,7 @@ void MainWindow::SaveWebHexToLocal()
     ui->cmdWebHexPicker->setText("Get Latest Release"); // Restore button text
     ui->cmdWebHexPicker->setChecked(false);             // Uncheck
     ui->cmdWebHexPicker->setEnabled(true);              // Re-enable
+    ui->cboFlashDevice->setEnabled(true);               // Re-enable
 
 }
 void MainWindow::SaveWebHexFailed()
@@ -232,6 +274,7 @@ void MainWindow::SaveWebHexFailed()
     ui->cmdWebHexPicker->setText("Get Latest Release"); // Restore button text
     ui->cmdWebHexPicker->setChecked(false);             // Uncheck
     ui->cmdWebHexPicker->setEnabled(true);              // Re-enable
+    ui->cboFlashDevice->setEnabled(true);               // Re-enable
 }
 void MainWindow::ClearFirmwareVersion(FirmwareVersion fv)
 {
@@ -383,6 +426,13 @@ void MainWindow::getLocalHex()
 }
 void MainWindow::cmdFlashHex_clicked()
 {
+QString program;
+QStringList arguments;
+QString flagVerbose;
+QString flagProgrammer;
+QString flagBaud;
+QString hex;
+
     // If we are already in the middle of flashing, exit. This shouldn't actually occur.
     // Also if we are in the middle of a connection attempt, exit then too. That can occur if the
     // user clicks enough buttons.
@@ -417,44 +467,7 @@ void MainWindow::cmdFlashHex_clicked()
 
     MouseWait();        // Hourglass the cursor
 
-    // .arg(QCoreApplication::applicationDirPath()); returns the release dev folder:
-    // "path/QT/Projects/build-OpenPanzerConfig-Desktop_Qt_5_4_2_MSVC2013_64bit-Release/release/
-    // So for testing I've copied the AVRDude files there
-
-    // Construct our AVRDUDE executable and list of arguments.
-    // Don't put any spaces in the argument list, or it won't work.
-    QString program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
-    QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
-    QString flagPart =       "-patmega2560";   // -p part - ours is the ATmega2560. This also needs to be defined in avrdude.conf.
-    QString flagProgrammer = "-cwiring";       // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
-                                               //    See which is used in Arduino boards.txt for your chip, in our case it is
-                                               //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
-    QString flagPort =       "-P";             // -P port
-    flagPort.append(ui->cboCOMPorts->currentText());    // And now we append the actual COM port to the -P flag
-    QString flagSkipVerify = "-V";             // -V Skip verification, saves a lot of time
-    QString flagVerbose =    "-v";             // -v Verbose output
-    QString flagBaud =       "-b115200";       // -b baud - hardcoded to 115,200
-    //QString flagBaud =       "-b57600";
-    QString flagDisableErase = "-D";           // -D disables erase before write. You'd think we would want to erase before write,
-                                               //    but the Arduino IDE always includes this flag, and without it AVRDUDE often
-                                               //    gives an error message.
-
-    // Path to hex
-    //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QCoreApplication::applicationDirPath());
-    QString hex = "-Uflash:w:";
-            hex.append(HexFile);
-            hex.append(":i");
-
-    QStringList arguments;
-    //arguments << conf << flagPart << flagProgrammer << flagPort << flagSkipVerify << flagVerbose << flagBaud << flagDisableErase << hex;
-    // This one doesn't skip the verification
-    arguments << conf << flagPart << flagProgrammer << flagPort << flagVerbose << flagBaud << flagDisableErase << hex;
-
-    // Clear text box
-    ui->txtConsole->clear();
-    strAVRDUDEOutput.clear();
-
-    // Before we start, we need to take care of some things.
+    // Before we start the flash, we need to take care of some things.
     AttemptFlash = true;       // Set the attempt flag
 
     // If are presently connected, we need to disconnect because if Qt has the COM port, AVRDUDE won't be able to access it
@@ -477,9 +490,107 @@ void MainWindow::cmdFlashHex_clicked()
     ui->cboCOMPorts->setEnabled(false);
     ui->cboConsoleBaud->setEnabled(false);
     ui->cmdConnect->setEnabled(false);
+    ui->cboFlashDevice->setEnabled(false);
 
-    AVRDUDEProcess->setProcessChannelMode(QProcess::MergedChannels);
-    AVRDUDEProcess->start(program, arguments);
+
+    // .arg(QCoreApplication::applicationDirPath()); returns the release dev folder:
+    // "path/QT/Projects/build-OpenPanzerConfig-Desktop_Qt_5_4_2_MSVC2013_64bit-Release/release/
+    // So for testing I've copied the AVRDude/Teensy loader files there
+
+    // Now construct our command line arguments
+    switch (ui->cboFlashDevice->currentData().toInt())
+    {
+        // These two are ATmega devices and we will use AVRDUDE to flash
+        case DEVICE_TCB:
+        case DEVICE_SCOUT:
+            {
+            // Construct our AVRDUDE executable and list of arguments.
+            // Don't put any spaces in the argument list, or it won't work.
+            program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
+            QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
+            QString flagPart;
+            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB)
+            {
+                flagPart =           "-patmega2560";   // -p part - TCB is the ATmega2560. This also needs to be defined in avrdude.conf
+                flagProgrammer =     "-cwiring";       // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
+                                                       //    See which is used in Arduino boards.txt for your chip, in our case it is
+                                                       //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
+                flagBaud =           "-b115200";       // -b baud - hardcoded to 115,200
+            }
+            else
+            {
+                flagPart =           "-patmega328p";   // -p part - Scout uses an ATmega328p
+                flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
+                                                       //    See which is used in Arduino boards.txt for your chip, in our case it is
+                                                       //    "arduino", which will interface with FTDI cables/adapters
+                flagBaud =           "-b57600";        // -b baud - hardcoded to 57,600 for Nano
+            }
+            QString flagPort =       "-P";             // -P port
+            flagPort.append(ui->cboCOMPorts->currentText());    // And now we append the actual COM port to the -P flag
+            QString flagSkipVerify = "-V";             // -V Skip verification, saves a lot of time
+            flagVerbose =            "-v";             // -v Verbose output
+            QString flagDisableErase = "-D";           // -D disables erase before write. You'd think we would want to erase before write,
+                                                       //    but the Arduino IDE always includes this flag, and without it AVRDUDE often
+                                                       //    gives an error message.
+            // Path to hex
+            //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QCoreApplication::applicationDirPath());
+            hex = "-Uflash:w:";
+            hex.append(HexFile);
+            hex.append(":i");
+
+            //arguments << conf << flagPart << flagProgrammer << flagPort << flagSkipVerify << flagVerbose << flagBaud << flagDisableErase << hex;
+            // This one doesn't skip the verification
+            arguments << conf << flagPart << flagProgrammer << flagPort << flagVerbose << flagBaud << flagDisableErase << hex;
+
+            // Clear text box and our output string
+            ui->txtConsole->clear();
+            strAVRDUDEOutput.clear();
+
+            AVRDUDEProcess->setProcessChannelMode(QProcess::MergedChannels);
+            AVRDUDEProcess->start(program, arguments);
+            }
+            break;
+
+        // We will use PJRC's command-line version of Teensy Loader to flash the Teensy 3.2 chip on the Sound Card.
+        // No baud or COM port settings are required.
+        case DEVICE_TEENSYSOUND:
+            {
+            // Construct our Teensy Loader executable and list of arguments.
+            // Don't put any spaces in the argument list, or it won't work.
+            program = QString("%1/teensyloader/teensy_loader_cli ").arg(QCoreApplication::applicationDirPath());       // Teensy loader exe file
+
+            //teensy_loader_cli -mmcu=mk20dx256 -w blink_slow_Teensy32.hex
+            QString flagMCU =       "-mmcu=mk20dx256";  // -mmcu - Teensy 3.2 (mk20dx256)
+            QString flagWait =      "-w";               // -w wait - Wait for device to appear. When the pushbuttons has not been pressed and
+                                                        //           HalfKay may not be running yet, this option makes teensy_loader_cli wait.
+                                                        //           It is safe to use this when HalfKay is already running. The hex file is
+                                                        //           read before waiting to verify it exists, and again immediately after the device is detected.
+            flagVerbose =           "-v";               // -v Verbose output
+
+            // Assemble
+            arguments.clear();
+            arguments << flagMCU << flagWait << flagVerbose << HexFile;
+
+            // Clear text box and our output string
+            ui->txtConsole->clear();
+            strTeensyLoaderOutput.clear();
+            // qDebug() << "Program:" << program << " Args: " << arguments;
+
+            startTeensyTimer(); // Start the timeout timer
+            TeensyLoaderProcess->setProcessChannelMode(QProcess::MergedChannels);
+            TeensyLoaderProcess->start(program, arguments);
+            }
+            break;
+    }
+}
+void MainWindow::startTeensyTimer()
+{
+    TeensyTimeoutTimer->setSingleShot(true);
+    TeensyTimeoutTimer->start(10000);   // Is 10 seconds too long?
+}
+void MainWindow::stopTeensyTimer()
+{
+    TeensyLoaderProcess->kill();
 }
 void MainWindow::flashStarted()
 {
@@ -487,26 +598,57 @@ void MainWindow::flashStarted()
 }
 void MainWindow::flashFinished()
 {
-    //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
-
     MouseRestore();
 
-    if (AVRDUDEProcess->exitCode() == 0)
+    switch (ui->cboFlashDevice->currentData().toInt())
     {
-        // Flash successful
-        SetStatusLabel("Firmware update successful",slGood);
-    }
-    else
-    {
-        // Flash failed
-        //qDebug() << AVRDUDEProcess->exitCode();
-        // timeout seems to return code 62097
-        msgBox("Flash operation failed. Make sure you selected the correct COM port!",vbOkOnly,"Flash Failed", vbExclamation);
-        SetStatusLabel("Firmware update failed!",slBad);
-    }
+        case DEVICE_TCB:
+        case DEVICE_SCOUT:
+            //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
+            if (AVRDUDEProcess->exitCode() == 0)
+            {
+                // Flash successful
+                SetStatusLabel("Firmware update successful",slGood);
+            }
+            else
+            {
+                // Flash failed
+                // timeout seems to return code 62097
+                // The main reason for failure, at least for me, is forgetting to select the right COM port.
+                msgBox("Flash operation failed. Make sure you selected the correct COM port!",vbOkOnly,"Flash Failed", vbExclamation);
+                SetStatusLabel("Firmware update failed!",slBad);
+            }
 
-    // Kill that bitch, make sure it's really dead.
-    AVRDUDEProcess->kill();
+            // Kill that bitch, make sure it's really dead.
+            AVRDUDEProcess->kill();
+            break;
+
+        case DEVICE_TEENSYSOUND:
+            //qDebug() << TeensyLoaderProcess->exitCode() << " - " << TeensyLoaderProcess->exitStatus();
+            if (TeensyLoaderProcess->exitCode() == 0)
+            {
+                // Flash successful
+                SetStatusLabel("Firmware update successful",slGood);
+                ui->txtConsole->append("SUCCESS!"); // The console message is not very helpful, add one.
+            }
+            else
+            {
+                // Flash failed
+                // timeout (killed) will return code 62097
+                // Typically this will be because the user didn't press the button and the operation timed out
+
+                // In this case, the last words in the console will still be "Hint - press the button" or some such, not very helpful
+                // now. Add a failure message
+                ui->txtConsole->append("FLASH FAILED.");
+
+                msgBox("Flash operation failed. Remember to push the button on your Sound Card after the flash operation starts!",vbOkOnly,"Flash Failed", vbExclamation);
+                SetStatusLabel("Firmware update failed!",slBad);
+            }
+
+            // Kill that bitch, make sure it's really dead.
+            TeensyLoaderProcess->kill();
+            break;
+    }
 
     // Set the button back
     ui->cmdFlashHex->setChecked(false);  // Un-check the button
@@ -521,6 +663,7 @@ void MainWindow::flashFinished()
     ui->cboCOMPorts->setEnabled(true);
     ui->cboConsoleBaud->setEnabled(true);
     ui->cmdConnect->setEnabled(true);
+    ui->cboFlashDevice->setEnabled(true);
 
     // Clear the flag
     AttemptFlash = false;
@@ -530,24 +673,47 @@ void MainWindow::flashFinished()
 }
 void MainWindow::readyReadStandardOutput()
 {
-    // Append output to our string
-    strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
-
-    // Put string in textbox
-    ui->txtConsole->setText(strAVRDUDEOutput);
-    // If Autoscroll is checked, keep the text scrolled down
-    if (ui->chkAutoscroll->isChecked()) ui->txtConsole->verticalScrollBar()->setValue(ui->txtConsole->verticalScrollBar()->maximum());
-
-    // Now some output is bad news.
-        // avrdude : stk500v2_ReceiveMessage(): timeout
-        // avrdude : ser_open(): can't open device "\\.
-    if (strAVRDUDEOutput.contains("ReceiveMessage(): timeout", Qt::CaseInsensitive))
+    switch (ui->cboFlashDevice->currentData().toInt())
     {
-        AVRDUDEProcess->kill();
-    }
-    else if (strAVRDUDEOutput.contains("can't open device", Qt::CaseInsensitive))
-    {
-        AVRDUDEProcess->kill();
+        case DEVICE_TCB:
+        case DEVICE_SCOUT:
+            // Append output to our string
+            strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
+
+            // Put string in textbox
+            ui->txtConsole->setText(strAVRDUDEOutput);
+            // If Autoscroll is checked, keep the text scrolled down
+            if (ui->chkAutoscroll->isChecked()) ui->txtConsole->verticalScrollBar()->setValue(ui->txtConsole->verticalScrollBar()->maximum());
+
+            // Now some output is bad news.
+                // avrdude : stk500v2_ReceiveMessage(): timeout
+                // avrdude : ser_open(): can't open device "\\.
+            if (strAVRDUDEOutput.contains("ReceiveMessage(): timeout", Qt::CaseInsensitive))
+            {
+                AVRDUDEProcess->kill();
+            }
+            else if (strAVRDUDEOutput.contains("can't open device", Qt::CaseInsensitive))
+            {
+                AVRDUDEProcess->kill();
+            }
+            break;
+
+        case DEVICE_TEENSYSOUND:
+            // Append output to our string
+            strTeensyLoaderOutput.append(TeensyLoaderProcess->readAllStandardOutput());
+
+            // Put string in textbox
+            ui->txtConsole->setText(strTeensyLoaderOutput);
+            // If Autoscroll is checked, keep the text scrolled down
+            if (ui->chkAutoscroll->isChecked()) ui->txtConsole->verticalScrollBar()->setValue(ui->txtConsole->verticalScrollBar()->maximum());
+
+            // Now some output is bad news. But we haven't done enough testing yet to know what it would be.
+            // It's hard to screw this one up!
+//            if (strTeensyLoaderOutput.contains("SOME BAD NEWS", Qt::CaseInsensitive))
+//            {
+//                TeensyLoaderProcess->kill();
+//            }
+            break;
     }
 }
 void MainWindow::readyReadStandardError()
@@ -617,6 +783,7 @@ void MainWindow::ShowSnoopStatus(boolean snooping)
         // We also don't want the user changing the COM port and Baud rate while snooping, although it wouldn't hurt if they did
         ui->cboCOMPorts->setEnabled(false);
         ui->cboConsoleBaud->setEnabled(false);
+        ui->cboFlashDevice->setEnabled(false);      // Same here
 
         // Update serial status Label
         SerialStatus_SetConnected();
@@ -635,6 +802,7 @@ void MainWindow::ShowSnoopStatus(boolean snooping)
 
         ui->cboCOMPorts->setEnabled(true);
         ui->cboConsoleBaud->setEnabled(true);
+        ui->cboFlashDevice->setEnabled(true);
 
         // Update the serial status Label - but not if we quit snooping to try flashing, in that case
         // the flashing routine will set its own message.

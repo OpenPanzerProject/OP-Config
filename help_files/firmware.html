@@ -21,41 +21,70 @@
 	
 	<h2 id="flash">Update Firmware</h2>
 	<p>
-	On this tab you can update the software that runs on the TCB, which we call "firmware." Think of the firmware as the operating system - it is the set of instructions that get executed when 
+	On this tab you can update the software that runs on Open Panzer devices, which we call "firmware." Think of the firmware as the operating system - it is the set of instructions that get executed when 
 	the device is turned on. The process of updating the operating system is often called "flashing new firmware" or "flashing a hex file." The word flash refers to the process of overwriting an area of 
 	memory known as "flash" on the microcontroller where the code resides, and hex refers to the type of file that holds the compiled code we are flashing.<br><br>
 	
 	It is important to note that flashing new firmware is not the same thing as updating (writing) new settings to the TCB. We read and write the settings by using the 
 	<a href="writedevice.html">green and blue arrow buttons</a>. The settings are values you specified yourself on all the other tabs of the OP Config program. We can change the settings
-	whenever we want, but updating or flashing the firmware only needs to happen when a new version of the TCB code is released. 
+	whenever we want, but updating or flashing the firmware only needs to happen when a new version of code is released for the TCB (or other devices). 
 	</p>
 	
+    <h4 class="entry">Select Hex File for</h4>
+    <p>
+    From the drop-down menu select the device you want to update: TCB, Scout ESC, or the Open Panzer Sound Card.
+    </p>
+    
 	<h4	class="entry">Get Latest Release</h4>
 	<p>
-	Click here to check the OpenPanzer.org website for the latest version of the TCB firmware. If a file is detected the version number will be displayed and the hex file will be 
-	downloaded to a temporary folder. It is highly unlikely you will download a version of the firmware that is older than the version you already have on your TCB, but it might be the same 
+	Click here to check the OpenPanzer.org website for the latest firmware for the selected device. If a file is detected the version number will be displayed and the hex file will be 
+	downloaded to a temporary folder. It is highly unlikely you will download a version of the firmware that is older than the version you already have, but it might be the same 
 	version, in which case flashing the update is unnecessary. You can always check which version of the firmware your TCB is presently running by connecting to the TCB and looking at the
 	Serial Status label on the bottom left of the OP Config program (#8 on the <a href="formlayout.html">Program Layout</a> diagram). You can also read the firmware version by connecting
-	the TCB to any serial console (such as the built-in console discussed below), and pressing the INPUT button on the TCB board, which causes the TCB to send diagnostic information, including
-	the firmware version, out the serial port. 
+	the TCB to any serial console (such as the built-in console discussed below), and pressing the INPUT button on the TCB board which causes the TCB to send diagnostic information including
+	the firmware version to the console. If you have a Scout ESC or Open Panzer Sound Card attached to your TCB, the diagnostic information will show the firmware versions for those 
+    devices as well. 
 	</p>
 	
 	<h4	class="entry">Use Your Own Hex</h4>
 	<p>
-	If you are a developer and have compiled your own hex, you can select it using this button. If you are working on a project in the Arduino IDE, you can generate a hex file 
-	by typing Ctrl+Alt+S or going to the Sketch menu and selecting the "Export compiled Binary" option. The hex file will then appear in your sketch folder (instructions valid for Arduino
-	1.6.5, and may change with future versions). 
-	
+	If you are a developer and have compiled your own hex, or perhaps were given a testing Hex by a developer on the Open Panzer forums, you can select it using this button. If you are working 
+    on a project in the Arduino IDE, you can generate a hex file by typing Ctrl+Alt+S or going to the Sketch menu and selecting the "Export compiled Binary" option. The hex file will then appear 
+    in your sketch folder (instructions valid for Arduino 1.6.5, and may change with future versions). <b>Advanced Note:</b> you can use OP Config to flash a hex file to any Arduino Mega using the 
+    TCB option. You can flash any Arduino Uno, Nano, Duemilanove or other ATmega328 device using the Scout ESC option. 	
 	</p>
 	
 	<h4	class="entry">Flash</h4>
 	<p>
-	Once you have selected a hex file, either the latest release you downloaded or one of your own, click the Flash button to attempt flashing the hex to the device. Be sure you have selected
-	the correct COM port first, <i>and</i> be sure that you have Dipswitch #5 on the TCB set to use the correct serial port (Dipswitch #5 in the On position to flash over USB, or in the 
-    Off position to flash over the Serial 1 port). The status of the flash operation will be shown in the console window. Be patient, the flash operation can take 30 seconds or more.<br />
-    <b>Developers:</b> flashing is actually accomplished by calling AVRDUDE, which is bundled with OP Config. 
-	</p>
+	Once you have selected a hex file, either the latest release you downloaded or one of your own, click the Flash button to attempt flashing the hex to the device. The flashing process will be 
+    slightly different depending on the device you selected:
+    </p>
+      
+        <h5>TCB</h5>
+        <p>
+        Be sure you have selected the correct COM port first, <i><u>and</u></i> be sure you have Dipswitch #5 on the TCB set to use the correct serial port (Dipswitch #5 in the On position to flash 
+        over USB, or in the Off position to flash over the Serial 1 port which is used for Bluetooth communication). The status of the flash operation will be shown in the console window. 
+        Be patient, the flash operation can take 30 seconds or more.
+        </p>
 	
+        <h5>Scout ESC</h5>
+        <p>
+        Before flashing your Scout, be sure to disconnect it from your TCB otherwise the operation may fail. The Scout does not have a built-in USB connection, instead you must use an FTDI adapter or 
+        FTDI cable. One end of the adapter/cable will have a six-pin socket that plugs into the six pins on the Scout. Be sure to orient it so the "Black" and "Green" labels on the adapter match the same 
+        labels printed on the bottom of the Scout board. The other end of the FTDI adapter/cable is a standard USB connection that you use to connect to your computer. Be sure you have selected the 
+        correct COM port in OP Config, then click the Flash button. The status of the flash operation will be shown in the console window. 
+        </p>
+        
+        <h5>Open Panzer Sound Card</h5>
+        <p>
+        Connect your Sound Card to your computer using a standard USB cable. A new entry may or may not appear in the COM ports list but in this case it doesn't matter 
+        that you select a COM port, the software will detect your sound card automatically. After you start the Flash operation, you need to <u>press the small button on the top of the Sound Card</u>. 
+        This allows OP Config to detect the device and let it know to start flashing. You may hear the USB connect/disconnect sounds from your computer during this process, that is normal. The status of 
+        the flash operation will be shown in the console window. If you forget to press the button or OP Config can't find your device, the flash operation will time out after 10 seconds. 
+        </p>
+	
+    
+    
 		
 	<h2 id="console">Console Utility</h2>
 	<p>

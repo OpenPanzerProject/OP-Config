@@ -2,7 +2,8 @@
 
 SoundDevicesComboBox::SoundDevicesComboBox(QWidget *parent) : QComboBox(parent)
 {
-    insertItem(count(), "Benedini - TBS Mini", SD_BENEDINI_TBSMINI);
+    insertItem(count(), "Benedini - Mini", SD_BENEDINI_TBSMINI);
+    insertItem(count(), "Benedini - Micro", SD_BENEDINI_TBSMICRO);
     insertItem(count(), "Open Panzer Sound Card", SD_OP_SOUND_CARD);
     insertItem(count(), "Taigen Sound Cards", SD_TAIGEN_SOUND);
     // FOR FUTURE USE

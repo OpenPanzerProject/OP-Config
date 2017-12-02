@@ -475,8 +475,10 @@ typedef char SOUND_DEVICE;
 #define SD_OP_SOUND_CARD        1
 #define SD_TAIGEN_SOUND         2
 #define SD_BEIER_USMRC2         3
+#define SD_BENEDINI_TBSMICRO    4       // Added December 2017
+
 #define SD_FIRST_SD             SD_BENEDINI_TBSMINI
-#define SD_LAST_SD              SD_BEIER_USMRC2
+#define SD_LAST_SD              SD_BENEDINI_TBSMICRO
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>

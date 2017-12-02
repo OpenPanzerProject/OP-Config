@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-// The tab gets a 10 out of 10 for craptastic...
+// This tab gets a 10 out of 10 for craptastic...
 
 //------------------------------------------------------------------------------------------------------------------------>>
 // FORM CONTROLS - SOUND TAB
@@ -78,9 +78,9 @@ void MainWindow::ShowHideSoundCardSettings()
             // Hide volumes
             ui->frmVolume->hide();
             // Remove functions not applicable
-            RemoveSoundFunctionsBenedini();
+            RemoveSoundFunctionsBenedini_Mini();
             // Add those that are
-            AddSoundFunctionsBenedini();
+            AddSoundFunctionsBenedini_Mini();
             // Enable 3 squeaks
             ui->frmSqueaks->show();
             ui->frmSqueaks->resize(411,241);
@@ -91,8 +91,25 @@ void MainWindow::ShowHideSoundCardSettings()
             SqueakSettingsMoveUp();
             // Enable headlight option
             EnableHeadlightSoundSetting();
+            // Enable turret sound settings
+            EnableTurretSoundSettings();
             break;
 
+        case SD_BENEDINI_TBSMICRO:
+            // We remove the volume control and all user sound functions
+            RemoveSoundFunctionsBenedini_Micro();
+            ui->frmVolume->hide();
+            ui->frmSqueaks->hide();
+            // Disable and hide all squeak options
+            HideSqueakHeader();
+            DisableSqueaks1_3();
+            DisableSqueaks4_6();
+            DisableMinSqueakSpeed();
+            // Disable and hide headlight option
+            DisableHeadlightSoundSetting();
+            // Disable turret sound settings
+            DisableTurretSoundSettings();
+            break;
 
         case SD_OP_SOUND_CARD:
             // The only functions we need to remove for this card are the stepwise volume control functions,
@@ -112,6 +129,8 @@ void MainWindow::ShowHideSoundCardSettings()
             SqueakSettingsMoveDown();
             // Enable headlight option
             EnableHeadlightSoundSetting();
+            // Enable turret sound settings
+            EnableTurretSoundSettings();
             break;
 
 
@@ -127,6 +146,8 @@ void MainWindow::ShowHideSoundCardSettings()
             DisableMinSqueakSpeed();
             // Disable and hide headlight option
             DisableHeadlightSoundSetting();
+            // Enable turret sound settings
+            EnableTurretSoundSettings();
             break;
 
         // Not yet implemented
@@ -142,16 +163,22 @@ void MainWindow::ShowHideSoundCardSettings()
     ShowHideOtherSqueakSettings();
 }
 
-void MainWindow::EnableBarrelSoundSetting()
+void MainWindow::EnableTurretSoundSettings()
 {
     // Enable barrel sound option
     ui->chkEnableBarrelSound->setEnabled(true);
     ui->chkEnableBarrelSound->setChecked(DeviceData.BarrelSound_Enabled);
+    // Enable turret sound option
+    ui->chkEnableTurretSound->setEnabled(true);
+    ui->chkEnableTurretSound->setChecked(DeviceData.TurretSound_Enabled);
 }
-void MainWindow::DisableBarrelSoundSetting()
+void MainWindow::DisableTurretSoundSettings()
 {
     ui->chkEnableBarrelSound->setChecked(false);
     ui->chkEnableBarrelSound->setEnabled(false);
+
+    ui->chkEnableTurretSound->setChecked(false);
+    ui->chkEnableTurretSound->setEnabled(false);
 }
 
 void MainWindow::EnableHeadlightSoundSetting()
@@ -296,7 +323,11 @@ void MainWindow::RemoveSoundFunctionsTaigen()
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_OFF))
         RemovedFunctionTriggersMsgBox();
 }
-void MainWindow::RemoveSoundFunctionsBenedini()
+void MainWindow::RemoveSoundFunctionsBenedini_Micro()
+{
+    RemoveSoundFunctionsTaigen();
+}
+void MainWindow::RemoveSoundFunctionsBenedini_Mini()
 {
     uint8_t removed = 0;
 
@@ -352,7 +383,7 @@ void MainWindow::RemoveSoundFunctionsBenedini()
 
     if (removed > 0) RemovedFunctionTriggersMsgBox();
 }
-void MainWindow::AddSoundFunctionsBenedini()
+void MainWindow::AddSoundFunctionsBenedini_Mini()
 {
     ui->cboSelectFunction->RemoveSF(SF_INCR_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_DECR_VOLUME);
@@ -414,8 +445,8 @@ void MainWindow::UpdateSoundFunctionsBenedini()
     // will depend on whether the user has enabled squeaks 1-3 or not
     if (ui->cboSoundDevice->getCurrentSoundDevice() == SD_BENEDINI_TBSMINI)
     {
-        RemoveSoundFunctionsBenedini(); // This removes any user functions if they are reserved for squeaks instead
-        AddSoundFunctionsBenedini();    // This makes sure all appropriate Benedini functions are added in order
+        RemoveSoundFunctionsBenedini_Mini(); // This removes any user functions if they are reserved for squeaks instead
+        AddSoundFunctionsBenedini_Mini();    // This makes sure all appropriate Benedini functions are added in order
     }
 
 }

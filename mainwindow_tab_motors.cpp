@@ -547,11 +547,11 @@ void MainWindow::ValidateRCPassthroughs()
 
     // Servo 5 - never available, always reserved for recoil action
 
-    // Servos 6-8 - available depending on sound card selection
+    // Servos 6-8 - may need removed depending on sound card selection
     switch (ui->cboSoundDevice->getCurrentSoundDevice())
     {
         case SD_BENEDINI_TBSMINI:
-            // Benedini sound card requires three outputs so none of these are available
+            // Benedini Mini sound card requires three outputs so none of these are available
             ui->cboSelectFunction->removeRCPassthrough(6);
             ui->cboSelectFunction->removeRCPassthrough(7);
             ui->cboSelectFunction->removeRCPassthrough(8);
@@ -560,6 +560,19 @@ void MainWindow::ValidateRCPassthroughs()
             if (FT_TableModel->removeFunctionFromList(SF_RC6_PASS)     |
                 FT_TableModel->removeFunctionFromList(SF_RC6_PASS_PAN) |
                 FT_TableModel->removeFunctionFromList(SF_RC7_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC7_PASS_PAN) |
+                FT_TableModel->removeFunctionFromList(SF_RC8_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC8_PASS_PAN))
+                RemovedFunctionTriggersMsgBox();
+            break;
+
+        case SD_BENEDINI_TBSMICRO:
+            // Benedini Micro sound card uses Prop 1 (8) and Prop 2 (7), but Prop 3 (6) can be left pass-through
+            ui->cboSelectFunction->removeRCPassthrough(7);
+            ui->cboSelectFunction->removeRCPassthrough(8);
+            // Now make sure this isn't in our function trigger list
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_RC7_PASS)     |
                 FT_TableModel->removeFunctionFromList(SF_RC7_PASS_PAN) |
                 FT_TableModel->removeFunctionFromList(SF_RC8_PASS)     |
                 FT_TableModel->removeFunctionFromList(SF_RC8_PASS_PAN))
@@ -575,5 +588,8 @@ void MainWindow::ValidateRCPassthroughs()
                 FT_TableModel->removeFunctionFromList(SF_RC8_PASS_PAN))
                 RemovedFunctionTriggersMsgBox();
             break;
+
+        // case SD_OP_SOUND_CARD:
+        // The Open Panzer sound card uses none of the RC outputs so they can all be left for passthrough (already added above)
     }
 }

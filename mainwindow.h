@@ -422,15 +422,16 @@ private:
         void SetupControls_BattleTab(void);
       // Sound tab
         void SetupControls_SoundTab(void);
-        void EnableBarrelSoundSetting(void);
-        void DisableBarrelSoundSetting(void);
+        void EnableTurretSoundSettings(void);
+        void DisableTurretSoundSettings(void);
         void EnableHeadlightSoundSetting(void);
         void DisableHeadlightSoundSetting(void);
         void RemoveVolumeFunctionsStep(void);
         void AddSoundFunctionsOP(void);
         void RemoveSoundFunctionsTaigen(void);
-        void RemoveSoundFunctionsBenedini(void);
-        void AddSoundFunctionsBenedini(void);
+        void RemoveSoundFunctionsBenedini_Mini(void);
+        void AddSoundFunctionsBenedini_Mini(void);
+        void RemoveSoundFunctionsBenedini_Micro(void);
         void UpdateSoundFunctionsBenedini(void);
         void EnableSqueaks1_3(void);
         void EnableSqueaks4_6(void);

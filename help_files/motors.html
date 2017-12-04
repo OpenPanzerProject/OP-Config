@@ -42,9 +42,10 @@
 	<p>
 	There are four possible vehicle types, each with slightly different drive motor considerations. Select the one that matches your model:
 	<ul class="smalllist">
-		<li><b>Tank:</b> Tanks have two independent drive motors. Steering is accomplished through differential control of these motors.  </li>
-        <li><b>Tank (DLKM style):</b> This type of tank has only a single drive motor. Steering is accomplished with a second motor through a clutch-style gearbox such as the DKLM RC Propulsion
+		<li><b>Tank:</b> Tanks have two independent drive motors. Steering is accomplished through differential control of these motors, and the TCB takes care of the mixing.  </li>
+        <li><b>Tank - DLKM:</b> This type of tank only has a single drive motor, steering is accomplished with a second motor through a clutch-style gearbox such as the DKLM RC Propulsion
             Dynamics Steel Gearbox (PDSGB)</b></li>
+        <li><b>Tank - Tamiya DMD:</b> Select this option if you have a Tamiya DMD (T-01, T-03, T-08) which is just a dual brushed speed controller with built-in mixing.</li>
 		<li><b>Halftrack:</b> Halftracks have two independent drive motors like conventional tanks. Steering is accomplished both through differential control of the drive motors <i>and</i> through a steering servo 
 		attached to the front wheels. (The proportion of steering applied to the treads and the servo can be adjusted on the <a href="driving.html">Driving tab</a> under the Turning section.)</li>
 		<li><b>Car:</b> A car has a single drive motor. Steering is accomplished through a steering servo. You could also use this mode for halftrack models that do not have independent tread motors.</li>
@@ -58,15 +59,15 @@
 	<p>
 	This is where you select how you want to power the main drive motor(s). For Tanks and Halftracks, there are always two drive motors, for Cars there is only one. You have three basic options:
 	<ol>
-		<li><b>RC Output:</b> Select this if you intend to use a standard RC electronic speed control (ESC), <i>or</i> if you plan to use a continuous-rotation servo as the actual drive motor. 
+		<li><b>RC Output:</b> Select this if you intend to use any standard RC electronic speed control (ESC), <i>or</i> if you plan to use a continuous-rotation servo as the actual drive motor. 
 		The ESC/Servo for the Left tread should be plugged into RC Output 1 (also labeled <b>Left</b> on the TCB) and the ESC/Servo for the Right tread should be plugged into RC Output 2 (labeled <b>Right</b>
 		 on the TCB). If this is a car with only a single drive motor, plug it into RC Output 1. <br><br>
 		
-		<span class="boldred">Warning:</span> Almost every hobby ESC today includes a BEC (battery eliminator circuit). The purpose is for the ESC to provide 5v power to the radio receiver and subsequently the 
-        servos in a typical hobby application (which “eliminates” the need for a separate receiver battery). However, because the TCB already has its own 5v supply, you <span class="boldred">must</span> disable 
-        the speed control's BEC before plugging it into the TCB, or you could damage one or both!<br /><br />
+		<span class="boldred">Warning:</span> Almost every hobby ESC today includes a BEC (battery eliminator circuit) - this includes the Tamiya DMD! The purpose is for the ESC to provide 5v power to the radio receiver and subsequently the 
+        servos in a typical hobby application (which "eliminates" the need for a separate receiver battery). However, because the TCB already has its own 5v supply, you <span class="boldred">MUST</span> disable 
+        the speed control's BEC before plugging it into the TCB, or you could damage one or both devices!<br /><br />
         
-        Disabling the BEC is very simple, you only have to remove the center pin of the speed control plug. The pin can be replaced later if you decide to use the speed control for some other project, 
+        Disabling the BEC is very simple, you only have to remove the center pin of the speed control plug (typically red or orange in color). The pin can be replaced later if you decide to use the speed control for some other project, 
         so it is not destructive in any way. Here's how:<br /><br />
         <a class="image_link" href="images/disable_bec.jpg"><img src="images/disable_bec.jpg" width="800" align="middle"/></a>
 		<br>

@@ -853,7 +853,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>8</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -8633,7 +8633,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>(No settings in Car mode)</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="lblNoTurnSettingsForHalftracks">
+                <widget class="QLabel" name="lblNoNeutralTurns">
                  <property name="geometry">
                   <rect>
                    <x>240</x>
@@ -8651,7 +8651,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string>(Unavailable in Halftrack mode)</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="lblNoTurnModeDKLM">
+                <widget class="QLabel" name="lblNoTurnMode">
                  <property name="geometry">
                   <rect>
                    <x>280</x>

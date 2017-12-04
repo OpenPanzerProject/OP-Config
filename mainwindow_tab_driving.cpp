@@ -121,9 +121,9 @@ void MainWindow::ShowHideNeutralTurnAllowed(int)
         ui->cboTurnMode->setEnabled(true);
 
         // Hide these labels
-        ui->lblNoTurnModeDKLM->hide();
+        ui->lblNoTurnMode->hide();
         ui->lblNoTurnSettingsForCars->hide();
-        ui->lblNoTurnSettingsForHalftracks->hide();
+        ui->lblNoNeutralTurns->hide();
     }
     else if (ui->cboDriveType->currentData() == DT_HALFTRACK)
     {
@@ -131,9 +131,10 @@ void MainWindow::ShowHideNeutralTurnAllowed(int)
         ui->lblTurnMode->setEnabled(true);
         ui->cboTurnMode->setEnabled(true);
 
-        ui->lblNoTurnModeDKLM->hide();
+        ui->lblNoTurnMode->hide();
         ui->lblNoTurnSettingsForCars->hide();
-        ui->lblNoTurnSettingsForHalftracks->show(); // Show - no neutral turns for halftracks
+        ui->lblNoNeutralTurns->setText("(Unavailable for Halftracks)");
+        ui->lblNoNeutralTurns->show(); // Show - no neutral turns for halftracks
     }
     else if (ui->cboDriveType->currentData() == DT_CAR)
     {
@@ -141,9 +142,9 @@ void MainWindow::ShowHideNeutralTurnAllowed(int)
         ui->lblTurnMode->setEnabled(false);
         ui->cboTurnMode->setEnabled(false);
 
-        ui->lblNoTurnModeDKLM->hide();
+        ui->lblNoTurnMode->hide();
         ui->lblNoTurnSettingsForCars->show();       // Show - no turn settings at all for cars
-        ui->lblNoTurnSettingsForHalftracks->hide();
+        ui->lblNoNeutralTurns->hide();
     }
     else if (ui->cboDriveType->currentData() == DT_DKLM)
     {
@@ -151,9 +152,22 @@ void MainWindow::ShowHideNeutralTurnAllowed(int)
         ui->lblTurnMode->setEnabled(false);
         ui->cboTurnMode->setEnabled(false);
 
-        ui->lblNoTurnModeDKLM->show();              // Show - no turn modes for DKLM
+        ui->lblNoTurnMode->show();                  // Show - no turn modes for DKLM
+        ui->lblNoTurnMode->setText("Unavailable for DKLM");
         ui->lblNoTurnSettingsForCars->hide();
-        ui->lblNoTurnSettingsForHalftracks->hide();
+        ui->lblNoNeutralTurns->hide();
+    }
+    else if (ui->cboDriveType->currentData() == DT_DMD)
+    {
+        // Disable turn modes for Tamiya DMD since it does the mixing itself
+        ui->lblTurnMode->setEnabled(false);
+        ui->cboTurnMode->setEnabled(false);
+
+        ui->lblNoTurnMode->show();                  // Show - no turn modes for DKLM
+        ui->lblNoTurnMode->setText("Unavailable for DMD");
+        ui->lblNoTurnSettingsForCars->hide();
+        ui->lblNoNeutralTurns->setText("(Handled by DMD)");
+        ui->lblNoNeutralTurns->show(); // Show - neutral turns are allowed, but they are handled by DMD so we don't need settings here
     }
 }
 void MainWindow::ShowHideNeutralTurnPct(bool checked)

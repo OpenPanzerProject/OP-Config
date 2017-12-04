@@ -10,8 +10,9 @@ void MainWindow::SetupControls_MotorTab(void)
     // Setup the drive type combo
     ui->cboDriveType->insertItem(1, "Tank (Dual drive motors)", DT_TANK);
     ui->cboDriveType->insertItem(2, "Tank (Single drive motor + steering motor, eg DKLM)", DT_DKLM);
-    ui->cboDriveType->insertItem(3, "Halftrack (Dual drive motors + Steering servo)", DT_HALFTRACK);
-    ui->cboDriveType->insertItem(4, "Car (Single drive motor + Steering servo)", DT_CAR);
+    ui->cboDriveType->insertItem(3, "Tank (Tamiya DMD)", DT_DMD);
+    ui->cboDriveType->insertItem(4, "Halftrack (Dual drive motors + Steering servo)", DT_HALFTRACK);
+    ui->cboDriveType->insertItem(5, "Car (Single drive motor + Steering servo)", DT_CAR);
     ui->cboDriveType->setCurrentIndex(0);
 
     // Setup the motor type combo boxes
@@ -205,17 +206,30 @@ void MainWindow::ValidateMotorSelections()
         msgBox("When drive type is set to dual-motor halftrack, the dual drive motors must be powered by the onboard drivers or a serial controller.\n\nThe drive motor selection has been changed to Sabertooth for now.",vbOkOnly,"Invalid Motor Selections",vbExclamation);
     }
 
+    // The Tamiya DMD operates only on RC Output, so don't let them select any other option
+    if (ui->cboDriveType->currentData() == DT_DMD)
+    {
+        ui->cboDriveMotors->setCurrentIndex(ui->cboDriveMotors->findData(SERVO_ESC));
+        ui->cboDriveMotors->setEnabled(false);
+    }
+    else
+    {
+        ui->cboDriveMotors->setEnabled(true);
+    }
+
     // We will however allow both turret and drive motors to be driven by serial, but the user will need to make
     // some kind of Y-harness and assign each serial ESC a unique address
 
 
-    // Another restriction is that turn modes are disabled for cars (obviously) as well as clutch-style tank gearboxes.
+    // Another restriction is that turn modes are disabled for cars (obviously) as well as clutch-style tank gearboxes and the Tamiya DMD.
     // First, make sure they are all already there (AddSF will only add them if they are not)
     ui->cboSelectFunction->AddSF(SF_TURNMODE_1);
     ui->cboSelectFunction->AddSF(SF_TURNMODE_2);
     ui->cboSelectFunction->AddSF(SF_TURNMODE_3);
     // Now remove them if necessary
-    if (ui->cboDriveType->currentData() == DT_CAR || ui->cboDriveType->currentData() == DT_DKLM)
+    if (ui->cboDriveType->currentData() == DT_CAR ||
+        ui->cboDriveType->currentData() == DT_DKLM ||
+        ui->cboDriveType->currentData() == DT_DMD)
     {
         ui->cboSelectFunction->RemoveSF(SF_TURNMODE_1);
         ui->cboSelectFunction->RemoveSF(SF_TURNMODE_2);
@@ -228,12 +242,16 @@ void MainWindow::ValidateMotorSelections()
     }
 
     // Neutral turns are not allowed for Cars and Halftracks, so remove that function if necessary
+    // They _are_ allowed for Tamiya DMD, but the DMD is the one that takes care of it, so we still want to remove
+    // these functions for DMD types because they will do nothing
     // First, make sure they are all already there (AddSF will only add them if they are not)
     ui->cboSelectFunction->AddSF(SF_NT_ENABLE);
     ui->cboSelectFunction->AddSF(SF_NT_DISABLE);
     ui->cboSelectFunction->AddSF(SF_NT_TOGGLE);
     // Now remove them if necessary
-    if (ui->cboDriveType->currentData() == DT_CAR || ui->cboDriveType->currentData() == DT_HALFTRACK)
+    if (ui->cboDriveType->currentData() == DT_CAR ||
+        ui->cboDriveType->currentData() == DT_HALFTRACK ||
+        ui->cboDriveType->currentData() == DT_DMD)
     {
         ui->cboSelectFunction->RemoveSF(SF_NT_ENABLE);
         ui->cboSelectFunction->RemoveSF(SF_NT_DISABLE);
@@ -377,6 +395,10 @@ void MainWindow::ValidateMotorSelections()
         {
             ui->lblDriveMotors->setText("Plug Propulsion ESC into RC Output 1, Steering ESC into RC Output 2");
         }
+        else if (ui->cboDriveType->currentData() == DT_DMD)
+        {
+            ui->lblDriveMotors->setText("DMD Rudder into RC Output 1, DMD Throttle into RC Output 2");
+        }
         else if (ui->cboDriveType->currentData() == DT_CAR)
         {
             ui->lblDriveMotors->setText("Plug motor ESC into RC Output 1, steering servo into RC Output 2");
@@ -513,7 +535,8 @@ void MainWindow::ValidateRCPassthroughs()
     }
     else
     {
-        if (ui->cboDriveType->currentData() != DT_TANK)
+        if (ui->cboDriveType->currentData() == DT_HALFTRACK ||
+            ui->cboDriveType->currentData() == DT_CAR)
         {   // Even if the drive motors are not RC outs, we might still lose the right tread servo slot if we have
             // a steering servo, which we will if this is a halftrack or car
             ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);

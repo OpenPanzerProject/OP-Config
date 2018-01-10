@@ -174,6 +174,12 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input A", TS_INPUT_A);
             if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.dataType == false)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input B", TS_INPUT_B);
+            // Throttle command, vehicle and engine speeds, always present
+            // OK - These work, and they are implemented in the TCB firmware as well. However I really see no clear use-case for them.
+            // One wonders if they are worth enabling...
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Throttle Command", TS_THROTTLE_COMMAND);
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Engine Speed", TS_ENGINE_SPEED);
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Speed", TS_VEHICLE_SPEED);
         }
     }
 
@@ -448,6 +454,19 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
             case TS_SPEED_DECR:
                 TriggerID = trigger_id_speed_decrease;
                 if (sf_digital) TriggerID += ta;    // Trigger ID is the ID plus the set level
+                break;
+
+            // THROTTLE COMMAND / VEHICLE / ENGINE SPEEDS
+            // ---------------------------------------------------------------------------->>
+            // These are very simple, just a single number with no other information
+            case TS_THROTTLE_COMMAND:
+                TriggerID = trigger_id_throttle_command;
+                break;
+            case TS_ENGINE_SPEED:
+                TriggerID = trigger_id_engine_speed;
+                break;
+            case TS_VEHICLE_SPEED:
+                TriggerID = trigger_id_vehicle_speed;
                 break;
 
             // AD-HOC

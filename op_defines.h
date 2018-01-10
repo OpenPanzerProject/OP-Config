@@ -316,6 +316,10 @@ struct _functionTrigger {
 #define trigger_id_speed_decrease           21000       // Trigger IDs for speed falling below a set level. Range FROM trigger_id_speed_decrease TO (trigger_id_speed_decrease + trigger_id_speed_range - 1)
 #define trigger_id_speed_range              1000
 
+#define trigger_id_throttle_command         22001       // Variable trigger synchronous with actual throttle stick position
+#define trigger_id_engine_speed             22002       // Variable trigger synchronous with engine speed (modified/massaged throttle command)
+#define trigger_id_vehicle_speed            22003       // Variable trigger synchronous with vehicle movement speed
+
 #define COUNT_ADHOC_TRIGGERS            3               // This number can not get higher than 16 unless you want to change some methods in the sketch
 // Ad-Hoc trigger Flag Masks
 #define ADHOCT_BIT_BRAKES_APPLIED       0               // Brakes just applied
@@ -346,9 +350,25 @@ enum _trigger_source : byte {
     TS_INPUT_B,            // External input B (if set to input)
     TS_SPEED_INCR,         // Vehicle speed increases beyond a set point
     TS_SPEED_DECR,         // Vehicle speed decreased below  a set point
+    TS_THROTTLE_COMMAND,   // Throttle command (variable)
+    TS_ENGINE_SPEED,       // Engine speed (variable)
+    TS_VEHICLE_SPEED,      // Vehicle speed (variable)
     TS_ADHC_BRAKES,        // Ad-hoc - brakes applied
     TS_ADHC_CANNONHIT,     // Ad-hoc - received cannon hit
-    TS_ADHC_DESTROYED      // Ad-hoc - vehicle destroyed
+    TS_ADHC_DESTROYED,     // Ad-hoc - vehicle destroyed
+    TS_ADHC_UNUSED_4,      // Ad-hoc - unused
+    TS_ADHC_UNUSED_5,      // Ad-hoc - unused
+    TS_ADHC_UNUSED_6,      // Ad-hoc - unused
+    TS_ADHC_UNUSED_7,      // Ad-hoc - unused
+    TS_ADHC_UNUSED_8,      // Ad-hoc - unused
+    TS_ADHC_UNUSED_9,      // Ad-hoc - unused
+    TS_ADHC_UNUSED_10,     // Ad-hoc - unused
+    TS_ADHC_UNUSED_11,     // Ad-hoc - unused
+    TS_ADHC_UNUSED_12,     // Ad-hoc - unused
+    TS_ADHC_UNUSED_13,     // Ad-hoc - unused
+    TS_ADHC_UNUSED_14,     // Ad-hoc - unused
+    TS_ADHC_UNUSED_15,     // Ad-hoc - unused
+    TS_ADHC_UNUSED_16      // Ad-hoc - unused
 };
 
 

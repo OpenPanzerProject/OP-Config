@@ -428,6 +428,24 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
         TriggerDescription = "Vehicle Speed Decreases Below ";
         TriggerDescription.append(QString("%1\%").arg(triggerSpeed));
     }
+    // Throttle command - variable (analog) trigger
+    else if (TriggerID == trigger_id_throttle_command)
+    {
+        ts = TS_THROTTLE_COMMAND;
+        TriggerDescription = "Throttle Command";
+    }
+    // Engine speed - variable (analog) trigger
+    else if (TriggerID == trigger_id_engine_speed)
+    {
+        ts = TS_ENGINE_SPEED;
+        TriggerDescription = "Engine Speed";
+    }
+    // Vehicle speed - variable (analog) trigger
+    else if (TriggerID == trigger_id_vehicle_speed)
+    {
+        ts = TS_VEHICLE_SPEED;
+        TriggerDescription = "Vehicle Speed";
+    }
 
     return TriggerDescription;
 }

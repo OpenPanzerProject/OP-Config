@@ -474,6 +474,9 @@ QMap<_trigger_source, QString> OP_QMaps::getAllTriggerSourcesQMap()
     _OPT_ALL_QMAP.insert(TS_INPUT_B, "External Input B");                       // External input B (if set to input)
     _OPT_ALL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Increases Above:");      // Speed increases above level trigger
     _OPT_ALL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Decreases Below:");      // Speed falls below level trigger
+    _OPT_ALL_QMAP.insert(TS_THROTTLE_COMMAND, "Throttle Command");              // Variable - throttle command
+    _OPT_ALL_QMAP.insert(TS_ENGINE_SPEED, "Engine Speed");                      // Variable - engine speed
+    _OPT_ALL_QMAP.insert(TS_VEHICLE_SPEED, "Vehicle Speed");                    // Variable - vehicle speed
     _OPT_ALL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                     // Ad-Hoc - brakes applied
     _OPT_ALL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                      // Ad-Hoc - received cannon hit
     _OPT_ALL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");               // Ad-Hoc - vehicle destroyed
@@ -525,6 +528,9 @@ QMap<_trigger_source, QString> OP_QMaps::getAnalogTriggerSourcesQMap()
     _OPT_ANALOG_QMAP.insert(TS_AUX12, "Aux Channel 12");                        // Aux channel 12
     _OPT_ANALOG_QMAP.insert(TS_INPUT_A, "External Input A");                    // External input A (if set to input)
     _OPT_ANALOG_QMAP.insert(TS_INPUT_B, "External Input B");                    // External input B (if set to input)
+    _OPT_ANALOG_QMAP.insert(TS_THROTTLE_COMMAND, "Throttle Command");           // Variable - throttle command
+    _OPT_ANALOG_QMAP.insert(TS_ENGINE_SPEED, "Engine Speed");                   // Variable - engine speed
+    _OPT_ANALOG_QMAP.insert(TS_VEHICLE_SPEED, "Vehicle Speed");                 // Variable - vehicle speed
     return _OPT_ANALOG_QMAP;
 }
 

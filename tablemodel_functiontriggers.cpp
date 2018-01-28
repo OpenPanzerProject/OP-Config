@@ -446,6 +446,24 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
         ts = TS_VEHICLE_SPEED;
         TriggerDescription = "Vehicle Speed";
     }
+    // Steering command - variable (analog) trigger
+    else if (TriggerID == trigger_id_steering_command)
+    {
+        ts = TS_STEERING_COMMAND;
+        TriggerDescription = "Steering Command";
+    }
+    // Turret rotation command - variable (analog) trigger
+    else if (TriggerID == trigger_id_rotation_command)
+    {
+        ts = TS_ROTATION_COMMAND;
+        TriggerDescription = "Turret Rotation Command";
+    }
+    // Barrel elevation command - variable (analog) trigger
+    else if (TriggerID == trigger_id_elevation_command)
+    {
+        ts = TS_ELEVATION_COMMAND;
+        TriggerDescription = "Barrel Elevation Command";
+    }
 
     return TriggerDescription;
 }

@@ -86,6 +86,7 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_AUXOUT_OFF, "Aux Output - Turn Off");
     _SF_ALL_QMAP.insert(SF_AUXOUT_LEVEL, "Aux Output - Set Level");                 // Analog
     _SF_ALL_QMAP.insert(SF_AUXOUT_PRESETDIM, "Aux Output - Preset Dim Level");
+    _SF_ALL_QMAP.insert(SF_AUXOUT_TOGGLEDIM, "Aux Output - Toggle Dim Level");
     _SF_ALL_QMAP.insert(SF_AUXOUT_FLASH, "Aux Output - Flash");
     _SF_ALL_QMAP.insert(SF_AUXOUT_INV_FLASH, "Aux Output - Inverse Flash");
     _SF_ALL_QMAP.insert(SF_AUXOUT_BLINK, "Aux Output - Blink");
@@ -220,90 +221,91 @@ QList<_special_function> OP_QMaps::getAllSpecialFunctionsSortOrder()
     _SF_ALL_QMAP_SORT.insert(32, SF_AUXOUT_OFF);
     _SF_ALL_QMAP_SORT.insert(33, SF_AUXOUT_LEVEL);
     _SF_ALL_QMAP_SORT.insert(34, SF_AUXOUT_PRESETDIM);
-    _SF_ALL_QMAP_SORT.insert(35, SF_AUXOUT_FLASH);
-    _SF_ALL_QMAP_SORT.insert(36, SF_AUXOUT_INV_FLASH);
-    _SF_ALL_QMAP_SORT.insert(37, SF_AUXOUT_BLINK);
-    _SF_ALL_QMAP_SORT.insert(38, SF_AUXOUT_TOGGLEBLINK);
-    _SF_ALL_QMAP_SORT.insert(39, SF_AUXOUT_REVOLVE);
-    _SF_ALL_QMAP_SORT.insert(40, SF_AUXOUT_TOGGLEREVOLVE);
-    _SF_ALL_QMAP_SORT.insert(41, SF_OUTPUT_A_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(42, SF_OUTPUT_A_ON);
-    _SF_ALL_QMAP_SORT.insert(43, SF_OUTPUT_A_OFF);
-    _SF_ALL_QMAP_SORT.insert(44, SF_OUTPUT_A_PULSE);
-    _SF_ALL_QMAP_SORT.insert(45, SF_OUTPUT_B_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(46, SF_OUTPUT_B_ON);
-    _SF_ALL_QMAP_SORT.insert(47, SF_OUTPUT_B_OFF);
-    _SF_ALL_QMAP_SORT.insert(48, SF_OUTPUT_B_PULSE);
-    _SF_ALL_QMAP_SORT.insert(49, SF_ACCEL_LEVEL);
-    _SF_ALL_QMAP_SORT.insert(50, SF_DECEL_LEVEL);
-    _SF_ALL_QMAP_SORT.insert(51, SF_TURNMODE_1);
-    _SF_ALL_QMAP_SORT.insert(52, SF_TURNMODE_2);
-    _SF_ALL_QMAP_SORT.insert(53, SF_TURNMODE_3);
-    _SF_ALL_QMAP_SORT.insert(54, SF_NT_ENABLE);
-    _SF_ALL_QMAP_SORT.insert(55, SF_NT_DISABLE);
-    _SF_ALL_QMAP_SORT.insert(56, SF_NT_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(57, SF_DRIVEPROFILE_1);
-    _SF_ALL_QMAP_SORT.insert(58, SF_DRIVEPROFILE_2);
-    _SF_ALL_QMAP_SORT.insert(59, SF_DRIVEPROFILE_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(60, SF_SMOKER);
-    _SF_ALL_QMAP_SORT.insert(61, SF_SMOKER_ON);
-    _SF_ALL_QMAP_SORT.insert(62, SF_SMOKER_OFF);
-    _SF_ALL_QMAP_SORT.insert(63, SF_SMOKER_ENABLE);
-    _SF_ALL_QMAP_SORT.insert(64, SF_SMOKER_DISABLE);
-    _SF_ALL_QMAP_SORT.insert(65, SF_SMOKER_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(66, SF_MOTOR_A);
-    _SF_ALL_QMAP_SORT.insert(67, SF_MOTOR_B);
-    _SF_ALL_QMAP_SORT.insert(68, SF_SET_VOLUME);
-    _SF_ALL_QMAP_SORT.insert(69, SF_INCR_VOLUME);
-    _SF_ALL_QMAP_SORT.insert(70, SF_DECR_VOLUME);
-    _SF_ALL_QMAP_SORT.insert(71, SF_STOP_VOLUME);
-    _SF_ALL_QMAP_SORT.insert(72, SF_OVERLAY_ENABLE);
-    _SF_ALL_QMAP_SORT.insert(73, SF_OVERLAY_DISABLE);
-    _SF_ALL_QMAP_SORT.insert(74, SF_USER_SOUND1_ONCE);
-    _SF_ALL_QMAP_SORT.insert(75, SF_USER_SOUND1_RPT);
-    _SF_ALL_QMAP_SORT.insert(76, SF_USER_SOUND1_OFF);
-    _SF_ALL_QMAP_SORT.insert(77, SF_USER_SOUND2_ONCE);
-    _SF_ALL_QMAP_SORT.insert(78, SF_USER_SOUND2_RPT);
-    _SF_ALL_QMAP_SORT.insert(79, SF_USER_SOUND2_OFF);
-    _SF_ALL_QMAP_SORT.insert(80, SF_USER_SOUND3_ONCE);
-    _SF_ALL_QMAP_SORT.insert(81, SF_USER_SOUND3_RPT);
-    _SF_ALL_QMAP_SORT.insert(82, SF_USER_SOUND3_OFF);
-    _SF_ALL_QMAP_SORT.insert(83, SF_USER_SOUND4_ONCE);
-    _SF_ALL_QMAP_SORT.insert(84, SF_USER_SOUND4_RPT);
-    _SF_ALL_QMAP_SORT.insert(85, SF_USER_SOUND4_OFF);
-    _SF_ALL_QMAP_SORT.insert(86, SF_USER_SOUND5_ONCE);
-    _SF_ALL_QMAP_SORT.insert(87, SF_USER_SOUND5_RPT);
-    _SF_ALL_QMAP_SORT.insert(88, SF_USER_SOUND5_OFF);
-    _SF_ALL_QMAP_SORT.insert(89, SF_USER_SOUND6_ONCE);
-    _SF_ALL_QMAP_SORT.insert(90, SF_USER_SOUND6_RPT);
-    _SF_ALL_QMAP_SORT.insert(91, SF_USER_SOUND6_OFF);
-    _SF_ALL_QMAP_SORT.insert(92, SF_RC1_PASS);
-    _SF_ALL_QMAP_SORT.insert(93, SF_RC2_PASS);
-    _SF_ALL_QMAP_SORT.insert(94, SF_RC3_PASS);
-    _SF_ALL_QMAP_SORT.insert(95, SF_RC4_PASS);
-    _SF_ALL_QMAP_SORT.insert(96, SF_RC6_PASS);
-    _SF_ALL_QMAP_SORT.insert(97, SF_RC7_PASS);
-    _SF_ALL_QMAP_SORT.insert(98, SF_RC8_PASS);
-    _SF_ALL_QMAP_SORT.insert(99, SF_RC1_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(100, SF_RC2_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(101, SF_RC3_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(102, SF_RC4_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(103, SF_RC6_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(104, SF_RC7_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(105, SF_RC8_PASS_PAN);
-    _SF_ALL_QMAP_SORT.insert(106, SF_BARREL_STAB_ON);
-    _SF_ALL_QMAP_SORT.insert(107, SF_BARREL_STAB_OFF);
-    _SF_ALL_QMAP_SORT.insert(108, SF_BARREL_STAB_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(109, SF_BARREL_STAB_LEVEL);
-    _SF_ALL_QMAP_SORT.insert(110, SF_HILLS_ON);
-    _SF_ALL_QMAP_SORT.insert(111, SF_HILLS_OFF);
-    _SF_ALL_QMAP_SORT.insert(112, SF_HILLS_TOGGLE);
-    _SF_ALL_QMAP_SORT.insert(113, SF_HILLS_LEVEL);
-    _SF_ALL_QMAP_SORT.insert(114, SF_USER_FUNC_1);
-    _SF_ALL_QMAP_SORT.insert(115, SF_USER_FUNC_2);
-    _SF_ALL_QMAP_SORT.insert(116, SF_USER_ANLG_1);
-    _SF_ALL_QMAP_SORT.insert(117, SF_USER_ANLG_2);
-    _SF_ALL_QMAP_SORT.insert(118, SF_DUMP_DEBUG);
+    _SF_ALL_QMAP_SORT.insert(35, SF_AUXOUT_TOGGLEDIM);
+    _SF_ALL_QMAP_SORT.insert(36, SF_AUXOUT_FLASH);
+    _SF_ALL_QMAP_SORT.insert(37, SF_AUXOUT_INV_FLASH);
+    _SF_ALL_QMAP_SORT.insert(38, SF_AUXOUT_BLINK);
+    _SF_ALL_QMAP_SORT.insert(39, SF_AUXOUT_TOGGLEBLINK);
+    _SF_ALL_QMAP_SORT.insert(40, SF_AUXOUT_REVOLVE);
+    _SF_ALL_QMAP_SORT.insert(41, SF_AUXOUT_TOGGLEREVOLVE);
+    _SF_ALL_QMAP_SORT.insert(42, SF_OUTPUT_A_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(43, SF_OUTPUT_A_ON);
+    _SF_ALL_QMAP_SORT.insert(44, SF_OUTPUT_A_OFF);
+    _SF_ALL_QMAP_SORT.insert(45, SF_OUTPUT_A_PULSE);
+    _SF_ALL_QMAP_SORT.insert(46, SF_OUTPUT_B_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(47, SF_OUTPUT_B_ON);
+    _SF_ALL_QMAP_SORT.insert(48, SF_OUTPUT_B_OFF);
+    _SF_ALL_QMAP_SORT.insert(49, SF_OUTPUT_B_PULSE);
+    _SF_ALL_QMAP_SORT.insert(50, SF_ACCEL_LEVEL);
+    _SF_ALL_QMAP_SORT.insert(51, SF_DECEL_LEVEL);
+    _SF_ALL_QMAP_SORT.insert(52, SF_TURNMODE_1);
+    _SF_ALL_QMAP_SORT.insert(53, SF_TURNMODE_2);
+    _SF_ALL_QMAP_SORT.insert(54, SF_TURNMODE_3);
+    _SF_ALL_QMAP_SORT.insert(55, SF_NT_ENABLE);
+    _SF_ALL_QMAP_SORT.insert(56, SF_NT_DISABLE);
+    _SF_ALL_QMAP_SORT.insert(57, SF_NT_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(58, SF_DRIVEPROFILE_1);
+    _SF_ALL_QMAP_SORT.insert(59, SF_DRIVEPROFILE_2);
+    _SF_ALL_QMAP_SORT.insert(60, SF_DRIVEPROFILE_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(61, SF_SMOKER);
+    _SF_ALL_QMAP_SORT.insert(62, SF_SMOKER_ON);
+    _SF_ALL_QMAP_SORT.insert(63, SF_SMOKER_OFF);
+    _SF_ALL_QMAP_SORT.insert(64, SF_SMOKER_ENABLE);
+    _SF_ALL_QMAP_SORT.insert(65, SF_SMOKER_DISABLE);
+    _SF_ALL_QMAP_SORT.insert(66, SF_SMOKER_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(67, SF_MOTOR_A);
+    _SF_ALL_QMAP_SORT.insert(68, SF_MOTOR_B);
+    _SF_ALL_QMAP_SORT.insert(69, SF_SET_VOLUME);
+    _SF_ALL_QMAP_SORT.insert(70, SF_INCR_VOLUME);
+    _SF_ALL_QMAP_SORT.insert(71, SF_DECR_VOLUME);
+    _SF_ALL_QMAP_SORT.insert(72, SF_STOP_VOLUME);
+    _SF_ALL_QMAP_SORT.insert(73, SF_OVERLAY_ENABLE);
+    _SF_ALL_QMAP_SORT.insert(74, SF_OVERLAY_DISABLE);
+    _SF_ALL_QMAP_SORT.insert(75, SF_USER_SOUND1_ONCE);
+    _SF_ALL_QMAP_SORT.insert(76, SF_USER_SOUND1_RPT);
+    _SF_ALL_QMAP_SORT.insert(77, SF_USER_SOUND1_OFF);
+    _SF_ALL_QMAP_SORT.insert(78, SF_USER_SOUND2_ONCE);
+    _SF_ALL_QMAP_SORT.insert(79, SF_USER_SOUND2_RPT);
+    _SF_ALL_QMAP_SORT.insert(80, SF_USER_SOUND2_OFF);
+    _SF_ALL_QMAP_SORT.insert(81, SF_USER_SOUND3_ONCE);
+    _SF_ALL_QMAP_SORT.insert(82, SF_USER_SOUND3_RPT);
+    _SF_ALL_QMAP_SORT.insert(83, SF_USER_SOUND3_OFF);
+    _SF_ALL_QMAP_SORT.insert(84, SF_USER_SOUND4_ONCE);
+    _SF_ALL_QMAP_SORT.insert(85, SF_USER_SOUND4_RPT);
+    _SF_ALL_QMAP_SORT.insert(86, SF_USER_SOUND4_OFF);
+    _SF_ALL_QMAP_SORT.insert(87, SF_USER_SOUND5_ONCE);
+    _SF_ALL_QMAP_SORT.insert(88, SF_USER_SOUND5_RPT);
+    _SF_ALL_QMAP_SORT.insert(89, SF_USER_SOUND5_OFF);
+    _SF_ALL_QMAP_SORT.insert(90, SF_USER_SOUND6_ONCE);
+    _SF_ALL_QMAP_SORT.insert(91, SF_USER_SOUND6_RPT);
+    _SF_ALL_QMAP_SORT.insert(92, SF_USER_SOUND6_OFF);
+    _SF_ALL_QMAP_SORT.insert(93, SF_RC1_PASS);
+    _SF_ALL_QMAP_SORT.insert(94, SF_RC2_PASS);
+    _SF_ALL_QMAP_SORT.insert(95, SF_RC3_PASS);
+    _SF_ALL_QMAP_SORT.insert(96, SF_RC4_PASS);
+    _SF_ALL_QMAP_SORT.insert(97, SF_RC6_PASS);
+    _SF_ALL_QMAP_SORT.insert(98, SF_RC7_PASS);
+    _SF_ALL_QMAP_SORT.insert(99, SF_RC8_PASS);
+    _SF_ALL_QMAP_SORT.insert(100, SF_RC1_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(101, SF_RC2_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(102, SF_RC3_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(103, SF_RC4_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(104, SF_RC6_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(105, SF_RC7_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(106, SF_RC8_PASS_PAN);
+    _SF_ALL_QMAP_SORT.insert(107, SF_BARREL_STAB_ON);
+    _SF_ALL_QMAP_SORT.insert(108, SF_BARREL_STAB_OFF);
+    _SF_ALL_QMAP_SORT.insert(109, SF_BARREL_STAB_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(110, SF_BARREL_STAB_LEVEL);
+    _SF_ALL_QMAP_SORT.insert(111, SF_HILLS_ON);
+    _SF_ALL_QMAP_SORT.insert(112, SF_HILLS_OFF);
+    _SF_ALL_QMAP_SORT.insert(113, SF_HILLS_TOGGLE);
+    _SF_ALL_QMAP_SORT.insert(114, SF_HILLS_LEVEL);
+    _SF_ALL_QMAP_SORT.insert(115, SF_USER_FUNC_1);
+    _SF_ALL_QMAP_SORT.insert(116, SF_USER_FUNC_2);
+    _SF_ALL_QMAP_SORT.insert(117, SF_USER_ANLG_1);
+    _SF_ALL_QMAP_SORT.insert(118, SF_USER_ANLG_2);
+    _SF_ALL_QMAP_SORT.insert(119, SF_DUMP_DEBUG);
 
     return _SF_ALL_QMAP_SORT;
 }
@@ -342,6 +344,7 @@ QMap<_special_function, QString> OP_QMaps::getDigitalSpecialFunctionsQMap()
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_ON, "Aux Output - Turn On");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_OFF, "Aux Output - Turn Off");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_PRESETDIM, "Aux Output - Preset Dim Level");
+    _SF_DIGITAL_QMAP.insert(SF_AUXOUT_TOGGLEDIM, "Aux Output - Toggle Dim Level");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_FLASH, "Aux Output - Flash");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_INV_FLASH, "Aux Output - Inverse Flash");
     _SF_DIGITAL_QMAP.insert(SF_AUXOUT_BLINK, "Aux Output - Blink");
@@ -477,6 +480,9 @@ QMap<_trigger_source, QString> OP_QMaps::getAllTriggerSourcesQMap()
     _OPT_ALL_QMAP.insert(TS_THROTTLE_COMMAND, "Throttle Command");              // Variable - throttle command
     _OPT_ALL_QMAP.insert(TS_ENGINE_SPEED, "Engine Speed");                      // Variable - engine speed
     _OPT_ALL_QMAP.insert(TS_VEHICLE_SPEED, "Vehicle Speed");                    // Variable - vehicle speed
+    _OPT_ALL_QMAP.insert(TS_STEERING_COMMAND, "Steering Command");              // Variable - steering command
+    _OPT_ALL_QMAP.insert(TS_ROTATION_COMMAND, "Turret Rotation Command");       // Variable - rotation command
+    _OPT_ALL_QMAP.insert(TS_ELEVATION_COMMAND, "Barrel Elevation Command");     // Variable - elevation command
     _OPT_ALL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                     // Ad-Hoc - brakes applied
     _OPT_ALL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                      // Ad-Hoc - received cannon hit
     _OPT_ALL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");               // Ad-Hoc - vehicle destroyed
@@ -531,6 +537,9 @@ QMap<_trigger_source, QString> OP_QMaps::getAnalogTriggerSourcesQMap()
     _OPT_ANALOG_QMAP.insert(TS_THROTTLE_COMMAND, "Throttle Command");           // Variable - throttle command
     _OPT_ANALOG_QMAP.insert(TS_ENGINE_SPEED, "Engine Speed");                   // Variable - engine speed
     _OPT_ANALOG_QMAP.insert(TS_VEHICLE_SPEED, "Vehicle Speed");                 // Variable - vehicle speed
+    _OPT_ANALOG_QMAP.insert(TS_STEERING_COMMAND, "Steering Command");           // Variable - steering command
+    _OPT_ANALOG_QMAP.insert(TS_ROTATION_COMMAND, "Turret Rotation Command");    // Variable - rotation command
+    _OPT_ANALOG_QMAP.insert(TS_ELEVATION_COMMAND, "Barrel Elevation Command");  // Variable - elevation command
     return _OPT_ANALOG_QMAP;
 }
 

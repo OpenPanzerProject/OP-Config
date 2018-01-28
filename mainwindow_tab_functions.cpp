@@ -174,12 +174,13 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input A", TS_INPUT_A);
             if (DeviceData.PortB.Settings.dataDirection == DD_INPUT && DeviceData.PortB.Settings.dataType == false)
                 ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "External Input B", TS_INPUT_B);
-            // Throttle command, vehicle and engine speeds, always present
-            // OK - These work, and they are implemented in the TCB firmware as well. However I really see no clear use-case for them.
-            // One wonders if they are worth enabling...
+            // Throttle command, vehicle and engine speeds, steering command and turret commands, always present
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Throttle Command", TS_THROTTLE_COMMAND);
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Engine Speed", TS_ENGINE_SPEED);
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Speed", TS_VEHICLE_SPEED);
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Steering Command", TS_STEERING_COMMAND);
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Turret Rotation Command", TS_ROTATION_COMMAND);
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Barrel Elevation Command", TS_ELEVATION_COMMAND);
         }
     }
 
@@ -330,7 +331,7 @@ void MainWindow::SetupTriggerActions(int)
 //            {
 //            }
         }
-        // Trigger source is Analog of some kind (doesn't matter whether Aux channel or External Port
+        // Trigger source is Analog of some kind
         else
         {
             // Analog, they only need a single selection which we will place for them and which doesn't actually
@@ -456,7 +457,7 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
                 if (sf_digital) TriggerID += ta;    // Trigger ID is the ID plus the set level
                 break;
 
-            // THROTTLE COMMAND / VEHICLE / ENGINE SPEEDS
+            // THROTTLE COMMAND / VEHICLE / ENGINE SPEEDS / STEERING COMMAND / TURRET COMMANDS
             // ---------------------------------------------------------------------------->>
             // These are very simple, just a single number with no other information
             case TS_THROTTLE_COMMAND:
@@ -467,6 +468,15 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
                 break;
             case TS_VEHICLE_SPEED:
                 TriggerID = trigger_id_vehicle_speed;
+                break;
+            case TS_STEERING_COMMAND:
+                TriggerID = trigger_id_steering_command;
+                break;
+            case TS_ROTATION_COMMAND:
+                TriggerID = trigger_id_rotation_command;
+                break;
+            case TS_ELEVATION_COMMAND:
+                TriggerID = trigger_id_elevation_command;
                 break;
 
             // AD-HOC

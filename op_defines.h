@@ -168,7 +168,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 119;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 120;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -288,7 +288,8 @@ enum _special_function : byte {
     SF_OVERLAY_DISABLE  = 115,      // 115
     SF_MANTRANS_FWD     = 116,      // 116
     SF_MANTRANS_REV     = 117,      // 117
-    SF_MANTRANS_NEUTRAL = 118       // 118
+    SF_MANTRANS_NEUTRAL = 118,      // 118
+    SF_AUXOUT_TOGGLEDIM = 119       // 119
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -319,6 +320,9 @@ struct _functionTrigger {
 #define trigger_id_throttle_command         22001       // Variable trigger synchronous with actual throttle stick position
 #define trigger_id_engine_speed             22002       // Variable trigger synchronous with engine speed (modified/massaged throttle command)
 #define trigger_id_vehicle_speed            22003       // Variable trigger synchronous with vehicle movement speed
+#define trigger_id_steering_command         22004       // Variable trigger synchronous with steering input (stick position)
+#define trigger_id_rotation_command         22005       // Variable trigger synchronous with turret rotation (stick position)
+#define trigger_id_elevation_command        22006       // Variable trigger synchronous with barrel elevation (stick position)
 
 #define COUNT_ADHOC_TRIGGERS            3               // This number can not get higher than 16 unless you want to change some methods in the sketch
 // Ad-Hoc trigger Flag Masks
@@ -353,6 +357,9 @@ enum _trigger_source : byte {
     TS_THROTTLE_COMMAND,   // Throttle command (variable)
     TS_ENGINE_SPEED,       // Engine speed (variable)
     TS_VEHICLE_SPEED,      // Vehicle speed (variable)
+    TS_STEERING_COMMAND,   // Steering input (variable)
+    TS_ROTATION_COMMAND,   // Turrent rotation input (variable)
+    TS_ELEVATION_COMMAND,  // Barrel elevation input (variable)
     TS_ADHC_BRAKES,        // Ad-hoc - brakes applied
     TS_ADHC_CANNONHIT,     // Ad-hoc - received cannon hit
     TS_ADHC_DESTROYED,     // Ad-hoc - vehicle destroyed

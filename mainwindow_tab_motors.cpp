@@ -197,13 +197,24 @@ void MainWindow::ValidateMotorSelections()
         msgBox("Only the turret or the drive motors can be connected to the onboard motor driver, but not both. Please check again.\n\nThe drive motor selection has been changed to RC Output for now.",vbOkOnly,"Invalid Motor Selections",vbExclamation);
     }
 
-    // Another combination that is not possible, is drive type set to Halftrack with dual drive motors with
-    // drive motors set to RC Output - that is because in halftrack/car mode, the Right Tread RC Output is used for the steering servo
+    // When the vehicle type is halftrack we must find some RC output to use for the steering servo. If the halftrack only has a single drive
+    // motor this is not a problem - we can use RC output 2, and even if the user wants to use RC output for the drive motor they only need
+    // one, which can be output 1. But if they want independent track control AND they want to use RC outputs to control those, both
+    // RC 1 & 2 will be taken. If they are using the Benedini Mini 6-8 are taken and 5 is always reserved for recoil. We are left with
+    // stealing one of the turret outputs, which is not so bad since most people will use the onboard drivers for those. We choose
+    // the barrel elevation (RC Output 4). This means we need to prevent them from selecting RC output for the barrel elevation motor.
     if (ui->cboDriveType->currentData() == DT_HALFTRACK && ui->cboDriveMotors->isRCOutput())
     {
-        // Set the motor to Sabertooth instead
-        ui->cboDriveMotors->setCurrentIndex(ui->cboDriveMotors->findData(SABERTOOTH));
-        msgBox("When drive type is set to dual-motor halftrack, the dual drive motors must be powered by the onboard drivers or a serial controller.\n\nThe drive motor selection has been changed to Sabertooth for now.",vbOkOnly,"Invalid Motor Selections",vbExclamation);
+        // If they would use a serial controller for the dual drives, we could still use RC Output 2 for the steering servo. But
+        // since they want to use two ESCs for haltrack drive, we are going to move the steering servo to the barrel elevation
+        // output, which means that one can not be set to RC. We change it to onboard and notify the user.
+        if (ui->cboTurretElevationMotor->isRCOutput())
+        {
+            ui->cboTurretElevationMotor->setCurrentIndex(ui->cboTurretElevationMotor->findData(ONBOARD));
+            msgBox("When vehicle type is dual-motor halftrack and the drive type is RC, the barrel elevation output "
+                   "will be re-purposed for the steering servo.<br /><br />This means the barrel elevation motor must be driven by "
+                   "something other than RC - for now it has been changed to the Onboard driver.",vbOkOnly,"Invalid Motor Selections",vbExclamation);
+        }
     }
 
     // The Tamiya DMD operates only on RC Output, so don't let them select any other option
@@ -320,14 +331,29 @@ void MainWindow::ValidateMotorSelections()
 
     // Now provide some connection hints based on the user's selection
     // If the user selected halftrack or car, show the steering servo message
-    if (ui->cboDriveType->currentData() == DT_HALFTRACK || ui->cboDriveType->currentData() == DT_CAR)
+    if (ui->cboDriveType->currentData() == DT_HALFTRACK)
     {
+        if (ui->cboDriveMotors->isRCOutput())
+        {
+            ui->lblSteeringServo->setText("Plug steering servo into RC Output <b>4</b>");
+        }
+        else
+        {
+            ui->lblSteeringServo->setText("Plug steering servo into RC Output <b>2</b>");
+        }
+        ui->lblSteeringServo->show();
+    }
+    else if (ui->cboDriveType->currentData() == DT_CAR)
+    {
+        ui->lblSteeringServo->setText("Plug steering servo into RC Output <b>2</b>");
         ui->lblSteeringServo->show();
     }
     else
     {
         ui->lblSteeringServo->hide();
     }
+
+
     // Now the drive motor connection
     // Drive motors driven by Serial
     if (ui->cboDriveMotors->isSerial())
@@ -422,7 +448,7 @@ void MainWindow::ValidateMotorSelections()
         }
     }
 
-    // Now the turret rotation  motor
+    // Now the turret rotation motor
     if (ui->cboTurretRotationMotor->isSerial())
     {    switch (ui->cboTurretRotationMotor->getCurrentDriveType())
         {
@@ -519,26 +545,47 @@ void MainWindow::ValidateRCPassthroughs()
     // Now: remove the ones that should not be there. If we remove one from the combo, check also if it exists already in our
     // function trigger list, and if so, remove it from there too.
 
-    // Servo 1 & 2 - available if drive motors are not RC outputs, and if there is no steering servo
+    // Servo 1 & 2 and possibly 4 - available if drive motors are not RC outputs, and if there is no steering servo
     if (ui->cboDriveMotors->isRCOutput())
-    {   // In this case we lose both servo 1 & 2
-        ui->cboSelectFunction->removeRCPassthrough(SERVONUM_LEFTTREAD);
-        ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
+    {
+        if (ui->cboDriveType->currentData() == DT_HALFTRACK)
+        {
+            // In this case we lose servos 1 & 2 (for left and right tread) and also 4 (for steering servo)
+            ui->cboSelectFunction->removeRCPassthrough(SERVONUM_LEFTTREAD);
+            ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
+            ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETELEVATION);
 
-        // Now make sure these aren't in our function triggers
-        // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
-        if (FT_TableModel->removeFunctionFromList(SF_RC1_PASS)     |
-            FT_TableModel->removeFunctionFromList(SF_RC1_PASS_PAN) |
-            FT_TableModel->removeFunctionFromList(SF_RC2_PASS)     |
-            FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN))
-            RemovedFunctionTriggersMsgBox();
+            // Now make sure these aren't in our function triggers
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_RC1_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC1_PASS_PAN) |
+                FT_TableModel->removeFunctionFromList(SF_RC2_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN) |
+                FT_TableModel->removeFunctionFromList(SF_RC4_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC4_PASS_PAN))
+                RemovedFunctionTriggersMsgBox();
+        }
+        else // Tank or car or something besides halftrack
+        {
+            // In this case we only lose servos 1 & 2 (either both used for drive, or one for drive and one for steering)
+            ui->cboSelectFunction->removeRCPassthrough(SERVONUM_LEFTTREAD);
+            ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
+
+            // Now make sure these aren't in our function triggers
+            // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+            if (FT_TableModel->removeFunctionFromList(SF_RC1_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC1_PASS_PAN) |
+                FT_TableModel->removeFunctionFromList(SF_RC2_PASS)     |
+                FT_TableModel->removeFunctionFromList(SF_RC2_PASS_PAN))
+                RemovedFunctionTriggersMsgBox();
+        }
     }
     else
     {
-        if (ui->cboDriveType->currentData() == DT_HALFTRACK ||
-            ui->cboDriveType->currentData() == DT_CAR)
-        {   // Even if the drive motors are not RC outs, we might still lose the right tread servo slot if we have
-            // a steering servo, which we will if this is a halftrack or car
+        // Even if the drive motors are not RC outs, we might still lose the right tread servo slot if we have
+        // a steering servo, which we will if this is a halftrack or car
+        if (ui->cboDriveType->currentData() == DT_HALFTRACK || ui->cboDriveType->currentData() == DT_CAR)
+        {
             ui->cboSelectFunction->removeRCPassthrough(SERVONUM_RIGHTTREAD);
             // Now make sure this isn't in our function trigger list
             // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
@@ -547,7 +594,7 @@ void MainWindow::ValidateRCPassthroughs()
                 RemovedFunctionTriggersMsgBox();
         }
     }
-    // Servo 3 - available if turret rotation is not RC output
+    // Servo 3 - not available if turret rotation is RC output
     if (ui->cboTurretRotationMotor->isRCOutput())
     {
         ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETROTATION);
@@ -557,7 +604,7 @@ void MainWindow::ValidateRCPassthroughs()
             FT_TableModel->removeFunctionFromList(SF_RC3_PASS_PAN))
             RemovedFunctionTriggersMsgBox();
     }
-    // Servo 4 - available if turret elevation is not RC output
+    // Servo 4 - not available if barrel elevation is RC output (or if re-purposed for steering servo, already handled above)
     if (ui->cboTurretElevationMotor->isRCOutput())
     {
         ui->cboSelectFunction->removeRCPassthrough(SERVONUM_TURRETELEVATION);

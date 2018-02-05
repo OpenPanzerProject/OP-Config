@@ -152,8 +152,9 @@ typedef char TANKCLASSTYPES;
 typedef char DAMAGEPROFILES;
 #define TAMIYA_DAMAGE   	0		// Stock Tamiya damage profile
 #define OPENPANZER_DAMAGE	1		// Open Panzer damage profile
+#define NO_DAMAGE           2       // No damage
 //#define ADDITIONAL (number)
-#define LAST_DAMAGE_PROFILE OPENPANZER_DAMAGE
+#define LAST_DAMAGE_PROFILE NO_DAMAGE
 
 struct weightClassSettings{
     uint16_t reloadTime;		// How long (in mS) does it take to reload the cannon. Depends on weight class

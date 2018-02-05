@@ -8,9 +8,11 @@ DamageProfileComboBox::DamageProfileComboBox(QWidget *parent) : QComboBox(parent
     typedef char DAMAGEPROFILES;
     #define TAMIYA_DAMAGE   	0		// Stock Tamiya damage profile
     #define OPENPANZER_DAMAGE	1		// Open Panzer damage profile
+    #define NO_DAMAGE           2       // No damage
     */
 
     this->insertItem(count(), "Tamiya Spec", TAMIYA_DAMAGE);
     this->insertItem(count(), "Experimental", OPENPANZER_DAMAGE);
+    this->insertItem(count(), "None", NO_DAMAGE);
 }
 

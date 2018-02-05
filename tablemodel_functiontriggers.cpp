@@ -408,6 +408,10 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
                 ts = TS_ADHC_DESTROYED;
                 TriggerDescription = "Vehicle Destroyed";
                 break;
+            case ADHOC_TRIGGER_CANNON_RELOADED:
+                ts = TS_ADHC_CANNONRELOAD;
+                TriggerDescription = "Cannon Reloaded";
+                break;
         }
     }
     // Vehicle speed triggers - increasing speed

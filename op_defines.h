@@ -324,16 +324,18 @@ struct _functionTrigger {
 #define trigger_id_rotation_command         22005       // Variable trigger synchronous with turret rotation (stick position)
 #define trigger_id_elevation_command        22006       // Variable trigger synchronous with barrel elevation (stick position)
 
-#define COUNT_ADHOC_TRIGGERS            3               // This number can not get higher than 16 unless you want to change some methods in the sketch
+#define COUNT_ADHOC_TRIGGERS            4               // This number can not get higher than 16 unless you want to change some methods in the sketch
 // Ad-Hoc trigger Flag Masks
 #define ADHOCT_BIT_BRAKES_APPLIED       0               // Brakes just applied
 #define ADHOCT_BIT_CANNON_HIT           1               // Vehicle received cannon hit
 #define ADHOCT_BIT_VEHICLE_DESTROYED    2               // Vehicle destroyed
+#define ADHOCT_BIT_CANNON_RELOADED      3               // Cannon reloaded
 
 // Ad-Hoc trigger Triggger IDs
 #define ADHOC_TRIGGER_BRAKES_APPLIED    trigger_id_adhoc_start + ADHOCT_BIT_BRAKES_APPLIED      // Ad-Hoc Trigger ID  1 - brakes just applied   19000
 #define ADHOC_TRIGGER_CANNON_HIT        trigger_id_adhoc_start + ADHOCT_BIT_CANNON_HIT          // Ad-Hoc Trigger ID  2 - received cannon hit   19001
 #define ADHOC_TRIGGER_VEHICLE_DESTROYED trigger_id_adhoc_start + ADHOCT_BIT_VEHICLE_DESTROYED   // Ad-Hoc Trigger ID  3 - vehicle destroyed     19002
+#define ADHOC_TRIGGER_CANNON_RELOADED   trigger_id_adhoc_start + ADHOCT_BIT_CANNON_RELOADED     // Ad-Hoc Trigger ID  4 - cannon reloaded       19003
 
 enum _trigger_source : byte {
     TS_NULL_TRIGGER = 0,   // no trigger
@@ -363,7 +365,7 @@ enum _trigger_source : byte {
     TS_ADHC_BRAKES,        // Ad-hoc - brakes applied
     TS_ADHC_CANNONHIT,     // Ad-hoc - received cannon hit
     TS_ADHC_DESTROYED,     // Ad-hoc - vehicle destroyed
-    TS_ADHC_UNUSED_4,      // Ad-hoc - unused
+    TS_ADHC_CANNONRELOAD,  // Ad-hoc - cannon reloaded
     TS_ADHC_UNUSED_5,      // Ad-hoc - unused
     TS_ADHC_UNUSED_6,      // Ad-hoc - unused
     TS_ADHC_UNUSED_7,      // Ad-hoc - unused

@@ -485,6 +485,7 @@ QMap<_trigger_source, QString> OP_QMaps::getAllTriggerSourcesQMap()
     _OPT_ALL_QMAP.insert(TS_ELEVATION_COMMAND, "Barrel Elevation Command");     // Variable - elevation command
     _OPT_ALL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                     // Ad-Hoc - brakes applied
     _OPT_ALL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                      // Ad-Hoc - received cannon hit
+    _OPT_ALL_QMAP.insert(TS_ADHC_CANNONRELOAD, "Cannon Reloaded");              // Ad-Hoc - cannon reloaded
     _OPT_ALL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");               // Ad-Hoc - vehicle destroyed
     return _OPT_ALL_QMAP;
 }
@@ -512,6 +513,7 @@ QMap<_trigger_source, QString> OP_QMaps::getDigitalTriggerSourcesQMap()
     _OPT_DIGITAL_QMAP.insert(TS_SPEED_INCR, "Vehicle Speed Decreases Below:");  // Speed falls below level trigger
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_BRAKES, "Brakes Applied");                 // Ad-Hoc - brakes applied
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                  // Ad-Hoc - received cannon hit
+    _OPT_DIGITAL_QMAP.insert(TS_ADHC_CANNONRELOAD, "Cannon Reloaded");          // Ad-Hoc - cannon reloaded
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");           // Ad-Hoc - vehicle destroyed
     return _OPT_DIGITAL_QMAP;
 }

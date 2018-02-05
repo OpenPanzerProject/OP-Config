@@ -140,6 +140,7 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
             // Ad-Hoc Triggers
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Brakes Applied", TS_ADHC_BRAKES );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Cannon Hit", TS_ADHC_CANNONHIT );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Cannon Reloaded", TS_ADHC_CANNONRELOAD );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Destroyed", TS_ADHC_DESTROYED );
         }
         else
@@ -508,6 +509,9 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
             break;
         case TS_ADHC_DESTROYED:
             TriggerID = ADHOC_TRIGGER_VEHICLE_DESTROYED;
+            break;
+        case TS_ADHC_CANNONRELOAD:
+            TriggerID = ADHOC_TRIGGER_CANNON_RELOADED;
             break;
         default:
             TriggerID = 0;

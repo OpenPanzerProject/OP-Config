@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1103</width>
-    <height>830</height>
+    <width>1046</width>
+    <height>796</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,13 +18,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1045</width>
-    <height>600</height>
+    <width>1046</width>
+    <height>796</height>
    </size>
   </property>
   <property name="baseSize">
    <size>
-    <width>1060</width>
+    <width>1046</width>
     <height>840</height>
    </size>
   </property>
@@ -90,6 +90,16 @@ QFrame#frmHeader{
 	background: #39085A;	/* Purple */
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+}
+QPushButton#cmdHideHeader{
+	image: url(:/images/minimize.png);
+	border: none;
+	background: #39085A;
+	padding: 1px;
+	min-height: 11px;
+}
+QPushButton#cmdHideHeader:hover {
+	image: url(:/images/minimize_hover.png);
 }
 
 
@@ -408,7 +418,7 @@ QSizeGrip {
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="verticalSpacing">
+      <property name="spacing">
        <number>0</number>
       </property>
       <item row="0" column="0">
@@ -420,7 +430,7 @@ QSizeGrip {
          <enum>QLayout::SetNoConstraint</enum>
         </property>
         <property name="topMargin">
-         <number>5</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -492,6 +502,46 @@ QSizeGrip {
             <enum>QFrame::Raised</enum>
            </property>
           </widget>
+          <widget class="QPushButton" name="cmdHideHeader">
+           <property name="geometry">
+            <rect>
+             <x>1002</x>
+             <y>29</y>
+             <width>16</width>
+             <height>13</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>16</width>
+             <height>13</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16</width>
+             <height>13</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Minimize Header</string>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>14</width>
+             <height>11</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -506,7 +556,7 @@ QSizeGrip {
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>42</height>
+            <height>38</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -522,7 +572,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>980</x>
-             <y>10</y>
+             <y>8</y>
              <width>23</width>
              <height>22</height>
             </rect>
@@ -570,7 +620,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>950</x>
-             <y>10</y>
+             <y>8</y>
              <width>23</width>
              <height>22</height>
             </rect>
@@ -610,7 +660,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>870</x>
-             <y>10</y>
+             <y>8</y>
              <width>71</width>
              <height>22</height>
             </rect>
@@ -641,7 +691,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>640</x>
-             <y>10</y>
+             <y>8</y>
              <width>21</width>
              <height>22</height>
             </rect>
@@ -660,7 +710,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>670</x>
-             <y>10</y>
+             <y>8</y>
              <width>101</width>
              <height>22</height>
             </rect>
@@ -679,7 +729,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>10</x>
-             <y>11</y>
+             <y>9</y>
              <width>491</width>
              <height>21</height>
             </rect>
@@ -698,7 +748,7 @@ QSizeGrip {
            <property name="geometry">
             <rect>
              <x>780</x>
-             <y>10</y>
+             <y>8</y>
              <width>81</width>
              <height>22</height>
             </rect>
@@ -853,7 +903,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -10496,8 +10546,8 @@ gearboxes by dragging inner track during turns:</string>
                 </property>
                 <property name="geometry">
                  <rect>
-                  <x>710</x>
-                  <y>540</y>
+                  <x>430</x>
+                  <y>180</y>
                   <width>121</width>
                   <height>61</height>
                  </rect>
@@ -13242,7 +13292,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>12</height>
+              <height>8</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -13263,7 +13313,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>12</height>
+            <height>8</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -13288,9 +13338,15 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1103</width>
+     <width>1046</width>
      <height>29</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="font">
     <font>
@@ -13319,6 +13375,14 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuDevice">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>202</width>
+      <height>137</height>
+     </rect>
+    </property>
     <property name="font">
      <font>
       <family>MS Shell Dlg 2</family>

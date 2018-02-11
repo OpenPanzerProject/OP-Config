@@ -39,6 +39,8 @@
         <file>images/tcb_subheader.png</file>
         <file>css/drivingprofiletabs.qss</file>
         <file>css/volumeslider.qss</file>
+        <file>images/minimize.png</file>
+        <file>images/minimize_hover.png</file>
     </qresource>
     <qresource prefix="/icons">
         <file>images/OP_Icon_16.png</file>

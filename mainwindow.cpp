@@ -130,6 +130,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->cmdReadDevice, SIGNAL(clicked(bool)), this, SLOT(readSettingsFromDevice()));
     connect(ui->cmdWriteDevice, SIGNAL(clicked(bool)), this, SLOT(writeAllSettingsToDevice()));
 
+    // Connect HideHeader button
+    connect(ui->cmdHideHeader, SIGNAL(clicked(bool)), this, SLOT(cmdHideHeader_Click()));
+
     // Connections to the OpenPanzerComm object (there are some other set on SetupControls_FirmwareTab for snooping/console features)
     connect(comm, SIGNAL(ConnectionChanged(boolean)), this, SLOT (ShowConnectionStatus(boolean)));
     connect(comm, SIGNAL(HereIsFirmwareVersion(QString)), this, SLOT(SerialStatus_displayFirmware(QString)));
@@ -405,6 +408,16 @@ void MainWindow::changeStackedWidget(const QModelIndex& current, const QModelInd
     ui->listViewWest->setCurrentIndex(current);
     qApp->processEvents();  // Equivalent of VB DoEvents()
 }*/
+void MainWindow::cmdHideHeader_Click()
+{
+    ui->frmHeader->hide();
+    setMinimumHeight(741);
+    resize(width(), 741);
+    // To re-expand, we would use
+    // ui->frmHeader->show();
+    // setMinimumHeight(796);
+    // resize(width(), 796);
+}
 void MainWindow::cmdTest1_Click()
 {
     qDebug() << "Test 1 button clicked";

@@ -413,16 +413,16 @@ void MainWindow::ShowHideHeader()
     if (ui->frmHeader->isHidden())
     {
         ui->frmHeader->show();
-        setMinimumHeight(796);
-        resize(width(), 796);
+        setMinimumHeight(788);
+        resize(width(), 788);
     }
     else
     {
         // Hide the "OPEN PANZER OP CONFIG" header bar along the top of the application window. This can be useful
         // for those with small screens
         ui->frmHeader->hide();
-        setMinimumHeight(741);
-        resize(width(), 741);
+        setMinimumHeight(733);
+        resize(width(), 733);
     }
 }
 void MainWindow::cmdTest1_Click()

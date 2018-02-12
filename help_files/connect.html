@@ -70,17 +70,21 @@
 	
 	<h4>Troubleshooting direct connection issues:</h4>
 	<ul class="smalllist">
+        <li><b>Drivers:</b> Make sure you <a href="http://www.openpanzer.org/wiki/doku.php?id=wiki:opconfig:gs:drivers">installed the correct USB drivers</a>.</li>
+        <li><b>Baud Rate:</b> Make sure the Baud Rate is set correctly. For USB connections it should always be 115,200.</li>
 		<li><b>Wrong COM Port:</b> There can be multiple COM ports on your computer, each one assigned to various USB devices you may have. Make sure you know which COM port number belongs to
-		your TCB. It is possible this number may change over time if you plug the TCB into a different USB slot. See the discussion in the <a href="drivers.html">Drivers</a> section for ways 
+		your TCB. It is possible this number may change over time if you plug the TCB into a different USB slot. See the discussion in the <a href="http://www.openpanzer.org/wiki/doku.php?id=wiki:opconfig:gs:drivers">Drivers</a> section for ways 
 		to identify which COM port your TCB has been assigned. Note also there are two orange LEDs on the TCB board near the USB connector. These LEDs blink anytime communication occurs from either direction. The LED closest to the edge of the board
 		will light up anytime the computer sends data to the TCB. When you click the Connect button, this LED should blink several times (though it may take a few seconds to start). If this LED
 		never illuminates and the OP Config program says that connection failed, you probably do not have the correct COM port selected.</li>
 		<li><b>COM Port Busy:</b> Only one program can access a COM port at a time. Did you connect to the TCB with the Arduino IDE or with some other serial monitoring program? If so, OP Config 
-		may be unable to open the COM port. Close the other programs and try again.</li>
-		<li><b>Wrong Dipswitch Setting:</b> Is Dipswitch #5 on the TCB set to the Off position? If so, the TCB is going to try to communicate only through the Serial 1 connector, and it will ignore data on the USB port. Put Dipswitch #5 back to the On position.</li>
-		<li><b>If All Else Fails:</b> unplug the TCB from the computer. Close the OP Config program. Plug the TCB back into the computer, making sure Windows beeps at you to indicate the TCB
-		has been detected. Re-open OP Config and try connecting again.</li>
-	</ul>
+		may be unable to open the COM port. Close the other programs and try again, you may also need to restart OP Config.</li>
+		<li><b>Wrong Dipswitch Setting:</b> Make sure Dipswitch #5 is in the correct position for the method you are using to connect. Set Dipswtich #5 to On if you are connecting with a USB cable. Set it to Off if you are trying to connect over the Serial 1 port (for example, with a Bluetooth adapter).</li>
+		<li><b>Alternate Connection Method:</b> If all else fails, try creating a connection using the longer two-step process. As usual select the correct COM Port, but instead of trying to connect go to the Firmware tab of OP 
+            Config and click the Snoop button. If a Snoop connection is successful you will see a notification to that effect at the bottom of the window, and the TCB will spit out some information in the console window. It may be 
+            a lot of information if the radio receiver is connected/detected. The Snoop connection only listens to the TCB, it doesn't talk. But if that part works, you are already halfway to a full connection. After the TCB has 
+            completed printing debug information, now click the Connect button and the full communication connection should be made.</li>
+    </ul>
 	
 	
 

@@ -175,7 +175,7 @@ private slots:
     // Slots for the Tools menu
     // ---------------------------------------------------------------------------------------------------->>
       void ResetAllValues();
-      void cmdHideHeader_Click();
+      void ShowHideHeader();
 
     // Slots for the two test buttons on the Radio tab
     // ---------------------------------------------------------------------------------------------------->>

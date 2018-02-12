@@ -131,7 +131,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->cmdWriteDevice, SIGNAL(clicked(bool)), this, SLOT(writeAllSettingsToDevice()));
 
     // Connect HideHeader button
-    connect(ui->cmdHideHeader, SIGNAL(clicked(bool)), this, SLOT(cmdHideHeader_Click()));
+    connect(ui->cmdHideHeader, SIGNAL(clicked(bool)), this, SLOT(ShowHideHeader()));
 
     // Connections to the OpenPanzerComm object (there are some other set on SetupControls_FirmwareTab for snooping/console features)
     connect(comm, SIGNAL(ConnectionChanged(boolean)), this, SLOT (ShowConnectionStatus(boolean)));
@@ -408,15 +408,22 @@ void MainWindow::changeStackedWidget(const QModelIndex& current, const QModelInd
     ui->listViewWest->setCurrentIndex(current);
     qApp->processEvents();  // Equivalent of VB DoEvents()
 }*/
-void MainWindow::cmdHideHeader_Click()
+void MainWindow::ShowHideHeader()
 {
-    ui->frmHeader->hide();
-    setMinimumHeight(741);
-    resize(width(), 741);
-    // To re-expand, we would use
-    // ui->frmHeader->show();
-    // setMinimumHeight(796);
-    // resize(width(), 796);
+    if (ui->frmHeader->isHidden())
+    {
+        ui->frmHeader->show();
+        setMinimumHeight(796);
+        resize(width(), 796);
+    }
+    else
+    {
+        // Hide the "OPEN PANZER OP CONFIG" header bar along the top of the application window. This can be useful
+        // for those with small screens
+        ui->frmHeader->hide();
+        setMinimumHeight(741);
+        resize(width(), 741);
+    }
 }
 void MainWindow::cmdTest1_Click()
 {
@@ -717,6 +724,8 @@ void MainWindow::initActionsConnections()
     // Tools Menu
     ui->actionResetAllVals->setEnabled(true);
     connect(ui->actionResetAllVals, SIGNAL(triggered()), this, SLOT(ResetAllValues()));
+    ui->actionShowHeader->setEnabled(true);
+    connect(ui->actionShowHeader, SIGNAL(triggered()), this, SLOT(ShowHideHeader()));
 
     // Device Menu
     ui->actionConnect->setEnabled(true);

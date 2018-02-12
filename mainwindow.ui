@@ -13418,6 +13418,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <string>Tools</string>
     </property>
     <addaction name="actionResetAllVals"/>
+    <addaction name="separator"/>
+    <addaction name="actionShowHeader"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -13492,6 +13494,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
   <action name="actionResetAllVals">
    <property name="text">
     <string>Reset All Values to Default</string>
+   </property>
+  </action>
+  <action name="actionShowHeader">
+   <property name="text">
+    <string>Show/Hide header</string>
    </property>
   </action>
  </widget>

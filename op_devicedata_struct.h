@@ -183,6 +183,7 @@ struct _device_data {
     boolean  HiFlashWithCannon;					 // If true, the high-intensity flash unit will automatically be triggered with cannon fire. If False, user can still trigger it manually.
     boolean  AuxFlashWithCannon;                 // If true, the aux light output will automatically be flashed with cannon fire. If False, it is controlled by user through function triggers
     uint8_t  SecondMGLightBlink_mS;				 // Some number between 0-255. The Second machine gun blinks on/off at the same rate
+    boolean  CannonReloadBlink;                  // Should the Apple lights be blinked when the cannon is done reloading.
 
 // Program setting
     boolean PrintDebug;							 // If true, TCB will print debugging messages out the DebugSerial serial port

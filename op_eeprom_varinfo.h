@@ -9,7 +9,7 @@
 //=======================================================================================================================================>>
 // You must make sure this number equals the number of variables defined in the __eeprom_data struct (including the first var FirstVar)
 //
-    #define NUM_STORED_VARS			314
+    #define NUM_STORED_VARS			315
 
 //
 // The definition above, as well as the PROGMEM array below, can be generated from the Excel reference sheet
@@ -340,7 +340,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {3019, 410, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
     {3020, 412, varUINT8, "1"},        // CustomClassSettings.maxHits
     {3021, 413, varUINT8, "10"},        // CustomClassSettings.maxMGHits
-    {3022, 414, varBOOL, "FALSE"},        // SendTankID
+    {3022, 414, varBOOL, "0"},        // SendTankID
     {3023, 415, varUINT16, "1"},        // TankID
     {3024, 417, varUINT8, "0"},        // IR_Team
     {3211, 418, varUINT32, "115200"},        // USBSerialBaud
@@ -361,8 +361,9 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {3420, 449, varBOOL, "1"},        // HiFlashWithCannon
     {3421, 450, varBOOL, "0"},        // AuxFlashWithCannon
     {3422, 451, varUINT8, "30"},        // SecondMGLightBlink_mS
-    {9011, 452, varBOOL, "1"},        // PrintDebug
-    {9999, 453, varUINT32, "43589"}        // InitStamp
+    {3423, 452, varBOOL, "1"},        // CannonReloadBlink
+    {9011, 453, varBOOL, "1"},        // PrintDebug
+    {9999, 454, varUINT32, "43589"}        // InitStamp
 };
 
 

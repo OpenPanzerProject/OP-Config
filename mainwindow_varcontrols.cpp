@@ -117,8 +117,9 @@ void MainWindow::Variables_to_Controls(void)
     // Machine Guns blink rates
     ui->spinMGBlink_mS->setValue(DeviceData.MGLightBlink_mS);
     ui->spinSecondMGBlink_mS->setValue(DeviceData.SecondMGLightBlink_mS);
-    // Blink lights when radio signal lost
+    // Blink lights when radio signal lost, Apple blink
     ui->chkBlinkSignalLost->setChecked(DeviceData.FlashLightsWhenSignalLost);
+    ui->chkReloadBlink->setChecked(DeviceData.CannonReloadBlink);
     // High Intensity Flash Unit
     ui->chkHiFlashWithCannon->setChecked(DeviceData.HiFlashWithCannon);
     SetHiFlashAuto(ui->chkHiFlashWithCannon->isChecked());
@@ -377,8 +378,9 @@ void MainWindow::Controls_to_Variables(void)
     // Machine Guns blink rates
     DeviceData.MGLightBlink_mS = ui->spinMGBlink_mS->value();
     DeviceData.SecondMGLightBlink_mS = ui->spinSecondMGBlink_mS->value();
-    // Blink lights if radio signal lost
+    // Blink lights if radio signal lost, Apple blink
     DeviceData.FlashLightsWhenSignalLost = ui->chkBlinkSignalLost->isChecked();
+    DeviceData.CannonReloadBlink = ui->chkReloadBlink->isChecked();
     // Aux Output Settings
     DeviceData.AuxLightFlashTime_mS = ui->spinAuxFlash_mS->value();
     DeviceData.AuxLightBlinkOnTime_mS = ui->spinAuxBlinkOn_mS->value();

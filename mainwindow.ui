@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>2</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -7207,7 +7207,7 @@ QSizeGrip {
                   <x>10</x>
                   <y>280</y>
                   <width>341</width>
-                  <height>81</height>
+                  <height>121</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -7306,12 +7306,43 @@ QSizeGrip {
                   <string/>
                  </property>
                 </widget>
+                <widget class="QCheckBox" name="chkReloadBlink">
+                 <property name="geometry">
+                  <rect>
+                   <x>250</x>
+                   <y>81</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_165">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>80</y>
+                   <width>221</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Blink Apple when cannon reloaded</string>
+                 </property>
+                </widget>
                </widget>
                <widget class="FrameContent" name="frmHiFlash">
                 <property name="geometry">
                  <rect>
                   <x>10</x>
-                  <y>370</y>
+                  <y>410</y>
                   <width>341</width>
                   <height>81</height>
                  </rect>

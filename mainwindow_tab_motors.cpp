@@ -295,36 +295,80 @@ void MainWindow::ValidateMotorSelections()
     // Also depending on what *wasn't* selected, it may be possible to use the onboard Motor A or B output
     // as a general purpose ESC. First, remove and then add so they will be next to each other (if both are available):
     ui->cboSelectFunction->RemoveSF(SF_MOTOR_A);
+    ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_ON);
+    ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_TOGGLE);
     ui->cboSelectFunction->RemoveSF(SF_MOTOR_B);
+    ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_ON);
+    ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_TOGGLE);
     ui->cboSelectFunction->AddSF(SF_MOTOR_A);
+    ui->cboSelectFunction->AddSF(SF_MOTOR_A_ON);
+    ui->cboSelectFunction->AddSF(SF_MOTOR_A_OFF);
+    ui->cboSelectFunction->AddSF(SF_MOTOR_A_TOGGLE);
     ui->cboSelectFunction->AddSF(SF_MOTOR_B);
+    ui->cboSelectFunction->AddSF(SF_MOTOR_B_ON);
+    ui->cboSelectFunction->AddSF(SF_MOTOR_B_OFF);
+    ui->cboSelectFunction->AddSF(SF_MOTOR_B_TOGGLE);
     // Now remove either one if they should not be there
     if (ui->cboTurretRotationMotor->isOnboard())
     {
         ui->cboSelectFunction->RemoveSF(SF_MOTOR_A);
-        if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A))
+        ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_ON);
+        ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_OFF);
+        ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_TOGGLE);
+        if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A)     |
+            FT_TableModel->removeFunctionFromList(SF_MOTOR_A_ON)  |
+            FT_TableModel->removeFunctionFromList(SF_MOTOR_A_OFF) |
+            FT_TableModel->removeFunctionFromList(SF_MOTOR_A_TOGGLE))
             RemovedFunctionTriggersMsgBox();
     }
     if (ui->cboTurretElevationMotor->isOnboard())
     {
         ui->cboSelectFunction->RemoveSF(SF_MOTOR_B);
-        if (FT_TableModel->removeFunctionFromList(SF_MOTOR_B))
+        ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_ON);
+        ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_OFF);
+        ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_TOGGLE);
+        if (FT_TableModel->removeFunctionFromList(SF_MOTOR_B)     |
+            FT_TableModel->removeFunctionFromList(SF_MOTOR_B_ON)  |
+            FT_TableModel->removeFunctionFromList(SF_MOTOR_B_OFF) |
+            FT_TableModel->removeFunctionFromList(SF_MOTOR_B_TOGGLE))
             RemovedFunctionTriggersMsgBox();
     }
     if (ui->cboDriveMotors->isOnboard())
     {
         if (ui->cboDriveType->currentData() == DT_CAR)
         {   // In the case of a car only Motor A is taken
-            if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A))
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_ON);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_OFF);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_TOGGLE);
+            if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A)     |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_A_ON)  |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_A_OFF) |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_A_TOGGLE))
                 RemovedFunctionTriggersMsgBox();
         }
         else
         {
             // Drive type is Tank or Halftrack or DKLM - remove both onboard drivers
             ui->cboSelectFunction->RemoveSF(SF_MOTOR_A);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_ON);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_OFF);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_A_TOGGLE);
             ui->cboSelectFunction->RemoveSF(SF_MOTOR_B);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_ON);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_OFF);
+            ui->cboSelectFunction->RemoveSF(SF_MOTOR_B_TOGGLE);
             // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
-            if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A) | FT_TableModel->removeFunctionFromList(SF_MOTOR_B))
+            if (FT_TableModel->removeFunctionFromList(SF_MOTOR_A)     |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_A_ON)  |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_A_OFF) |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_A_TOGGLE) |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_B)     |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_B_ON)  |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_B_OFF) |
+                FT_TableModel->removeFunctionFromList(SF_MOTOR_B_TOGGLE))
                 RemovedFunctionTriggersMsgBox();
         }
     }

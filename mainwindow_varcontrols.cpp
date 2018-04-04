@@ -279,6 +279,8 @@ void MainWindow::Variables_to_Controls(void)
     // Other enables
     ui->chkEnableHeadlightSound->setChecked(DeviceData.HeadlightSound_Enabled);
     ShowHideHeadlightSoundNote(ui->chkEnableHeadlightSound->isChecked());
+    ui->chkEnableHeadlight2Sound->setChecked(DeviceData.HeadlightSound2_Enabled);
+    ShowHideHeadlight2SoundNote(ui->chkEnableHeadlight2Sound->isChecked());
     ui->chkEnableTurretSound->setChecked(DeviceData.TurretSound_Enabled);
     ui->chkEnableBarrelSound->setChecked(DeviceData.BarrelSound_Enabled);
     // Final step
@@ -515,6 +517,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.VolumeEffects = ui->sliderEffectsVolume->value();
     // Other enables
     DeviceData.HeadlightSound_Enabled = ui->chkEnableHeadlightSound->isChecked();
+    DeviceData.HeadlightSound2_Enabled = ui->chkEnableHeadlight2Sound->isChecked();
     DeviceData.TurretSound_Enabled = ui->chkEnableTurretSound->isChecked();
     DeviceData.BarrelSound_Enabled = ui->chkEnableBarrelSound->isChecked();
 

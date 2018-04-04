@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>6</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -10585,7 +10585,7 @@ gearboxes by dragging inner track during turns:</string>
                  <rect>
                   <x>430</x>
                   <y>180</y>
-                  <width>121</width>
+                  <width>181</width>
                   <height>61</height>
                  </rect>
                 </property>
@@ -10604,8 +10604,8 @@ gearboxes by dragging inner track during turns:</string>
                    <rect>
                     <x>10</x>
                     <y>10</y>
-                    <width>171</width>
-                    <height>141</height>
+                    <width>141</width>
+                    <height>41</height>
                    </rect>
                   </property>
                   <property name="frameShape">
@@ -10635,7 +10635,7 @@ gearboxes by dragging inner track during turns:</string>
                    <rect>
                     <x>10</x>
                     <y>10</y>
-                    <width>91</width>
+                    <width>141</width>
                     <height>41</height>
                    </rect>
                   </property>
@@ -10667,7 +10667,7 @@ gearboxes by dragging inner track during turns:</string>
                   <x>10</x>
                   <y>0</y>
                   <width>411</width>
-                  <height>221</height>
+                  <height>241</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -10755,7 +10755,7 @@ gearboxes by dragging inner track during turns:</string>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Enable headlight sound</string>
+                  <string>Enable Light 1 sound</string>
                  </property>
                 </widget>
                 <widget class="QCheckBox" name="chkEnableTurretSound">
@@ -10799,7 +10799,7 @@ gearboxes by dragging inner track during turns:</string>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Plug headlights into &quot;L1&quot; port</string>
+                  <string>Plug lights into &quot;L1&quot; port</string>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_310">
@@ -10885,6 +10885,55 @@ gearboxes by dragging inner track during turns:</string>
                  </property>
                  <property name="text">
                   <string>Enable barrel sound</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblHeadlight2Sound">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>210</y>
+                   <width>151</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Enable Light 2 sound</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkEnableHeadlight2Sound">
+                 <property name="geometry">
+                  <rect>
+                   <x>180</x>
+                   <y>213</y>
+                   <width>16</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblHeadlight2SoundNote">
+                 <property name="geometry">
+                  <rect>
+                   <x>220</x>
+                   <y>210</y>
+                   <width>181</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Plug lights into &quot;L2&quot; port</string>
                  </property>
                 </widget>
                </widget>
@@ -11140,7 +11189,7 @@ gearboxes by dragging inner track during turns:</string>
                 <property name="geometry">
                  <rect>
                   <x>10</x>
-                  <y>230</y>
+                  <y>260</y>
                   <width>411</width>
                   <height>331</height>
                  </rect>

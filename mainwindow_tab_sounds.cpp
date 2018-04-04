@@ -21,6 +21,7 @@ void MainWindow::SetupControls_SoundTab(void)
     // Connect Signals and Slots
     // If we disable neutral turns, no need to allow a neutral turn percent speed
     connect(ui->chkEnableHeadlightSound, SIGNAL(clicked(bool)), this, SLOT(ShowHideHeadlightSoundNote(bool)));
+    connect(ui->chkEnableHeadlight2Sound, SIGNAL(clicked(bool)), this, SLOT(ShowHideHeadlight2SoundNote(bool)));
     // If we disable one of the squeaks, we also disable the min/max settings for that squeak
     connect(ui->chkEnableSqueak1, SIGNAL(clicked(bool)), this, SLOT(ShowHideSqueak1Settings(bool)));
     connect(ui->chkEnableSqueak2, SIGNAL(clicked(bool)), this, SLOT(ShowHideSqueak2Settings(bool)));
@@ -91,6 +92,8 @@ void MainWindow::ShowHideSoundCardSettings()
             SqueakSettingsMoveUp();
             // Enable headlight option
             EnableHeadlightSoundSetting();
+            // But not Light 2
+            DisableHeadlight2SoundSetting();
             // Enable turret sound settings
             EnableTurretSoundSettings();
             break;
@@ -107,6 +110,7 @@ void MainWindow::ShowHideSoundCardSettings()
             DisableMinSqueakSpeed();
             // Disable and hide headlight option
             DisableHeadlightSoundSetting();
+            DisableHeadlight2SoundSetting();
             // Disable turret sound settings
             DisableTurretSoundSettings();
             break;
@@ -127,8 +131,9 @@ void MainWindow::ShowHideSoundCardSettings()
             EnableSqueaks4_6();
             EnableMinSqueakSpeed();
             SqueakSettingsMoveDown();
-            // Enable headlight option
+            // Enable all headlight options
             EnableHeadlightSoundSetting();
+            EnableHeadlight2SoundSetting();
             // Enable turret sound settings
             EnableTurretSoundSettings();
             break;
@@ -144,8 +149,9 @@ void MainWindow::ShowHideSoundCardSettings()
             DisableSqueaks1_3();
             DisableSqueaks4_6();
             DisableMinSqueakSpeed();
-            // Disable and hide headlight option
+            // Disable and hide headlight options
             DisableHeadlightSoundSetting();
+            DisableHeadlight2SoundSetting();
             // Enable turret sound settings
             EnableTurretSoundSettings();
             break;
@@ -204,6 +210,30 @@ void MainWindow::ShowHideHeadlightSoundNote(bool isChecked)
 {
     if (isChecked) ui->lblHeadlightSoundNote->show();
     else ui->lblHeadlightSoundNote->hide();
+}
+void MainWindow::EnableHeadlight2SoundSetting()
+{
+    // Enable headlight 2 sound option
+    ui->chkEnableHeadlight2Sound->setEnabled(true);
+    ui->chkEnableHeadlight2Sound->setChecked(DeviceData.HeadlightSound2_Enabled);
+    // Show
+    ui->lblHeadlight2Sound->show();
+    ui->chkEnableHeadlight2Sound->show();
+    ShowHideHeadlight2SoundNote(ui->chkEnableHeadlight2Sound->isChecked());
+}
+void MainWindow::DisableHeadlight2SoundSetting()
+{
+    ui->chkEnableHeadlight2Sound->setChecked(false);
+    ui->chkEnableHeadlight2Sound->setEnabled(false);
+    // Hide all
+    ui->lblHeadlight2Sound->hide();
+    ui->chkEnableHeadlight2Sound->hide();
+    ui->lblHeadlight2SoundNote->hide();
+}
+void MainWindow::ShowHideHeadlight2SoundNote(bool isChecked)
+{
+    if (isChecked) ui->lblHeadlight2SoundNote->show();
+    else ui->lblHeadlight2SoundNote->hide();
 }
 
 void MainWindow::RemoveVolumeFunctionsStep()

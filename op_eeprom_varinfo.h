@@ -9,7 +9,7 @@
 //=======================================================================================================================================>>
 // You must make sure this number equals the number of variables defined in the __eeprom_data struct (including the first var FirstVar)
 //
-    #define NUM_STORED_VARS			315
+    #define NUM_STORED_VARS			316
 
 //
 // The definition above, as well as the PROGMEM array below, can be generated from the Excel reference sheet
@@ -329,41 +329,42 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {2834, 398, varUINT8, "50"},        // VolumeEngine
     {2835, 399, varUINT8, "50"},        // VolumeTrackOverlay
     {2836, 400, varUINT8, "50"},        // VolumeEffects
-    {3011, 401, varUINT8, "1"},        // IR_FireProtocol
-    {3012, 402, varUINT8, "0"},        // IR_HitProtocol_2
-    {3013, 403, varUINT8, "10"},        // IR_RepairProtocol
-    {3014, 404, varUINT8, "0"},        // IR_MGProtocol
-    {3015, 405, varBOOL, "0"},        // Use_MG_Protocol
-    {3016, 406, varBOOL, "0"},        // Accept_MG_Damage
-    {3017, 407, varUINT8, "0"},        // DamageProfile
-    {3018, 408, varUINT16, "1500"},        // CustomClassSettings.reloadTime
-    {3019, 410, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
-    {3020, 412, varUINT8, "1"},        // CustomClassSettings.maxHits
-    {3021, 413, varUINT8, "10"},        // CustomClassSettings.maxMGHits
-    {3022, 414, varBOOL, "0"},        // SendTankID
-    {3023, 415, varUINT16, "1"},        // TankID
-    {3024, 417, varUINT8, "0"},        // IR_Team
-    {3211, 418, varUINT32, "115200"},        // USBSerialBaud
-    {3212, 422, varUINT32, "115200"},        // AuxSerialBaud
-    {3213, 426, varUINT32, "38400"},        // MotorSerialBaud
-    {3214, 430, varUINT32, "38400"},        // Serial3TxBaud
-    {3215, 434, varBOOL, "0"},        // LVC_Enabled
-    {3216, 435, varUINT16, "6400"},        // LVC_Cutoff_mV
-    {3411, 437, varBOOL, "0"},        // RunningLightsAlwaysOn
-    {3412, 438, varUINT8, "30"},        // RunningLightsDimLevelPct
-    {3413, 439, varBOOL, "0"},        // BrakesAutoOnAtStop
-    {3414, 440, varUINT16, "30"},        // AuxLightFlashTime_mS
-    {3415, 442, varUINT16, "30"},        // AuxLightBlinkOnTime_mS
-    {3416, 444, varUINT16, "30"},        // AuxLightBlinkOffTime_mS
-    {3417, 446, varUINT8, "30"},        // AuxLightPresetDim
-    {3418, 447, varUINT8, "30"},        // MGLightBlink_mS
-    {3419, 448, varBOOL, "1"},        // FlashLightsWhenSignalLost
-    {3420, 449, varBOOL, "1"},        // HiFlashWithCannon
-    {3421, 450, varBOOL, "0"},        // AuxFlashWithCannon
-    {3422, 451, varUINT8, "30"},        // SecondMGLightBlink_mS
-    {3423, 452, varBOOL, "1"},        // CannonReloadBlink
-    {9011, 453, varBOOL, "1"},        // PrintDebug
-    {9999, 454, varUINT32, "43589"}        // InitStamp
+    {2837, 401, varBOOL, "0"},        // HeadlightSound2_Enabled
+    {3011, 402, varUINT8, "1"},        // IR_FireProtocol
+    {3012, 403, varUINT8, "0"},        // IR_HitProtocol_2
+    {3013, 404, varUINT8, "10"},        // IR_RepairProtocol
+    {3014, 405, varUINT8, "0"},        // IR_MGProtocol
+    {3015, 406, varBOOL, "0"},        // Use_MG_Protocol
+    {3016, 407, varBOOL, "0"},        // Accept_MG_Damage
+    {3017, 408, varUINT8, "0"},        // DamageProfile
+    {3018, 409, varUINT16, "1500"},        // CustomClassSettings.reloadTime
+    {3019, 411, varUINT16, "8000"},        // CustomClassSettings.recoveryTime
+    {3020, 413, varUINT8, "1"},        // CustomClassSettings.maxHits
+    {3021, 414, varUINT8, "10"},        // CustomClassSettings.maxMGHits
+    {3022, 415, varBOOL, "0"},        // SendTankID
+    {3023, 416, varUINT16, "1"},        // TankID
+    {3024, 418, varUINT8, "0"},        // IR_Team
+    {3211, 419, varUINT32, "115200"},        // USBSerialBaud
+    {3212, 423, varUINT32, "115200"},        // AuxSerialBaud
+    {3213, 427, varUINT32, "38400"},        // MotorSerialBaud
+    {3214, 431, varUINT32, "38400"},        // Serial3TxBaud
+    {3215, 435, varBOOL, "0"},        // LVC_Enabled
+    {3216, 436, varUINT16, "6400"},        // LVC_Cutoff_mV
+    {3411, 438, varBOOL, "0"},        // RunningLightsAlwaysOn
+    {3412, 439, varUINT8, "30"},        // RunningLightsDimLevelPct
+    {3413, 440, varBOOL, "0"},        // BrakesAutoOnAtStop
+    {3414, 441, varUINT16, "30"},        // AuxLightFlashTime_mS
+    {3415, 443, varUINT16, "30"},        // AuxLightBlinkOnTime_mS
+    {3416, 445, varUINT16, "30"},        // AuxLightBlinkOffTime_mS
+    {3417, 447, varUINT8, "30"},        // AuxLightPresetDim
+    {3418, 448, varUINT8, "30"},        // MGLightBlink_mS
+    {3419, 449, varBOOL, "1"},        // FlashLightsWhenSignalLost
+    {3420, 450, varBOOL, "1"},        // HiFlashWithCannon
+    {3421, 451, varBOOL, "0"},        // AuxFlashWithCannon
+    {3422, 452, varUINT8, "30"},        // SecondMGLightBlink_mS
+    {3423, 453, varBOOL, "1"},        // CannonReloadBlink
+    {9011, 454, varBOOL, "1"},        // PrintDebug
+    {9999, 455, varUINT32, "43589"}        // InitStamp
 };
 
 

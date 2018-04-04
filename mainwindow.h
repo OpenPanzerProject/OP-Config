@@ -284,6 +284,7 @@ private slots:
       // Sound tab
       void ShowHideSoundCardSettings();
       void ShowHideHeadlightSoundNote(bool);
+      void ShowHideHeadlight2SoundNote(bool);
       void ShowHideSqueak1Settings(bool);
       void ShowHideSqueak2Settings(bool);
       void ShowHideSqueak3Settings(bool);
@@ -427,6 +428,8 @@ private:
         void DisableTurretSoundSettings(void);
         void EnableHeadlightSoundSetting(void);
         void DisableHeadlightSoundSetting(void);
+        void EnableHeadlight2SoundSetting(void);
+        void DisableHeadlight2SoundSetting(void);
         void RemoveVolumeFunctionsStep(void);
         void AddSoundFunctionsOP(void);
         void RemoveSoundFunctionsTaigen(void);

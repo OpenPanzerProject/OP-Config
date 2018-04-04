@@ -169,7 +169,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 126;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 144;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -296,7 +296,25 @@ enum _special_function : byte {
     SF_MOTOR_A_TOGGLE   = 122,      // 122
     SF_MOTOR_B_ON       = 123,      // 123
     SF_MOTOR_B_OFF      = 124,      // 124
-    SF_MOTOR_B_TOGGLE   = 125       // 125
+    SF_MOTOR_B_TOGGLE   = 125,      // 125
+    SF_USER_SOUND7_ONCE = 126,      // 126  -- see also 35-40 for user sounds 1 & 2, 86-91 for user sounds 3 & 4, 103-108 for user sounds 5 & 6
+    SF_USER_SOUND7_RPT  = 127,      // 127  -- PEOPLE WANT SHIT TONS OF SOUNDS I GUESS
+    SF_USER_SOUND7_OFF  = 128,      // 128
+    SF_USER_SOUND8_ONCE = 129,      // 129
+    SF_USER_SOUND8_RPT  = 130,      // 130
+    SF_USER_SOUND8_OFF  = 131,      // 131
+    SF_USER_SOUND9_ONCE = 132,      // 132
+    SF_USER_SOUND9_RPT  = 133,      // 133
+    SF_USER_SOUND9_OFF  = 134,      // 134
+    SF_USER_SOUND10_ONCE= 135,      // 135
+    SF_USER_SOUND10_RPT = 136,      // 136
+    SF_USER_SOUND10_OFF = 137,      // 137
+    SF_USER_SOUND11_ONCE= 138,      // 138
+    SF_USER_SOUND11_RPT = 139,      // 139
+    SF_USER_SOUND11_OFF = 140,      // 140
+    SF_USER_SOUND12_ONCE= 141,      // 141
+    SF_USER_SOUND12_RPT = 142,      // 142
+    SF_USER_SOUND12_OFF = 143       // 143
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

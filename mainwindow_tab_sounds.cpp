@@ -243,6 +243,24 @@ void MainWindow::AddSoundFunctionsOP()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_SET_VOLUME);
@@ -266,6 +284,24 @@ void MainWindow::AddSoundFunctionsOP()
     ui->cboSelectFunction->AddSF(SF_USER_SOUND6_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND6_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND6_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND7_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND7_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND7_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND8_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND8_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND8_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND9_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND9_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND9_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND10_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND10_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND10_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND11_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND11_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND11_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND12_ONCE);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND12_RPT);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND12_OFF);
 }
 
 void MainWindow::RemoveSoundFunctionsTaigen()
@@ -295,6 +331,24 @@ void MainWindow::RemoveSoundFunctionsTaigen()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
@@ -320,7 +374,25 @@ void MainWindow::RemoveSoundFunctionsTaigen()
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND5_OFF)  |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_ONCE) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_RPT)  |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_OFF))
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND7_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND7_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND7_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND8_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND8_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND8_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND9_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND9_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND9_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND10_ONCE)|
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND10_RPT) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND10_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_ONCE)|
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_RPT) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_ONCE)|
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_RPT) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF))
         RemovedFunctionTriggersMsgBox();
 }
 void MainWindow::RemoveSoundFunctionsBenedini_Micro()
@@ -333,9 +405,28 @@ void MainWindow::RemoveSoundFunctionsBenedini_Mini()
 
     // Remove the analog volume adjustment function,
     // and also user sound functions 4-6 if instead those are being used for squeaks
+    // and always user sound functions 7+
     ui->cboSelectFunction->RemoveSF(SF_SET_VOLUME);
     ui->cboSelectFunction->RemoveSF(SF_OVERLAY_ENABLE);
     ui->cboSelectFunction->RemoveSF(SF_OVERLAY_DISABLE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
     if (ui->chkEnableSqueak1->isChecked())
     {
         ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
@@ -380,6 +471,25 @@ void MainWindow::RemoveSoundFunctionsBenedini_Mini()
             FT_TableModel->removeFunctionFromList(SF_USER_SOUND6_OFF))
             removed += 1;
     }
+    if (FT_TableModel->removeFunctionFromList(SF_USER_SOUND7_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND7_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND7_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND8_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND8_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND8_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND9_ONCE) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND9_RPT)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND9_OFF)  |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND10_ONCE)|
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND10_RPT) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND10_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_ONCE)|
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_RPT) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_ONCE)|
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_RPT) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF))
+        removed += 1;
 
     if (removed > 0) RemovedFunctionTriggersMsgBox();
 }
@@ -406,6 +516,24 @@ void MainWindow::AddSoundFunctionsBenedini_Mini()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND6_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND7_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND8_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND9_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND10_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND11_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_INCR_VOLUME);

@@ -19,6 +19,7 @@
 
 #define RADIO_SETTINGS_START_ID     1011    // Radio settings begin with this var ID
 #define RADIO_SETTINGS_END_ID       1294    // Radio settings will not exceed this var ID
+#define FUNCTION_TRIGGERS_START_ID  1411    // Function triggers begin with this var ID
 
 // Data types that we are using. Currently we have no need for floats
 typedef uint8_t _vartype;

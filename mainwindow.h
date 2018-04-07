@@ -485,6 +485,7 @@ private:
       uint16_t findStorageArrayPosition(uint16_t findID);
       void VarArray_to_Variables(void);             // These two functions are really the critical ones in terms of mapping all our variables to the VarArray
       void Variables_to_VarArray(void);             // Mess these up, and you are in trouble, as they are hard-coded.
+      void ConvertOldAuxChannels(void);             // Updates aux channel positions from old (0.92.22 and earlier) nomenclature to new
 
     // Variables to Controls and back
     // ---------------------------------------------------------------------------------------------------->>
@@ -532,6 +533,7 @@ private:
     // XML File Reading/Writing
     // ---------------------------------------------------------------------------------------------------->>
       QXmlStreamReader xmlReader;
+
 
 };
 

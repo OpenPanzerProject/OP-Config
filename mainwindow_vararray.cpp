@@ -157,7 +157,7 @@ void MainWindow::VarArray_to_Variables(void)
 
     // Special Function Triggers - 14xx
     int j = 0;
-    int startVal = 1411;
+    int startVal = FUNCTION_TRIGGERS_START_ID;  // 1411 - defined in op_eeprom_varinfo.h
     for (int i=0; i<MAX_FUNCTION_TRIGGERS; i++)
     {
         DeviceData.SF_Trigger[i].TriggerID = VarArray.value(startVal + j).toUInt();                                           // 14xx - Special Function trigger i
@@ -465,7 +465,7 @@ void MainWindow::Variables_to_VarArray(void)
 
     // Special Function Triggers - 14xx
     int j = 0;
-    int startVal = 1411;
+    int startVal = FUNCTION_TRIGGERS_START_ID;  // 1411 - defined in op_eeprom_varinfo.h
     for (int i=0; i<MAX_FUNCTION_TRIGGERS; i++)
     {
         VarArray.insert(startVal + j, QByteArray::number(DeviceData.SF_Trigger[i].TriggerID));           // 14xx - Special Function trigger i

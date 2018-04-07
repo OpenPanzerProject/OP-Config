@@ -358,33 +358,10 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
         TriggerDescription.append(" - ");
         if (sf_digital)
         {
-            // But we still need to append the position. Complicating matters is that the text description of the switch position
-            // depends on how many positions have been defined for that switch
-            // If for example the position is 5, and this is a 2-position switch, we want to actually display a description that says
-            // "Pos 2 (of 2)".
-
+            // But we still need to append the position.
             TriggerAction = getTriggerActionFromTriggerID(TriggerID);
             int numPositions = getNumPositionsFromTriggerID(TriggerID);
-
-            TriggerDescription.append("Pos ");
-            switch (numPositions)
-            {
-                case 2:
-                    // The only two valid positions in this case are really just 1 & 5, but
-                    // we split the difference at 3 for robustness
-                    if (TriggerAction <= 3) TriggerDescription.append("1 (of 2)");
-                    if (TriggerAction >  3) TriggerDescription.append("2 (of 2)");
-                    break;
-                case 3:
-                    // Again here the only valid positions are 1,3 and 5 but this works as well
-                    if (TriggerAction <  3) TriggerDescription.append("1 (of 3)");
-                    if (TriggerAction == 3) TriggerDescription.append("2 (of 3)");
-                    if (TriggerAction >  3) TriggerDescription.append("3 (of 3)");
-                    break;
-                case 5:
-                    TriggerDescription.append(QString("%1 (of 5)").arg(TriggerAction));
-                    break;
-            }
+            TriggerDescription.append(QString("Pos %1 (of %2)").arg(TriggerAction).arg(numPositions));
         }
         else
         {
@@ -483,20 +460,19 @@ uint8_t FunctionTriggerTableModel::getNumPositionsFromTriggerID(uint16_t Trigger
     if (TriggerID >= trigger_id_multiplier_ports && TriggerID < trigger_id_multiplier_auxchannel)
         return 2;
 
-    // Aux Channel switches - if digital, these can be 2, 3 or 5 position switches (for now)
+    // Aux Channel switches - if digital, these can be 2-6 position switches
     if (TriggerID >= trigger_id_multiplier_auxchannel)
     {
         // We will walk through an example as we calculate these values.
-        // Assume the Trigger ID is 4035
+        // Assume the Trigger ID is 4063
         // channelNum will equal 4 (Aux Channel 4)
         int channelNum = TriggerID / trigger_id_multiplier_auxchannel;
-        // NumPos_CurPos will equal 35. 3 is the number of positions the switch has, 5 is the trigger position number
-        // Recall that for a 3-position switch, the 3 possible positions are actually 1, 3, and 5
+        // NumPos_CurPos will equal 63. 6 is the number of positions the switch has, 3 is the trigger position number
         int NumPos_CurPos = TriggerID - (channelNum * trigger_id_multiplier_auxchannel);
-        // NumPositions will equal 3. This is the number of positions the switch is capable of
-        int NumPositions = NumPos_CurPos / switch_pos_multiplier;
+        // NumPositions will equal 6. This is the number of positions the switch is capable of
+        int NumPositions = NumPos_CurPos / switch_pos_multiplier;   // Drop the remainder
         return NumPositions;
-        // Trigger Action will equal 5, we don't need it in this function though
+        // Trigger Action will equal 3, we don't need it in this function though, see the next function getTriggerActionFromTriggerID
         // int TriggerAction = NumPos_CurPos - (NumPositions * switch_pos_multiplier);
     }
 
@@ -524,19 +500,18 @@ uint8_t FunctionTriggerTableModel::getTriggerActionFromTriggerID(uint16_t Trigge
         return TriggerAction;
     }
 
-    // Aux Channel switches - this is the tricky case that we have this function for in the first place
+    // Aux Channel switches
     if (TriggerID >= trigger_id_multiplier_auxchannel && TriggerID < trigger_id_adhoc_start)
     {
         // We will walk through an example as we calculate these values.
-        // Assume the Trigger ID is 4035
+        // Assume the Trigger ID is 4063
         // channelNum will equal 4 (Aux Channel 4)
         int channelNum = TriggerID / trigger_id_multiplier_auxchannel;
-        // NumPos_CurPos will equal 35. "3" is the number of positions the switch has, "5" is the trigger action we want.
-        // It is equal to "position 3" because for a three-position switcht, the three positions are actually defined as action 1,3,5
+        // NumPos_CurPos will equal 63. 6 is the number of positions the switch has, 3 is the trigger action we want.
         int NumPos_CurPos = TriggerID - (channelNum * trigger_id_multiplier_auxchannel);
-        // NumPositions will equal 3. This is the number of positions the switch is capable of
-        int NumPositions = NumPos_CurPos / switch_pos_multiplier;
-        // Trigger Action will equal 5
+        // NumPositions will equal 6. This is the number of positions the switch is capable of
+        int NumPositions = NumPos_CurPos / switch_pos_multiplier; // Drop remainder
+        // Trigger Action will equal 3
         TriggerAction = NumPos_CurPos - (NumPositions * switch_pos_multiplier);
         return TriggerAction;
     }

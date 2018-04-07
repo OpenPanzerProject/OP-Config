@@ -332,7 +332,7 @@ struct _functionTrigger {
 #define trigger_id_multiplier_ports         100         // External ports input trigger ID is defined as: (multipler_ports * port number) + 0/1 (off/on)
 
 #define trigger_id_multiplier_auxchannel    1000        // Aux channel trigger ID is defined as:
-                                                        // (multiplier_auxchannel * channel number) + (number of switch positions * switch_pos_multiplier) + switch position (1-5)
+                                                        // (multiplier_auxchannel * channel number) + (number of switch positions * switch_pos_multiplier) + switch position
 #define switch_pos_multiplier               10          // Move the number of switch positions to the tens slot
 
 #define trigger_id_adhoc_start              19000       // Trigger IDs for ad-hoc events. Range FROM trigger_id_adhoc_start TO (trigger_id_adhoc_start + trigger_id_adhoc_range - 1)
@@ -451,7 +451,8 @@ enum switch_positions : byte {
     SP_POS2,
     SP_POS3,
     SP_POS4,
-    SP_POS5
+    SP_POS5,
+    SP_POS6
 };
 struct aux_channel_settings{
     uint8_t channelNum;				// Which number are we in the PPM input stream
@@ -468,6 +469,38 @@ struct aux_channels {
     int16_t pulse;					// PPM pulse for this channel - if channel is analog input
     switch_positions switchPos;		// Current switch position, calculated from PPM pulse
     aux_channel_settings Settings;
+};
+
+#define RC_MULTISWITCH_START_POS    1000
+const int16_t MultiSwitch_MatchArray2[2] = {
+    1000,  // 0
+    2000   // 1
+};
+const int16_t MultiSwitch_MatchArray3[3] = {
+    1000,  // 0
+    1500,  // 1
+    2000   // 2
+};
+const int16_t MultiSwitch_MatchArray4[4] = {
+    1000,  // 0
+    1333,  // 1
+    1667,  // 2
+    1800   // 3
+};
+const int16_t MultiSwitch_MatchArray5[5] = {
+    1000,  // 0
+    1250,  // 1
+    1500,  // 2
+    1750,  // 3
+    1800   // 4
+};
+const int16_t MultiSwitch_MatchArray6[6] = {
+    1000,  // 0
+    1200,  // 1
+    1400,  // 2
+    1600,  // 3
+    1800,  // 4
+    2000   // 5
 };
 
 // Common channel settings

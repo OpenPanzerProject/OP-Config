@@ -88,7 +88,8 @@ void MainWindow::UpdateFunctionTriggerCount(int count)
 }
 
 void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
-{   // This gets triggered any time the user selects a special function from the drop down
+{   // This gets called any time the user selects a special function from the drop down,
+    // and shows them the list of Trigger sources available to assign to that function
 
     ui->cboTriggerSource->clear();
     ui->cboTriggerAction->clear();
@@ -189,7 +190,8 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
     ui->cboTriggerSource->setCurrentIndex(0);
 }
 void MainWindow::SetupTriggerActions(int)
-{   // This gets triggered any time the user selects a trigger source from the drop-down
+{   // This gets called any time the user selects a trigger source from the drop-down,
+    // and shows the actions/positions available for that trigger
 
     int numPositions = 0;
     ui->cboTriggerAction->clear();  // clear trigger actions to start
@@ -270,21 +272,35 @@ void MainWindow::SetupTriggerActions(int)
                 }
                 switch (numPositions)
                 {
-                    case 2: // 2 positions, with values 1/5
+                    case 2: // 2 positions
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
-                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
                         break;
-                    case 3: // 3 positions, with values 1/3/5
+                    case 3: // 3 positions
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
-                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS3);
-                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
                         break;
-                    case 5: // 5 positions, with values 1/2/3/4/5
+                    case 4: // 4 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        break;
+                    case 5: // 5 positions
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        break;
+                    case 6: // 6 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
                         break;
                 }
             }

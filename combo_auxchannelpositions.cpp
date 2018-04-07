@@ -5,13 +5,18 @@ AuxChannelPositionsCombo::AuxChannelPositionsCombo(QWidget *parent) : QComboBox(
     // Fill on creation
     this->insertItem(0, "2", 2);
     this->insertItem(1, "3", 3);
+//    this->insertItem(2, "4", 4);
+//    this->insertItem(3, "5", 5);
+    this->insertItem(4, "6", 6);
 
-    // We could also create more positions. 5 positions is already programmed on both the TCB side and in this
-    // program, though it doesn't make much sense for most radios.
-    // A 6-position switch might be more common (mix between a 2 and 3 position switch), and maybe an arbitrary number
-    // up to whatever for people who want to install multi-position rotary knobs...
+    // Switches with up to 6 positions are already defined in TCB firmware, and the number can be increased to any
+    // higher amount, although exceeding 3 positions doesn't make sense for most radios unless the user can
+    // do advaned programming or has installed a custom rotary knob. 6 positions are probably the common for these
+    // modifications (or the user can mix a 2 and 3 position switch).
 
-    //    this->insertItem(2, "5", 5);
+    // For now we hide positions 4 and 5 just to reduce clutter but they are available with no other change than
+    // simply uncommenting the lines above. If positions greater than 6 are desired new definitions will need to
+    // be created in TCB firmware, mainly in OP_Radio
 
     // Connect to my custom signal
     connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(AuxChannelPositionChangedSlot(QString)));

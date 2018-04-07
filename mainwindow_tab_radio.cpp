@@ -971,65 +971,71 @@ return lblText;
 }
 uint8_t MainWindow::calculateAuxSwitchPos(int16_t Pulse, uint8_t NumPositions, boolean Reversed)
 {
-// Up to 5 positions are defined for each switch.
-// Ranges:
-const int cutoff_4 = 1850;   // 2000 - 150  // Above cutoff_4 is Position 5 (Top)
-const int cutoff_3 = 1600;   // 1500 + 100  // Between cutoff_3 & 4 is Position 4
-const int cutoff_2 = 1400;   // 1500 - 100  // Between cutoff_2 & 3 is Position 3 (Middle)
-const int cutoff_1 = 1150;   // 1000 + 150  // Between cutoff_1 & 2 is Position 2
-// Below cutoff_1 is Position 1 (Bottom)
+    // Thanks to Rob Tillaart for the distance function
+    // http://forum.arduino.cc/index.php?topic=254836.0
 
-uint8_t pos = 1;
+    // This takes a pulse and returns the switch position with the
+    // nearest matching pulse
 
-    // Turn pulse into one of five possible positions
-    if (Pulse >= cutoff_4)
+    uint8_t pos = 0;
+    int d = 9999;
+    int distance = abs(RC_MULTISWITCH_START_POS - Pulse);
+
+    for (int i = 1; i < NumPositions; i++)
     {
-        pos = 5;
+        switch (NumPositions)
+        {
+            case 2: d = abs(MultiSwitch_MatchArray2[i] - Pulse);   break;
+            case 3: d = abs(MultiSwitch_MatchArray3[i] - Pulse);   break;
+            case 4: d = abs(MultiSwitch_MatchArray4[i] - Pulse);   break;
+            case 5: d = abs(MultiSwitch_MatchArray5[i] - Pulse);   break;
+            case 6: d = abs(MultiSwitch_MatchArray6[i] - Pulse);   break;
+        }
+
+        if (d < distance)
+        {
+            pos = i;
+            distance = d;
+        }
     }
-    else if ((Pulse > cutoff_3) && (Pulse < cutoff_4))
-    {
-        pos = 4;
-    }
-    else if ((Pulse >= cutoff_2) && (Pulse <= cutoff_3))
-    {
-        pos = 3;
-    }
-    else if ((Pulse < cutoff_2) && (Pulse > cutoff_1))
-    {
-        pos = 2;
-    }
-    else
-    {
-        pos = 1;
-    }
+
+    // Add 1 to POS because from here we don't want zero-based
+    pos += 1;
 
     // Swap positions if channel is reversed.
     if (Reversed)
     {
-        if      (pos == 1) pos = 5;
-        else if (pos == 2) pos = 4;
-        else if (pos == 4) pos = 2;
-        else if (pos == 5) pos = 1;
-    }
-
-    // But now, convert this position to a number that makes sense to the user. For example, if this is a 2-position switch,
-    // the two actual switch positions will be 1 and 5. But instead show the user 1 and 2.
-    switch (NumPositions)
-    {
-        case 2:
-            if (pos <= 3) pos = 1;
-            else pos = 2;
-            break;
-
-        case 3:
-            if (pos < 3) pos = 1;
-            else if (pos >3) pos = 3;
-            else pos = 2;
-            break;
-
-        case 5:
-        default:
-            pos = pos;  // Do nothing
+        switch (NumPositions)
+        {
+            case 2:
+                if (pos == 1) pos = 2;
+                else pos = 1;
+                break;
+            case 3:
+                if (pos == 1) pos = 3;
+                else if (pos == 3) pos = 1;
+                break;
+            case 4:
+                if (pos == 1) pos = 4;
+                else if (pos == 2) pos = 3;
+                else if (pos == 3) pos = 2;
+                else if (pos == 4) pos = 1;
+                break;
+            case 5:
+                if (pos == 1) pos = 5;
+                else if (pos == 2) pos = 4;
+                else if (pos == 4) pos = 2;
+                else if (pos == 5) pos = 1;
+                break;
+            case 6:
+                if (pos == 1) pos = 6;
+                else if (pos == 2) pos = 5;
+                else if (pos == 3) pos = 4;
+                else if (pos == 4) pos = 3;
+                else if (pos == 5) pos = 2;
+                else if (pos == 6) pos = 1;
+                break;
+        }
     }
 
     return pos;

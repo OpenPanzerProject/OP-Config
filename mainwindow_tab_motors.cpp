@@ -22,7 +22,7 @@ void MainWindow::SetupControls_MotorTab(void)
 
     // Smoker control combo
     ui->cboSmokerControl->insertItem(0, "Auto (with engine speed)", true);
-    ui->cboSmokerControl->insertItem(1, "Manual (with analog function trigger)", false);
+    ui->cboSmokerControl->insertItem(1, "Manual (with function triggers)", false);
     ui->cboSmokerControl->setCurrentIndex(0);
     connect(ui->cboSmokerControl, SIGNAL(currentIndexChanged(int)), this, SLOT(ShowHideSmokerSettings()));
 

@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>3</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -13596,14 +13596,20 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <header location="global">helpbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>DriveTypeComboBox</class>
-   <extends>QComboBox</extends>
-   <header location="global">combo_drivetype.h</header>
-  </customwidget>
-  <customwidget>
    <class>BaudRateComboBox</class>
    <extends>QComboBox</extends>
    <header location="global">combo_baudrates.h</header>
+  </customwidget>
+  <customwidget>
+   <class>FrameContent</class>
+   <extends>QFrame</extends>
+   <header location="global">framecontent.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DriveTypeComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">combo_drivetype.h</header>
   </customwidget>
   <customwidget>
    <class>ChannelOrderComboBox</class>
@@ -13654,12 +13660,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <class>DamageProfileComboBox</class>
    <extends>QComboBox</extends>
    <header location="global">combo_damageprofile.h</header>
-  </customwidget>
-  <customwidget>
-   <class>FrameContent</class>
-   <extends>QFrame</extends>
-   <header location="global">framecontent.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>MGProtocolComboBox</class>

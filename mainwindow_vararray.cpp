@@ -180,6 +180,11 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.TurretRotation_EPMax = VarArray.value(1817).toInt();                         // 1817 - Turret rotation end-point maximum
     DeviceData.TurretRotation_Reversed = VarArray.value(1818).toUInt();                     // 1818 - Turret rotation motor reversed
 
+    // Steering Servo settings - 19xx
+    DeviceData.SteeringServo_EPMin = VarArray.value(1911).toInt();                          // 1911 - Steering servo end-point minimum
+    DeviceData.SteeringServo_EPMax = VarArray.value(1912).toInt();                          // 1912 - Steering servo end-point maximum
+    DeviceData.SteeringServo_Reversed = VarArray.value(1913).toUInt();                      // 1913 - Steering servo reversed
+
     // Mechanical Barrel and Recoil Servo settings - 20xx
     DeviceData.Airsoft = VarArray.value(2011).toUInt();                                     // 2011 - Airsoft true/false
     DeviceData.MechanicalBarrelWithCannon = VarArray.value(2012).toUInt();                  // 2012 - Link mechanical barrel to cannon fire
@@ -487,6 +492,11 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(1816, QByteArray::number(DeviceData.TurretRotation_EPMin));                     // 1816 - Turret rotation end-point minimum
     VarArray.insert(1817, QByteArray::number(DeviceData.TurretRotation_EPMax));                     // 1817 - Turret rotation end-point maximum
     VarArray.insert(1818, QByteArray::number(DeviceData.TurretRotation_Reversed));                  // 1818 - Turret rotation motor reversed
+
+    // Steering Servo settings - 19xx
+    VarArray.insert(1911, QByteArray::number(DeviceData.SteeringServo_EPMin));                      // 1911 - Steering servo end-point minimum
+    VarArray.insert(1912, QByteArray::number(DeviceData.SteeringServo_EPMax));                      // 1912 - Steering servo end-point maximum
+    VarArray.insert(1913, QByteArray::number(DeviceData.SteeringServo_Reversed));                   // 1913 - Steering servo reversed
 
     // Mechanical Barrel and Recoil Servo settings - 20xx
     VarArray.insert(2011, QByteArray::number(DeviceData.Airsoft));                                  // 2011 - Airsoft true/false

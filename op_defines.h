@@ -67,7 +67,7 @@ typedef char IRTYPES;
 #define IR_TAMIYA_2SHOT		2		// Tamiya 2-shot kill code
 #define IR_TAMIYA_35   		3
 #define IR_HENGLONG    		4
-#define IR_TAIGEN	   		5
+#define IR_TAIGEN_V1   		5       // Taigen V1
 #define IR_FOV 	       		6		// No longer being sold. Imex/Taigen is going to re-issue them but it's still not clear if they will keep the same protocol
 #define IR_VSTANK      		7
 #define IR_OPENPANZER  		8		// Not yet implemented. For future custom IR codes.
@@ -77,6 +77,7 @@ typedef char IRTYPES;
 #define IR_MG_CLARK			12		// Machine gun: Clark protocol (Sony)
 #define IR_MG_RCTA			13		// Machine gun: RCTA protocol
 #define IR_SONY				14		// For general purpose Sony codes
+#define IR_TAIGEN           15      // Taigen V2/V3
 
 typedef char IRTEAMS;
 #define IR_TEAM_NONE           0

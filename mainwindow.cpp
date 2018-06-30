@@ -715,8 +715,11 @@ void MainWindow::initActionsConnections()
 {
     // File Menu
     ui->actionOpenFile->setEnabled(true);
+    ui->actionOpenFile->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     ui->actionSaveFile->setEnabled(true);
+    ui->actionSaveFile->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     ui->actionExit->setEnabled(true);
+    ui->actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
     connect(ui->actionOpenFile, SIGNAL(triggered()), this, SLOT(actionReadSettingsFromFile()));
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(writeSettingsToFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
@@ -729,9 +732,13 @@ void MainWindow::initActionsConnections()
 
     // Device Menu
     ui->actionConnect->setEnabled(true);
+    ui->actionConnect->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
     ui->actionDisconnect->setEnabled(false);
+    ui->actionDisconnect->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
     ui->actionRead->setEnabled(false);      // Can't read or write until connected
+    ui->actionRead->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
     ui->actionWrite->setEnabled(false);     //
+    ui->actionWrite->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_W));
     connect(ui->actionConnect, SIGNAL(triggered()), this, SLOT(connectToDevice()));
     connect(ui->actionDisconnect, SIGNAL(triggered()), this, SLOT(disconnectFromDevice()));
     connect(ui->actionRead, SIGNAL(triggered()), this, SLOT(readSettingsFromDevice()));

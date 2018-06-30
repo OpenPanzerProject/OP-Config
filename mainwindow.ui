@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -13463,8 +13463,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <widget class="QMenu" name="menuDevice">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>414</x>
+      <y>134</y>
       <width>202</width>
       <height>137</height>
      </rect>
@@ -13528,6 +13528,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <pointsize>8</pointsize>
     </font>
    </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
   </action>
   <action name="actionSaveFile">
    <property name="text">
@@ -13536,30 +13539,48 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <property name="toolTip">
     <string>Save Settings to OPZ File</string>
    </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
   </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionWrite">
    <property name="text">
     <string>Write Settings to Device</string>
    </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
   </action>
   <action name="actionRead">
    <property name="text">
     <string>Read Settings from Device</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionConnect">
    <property name="text">
     <string>Connect</string>
    </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
   </action>
   <action name="actionDisconnect">
    <property name="text">
     <string>Disconnect</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionHelp_Contents">

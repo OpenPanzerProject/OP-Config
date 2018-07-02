@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>8</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -12363,7 +12363,7 @@ gearboxes by dragging inner track during turns:</string>
                 <property name="geometry">
                  <rect>
                   <x>360</x>
-                  <y>120</y>
+                  <y>230</y>
                   <width>341</width>
                   <height>121</height>
                  </rect>
@@ -12512,7 +12512,7 @@ gearboxes by dragging inner track during turns:</string>
                 <property name="geometry">
                  <rect>
                   <x>360</x>
-                  <y>0</y>
+                  <y>110</y>
                   <width>341</width>
                   <height>111</height>
                  </rect>
@@ -12632,8 +12632,8 @@ gearboxes by dragging inner track during turns:</string>
                <widget class="FrameContent" name="frmIMU">
                 <property name="geometry">
                  <rect>
-                  <x>360</x>
-                  <y>250</y>
+                  <x>10</x>
+                  <y>410</y>
                   <width>391</width>
                   <height>181</height>
                  </rect>
@@ -12885,6 +12885,154 @@ gearboxes by dragging inner track during turns:</string>
                  </property>
                 </widget>
                </widget>
+               <widget class="FrameContent" name="frmScout">
+                <property name="geometry">
+                 <rect>
+                  <x>360</x>
+                  <y>0</y>
+                  <width>341</width>
+                  <height>101</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_43">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>341</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_166">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>291</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>MS Shell Dlg 2</family>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Scout ESC Current Limit</string>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbScoutSettings">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSetSabertoothBaud_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>50</y>
+                   <width>161</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Set Scout current limit to:</string>
+                 </property>
+                </widget>
+                <widget class="QDoubleSpinBox" name="spinScoutCurrent">
+                 <property name="geometry">
+                  <rect>
+                   <x>190</x>
+                   <y>50</y>
+                   <width>51</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>30.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>12.000000000000000</double>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSetSabertoothBaud_3">
+                 <property name="geometry">
+                  <rect>
+                   <x>260</x>
+                   <y>50</y>
+                   <width>41</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Amps</string>
+                 </property>
+                </widget>
+               </widget>
               </widget>
               <widget class="QWidget" name="pgFirmware">
                <widget class="FrameContent" name="frmFlash">
@@ -12976,9 +13124,9 @@ gearboxes by dragging inner track during turns:</string>
                 <widget class="QLabel" name="label_140">
                  <property name="geometry">
                   <rect>
-                   <x>10</x>
+                   <x>6</x>
                    <y>40</y>
-                   <width>111</width>
+                   <width>91</width>
                    <height>21</height>
                   </rect>
                  </property>
@@ -12988,7 +13136,7 @@ gearboxes by dragging inner track during turns:</string>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Select Hex File for:</string>
+                  <string>Use Hex file for</string>
                  </property>
                 </widget>
                 <widget class="QPushButton" name="cmdFlashHex">
@@ -13073,9 +13221,9 @@ gearboxes by dragging inner track during turns:</string>
                 <widget class="DeviceComboBox" name="cboFlashDevice">
                  <property name="geometry">
                   <rect>
-                   <x>130</x>
+                   <x>100</x>
                    <y>40</y>
-                   <width>101</width>
+                   <width>131</width>
                    <height>22</height>
                   </rect>
                  </property>

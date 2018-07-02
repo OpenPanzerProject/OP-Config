@@ -123,6 +123,7 @@ QString versionfile;
         {
             case DEVICE_TCB:          versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
             case DEVICE_SCOUT:        versionfile = LATEST_RELEASE_VERSION_URL_SCOUT;       break;
+            case DEVICE_SCOUT_R10:    versionfile = LATEST_RELEASE_VERSION_URL_SCOUT_R10;   break;
             case DEVICE_TEENSYSOUND:  versionfile = LATEST_RELEASE_VERSION_URL_TEENSYSOUND; break;
         }
         VersionDownloader->startDownload(versionfile);
@@ -183,6 +184,7 @@ void MainWindow::checkHexVersion()
     {
         case DEVICE_TCB:          hexfile = LATEST_RELEASE_HEX_URL_TCB;         break;
         case DEVICE_SCOUT:        hexfile = LATEST_RELEASE_HEX_URL_SCOUT;       break;
+        case DEVICE_SCOUT_R10:    hexfile = LATEST_RELEASE_HEX_URL_SCOUT_R10;   break;
         case DEVICE_TEENSYSOUND:  hexfile = LATEST_RELEASE_HEX_URL_TEENSYSOUND; break;
     }
     HexDownloader->startDownload(hexfile);
@@ -201,6 +203,7 @@ void MainWindow::SaveWebHexToLocal()
     {
         case DEVICE_TCB:          hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);    break;
         case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);   break;
+        case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion); break;
         case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);   break;
     }
     //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
@@ -503,6 +506,7 @@ QString hex;
         // These two are ATmega devices and we will use AVRDUDE to flash
         case DEVICE_TCB:
         case DEVICE_SCOUT:
+        case DEVICE_SCOUT_R10:
             {
             // Construct our AVRDUDE executable and list of arguments.
             // Don't put any spaces in the argument list, or it won't work.
@@ -517,7 +521,7 @@ QString hex;
                                                        //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
                 flagBaud =           "-b115200";       // -b baud - hardcoded to 115,200
             }
-            else
+            else    // Scouts
             {
                 flagPart =           "-patmega328p";   // -p part - Scout uses an ATmega328p
                 flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
@@ -604,6 +608,7 @@ void MainWindow::flashFinished()
     {
         case DEVICE_TCB:
         case DEVICE_SCOUT:
+        case DEVICE_SCOUT_R10:
             //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
             if (AVRDUDEProcess->exitCode() == 0)
             {
@@ -677,6 +682,7 @@ void MainWindow::readyReadStandardOutput()
     {
         case DEVICE_TCB:
         case DEVICE_SCOUT:
+        case DEVICE_SCOUT_R10:
             // Append output to our string
             strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
 

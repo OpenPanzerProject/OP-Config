@@ -190,15 +190,6 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinNeutralTurnSpeed->setValue(DeviceData.NeutralTurnPct);
     ui->spinHalftrackTurnPct->setValue(DeviceData.HalftrackTreadTurnPct);
     ShowHideNeutralTurnAllowed(ui->cboDriveType->currentIndex());
-    // Accelerometer
-    ui->chkEnableBarrel->setChecked(DeviceData.EnableBarrelStabilize);
-    ui->spinBarrelSensitivity->setValue(DeviceData.BarrelSensitivity);
-    ui->chkEnableHills->setChecked(DeviceData.EnableHillPhysics);
-    ui->spinHillSensitivity->setValue(DeviceData.HillSensitivity);
-    ShowHideBarrelSensitivity(ui->chkEnableBarrel->isChecked());
-    ShowHideHillSensitivity(ui->chkEnableHills->isChecked());
-    if (DeviceData.TurretElevationMotor == SERVO_PAN) ShowHideBarrelStabilization(true);
-    else ShowHideBarrelStabilization(false);
     // Track recoil
     ui->chkEnableTrackRecoil->setChecked(DeviceData.EnableTrackRecoil);
     ui->spinKickbackSpeed->setValue(DeviceData.TrackRecoilKickbackSpeed);
@@ -298,6 +289,17 @@ void MainWindow::Variables_to_Controls(void)
     double LVC = DeviceData.LVC_Cutoff_mV;  // We need to convert mV to Volts with 1-decimal precision
     LVC /= 1000;
     ui->dspinLVCVoltage->setValue(LVC);
+    // Scout current limit
+    ui->spinScoutCurrent->setValue(DeviceData.ScoutCurrentLimit);
+    // Accelerometer
+    ui->chkEnableBarrel->setChecked(DeviceData.EnableBarrelStabilize);
+    ui->spinBarrelSensitivity->setValue(DeviceData.BarrelSensitivity);
+    ui->chkEnableHills->setChecked(DeviceData.EnableHillPhysics);
+    ui->spinHillSensitivity->setValue(DeviceData.HillSensitivity);
+    ShowHideBarrelSensitivity(ui->chkEnableBarrel->isChecked());
+    ShowHideHillSensitivity(ui->chkEnableHills->isChecked());
+    if (DeviceData.TurretElevationMotor == SERVO_PAN) ShowHideBarrelStabilization(true);
+    else ShowHideBarrelStabilization(false);
     // Debugging
     ui->chkDebug->setChecked(DeviceData.PrintDebug);
 }
@@ -453,11 +455,6 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.NeutralTurnAllowed = ui->chkNeutralTurn->isChecked();
     DeviceData.NeutralTurnPct = ui->spinNeutralTurnSpeed->value();
     DeviceData.HalftrackTreadTurnPct = ui->spinHalftrackTurnPct->value();
-    // Accelerometer
-    DeviceData.EnableBarrelStabilize = ui->chkEnableBarrel->isChecked();
-    DeviceData.BarrelSensitivity = ui->spinBarrelSensitivity->value();
-    DeviceData.EnableHillPhysics = ui->chkEnableHills->isChecked();
-    DeviceData.HillSensitivity = ui->spinHillSensitivity->value();
     // Track Recoil
     DeviceData.EnableTrackRecoil = ui->chkEnableTrackRecoil->isChecked();
     DeviceData.TrackRecoilKickbackSpeed = ui->spinKickbackSpeed->value();
@@ -528,6 +525,13 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.MotorSerialBaud = ui->cboMotorSerialBaud->getCurrentBaudRate();
     DeviceData.AuxSerialBaud = ui->cboAuxSerialBaud->getCurrentBaudRate();
     DeviceData.Serial3TxBaud = ui->cboSer3Baud->getCurrentBaudRate();
+    // Scout settings
+    DeviceData.ScoutCurrentLimit = ui->spinScoutCurrent->value();
+    // Accelerometer
+    DeviceData.EnableBarrelStabilize = ui->chkEnableBarrel->isChecked();
+    DeviceData.BarrelSensitivity = ui->spinBarrelSensitivity->value();
+    DeviceData.EnableHillPhysics = ui->chkEnableHills->isChecked();
+    DeviceData.HillSensitivity = ui->spinHillSensitivity->value();
     // Low Voltage Cutoff
     DeviceData.LVC_Enabled = ui->chkLVCEnabled->isChecked();
     DeviceData.LVC_Cutoff_mV = static_cast<uint16_t>(ui->dspinLVCVoltage->value() * 1000.0);  // We need to convert Volts to milliVolts

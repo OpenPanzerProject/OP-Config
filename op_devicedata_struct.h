@@ -191,6 +191,9 @@ struct _device_data {
     uint8_t  SecondMGLightBlink_mS;				 // Some number between 0-255. The Second machine gun blinks on/off at the same rate
     boolean  CannonReloadBlink;                  // Should the Apple lights be blinked when the cannon is done reloading.
 
+// Scout Settings
+    uint8_t  ScoutCurrentLimit;                  // Accepts values from 1-30, represents current limit in Amps beyond which Scout will turn off motors.
+
 // Program setting
     boolean PrintDebug;							 // If true, TCB will print debugging messages out the DebugSerial serial port
 

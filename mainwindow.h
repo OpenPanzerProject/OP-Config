@@ -89,17 +89,6 @@ enum StatusLabelStatus{slGood, slBad, slNeutral};   // We use these to decide wh
 #define TAB_INDEX_MISC              7
 #define TAB_INDEX_FIRMWARE          8
 
-// Not very sophisticated. Here we store the URLs to the TCB latest release hex and version files, and we
-// assume they will never change in a million years.
-#define LATEST_RELEASE_VERSION_URL_TCB      "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TCB          "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
-
-#define LATEST_RELEASE_VERSION_URL_SCOUT    "http://openpanzer.org/downloads/scout/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_SCOUT        "http://openpanzer.org/downloads/scout/firmware/opscout.hex"
-
-#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND    "http://openpanzer.org/downloads/soundcard/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TEENSYSOUND        "http://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
-
 // Struct for firmware version info
 struct FirmwareVersion{
     uint8_t Major;

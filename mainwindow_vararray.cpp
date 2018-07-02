@@ -321,6 +321,9 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.SecondMGLightBlink_mS = VarArray.value(3422).toUInt();                       // 3422 - Second machine gun blink interval
     DeviceData.CannonReloadBlink = VarArray.value(3423).toUInt();                           // 3423 - Blink Apple lights when cannon done reloading
 
+    // Scout settings
+    DeviceData.ScoutCurrentLimit = VarArray.value(3611).toUInt();                           // 3611 - Scout current limit setting
+
     // Program setting - 90xx
     DeviceData.PrintDebug = VarArray.value(9011).toUInt();                                  // 9011 - Debug
 }
@@ -634,8 +637,11 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(3422, QByteArray::number(DeviceData.SecondMGLightBlink_mS));                    // 3422 - Second machine gun blink interval
     VarArray.insert(3423, QByteArray::number(DeviceData.CannonReloadBlink));                        // 3423 - Blink Apple lights when cannon done reloading
 
+    // Scout settings
+    VarArray.insert(3611, QByteArray::number(DeviceData.ScoutCurrentLimit));                        // 3611 - Scout current limit setting
+
     // Program setting - 90xx
-    VarArray.insert(9011, QByteArray::number(DeviceData.PrintDebug));                                // 9011 - Debug
+    VarArray.insert(9011, QByteArray::number(DeviceData.PrintDebug));                               // 9011 - Debug
 }
 
 

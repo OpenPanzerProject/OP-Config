@@ -28,8 +28,9 @@
 #frmLVC,
 #frmBaudRates,
 #frmDebug,
-#frmPololu,
+#frmScout,
 #frmSabertooth,
+#frmPololu,
 #frmFlash,
 #frmConsole
  {

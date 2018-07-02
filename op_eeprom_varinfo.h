@@ -9,7 +9,7 @@
 //=======================================================================================================================================>>
 // You must make sure this number equals the number of variables defined in the __eeprom_data struct (including the first var FirstVar)
 //
-    #define NUM_STORED_VARS			319
+    #define NUM_STORED_VARS			320
 
 //
 // The definition above, as well as the PROGMEM array below, can be generated from the Excel reference sheet
@@ -367,8 +367,9 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {3421, 456, varBOOL, "0"},        // AuxFlashWithCannon
     {3422, 457, varUINT8, "30"},        // SecondMGLightBlink_mS
     {3423, 458, varBOOL, "1"},        // CannonReloadBlink
-    {9011, 459, varBOOL, "1"},        // PrintDebug
-    {9999, 460, varUINT32, "43589"}        // InitStamp
+    {3611, 459, varUINT8, "12"},        // ScoutCurrentLimit
+    {9011, 460, varBOOL, "1"},        // PrintDebug
+    {9999, 461, varUINT32, "43589"}        // InitStamp
 };
 
 

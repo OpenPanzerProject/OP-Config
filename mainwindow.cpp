@@ -838,6 +838,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbDebug, SIGNAL(released()), signalMapper, SLOT(map()));               // Debug
         connect(ui->hpbSabertooth, SIGNAL(released()), signalMapper, SLOT(map()));          // Sabertooth configuration
         connect(ui->hpbPololu, SIGNAL(released()), signalMapper, SLOT(map()));              // Pololu configuration
+        connect(ui->hpbScoutSettings, SIGNAL(released()), signalMapper, SLOT(map()));       // Scout ESC configuration
         connect(ui->hpbIMU, SIGNAL(released()), signalMapper, SLOT(map()));                 // IMU
     // Firmware tab
         connect(ui->hpbFirmware, SIGNAL(released()), signalMapper, SLOT(map()));            // Firmware
@@ -885,6 +886,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbDebug, "misc.html#debug");                          // Debug
         signalMapper->setMapping(ui->hpbSabertooth, "misc.html#sabertooth");                // Sabertooth configuration
         signalMapper->setMapping(ui->hpbPololu, "misc.html#pololu");                        // Pololu configuration
+        signalMapper->setMapping(ui->hpbScoutSettings, "misc.html#scout");                  // Scout ESC configuration
         signalMapper->setMapping(ui->hpbIMU, "misc.html#imu");                              // IMU
     // Firmware
         signalMapper->setMapping(ui->hpbFirmware, "firmware.html#flash");                   // Firmware

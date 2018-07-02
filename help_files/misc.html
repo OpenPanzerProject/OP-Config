@@ -15,7 +15,8 @@
 			<li><a href="#lvc">Low Voltage Cutoff</a></li>
 			<li><a href="#baud">Baud Rates</a></li>
 			<li><a href="#debug">Debugging</a></li>	
-            <li><a href="sabertooth">Sabertooth Baud Rate Tool</li>
+            <li><a href="#scout">Scout ESC Settings</a></li>
+            <li><a href="#sabertooth">Sabertooth Baud Rate Tool</a></li>
             <li><a href="#pololu">Pololu Qik Configuration</a></li>
             <!-- <li><a href="#imu">Inertial Measurement Unit (IMU)</a></li> -->
 		</ul>
@@ -95,6 +96,16 @@
 	
 
 
+    <h2 id="scout">Scout ESC Settings</h2>
+    <p>
+    Here you can adjust the maximum current limit of any Scout ESC attached to your TCB. By default the Scout will stop the motors when current draw exceeds 12 amps total for 
+    both motors, since this is the Scout's limit for continuous operation without additional cooling. However the Scout can theoretically operate at up to 30 amps with sufficient 
+    heatsinking and cooling. Or you might wish to restrict the current limit to an even lower number in order to protect the drive-train on your model, if you already know the 
+    stall current of your motors. Set your desired maximum current here, and the TCB will instruct the Scout not to exceed that level.
+    </p>    
+    
+    
+    
 	<h2 id="sabertooth">Sabertooth Baud Rate Tool</h2>
 	<p>
 	Not all Dimension Engineering controllers operate the same way. Some can automatically detect the baud rate of the master device (in this case the TCB). This includes the 
@@ -111,6 +122,7 @@
     Select the baud rate you want for the Serial 2 port in the Baud Rates section. Most users should set this to 38400. Now click the "Set" button and the TCB will configure the Sabertooth to use that rate. 
     </p>
     
+
 
 	<h2 id="pololu">Pololu Qik Configuration</h2>
 	<p>

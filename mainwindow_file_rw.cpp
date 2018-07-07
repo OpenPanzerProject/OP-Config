@@ -8,7 +8,8 @@
 // This is just the Device menu action, and we simply get a file path/name from the user, then pass it to the actual reading function
 void MainWindow::actionReadSettingsFromFile()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from OPZ File"), ".", tr("OPZ files (*.opz)"));
+    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    QString filename = QFileDialog::getOpenFileName(this, tr("Import Settings from OPZ File"), desktopFolder, tr("OPZ files (*.opz)"));
 
     if (filename == "") return;     // Exit if they cancel
     else readSettingsFromFile(filename, false);
@@ -288,7 +289,8 @@ uint8_t numPositions;
 
 void MainWindow::writeSettingsToFile()
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Save Settings to OPZ File)"), ".", tr("OPZ files (*.opz)"));
+    const QString desktopFolder = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Settings to OPZ File)"), desktopFolder, tr("OPZ files (*.opz)"));
 
     if (filename == "") return; // Exit if they cancel
 

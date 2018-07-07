@@ -42,6 +42,7 @@
 #include <QFileInfo>
 #include <QPixmap>
 #include <QCommandLineParser>
+#include <QStandardPaths>
 #include <combo_drivetype.h>                        // My custom drive type combo box
 #include <combo_channelorder.h>
 #include <combo_baudrates.h>

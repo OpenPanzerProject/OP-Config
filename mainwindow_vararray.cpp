@@ -281,6 +281,8 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.VolumeTrackOverlay = VarArray.value(2835).toUInt();                          // 2835 - Track overlay volume level
     DeviceData.VolumeEffects = VarArray.value(2836).toUInt();                               // 2836 - Effects volume level
     DeviceData.HeadlightSound2_Enabled = VarArray.value(2837).toUInt();                     // 2837 - Headlight 2 sound
+    DeviceData.SoundBankA_Loop = VarArray.value(2838).toUInt();                             // 2838 - Sound Bank A auto-loop
+    DeviceData.SoundBankB_Loop = VarArray.value(2839).toUInt();                             // 2839 - Sound Bank B auto-loop
 
     // Battle settings - 30xx
     DeviceData.IR_FireProtocol = VarArray.value(3011).toUInt();                             // 3011 - IR protocol to send when firing cannon
@@ -597,6 +599,8 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2835, QByteArray::number(DeviceData.VolumeTrackOverlay));                       // 2835 - Track overlay volume level
     VarArray.insert(2836, QByteArray::number(DeviceData.VolumeEffects));                            // 2836 - Effects volume level
     VarArray.insert(2837, QByteArray::number(DeviceData.HeadlightSound2_Enabled));                  // 2837 - Headlight 2 sound
+    VarArray.insert(2838, QByteArray::number(DeviceData.SoundBankA_Loop));                          // 2838 - Sound Bank A auto-loop
+    VarArray.insert(2839, QByteArray::number(DeviceData.SoundBankB_Loop));                          // 2839 - Sound Bank B auto-loop
 
     // Battle settings - 30xx
     VarArray.insert(3011, QByteArray::number(DeviceData.IR_FireProtocol));                          // 3011 - IR protocol to send when firing cannon

@@ -832,6 +832,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbGeneralSound, SIGNAL(released()), signalMapper, SLOT(map()));        // General sound options
         connect(ui->hpbSoundSqueaks, SIGNAL(released()), signalMapper, SLOT(map()));        // Squeak section
         connect(ui->hpbSoundVolumes, SIGNAL(released()), signalMapper, SLOT(map()));        // Relative volumes
+        connect(ui->hpbSoundBank, SIGNAL(released()), signalMapper, SLOT(map()));           // Sound bank loop settings
     // Misc tab
         connect(ui->hpbLVC, SIGNAL(released()), signalMapper, SLOT(map()));                 // Low voltage cutoff
         connect(ui->hpbBaud, SIGNAL(released()), signalMapper, SLOT(map()));                // Baud rates
@@ -880,6 +881,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbGeneralSound, "sounds.html");                       // Sound tab
         signalMapper->setMapping(ui->hpbSoundSqueaks, "sounds.html#squeaks");               // Squeak settings
         signalMapper->setMapping(ui->hpbSoundVolumes, "sounds.html#volumes");               // Relative volumes
+        signalMapper->setMapping(ui->hpbSoundBank, "sounds.html#soundbank");                // Sound bank loop settings
     // Misc
         signalMapper->setMapping(ui->hpbLVC, "misc.html#lvc");                              // Low voltage cutoff
         signalMapper->setMapping(ui->hpbBaud, "misc.html#baud");                            // Baud rates

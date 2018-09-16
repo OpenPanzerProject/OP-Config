@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>8</number>
+               <number>6</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -10584,7 +10584,7 @@ gearboxes by dragging inner track during turns:</string>
                 <property name="geometry">
                  <rect>
                   <x>430</x>
-                  <y>180</y>
+                  <y>520</y>
                   <width>181</width>
                   <height>61</height>
                  </rect>
@@ -11189,7 +11189,7 @@ gearboxes by dragging inner track during turns:</string>
                 <property name="geometry">
                  <rect>
                   <x>10</x>
-                  <y>260</y>
+                  <y>250</y>
                   <width>411</width>
                   <height>331</height>
                  </rect>
@@ -11835,6 +11835,142 @@ gearboxes by dragging inner track during turns:</string>
                  </property>
                  <property name="frameShadow">
                   <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+               </widget>
+               <widget class="FrameContent" name="frmSoundBank">
+                <property name="geometry">
+                 <rect>
+                  <x>430</x>
+                  <y>180</y>
+                  <width>361</width>
+                  <height>81</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Box</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <widget class="QFrame" name="frame_45">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>23</y>
+                   <width>361</width>
+                   <height>20</height>
+                  </rect>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color: #666;</string>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::HLine</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                </widget>
+                <widget class="HelpButton" name="hpbSoundBank">
+                 <property name="geometry">
+                  <rect>
+                   <x>330</x>
+                   <y>10</y>
+                   <width>18</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>18</width>
+                   <height>18</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_167">
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>261</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Sound Bank Auto-Loop</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_168">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>49</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Bank A:</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_170">
+                 <property name="geometry">
+                  <rect>
+                   <x>170</x>
+                   <y>49</y>
+                   <width>121</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Bank B:</string>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkSBALoop">
+                 <property name="geometry">
+                  <rect>
+                   <x>80</x>
+                   <y>50</y>
+                   <width>21</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="chkSBBLoop">
+                 <property name="geometry">
+                  <rect>
+                   <x>230</x>
+                   <y>50</y>
+                   <width>21</width>
+                   <height>18</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string/>
                  </property>
                 </widget>
                </widget>

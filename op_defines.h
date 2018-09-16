@@ -191,7 +191,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 144;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 152;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -336,7 +336,15 @@ enum _special_function : byte {
     SF_USER_SOUND11_OFF = 140,      // 140
     SF_USER_SOUND12_ONCE= 141,      // 141
     SF_USER_SOUND12_RPT = 142,      // 142
-    SF_USER_SOUND12_OFF = 143       // 143
+    SF_USER_SOUND12_OFF = 143,      // 143
+    SF_SBA_PLAYSTOP     = 144,      // 144
+    SF_SBA_NEXT         = 145,      // 145
+    SF_SBA_PREVIOUS     = 146,      // 146
+    SF_SBA_RANDOM       = 147,      // 147
+    SF_SBB_PLAYSTOP     = 148,      // 148
+    SF_SBB_NEXT         = 149,      // 149
+    SF_SBB_PREVIOUS     = 150,      // 150
+    SF_SBB_RANDOM       = 151       // 151
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -592,6 +600,7 @@ typedef char SOUND_DEVICE;
 
 #define SD_FIRST_SD             SD_BENEDINI_TBSMINI
 #define SD_LAST_SD              SD_BENEDINI_TBSMICRO
+
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>

@@ -274,6 +274,9 @@ void MainWindow::Variables_to_Controls(void)
     ShowHideHeadlight2SoundNote(ui->chkEnableHeadlight2Sound->isChecked());
     ui->chkEnableTurretSound->setChecked(DeviceData.TurretSound_Enabled);
     ui->chkEnableBarrelSound->setChecked(DeviceData.BarrelSound_Enabled);
+    // Sound bank auto-loop
+    ui->chkSBALoop->setChecked(DeviceData.SoundBankA_Loop);
+    ui->chkSBBLoop->setChecked(DeviceData.SoundBankB_Loop);
     // Final step
     ShowHideSoundCardSettings();
 
@@ -517,6 +520,9 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.HeadlightSound2_Enabled = ui->chkEnableHeadlight2Sound->isChecked();
     DeviceData.TurretSound_Enabled = ui->chkEnableTurretSound->isChecked();
     DeviceData.BarrelSound_Enabled = ui->chkEnableBarrelSound->isChecked();
+    // Sound bank auto-loop
+    DeviceData.SoundBankA_Loop = ui->chkSBALoop->isChecked();
+    DeviceData.SoundBankB_Loop = ui->chkSBBLoop->isChecked();
 
     // Misc tab
     // ---------------------------------------------------------------------------------------------------------->>

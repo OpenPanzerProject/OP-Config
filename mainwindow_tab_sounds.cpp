@@ -78,6 +78,8 @@ void MainWindow::ShowHideSoundCardSettings()
         case SD_BENEDINI_TBSMINI:
             // Hide volumes
             ui->frmVolume->hide();
+            // Hide sound bank
+            ui->frmSoundBank->hide();
             // Remove functions not applicable
             RemoveSoundFunctionsBenedini_Mini();
             // Add those that are
@@ -103,6 +105,7 @@ void MainWindow::ShowHideSoundCardSettings()
             RemoveSoundFunctionsBenedini_Micro();
             ui->frmVolume->hide();
             ui->frmSqueaks->hide();
+            ui->frmSoundBank->hide();
             // Disable and hide all squeak options
             HideSqueakHeader();
             DisableSqueaks1_3();
@@ -123,6 +126,8 @@ void MainWindow::ShowHideSoundCardSettings()
             AddSoundFunctionsOP();
             // Show volume
             ui->frmVolume->show();
+            // Show sound bank
+            ui->frmSoundBank->show();
             // Enable all squeaks
             ui->frmSqueaks->show();
             ui->frmSqueaks->resize(411,331);
@@ -144,6 +149,7 @@ void MainWindow::ShowHideSoundCardSettings()
             RemoveSoundFunctionsTaigen();
             ui->frmVolume->hide();
             ui->frmSqueaks->hide();
+            ui->frmSoundBank->hide();
             // Disable and hide all squeak options
             HideSqueakHeader();
             DisableSqueaks1_3();
@@ -291,6 +297,14 @@ void MainWindow::AddSoundFunctionsOP()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_RANDOM);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_RANDOM);
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_SET_VOLUME);
@@ -332,6 +346,14 @@ void MainWindow::AddSoundFunctionsOP()
     ui->cboSelectFunction->AddSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->AddSF(SF_SBA_PLAYSTOP);
+    ui->cboSelectFunction->AddSF(SF_SBA_NEXT);
+    ui->cboSelectFunction->AddSF(SF_SBA_PREVIOUS);
+    ui->cboSelectFunction->AddSF(SF_SBA_RANDOM);
+    ui->cboSelectFunction->AddSF(SF_SBB_PLAYSTOP);
+    ui->cboSelectFunction->AddSF(SF_SBB_NEXT);
+    ui->cboSelectFunction->AddSF(SF_SBB_PREVIOUS);
+    ui->cboSelectFunction->AddSF(SF_SBB_RANDOM);
 }
 
 void MainWindow::RemoveSoundFunctionsTaigen()
@@ -379,6 +401,14 @@ void MainWindow::RemoveSoundFunctionsTaigen()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_RANDOM);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_RANDOM);
     // Make sure we didn't already have a function trigger defined for any of them either
     // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
     if (FT_TableModel->removeFunctionFromList(SF_SET_VOLUME)       |
@@ -422,7 +452,15 @@ void MainWindow::RemoveSoundFunctionsTaigen()
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_OFF) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_ONCE)|
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_RPT) |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF))
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_SBA_PLAYSTOP)     |
+        FT_TableModel->removeFunctionFromList(SF_SBA_NEXT)         |
+        FT_TableModel->removeFunctionFromList(SF_SBA_PREVIOUS)     |
+        FT_TableModel->removeFunctionFromList(SF_SBA_RANDOM)       |
+        FT_TableModel->removeFunctionFromList(SF_SBB_PLAYSTOP)     |
+        FT_TableModel->removeFunctionFromList(SF_SBB_NEXT)         |
+        FT_TableModel->removeFunctionFromList(SF_SBB_PREVIOUS)     |
+        FT_TableModel->removeFunctionFromList(SF_SBB_RANDOM))
         RemovedFunctionTriggersMsgBox();
 }
 void MainWindow::RemoveSoundFunctionsBenedini_Micro()
@@ -457,6 +495,14 @@ void MainWindow::RemoveSoundFunctionsBenedini_Mini()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_RANDOM);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_RANDOM);
     if (ui->chkEnableSqueak1->isChecked())
     {
         ui->cboSelectFunction->RemoveSF(SF_USER_SOUND4_ONCE);
@@ -518,7 +564,15 @@ void MainWindow::RemoveSoundFunctionsBenedini_Mini()
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND11_OFF) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_ONCE)|
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_RPT) |
-        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF))
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_SBA_PLAYSTOP)     |
+        FT_TableModel->removeFunctionFromList(SF_SBA_NEXT)         |
+        FT_TableModel->removeFunctionFromList(SF_SBA_PREVIOUS)     |
+        FT_TableModel->removeFunctionFromList(SF_SBA_RANDOM)       |
+        FT_TableModel->removeFunctionFromList(SF_SBB_PLAYSTOP)     |
+        FT_TableModel->removeFunctionFromList(SF_SBB_NEXT)         |
+        FT_TableModel->removeFunctionFromList(SF_SBB_PREVIOUS)     |
+        FT_TableModel->removeFunctionFromList(SF_SBB_RANDOM))
         removed += 1;
 
     if (removed > 0) RemovedFunctionTriggersMsgBox();
@@ -564,6 +618,14 @@ void MainWindow::AddSoundFunctionsBenedini_Mini()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBA_RANDOM);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PLAYSTOP);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_NEXT);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_PREVIOUS);
+    ui->cboSelectFunction->RemoveSF(SF_SBB_RANDOM);
     // Add all user sound functions.
     // The add function will only add a function if it isn't there already.
     ui->cboSelectFunction->AddSF(SF_INCR_VOLUME);

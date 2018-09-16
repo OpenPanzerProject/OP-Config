@@ -389,6 +389,14 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
                 ts = TS_ADHC_CANNONRELOAD;
                 TriggerDescription = "Cannon Reloaded";
                 break;
+            case ADHOC_TRIGGER_ENGINE_START:
+                ts = TS_ADHC_ENGINE_START;
+                TriggerDescription = "Engine Start";
+                break;
+            case ADHOC_TRIGGER_ENGINE_STOP:
+                ts = TS_ADHC_ENGINE_STOP;
+                TriggerDescription = "Engine Stop";
+                break;
         }
     }
     // Vehicle speed triggers - increasing speed

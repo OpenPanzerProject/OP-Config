@@ -143,6 +143,8 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Cannon Hit", TS_ADHC_CANNONHIT );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Cannon Reloaded", TS_ADHC_CANNONRELOAD );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Destroyed", TS_ADHC_DESTROYED );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Engine Start", TS_ADHC_ENGINE_START );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Engine Stop", TS_ADHC_ENGINE_STOP );
         }
         else
         {   // In this case we only want to show analog inputs
@@ -528,6 +530,12 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
             break;
         case TS_ADHC_CANNONRELOAD:
             TriggerID = ADHOC_TRIGGER_CANNON_RELOADED;
+            break;
+        case TS_ADHC_ENGINE_START:
+            TriggerID = ADHOC_TRIGGER_ENGINE_START;
+            break;
+        case TS_ADHC_ENGINE_STOP:
+            TriggerID = ADHOC_TRIGGER_ENGINE_STOP;
             break;
         default:
             TriggerID = 0;

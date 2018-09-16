@@ -583,6 +583,8 @@ QMap<_trigger_source, QString> OP_QMaps::getAllTriggerSourcesQMap()
     _OPT_ALL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                      // Ad-Hoc - received cannon hit
     _OPT_ALL_QMAP.insert(TS_ADHC_CANNONRELOAD, "Cannon Reloaded");              // Ad-Hoc - cannon reloaded
     _OPT_ALL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");               // Ad-Hoc - vehicle destroyed
+    _OPT_ALL_QMAP.insert(TS_ADHC_ENGINE_START, "Engine Start");                 // Ad-Hoc - engine start
+    _OPT_ALL_QMAP.insert(TS_ADHC_ENGINE_STOP, "Engine Stop");                   // Ad-Hoc - engine stop
     return _OPT_ALL_QMAP;
 }
 
@@ -611,6 +613,8 @@ QMap<_trigger_source, QString> OP_QMaps::getDigitalTriggerSourcesQMap()
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_CANNONHIT, "Cannon Hit");                  // Ad-Hoc - received cannon hit
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_CANNONRELOAD, "Cannon Reloaded");          // Ad-Hoc - cannon reloaded
     _OPT_DIGITAL_QMAP.insert(TS_ADHC_DESTROYED, "Vehicle Destroyed");           // Ad-Hoc - vehicle destroyed
+    _OPT_DIGITAL_QMAP.insert(TS_ADHC_ENGINE_START, "Engine Start");             // Ad-Hoc - engine start
+    _OPT_DIGITAL_QMAP.insert(TS_ADHC_ENGINE_STOP, "Engine Stop");               // Ad-Hoc - engine stop
     return _OPT_DIGITAL_QMAP;
 }
 

@@ -385,12 +385,16 @@ struct _functionTrigger {
 #define ADHOCT_BIT_CANNON_HIT           1               // Vehicle received cannon hit
 #define ADHOCT_BIT_VEHICLE_DESTROYED    2               // Vehicle destroyed
 #define ADHOCT_BIT_CANNON_RELOADED      3               // Cannon reloaded
+#define ADHOCT_BIT_ENGINE_START         4               // Engine started
+#define ADHOCT_BIT_ENGINE_STOP          5               // Engine stopped
 
 // Ad-Hoc trigger Triggger IDs
 #define ADHOC_TRIGGER_BRAKES_APPLIED    trigger_id_adhoc_start + ADHOCT_BIT_BRAKES_APPLIED      // Ad-Hoc Trigger ID  1 - brakes just applied   19000
 #define ADHOC_TRIGGER_CANNON_HIT        trigger_id_adhoc_start + ADHOCT_BIT_CANNON_HIT          // Ad-Hoc Trigger ID  2 - received cannon hit   19001
 #define ADHOC_TRIGGER_VEHICLE_DESTROYED trigger_id_adhoc_start + ADHOCT_BIT_VEHICLE_DESTROYED   // Ad-Hoc Trigger ID  3 - vehicle destroyed     19002
 #define ADHOC_TRIGGER_CANNON_RELOADED   trigger_id_adhoc_start + ADHOCT_BIT_CANNON_RELOADED     // Ad-Hoc Trigger ID  4 - cannon reloaded       19003
+#define ADHOC_TRIGGER_ENGINE_START      trigger_id_adhoc_start + ADHOCT_BIT_ENGINE_START        // Ad-Hoc Trigger ID  5 - engine start          19004
+#define ADHOC_TRIGGER_ENGINE_STOP       trigger_id_adhoc_start + ADHOCT_BIT_ENGINE_STOP         // Ad-Hoc Trigger ID  6 - engine stop           19005
 
 enum _trigger_source : byte {
     TS_NULL_TRIGGER = 0,   // no trigger
@@ -421,8 +425,8 @@ enum _trigger_source : byte {
     TS_ADHC_CANNONHIT,     // Ad-hoc - received cannon hit
     TS_ADHC_DESTROYED,     // Ad-hoc - vehicle destroyed
     TS_ADHC_CANNONRELOAD,  // Ad-hoc - cannon reloaded
-    TS_ADHC_UNUSED_5,      // Ad-hoc - unused
-    TS_ADHC_UNUSED_6,      // Ad-hoc - unused
+    TS_ADHC_ENGINE_START,  // Ad-hoc - engine start
+    TS_ADHC_ENGINE_STOP,   // Ad-hoc - engine stop
     TS_ADHC_UNUSED_7,      // Ad-hoc - unused
     TS_ADHC_UNUSED_8,      // Ad-hoc - unused
     TS_ADHC_UNUSED_9,      // Ad-hoc - unused

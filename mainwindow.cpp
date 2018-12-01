@@ -28,6 +28,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Window icon
     setWindowIcon(QIcon(":/icons/images/OP_Icon_32.png"));
 
+    // Application-specific settings - last place the user saved/opened a file
+    QCoreApplication::setOrganizationName("Open Panzer");
+    QCoreApplication::setOrganizationDomain("OpenPanzer.org");
+    QCoreApplication::setApplicationName("OP Config");
+
+    // Get the path of the last location the user read/opened a file
+    LastPath = GetLastPath();
+
+    // See if we should show or hide the header based on the user's last selection. If the setting hasn't
+    // been written yet, default to show
+    if (ProgIni.value("ShowHeader").toString() == "" || ProgIni.value("ShowHeader").toBool()) ShowHeader();
+    else                                                                                      HideHeader();
+
     // Create our assistant for help documentation
     assistant = new Assistant;
 
@@ -409,21 +422,25 @@ void MainWindow::changeStackedWidget(const QModelIndex& current, const QModelInd
     qApp->processEvents();  // Equivalent of VB DoEvents()
 }*/
 void MainWindow::ShowHideHeader()
+{   // Toggle the header
+    if (ui->frmHeader->isHidden())  ShowHeader();
+    else                            HideHeader();
+}
+void MainWindow::ShowHeader()
 {
-    if (ui->frmHeader->isHidden())
-    {
-        ui->frmHeader->show();
-        setMinimumHeight(788);
-        resize(width(), 788);
-    }
-    else
-    {
-        // Hide the "OPEN PANZER OP CONFIG" header bar along the top of the application window. This can be useful
-        // for those with small screens
-        ui->frmHeader->hide();
-        setMinimumHeight(733);
-        resize(width(), 733);
-    }
+    ui->frmHeader->show();
+    setMinimumHeight(788);
+    resize(width(), 788);
+    ProgIni.setValue("ShowHeader",true);    // Save setting
+}
+void MainWindow::HideHeader()
+{
+    // Hide the "OPEN PANZER OP CONFIG" header bar along the top of the application window. This can be useful
+    // for those with small screens
+    ui->frmHeader->hide();
+    setMinimumHeight(733);
+    resize(width(), 733);
+    ProgIni.setValue("ShowHeader",false);     // Save setting
 }
 void MainWindow::cmdTest1_Click()
 {

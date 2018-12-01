@@ -43,6 +43,7 @@
 #include <QPixmap>
 #include <QCommandLineParser>
 #include <QStandardPaths>
+#include <QSettings>
 #include <combo_drivetype.h>                        // My custom drive type combo box
 #include <combo_channelorder.h>
 #include <combo_baudrates.h>
@@ -165,7 +166,9 @@ private slots:
     // Slots for the Tools menu
     // ---------------------------------------------------------------------------------------------------->>
       void ResetAllValues();
-      void ShowHideHeader();
+      void ShowHideHeader();    // Toggle
+      void ShowHeader();
+      void HideHeader();
 
     // Slots for the two test buttons on the Radio tab
     // ---------------------------------------------------------------------------------------------------->>
@@ -328,6 +331,13 @@ private:
     // ---------------------------------------------------------------------------------------------------->>
       void MouseWait();                             // Sets the mouse to hourglass
       void MouseRestore();                          // Returns the mouse to a pointer
+
+    // Application-specific settings
+    // ---------------------------------------------------------------------------------------------------->>
+      QSettings ProgIni;
+      QString LastPath;
+      QString GetLastPath(void);                    // The app will remember the last path the user accessed
+      void StoreLastPath(QString);                  // when reading/writing OPZ files
 
     // QT Assistant
     // ---------------------------------------------------------------------------------------------------->>

@@ -397,6 +397,30 @@ QString FunctionTriggerTableModel::getTriggerDescription(_special_function sf, u
                 ts = TS_ADHC_ENGINE_STOP;
                 TriggerDescription = "Engine Stop";
                 break;
+            case ADHOC_TRIGGER_MOVE_FORWARD:
+                ts = TS_ADHC_MOVE_FWD;
+                TriggerDescription = "Moving Forward";
+                break;
+            case ADHOC_TRIGGER_MOVE_REVERSE:
+                ts = TS_ADHC_MOVE_REV;
+                TriggerDescription = "Moving Reverse";
+                break;
+            case ADHOC_TRIGGER_VEHICLE_STOP:
+                ts = TS_ADHC_VEHICLE_STOP;
+                TriggerDescription = "Vehicle Stopped";
+                break;
+            case ADHOC_TRIGGER_RIGHT_TURN:
+                ts = TS_ADHC_RIGHT_TURN;
+                TriggerDescription = "Right Turn";
+                break;
+            case ADHOC_TRIGGER_LEFT_TURN:
+                ts = TS_ADHC_LEFT_TURN;
+                TriggerDescription = "Left Turn";
+                break;
+            case ADHOC_TRIGGER_NO_TURN:
+                ts = TS_ADHC_NO_TURN;
+                TriggerDescription = "Turn Stopped";
+                break;
         }
     }
     // Vehicle speed triggers - increasing speed

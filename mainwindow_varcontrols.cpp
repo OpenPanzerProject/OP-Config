@@ -130,6 +130,9 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinAuxPresetDim->setValue(DeviceData.AuxLightPresetDim);
     ui->chkAuxFlashWithCannon->setChecked(DeviceData.AuxFlashWithCannon);
     // External I/O - set the combo to our user data, which means, we can't go directly to index
+    // IO blink times
+    ui->spinIOBlinkOn_mS->setValue(DeviceData.IOBlinkOnTime_mS);
+    ui->spinIOBlinkOff_mS->setValue(DeviceData.IOBlinkOffTime_mS);
     // First set the data direction
     ui->cboPortADataDirection->setCurrentIndex(ui->cboPortADataDirection->findData(DeviceData.PortA.Settings.dataDirection));
     ui->cboPortBDataDirection->setCurrentIndex(ui->cboPortBDataDirection->findData(DeviceData.PortB.Settings.dataDirection));
@@ -401,6 +404,8 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.PortB.Settings.dataDirection = ui->cboPortBDataDirection->itemData(ui->cboPortBDataDirection->currentIndex()).toUInt();
     DeviceData.PortA.Settings.dataType = ui->cboPortA_DataType->itemData(ui->cboPortA_DataType->currentIndex()).toUInt();
     DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(ui->cboPortB_DataType->currentIndex()).toUInt();
+    DeviceData.IOBlinkOnTime_mS = ui->spinIOBlinkOn_mS->value();
+    DeviceData.IOBlinkOffTime_mS = ui->spinIOBlinkOff_mS->value();
 
     // Functions tab
     // ---------------------------------------------------------------------------------------------------------->>

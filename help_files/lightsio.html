@@ -40,7 +40,7 @@
 	<br />
 	
 	The General Purpose I/O ports are logic-level which means that, unlike the AUX and light outputs, they can <i>not</i> provide very much current at all - about 20mA max. Do not try to drive an 
-	LED directly from these ports! Again, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">Open Panzer Wiki - I/O Ports</a> page for more information 
+	LED that draws more than 20mA directly from these ports! Again, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">Open Panzer Wiki - I/O Ports</a> page for more information 
 	on hardware limitations. 
 	</p>
 
@@ -184,7 +184,8 @@
 	- External Output A/B - Toggle<br>
  	- External Output A/B - Turn On<br>
 	- External Output A/B - Turn Off<br>
-    - External Output A/B - Pulse
+    - External Output A/B - Pulse<br>
+    - External Output A/B - Blink
 	</p>
 
 	<p>
@@ -193,13 +194,17 @@
     cause it to briefly be held Low (to Ground). This feature can be used to emulate a button press to some external device.<br>
     <br>
     
+    The fifth function will cause the output to blink and blinking will continue until you call the "Turn On" or "Turn Off" function. The blink rate can be set by using the "Blink - On Time" and 
+    "Off Time" values (the blink rate is shared by both outputs). <br>
+    <br>
+    
     What you do with these outputs is up to you, but remember these are <b>logic-level</b> outputs! That means they can <i>not source</i> enough current to actually power something, 
-    not even an LED! Instead consider the outputs like signals, and the signals can tell some other more powerful circuit to do something, or they could be used as direct inputs into 
-    another microcontroller (such as another Arduino).<br>
+    not even most LEDs! Instead consider the outputs like signals, and the signals can tell some other more powerful circuit to do something, or they could be used as direct inputs 
+    into another microcontroller (such as another Arduino). (If you know what you are doing, and you are certain your LEDs do not draw more than 20mA, you can connect them directly to the port).<br>
 	<br>
     
-	If you want to use these outputs to turn on a lamp, or a relay, or some other object that draws current, you will need to use a driver circuit. You can find a schematic for a MOSFET 
-    driver adapter on the Open Panzer Wiki designed specifically for this purpose, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page. 
+	If you want to use these outputs to turn on a lamp, or a relay, or some other object that draws more than 20mA of current, you will need to use a driver circuit. You can find a schematic for 
+    a MOSFET driver adapter on the Open Panzer Wiki designed specifically for this purpose, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page. 
     Alternatively you may want to use the Aux Output (see above) which <i>is</i> capable of driving a load directly. 
 	</p>
 

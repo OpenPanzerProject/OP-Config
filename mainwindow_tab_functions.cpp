@@ -145,6 +145,12 @@ void MainWindow::SetupTriggerSources(_special_function sf, boolean isSFDigital)
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Destroyed", TS_ADHC_DESTROYED );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Engine Start", TS_ADHC_ENGINE_START );
             ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Engine Stop", TS_ADHC_ENGINE_STOP );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Moving Forward", TS_ADHC_MOVE_FWD );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Moving Reverse", TS_ADHC_MOVE_REV );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Vehicle Stopped", TS_ADHC_VEHICLE_STOP );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Right Turn", TS_ADHC_RIGHT_TURN );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Left Turn", TS_ADHC_LEFT_TURN );
+            ui->cboTriggerSource->insertItem(ui->cboTriggerSource->count(), "Turn Stopped", TS_ADHC_NO_TURN );
         }
         else
         {   // In this case we only want to show analog inputs
@@ -536,6 +542,24 @@ void MainWindow::cmdAddFunctionTrigger_clicked(bool)
             break;
         case TS_ADHC_ENGINE_STOP:
             TriggerID = ADHOC_TRIGGER_ENGINE_STOP;
+            break;
+        case TS_ADHC_MOVE_FWD:
+            TriggerID = ADHOC_TRIGGER_MOVE_FORWARD;
+            break;
+        case TS_ADHC_MOVE_REV:
+            TriggerID = ADHOC_TRIGGER_MOVE_REVERSE;
+            break;
+        case TS_ADHC_VEHICLE_STOP:
+            TriggerID = ADHOC_TRIGGER_VEHICLE_STOP;
+            break;
+        case TS_ADHC_RIGHT_TURN:
+            TriggerID = ADHOC_TRIGGER_RIGHT_TURN;
+            break;
+        case TS_ADHC_LEFT_TURN:
+            TriggerID = ADHOC_TRIGGER_LEFT_TURN;
+            break;
+        case TS_ADHC_NO_TURN:
+            TriggerID = ADHOC_TRIGGER_NO_TURN;
             break;
         default:
             TriggerID = 0;

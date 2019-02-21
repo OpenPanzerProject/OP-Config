@@ -191,7 +191,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 152;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 158;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -234,10 +234,10 @@ enum _special_function : byte {
     SF_USER_SOUND2_ONCE = 38,       // 38
     SF_USER_SOUND2_RPT  = 39,       // 39
     SF_USER_SOUND2_OFF  = 40,       // 40
-    SF_OUTPUT_A_TOGGLE  = 41,       // 41   -- see also 109 for pulse
+    SF_OUTPUT_A_TOGGLE  = 41,       // 41   -- see also 109 for pulse and 156 for blink
     SF_OUTPUT_A_ON      = 42,       // 42
     SF_OUTPUT_A_OFF     = 43,       // 43
-    SF_OUTPUT_B_TOGGLE  = 44,       // 44   -- see also 110 for pulse
+    SF_OUTPUT_B_TOGGLE  = 44,       // 44   -- see also 110 for pulse and 157 for blink
     SF_OUTPUT_B_ON      = 45,       // 45
     SF_OUTPUT_B_OFF     = 46,       // 46
     SF_ACCEL_LEVEL      = 47,       // 47   -- analog function
@@ -344,7 +344,13 @@ enum _special_function : byte {
     SF_SBB_PLAYSTOP     = 148,      // 148
     SF_SBB_NEXT         = 149,      // 149
     SF_SBB_PREVIOUS     = 150,      // 150
-    SF_SBB_RANDOM       = 151       // 151
+    SF_SBB_RANDOM       = 151,      // 151
+    SF_SPEED_25         = 152,      // 152
+    SF_SPEED_50         = 153,      // 153
+    SF_SPEED_75         = 154,      // 154
+    SF_SPEED_RESTORE    = 155,      // 155
+    SF_OUTPUT_A_BLINK   = 156,      // 156
+    SF_OUTPUT_B_BLINK   = 157      // 157
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -379,7 +385,7 @@ struct _functionTrigger {
 #define trigger_id_rotation_command         22005       // Variable trigger synchronous with turret rotation (stick position)
 #define trigger_id_elevation_command        22006       // Variable trigger synchronous with barrel elevation (stick position)
 
-#define COUNT_ADHOC_TRIGGERS            4               // This number can not get higher than 16 unless you want to change some methods in the sketch
+#define COUNT_ADHOC_TRIGGERS            12              // This number can not get higher than 16 unless you want to change some methods in the sketch
 // Ad-Hoc trigger Flag Masks
 #define ADHOCT_BIT_BRAKES_APPLIED       0               // Brakes just applied
 #define ADHOCT_BIT_CANNON_HIT           1               // Vehicle received cannon hit
@@ -387,6 +393,12 @@ struct _functionTrigger {
 #define ADHOCT_BIT_CANNON_RELOADED      3               // Cannon reloaded
 #define ADHOCT_BIT_ENGINE_START         4               // Engine started
 #define ADHOCT_BIT_ENGINE_STOP          5               // Engine stopped
+#define ADHOCT_BIT_MOVE_FORWARD         6               // Forward movement begun
+#define ADHOCT_BIT_MOVE_REVERSE         7               // Reverse movement begun
+#define ADHOCT_BIT_VEHICLE_STOP         8               // Vehicle has come to a stop
+#define ADHOCT_BIT_RIGHT_TURN           9               // Right turn begun
+#define ADHOCT_BIT_LEFT_TURN            10              // Left turn begun
+#define ADHOCT_BIT_NO_TURN              11              // Vehicle is no longer turning
 
 // Ad-Hoc trigger Triggger IDs
 #define ADHOC_TRIGGER_BRAKES_APPLIED    trigger_id_adhoc_start + ADHOCT_BIT_BRAKES_APPLIED      // Ad-Hoc Trigger ID  1 - brakes just applied   19000
@@ -395,6 +407,12 @@ struct _functionTrigger {
 #define ADHOC_TRIGGER_CANNON_RELOADED   trigger_id_adhoc_start + ADHOCT_BIT_CANNON_RELOADED     // Ad-Hoc Trigger ID  4 - cannon reloaded       19003
 #define ADHOC_TRIGGER_ENGINE_START      trigger_id_adhoc_start + ADHOCT_BIT_ENGINE_START        // Ad-Hoc Trigger ID  5 - engine start          19004
 #define ADHOC_TRIGGER_ENGINE_STOP       trigger_id_adhoc_start + ADHOCT_BIT_ENGINE_STOP         // Ad-Hoc Trigger ID  6 - engine stop           19005
+#define ADHOC_TRIGGER_MOVE_FORWARD      trigger_id_adhoc_start + ADHOCT_BIT_MOVE_FORWARD        // Ad-Hoc Trigger ID  7 - forward movement      19006
+#define ADHOC_TRIGGER_MOVE_REVERSE      trigger_id_adhoc_start + ADHOCT_BIT_MOVE_REVERSE        // Ad-Hoc Trigger ID  8 - reverse movement      19007
+#define ADHOC_TRIGGER_VEHICLE_STOP      trigger_id_adhoc_start + ADHOCT_BIT_VEHICLE_STOP        // Ad-Hoc Trigger ID  9 - vehicle stopped       19008
+#define ADHOC_TRIGGER_RIGHT_TURN        trigger_id_adhoc_start + ADHOCT_BIT_RIGHT_TURN          // Ad-Hoc Trigger ID 10 - right turn            19009
+#define ADHOC_TRIGGER_LEFT_TURN         trigger_id_adhoc_start + ADHOCT_BIT_LEFT_TURN           // Ad-Hoc Trigger ID 11 - left turn             19010
+#define ADHOC_TRIGGER_NO_TURN           trigger_id_adhoc_start + ADHOCT_BIT_NO_TURN             // Ad-Hoc Trigger ID 12 - no turn               19011
 
 enum _trigger_source : byte {
     TS_NULL_TRIGGER = 0,   // no trigger
@@ -427,12 +445,12 @@ enum _trigger_source : byte {
     TS_ADHC_CANNONRELOAD,  // Ad-hoc - cannon reloaded
     TS_ADHC_ENGINE_START,  // Ad-hoc - engine start
     TS_ADHC_ENGINE_STOP,   // Ad-hoc - engine stop
-    TS_ADHC_UNUSED_7,      // Ad-hoc - unused
-    TS_ADHC_UNUSED_8,      // Ad-hoc - unused
-    TS_ADHC_UNUSED_9,      // Ad-hoc - unused
-    TS_ADHC_UNUSED_10,     // Ad-hoc - unused
-    TS_ADHC_UNUSED_11,     // Ad-hoc - unused
-    TS_ADHC_UNUSED_12,     // Ad-hoc - unused
+    TS_ADHC_MOVE_FWD,      // Ad-hoc - forward movement started
+    TS_ADHC_MOVE_REV,      // Ad-hoc - reverse movement started
+    TS_ADHC_VEHICLE_STOP,  // Ad-hoc - vehicle stopped
+    TS_ADHC_RIGHT_TURN,    // Ad-hoc - right turn started
+    TS_ADHC_LEFT_TURN,     // Ad-hoc - left turn started
+    TS_ADHC_NO_TURN,       // Ad-hoc - no turn
     TS_ADHC_UNUSED_13,     // Ad-hoc - unused
     TS_ADHC_UNUSED_14,     // Ad-hoc - unused
     TS_ADHC_UNUSED_15,     // Ad-hoc - unused

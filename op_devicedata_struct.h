@@ -28,6 +28,8 @@ struct _device_data {
     // save the entire external_io struct
     external_io PortA;
     external_io PortB;
+    uint16_t IOBlinkOnTime_mS;
+    uint16_t IOBlinkOffTime_mS;
 
 // Special function triggers
     _functionTrigger SF_Trigger[MAX_FUNCTION_TRIGGERS];	// Info for each trigger, up to MAX_FUNCTION_TRIGGERS

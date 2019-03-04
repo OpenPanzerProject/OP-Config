@@ -8,15 +8,17 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
 typedef char DEVICE;                    // Devices that we can program using OP Config
 #define DEVICE_TCB          0
-#define DEVICE_SCOUT        1           // Scout board versions R11 and later
-#define DEVICE_SCOUT_R10    2           // Scout board versions R10 and earlier
-#define DEVICE_TEENSYSOUND  3
+#define DEVICE_TCB_DIY      1           // DIY version of the TCB firmware, moves a few pins around for compatibility with stock Arduino MEGA boards
+#define DEVICE_SCOUT        2           // Scout board versions R11 and later
+#define DEVICE_SCOUT_R10    3           // Scout board versions R10 and earlier
+#define DEVICE_TEENSYSOUND  4
 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.
 // TCB firmware
 #define LATEST_RELEASE_VERSION_URL_TCB          "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
 #define LATEST_RELEASE_HEX_URL_TCB              "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
+#define LATEST_RELEASE_HEX_URL_TCB_DIY          "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1_diy.hex"
 
 // Scout firmware for Rev 11 boards and later (VNH5019 motor driver chips)
 #define LATEST_RELEASE_VERSION_URL_SCOUT        "http://openpanzer.org/downloads/scout/firmware/version.txt"

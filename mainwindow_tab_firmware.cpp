@@ -121,7 +121,9 @@ QString versionfile;
         // Release version URLs are defined at the top of MainWindow.h
         switch (ui->cboFlashDevice->currentData().toInt())
         {
-            case DEVICE_TCB:          versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
+            case DEVICE_TCB:          // Same version file for both of these
+            case DEVICE_TCB_DIY:      // Same version file for both of these
+                                      versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
             case DEVICE_SCOUT:        versionfile = LATEST_RELEASE_VERSION_URL_SCOUT;       break;
             case DEVICE_SCOUT_R10:    versionfile = LATEST_RELEASE_VERSION_URL_SCOUT_R10;   break;
             case DEVICE_TEENSYSOUND:  versionfile = LATEST_RELEASE_VERSION_URL_TEENSYSOUND; break;
@@ -183,6 +185,7 @@ void MainWindow::checkHexVersion()
     switch (ui->cboFlashDevice->currentData().toInt())
     {
         case DEVICE_TCB:          hexfile = LATEST_RELEASE_HEX_URL_TCB;         break;
+        case DEVICE_TCB_DIY:      hexfile = LATEST_RELEASE_HEX_URL_TCB_DIY;     break;
         case DEVICE_SCOUT:        hexfile = LATEST_RELEASE_HEX_URL_SCOUT;       break;
         case DEVICE_SCOUT_R10:    hexfile = LATEST_RELEASE_HEX_URL_SCOUT_R10;   break;
         case DEVICE_TEENSYSOUND:  hexfile = LATEST_RELEASE_HEX_URL_TEENSYSOUND; break;
@@ -201,10 +204,11 @@ void MainWindow::SaveWebHexToLocal()
     QString hexFilePath;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
-        case DEVICE_TCB:          hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);    break;
-        case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);   break;
+        case DEVICE_TCB:          hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);     break;
+        case DEVICE_TCB_DIY:      hexFilePath = hexFileFolder + QString("TCBMK1_DIY_%1.hex").arg(formattedVersion); break;
+        case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);    break;
         case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion); break;
-        case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);   break;
+        case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);    break;
     }
     //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
 
@@ -505,6 +509,7 @@ QString hex;
     {
         // These two are ATmega devices and we will use AVRDUDE to flash
         case DEVICE_TCB:
+        case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
             {
@@ -513,16 +518,16 @@ QString hex;
             program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
             QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
             QString flagPart;
-            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB)
-            {
+            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB || ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY )
+            {   // TCBs
                 flagPart =           "-patmega2560";   // -p part - TCB is the ATmega2560. This also needs to be defined in avrdude.conf
                 flagProgrammer =     "-cwiring";       // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
                                                        //    See which is used in Arduino boards.txt for your chip, in our case it is
                                                        //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
                 flagBaud =           "-b115200";       // -b baud - hardcoded to 115,200
             }
-            else    // Scouts
-            {
+            else
+            {   // Scouts
                 flagPart =           "-patmega328p";   // -p part - Scout uses an ATmega328p
                 flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
                                                        //    See which is used in Arduino boards.txt for your chip, in our case it is
@@ -607,6 +612,7 @@ void MainWindow::flashFinished()
     switch (ui->cboFlashDevice->currentData().toInt())
     {
         case DEVICE_TCB:
+        case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
             //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
@@ -681,6 +687,7 @@ void MainWindow::readyReadStandardOutput()
     switch (ui->cboFlashDevice->currentData().toInt())
     {
         case DEVICE_TCB:
+        case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
             // Append output to our string

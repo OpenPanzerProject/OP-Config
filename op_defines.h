@@ -193,7 +193,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 158;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 161;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -352,7 +352,10 @@ enum _special_function : byte {
     SF_SPEED_75         = 154,      // 154
     SF_SPEED_RESTORE    = 155,      // 155
     SF_OUTPUT_A_BLINK   = 156,      // 156
-    SF_OUTPUT_B_BLINK   = 157      // 157
+    SF_OUTPUT_B_BLINK   = 157,      // 157
+    SF_IR_ENABLE        = 158,      // 158
+    SF_IR_DISABLE       = 159,      // 159
+    SF_IR_TOGGLE        = 160      // 160
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

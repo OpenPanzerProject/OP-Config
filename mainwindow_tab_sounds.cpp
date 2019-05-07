@@ -297,6 +297,7 @@ void MainWindow::AddSoundFunctionsOP()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND_ALL_OFF);
     ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
     ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
     ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
@@ -346,6 +347,7 @@ void MainWindow::AddSoundFunctionsOP()
     ui->cboSelectFunction->AddSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->AddSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND_ALL_OFF);
     ui->cboSelectFunction->AddSF(SF_SBA_PLAYSTOP);
     ui->cboSelectFunction->AddSF(SF_SBA_NEXT);
     ui->cboSelectFunction->AddSF(SF_SBA_PREVIOUS);
@@ -401,6 +403,7 @@ void MainWindow::RemoveSoundFunctionsTaigen()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND_ALL_OFF);
     ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
     ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
     ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
@@ -453,6 +456,7 @@ void MainWindow::RemoveSoundFunctionsTaigen()
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_ONCE)|
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_RPT) |
         FT_TableModel->removeFunctionFromList(SF_USER_SOUND12_OFF) |
+        FT_TableModel->removeFunctionFromList(SF_USER_SOUND_ALL_OFF) |
         FT_TableModel->removeFunctionFromList(SF_SBA_PLAYSTOP)     |
         FT_TableModel->removeFunctionFromList(SF_SBA_NEXT)         |
         FT_TableModel->removeFunctionFromList(SF_SBA_PREVIOUS)     |
@@ -618,6 +622,7 @@ void MainWindow::AddSoundFunctionsBenedini_Mini()
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_ONCE);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_RPT);
     ui->cboSelectFunction->RemoveSF(SF_USER_SOUND12_OFF);
+    ui->cboSelectFunction->RemoveSF(SF_USER_SOUND_ALL_OFF);
     ui->cboSelectFunction->RemoveSF(SF_SBA_PLAYSTOP);
     ui->cboSelectFunction->RemoveSF(SF_SBA_NEXT);
     ui->cboSelectFunction->RemoveSF(SF_SBA_PREVIOUS);
@@ -658,6 +663,7 @@ void MainWindow::AddSoundFunctionsBenedini_Mini()
         ui->cboSelectFunction->AddSF(SF_USER_SOUND6_RPT);
         ui->cboSelectFunction->AddSF(SF_USER_SOUND6_OFF);
     }
+    ui->cboSelectFunction->AddSF(SF_USER_SOUND_ALL_OFF);
 }
 void MainWindow::UpdateSoundFunctionsBenedini()
 {

@@ -193,7 +193,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 161;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 163;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -247,7 +247,7 @@ enum _special_function : byte {
     SF_TURNMODE_1       = 49,       // 49
     SF_TURNMODE_2       = 50,       // 50
     SF_TURNMODE_3       = 51,       // 51
-    SF_SMOKER           = 52,       // 52   -- analog function -- see also 101-102 for digital on/off manual control of the smoker output
+    SF_SMOKER           = 52,       // 52   -- analog function, sets the speed of the smoker manually -- see also 101-102 & 161 for manual on/off/toggle digital functions. See 82-84 for control of auto smoker.
     SF_MOTOR_A          = 53,       // 53   -- analog function
     SF_MOTOR_B          = 54,       // 54   -- analog function
     SF_RC1_PASS         = 55,       // 55   -- analog function ("PASS" for pass-through) -- see also 92-97 for pass-throughs 6-8
@@ -277,7 +277,7 @@ enum _special_function : byte {
     SF_DRIVEPROFILE_1   = 79,       // 79
     SF_DRIVEPROFILE_2   = 80,       // 80
     SF_DRIVEPROFILE_TOGGLE = 81,    // 81
-    SF_SMOKER_ENABLE    = 82,       // 82
+    SF_SMOKER_ENABLE    = 82,       // 82   -- For control of _auto_ smoker functionality
     SF_SMOKER_DISABLE   = 83,       // 83
     SF_SMOKER_TOGGLE    = 84,       // 84
     SF_SET_VOLUME       = 85,       // 85
@@ -296,7 +296,7 @@ enum _special_function : byte {
     SF_INCR_VOLUME      = 98,       // 98
     SF_DECR_VOLUME      = 99,       // 99
     SF_STOP_VOLUME      = 100,      // 100
-    SF_SMOKER_ON        = 101,      // 101  -- see also 52 for analag manual control of the smoker output speed
+    SF_SMOKER_ON        = 101,      // 101  -- functions for controlling smoker manually, see also 52 for analog manual control of smoker output, and 161 for toggle. See 82-84 for control of auto smoker.
     SF_SMOKER_OFF       = 102,      // 102
     SF_USER_SOUND5_ONCE = 103,      // 103  -- see also 35-40 for user sounds 1 & 2 and 86-91 for user sounds 3 & 4
     SF_USER_SOUND5_RPT  = 104,      // 104
@@ -355,7 +355,9 @@ enum _special_function : byte {
     SF_OUTPUT_B_BLINK   = 157,      // 157
     SF_IR_ENABLE        = 158,      // 158
     SF_IR_DISABLE       = 159,      // 159
-    SF_IR_TOGGLE        = 160      // 160
+    SF_IR_TOGGLE        = 160,      // 160
+    SF_SMOKER_MANTOGGLE = 161,      // 161  -- see also 52 for analog manual control of smoker output and 101-102 for on/off
+    SF_USER_SOUND_ALL_OFF = 162    // 162
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save

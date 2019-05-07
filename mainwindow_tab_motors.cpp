@@ -138,11 +138,13 @@ void MainWindow::ShowHideSmokerSettings()
         ui->cboSelectFunction->RemoveSF(SF_SMOKER);     // This is an analog function for manual control of the speed (voltage)
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_ON);  // This is a digital function that allows manual control on
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_OFF); // This is a digital function that allows manual control off
+        ui->cboSelectFunction->RemoveSF(SF_SMOKER_MANTOGGLE); // This is a digital function that allows manual toggle of the output
         // Make sure we didn't already have a function trigger defined for it too
         // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
         if (FT_TableModel->removeFunctionFromList(SF_SMOKER)    |
             FT_TableModel->removeFunctionFromList(SF_SMOKER_ON) |
-            FT_TableModel->removeFunctionFromList(SF_SMOKER_OFF))
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_OFF)|
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_MANTOGGLE))
             { RemovedFunctionTriggersMsgBox(); }
         // Auto control does mean however that we want the three enable/disable/toggle functions to be available in the function list
         // The add function will only add it if it isn't there already
@@ -172,6 +174,7 @@ void MainWindow::ShowHideSmokerSettings()
         ui->cboSelectFunction->AddSF(SF_SMOKER);    // This is an analog function for manual control of the speed (voltage)
         ui->cboSelectFunction->AddSF(SF_SMOKER_ON); // This is a digital function that allows manual control on
         ui->cboSelectFunction->AddSF(SF_SMOKER_OFF);// This is a digital function that allows manual control off
+        ui->cboSelectFunction->AddSF(SF_SMOKER_MANTOGGLE);// This is a digital function that allows manual toggle of the output
         // But it also means we want to remove the three enable/disable/toggle functions because those only
         // apply to auto control
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_ENABLE);

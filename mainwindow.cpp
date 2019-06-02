@@ -1004,6 +1004,7 @@ void MainWindow::AboutOP()
     // The version info comes from version.h
     QString infoText = "<span style='font-size: 12px;'>Version ";
     infoText.append(VER_PRODUCTVERSION_STR);
+    // infoText.append("&nbsp;&nbsp;<b>[TEST]</b><br /><br />&#169; "); // Use for test versions instead of next line
     infoText.append("<br /><br />&#169; ");
     infoText.append(VER_COPYRIGHT_YEAR_STR);
     infoText.append(" <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");

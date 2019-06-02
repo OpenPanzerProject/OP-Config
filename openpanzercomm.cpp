@@ -202,6 +202,8 @@ void OpenPanzerComm::sendInit()
 
         if (serial->isOpen() && serial->isWritable())
         {
+            // This line seems to make no difference, so we're leaving it out.
+            // serial->setDataTerminalReady(true); // True here means "set DTR pin High", ie don't reset device. We desperately want this high, but Windows seems to have a mind of its own
             // Clear response, do this *before* sending anything
             ClearResponseData();
             SentenceReceived = false;   // Reset this as well. DO NOT DO THIS in ClearResponseData()
@@ -249,6 +251,8 @@ void OpenPanzerComm::closeSerial()
     if (serial->isOpen())
     {   // Make sure DTR is high at the end, in case it makes any difference next time
         serial->setDataTerminalReady(true); // True here means "set DTR pin High"
+        // This also seems to make no difference, so we'll leave it out
+        // serial->setSettingsRestoredOnClose(false);
         serial->close();
     }
     // If we disconnect while the radio is streaming, we want to emit the radio streaming

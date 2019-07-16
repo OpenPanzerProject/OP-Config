@@ -162,6 +162,7 @@
 
 // Debugging
 #define DEBUG_MSGS              false    // Set to true to have serial comms printed to the debug panel
+#define DEBUG_SEND_RECEIVE      false    // Print the send/receive sentences to the debug panel
 
 
 struct PortSettings {

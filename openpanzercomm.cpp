@@ -208,7 +208,7 @@ void OpenPanzerComm::sendInit()
             ClearResponseData();
             SentenceReceived = false;   // Reset this as well. DO NOT DO THIS in ClearResponseData()
             serial->write(Identify);
-            if (DEBUG_MSGS) qDebug() << "Sent: OPZ";
+            if (DEBUG_SEND_RECEIVE) qDebug() << "Sent: OPZ";
             if (APPEND_SENT_TO_CONSOLE) { QByteArray qc = Identify; emit NewData(qc.prepend("<- ")); }
             // You have to wait for bytes to be written or else it will skip!!
             if (!serial->waitForBytesWritten(50))
@@ -388,16 +388,20 @@ boolean OpenPanzerComm::sendSentence(DataSentence &_sentence)
 
         // You have to wait for bytes to be written or else it will skip!!
         if (!serial->waitForBytesWritten(50))
-        {
-            if (DEBUG_MSGS) qDebug() << serial->errorString();
-            closeSerial();  // We fail on this case and close the port
+        {   // This seems to throw error number 0 "Unknown Error" every now and then, but there is really no actual error.
+            if (serial->error() != 0)
+            {
+                if (DEBUG_MSGS) qDebug() << "Error Number " << serial->error() << ": " << serial->errorString();
+                serial->clearError();   // If you try to clear on an error 0 the program will croak
+                closeSerial();  // We fail on this case and close the port
+            }
             return false;
         }
 
         // Ok, it was really sent
 
         // Debug if option is set
-        if (DEBUG_MSGS) qDebug() << "Sent: " << bas;
+        if (DEBUG_SEND_RECEIVE) sentenceToDebug(_sentence, true);
 
         // Put a copy on the console if option is set
         if (APPEND_SENT_TO_CONSOLE)
@@ -553,7 +557,7 @@ void OpenPanzerComm::readData()
             SentenceReceived = true;
             emit AnySentence(); // We will use this to halt the watchdog timer
 
-            if (DEBUG_MSGS) sentenceToDebug(SentenceIN, false);  // This sends the sentence to the debug port so we can see it
+            if (DEBUG_SEND_RECEIVE) sentenceToDebug(SentenceIN, false);  // This sends the sentence to the debug port so we can see it
 
             switch (SentenceIN.Command)
             {
@@ -1041,13 +1045,9 @@ void OpenPanzerComm::sentenceToMsgBox(DataSentence sentence)
 
 void OpenPanzerComm::handleError(QSerialPort::SerialPortError error)
 {
-//    if (error == QSerialPort::ResourceError)
-//    {
-//        qDebug() << serial->errorString();
-//    }
-
     if (error != 0)
     {
+        if (DEBUG_MSGS) qDebug() << "Error number " << error << ": " << serial->errorString();
         emit CommError(serial->errorString(), serial->error());
         serial->clearError();
     }

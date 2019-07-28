@@ -188,9 +188,9 @@ void OpenPanzerComm::ConnectToDevice(void)
     initTimer->setSingleShot(true);
     initTimer->start(INIT_TIME);        // 1. Start this first, because sendInit() will only do anything if initTimer is active
     startBlitz = false;                 // 2. We are not ready to blitz, just send the init string once
-    sendInit();                         // 3. Send the first init string in the hope that we connect right away. This will also set startBlitz to true
-    blitzTimer->setSingleShot(true);    // 4. Because it probably won't connect, start the blitz timer.
+    blitzTimer->setSingleShot(true);    // 3. Because it probably won't connect, start the blitz timer.
     blitzTimer->start(FIRST_BLITZ_TIME);//    The first time is single shot, second and subsequent times will be configured by sendInit()
+    sendInit();                         // 4. Send the first init string and hope we connect right away. This will also set startBlitz to true
 }
 
 void OpenPanzerComm::sendInit()
@@ -207,9 +207,9 @@ void OpenPanzerComm::sendInit()
             // Clear response, do this *before* sending anything
             ClearResponseData();
             SentenceReceived = false;   // Reset this as well. DO NOT DO THIS in ClearResponseData()
-            serial->write(Identify);
             if (DEBUG_SEND_RECEIVE) qDebug() << "Sent: OPZ";
             if (APPEND_SENT_TO_CONSOLE) { QByteArray qc = Identify; emit NewData(qc.prepend("<- ")); }
+            serial->write(Identify);
             // You have to wait for bytes to be written or else it will skip!!
             if (!serial->waitForBytesWritten(50))
             {

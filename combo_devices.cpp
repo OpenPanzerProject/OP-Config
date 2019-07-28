@@ -3,11 +3,12 @@
 DeviceComboBox::DeviceComboBox(QWidget *parent) : QComboBox(parent)
 {
     // Fill on creation
-    this->insertItem(0, "TCB", DEVICE_TCB);
-    this->insertItem(1, "TCB - DIY Version", DEVICE_TCB_DIY);
-    this->insertItem(2, "Scout ESC (R11+)", DEVICE_SCOUT);
-    this->insertItem(3, "Scout ESC (R10 & prior)", DEVICE_SCOUT_R10);
-    this->insertItem(4, "Sound Card", DEVICE_TEENSYSOUND);
+//    this->insertItem(0, "TCB Mk II", DEVICE_TCB_MKII);            // For later use
+    this->insertItem(1, "TCB", DEVICE_TCB);
+    this->insertItem(2, "TCB - DIY Version", DEVICE_TCB_DIY);
+    this->insertItem(3, "Scout ESC (R11+)", DEVICE_SCOUT);
+    this->insertItem(4, "Scout ESC (R10 & prior)", DEVICE_SCOUT_R10);
+    this->insertItem(5, "Sound Card", DEVICE_TEENSYSOUND);
 
     connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(emitFlashDeviceChanged()));
 

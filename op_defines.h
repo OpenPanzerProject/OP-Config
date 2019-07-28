@@ -12,6 +12,7 @@ typedef char DEVICE;                    // Devices that we can program using OP 
 #define DEVICE_SCOUT        2           // Scout board versions R11 and later
 #define DEVICE_SCOUT_R10    3           // Scout board versions R10 and earlier
 #define DEVICE_TEENSYSOUND  4
+#define DEVICE_TCB_MKII     5
 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.
@@ -19,6 +20,10 @@ typedef char DEVICE;                    // Devices that we can program using OP 
 #define LATEST_RELEASE_VERSION_URL_TCB          "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
 #define LATEST_RELEASE_HEX_URL_TCB              "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
 #define LATEST_RELEASE_HEX_URL_TCB_DIY          "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1_diy.hex"
+
+// TCB MkII firmware
+#define LATEST_RELEASE_VERSION_URL_TCB_MKII     "http://openpanzer.org/downloads/tcbmk2/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TCB_MKII         "http://openpanzer.org/downloads/tcbmk2/firmware/tcbmk2.hex"
 
 // Scout firmware for Rev 11 boards and later (VNH5019 motor driver chips)
 #define LATEST_RELEASE_VERSION_URL_SCOUT        "http://openpanzer.org/downloads/scout/firmware/version.txt"
@@ -626,10 +631,10 @@ typedef char SOUND_DEVICE;
 #define SD_TAIGEN_SOUND         2
 #define SD_BEIER_USMRC2         3
 #define SD_BENEDINI_TBSMICRO    4       // Added December 2017
+#define SD_ONBOARD              5       // Added July 2019
 
 #define SD_FIRST_SD             SD_BENEDINI_TBSMINI
-#define SD_LAST_SD              SD_BENEDINI_TBSMICRO
-
+#define SD_LAST_SD              SD_ONBOARD
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>

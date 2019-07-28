@@ -121,6 +121,7 @@ QString versionfile;
         // Release version URLs are defined at the top of MainWindow.h
         switch (ui->cboFlashDevice->currentData().toInt())
         {
+            case DEVICE_TCB_MKII:     versionfile = LATEST_RELEASE_VERSION_URL_TCB_MKII;    break;
             case DEVICE_TCB:          // Same version file for both of these
             case DEVICE_TCB_DIY:      // Same version file for both of these
                                       versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
@@ -184,6 +185,7 @@ void MainWindow::checkHexVersion()
     QString hexfile;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
+        case DEVICE_TCB_MKII:     hexfile = LATEST_RELEASE_HEX_URL_TCB_MKII;    break;
         case DEVICE_TCB:          hexfile = LATEST_RELEASE_HEX_URL_TCB;         break;
         case DEVICE_TCB_DIY:      hexfile = LATEST_RELEASE_HEX_URL_TCB_DIY;     break;
         case DEVICE_SCOUT:        hexfile = LATEST_RELEASE_HEX_URL_SCOUT;       break;
@@ -204,6 +206,7 @@ void MainWindow::SaveWebHexToLocal()
     QString hexFilePath;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
+        case DEVICE_TCB_MKII:     hexFilePath = hexFileFolder + QString("TCBMK2_%1.hex").arg(formattedVersion);     break;
         case DEVICE_TCB:          hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);     break;
         case DEVICE_TCB_DIY:      hexFilePath = hexFileFolder + QString("TCBMK1_DIY_%1.hex").arg(formattedVersion); break;
         case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);    break;
@@ -560,8 +563,9 @@ QString hex;
             }
             break;
 
-        // We will use PJRC's command-line version of Teensy Loader to flash the Teensy 3.2 chip on the Sound Card.
+        // We will use PJRC's command-line version of Teensy Loader to flash the Teensy 3.2 chip on the TCB MkII and the Sound Card.
         // No baud or COM port settings are required.
+        case DEVICE_TCB_MKII:
         case DEVICE_TEENSYSOUND:
             {
             // Construct our Teensy Loader executable and list of arguments.
@@ -634,6 +638,7 @@ void MainWindow::flashFinished()
             AVRDUDEProcess->kill();
             break;
 
+        case DEVICE_TCB_MKII:
         case DEVICE_TEENSYSOUND:
             //qDebug() << TeensyLoaderProcess->exitCode() << " - " << TeensyLoaderProcess->exitStatus();
             if (TeensyLoaderProcess->exitCode() == 0)
@@ -652,7 +657,14 @@ void MainWindow::flashFinished()
                 // now. Add a failure message
                 ui->txtConsole->append("FLASH FAILED.");
 
-                msgBox("Flash operation failed. Remember to push the button on your Sound Card after the flash operation starts!",vbOkOnly,"Flash Failed", vbExclamation);
+                if (ui->cboFlashDevice->currentData().toInt() == DEVICE_TCB_MKII)
+                {
+                    msgBox("Flash operation failed. Remember to push the button on your TCB MkII after the flash operation starts!",vbOkOnly,"Flash Failed", vbExclamation);
+                }
+                else if (ui->cboFlashDevice->currentData().toInt() == DEVICE_TEENSYSOUND)
+                {
+                    msgBox("Flash operation failed. Remember to push the button on your Sound Card after the flash operation starts!",vbOkOnly,"Flash Failed", vbExclamation);
+                }
                 SetStatusLabel("Firmware update failed!",slBad);
             }
 
@@ -711,6 +723,7 @@ void MainWindow::readyReadStandardOutput()
             }
             break;
 
+        case DEVICE_TCB_MKII:
         case DEVICE_TEENSYSOUND:
             // Append output to our string
             strTeensyLoaderOutput.append(TeensyLoaderProcess->readAllStandardOutput());
@@ -781,7 +794,7 @@ void MainWindow::ShowSnoopStatus(boolean snooping)
         qs.append(ui->cboCOMPorts->currentText());
         SetStatusLabel(qs,slNeutral);
         ui->cmdSnoop->setChecked(true);                 // "Check" Snoop button
-            ui->cmdSnoop->setText("Stop Snooping");   // Change text to "Stop Snooping"
+            ui->cmdSnoop->setText("Stop Snooping");     // Change text to "Stop Snooping"
                 ui->cmdSnoop->setEnabled(true);
 
         // While snooping, the device is actually what we consider "disconnected" (not deliberately communicating).

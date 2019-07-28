@@ -473,9 +473,9 @@ void MainWindow::cmdToggleRadioStream_Click()
         // Before we actually start streaming, we first request the number of utilized channels
         // When the response arrives we will then proceed to initiate streaming.
         NumUtilizedChannels = 0;                // reset
-        comm->requestUtilizedRadioChannels();   // request
         Flag_StartRadioStream = true;           // The flag isn't to specify that streaming has started, it is to specify that we
                                                 // *want* streaming to start after the number of channels has been read.
+        comm->requestUtilizedRadioChannels();   // request
     }
 }
 // This slot is connected to the comm object signal that fires when streaming has started or stopped.

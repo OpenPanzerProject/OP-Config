@@ -118,6 +118,8 @@ void MainWindow::ShowHideSoundCardSettings()
             DisableTurretSoundSettings();
             break;
 
+        // These two have the same options
+        case SD_ONBOARD:
         case SD_OP_SOUND_CARD:
             // The only functions we need to remove for this card are the stepwise volume control functions,
             // since we can instead control volume directly

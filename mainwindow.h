@@ -229,6 +229,7 @@ private slots:
 
       // Motor tab
       void ValidateMotorSelections();
+      void ValidateSmokerSelections();
       void ShowHideRecoilDelay();
       void SetMechBarrelAuto(bool);
       void SetRecoilServoAuto(bool);

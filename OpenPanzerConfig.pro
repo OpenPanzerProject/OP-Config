@@ -74,7 +74,8 @@ SOURCES += main.cpp\
     mainwindow_tab_radio.cpp \
     singleapplication.cpp \
     combo_recoilservopreset.cpp \
-    combo_devices.cpp
+    combo_devices.cpp \
+    combo_smokertype.cpp
 
 HEADERS  += mainwindow.h \
     deviceselect.h \
@@ -110,7 +111,8 @@ HEADERS  += mainwindow.h \
     resources.rc \
     singleapplication.h \
     combo_recoilservopreset.h \
-    combo_devices.h
+    combo_devices.h \
+    combo_smokertype.h
 
 FORMS    += mainwindow.ui \
         deviceselect.ui

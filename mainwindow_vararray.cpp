@@ -197,6 +197,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.RecoilServo_Return_mS = VarArray.value(2017).toInt();                        // 2017 - Time in milliseconds for barrel to return
     DeviceData.RecoilServo_EPMin = VarArray.value(2018).toInt();                            // 2018 - Recoil servo endpoint adjustments. Min will be recoiled position
     DeviceData.RecoilServo_EPMax = VarArray.value(2019).toInt();                            // 2019 - Max will be returned position
+    DeviceData.RecoilServo_PresetNum = VarArray.value(2020).toUInt();                       // 2020 - Number that identifies a set of pre-determined recoil servo settings
 
     // On board smoker output - 22xx
     DeviceData.SmokerControlAuto = VarArray.value(2211).toUInt();                           // 2211 - Smoker speed controlled by engine speed
@@ -204,6 +205,11 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.SmokerFastIdleSpeed = VarArray.value(2213).toInt();                          // 2213 - Smoker fast idle speed (when transmission disengaged)
     DeviceData.SmokerMaxSpeed = VarArray.value(2214).toInt();                               // 2214 - Max smoker speed
     DeviceData.SmokerDestroyedSpeed = VarArray.value(2215).toInt();                         // 2215 - Smoker speed when tank destroyed
+    DeviceData.SmokerDeviceType = VarArray.value(2216).toUInt();                            // 2216 - Smoker device type
+    DeviceData.SmokerPreHeat_Sec = VarArray.value(2217).toUInt();                           // 2217 - Smoker preheat time in seconds
+    DeviceData.SmokerHeatIdleAmt = VarArray.value(2218).toInt();                            // 2218 - Smoker heat level at idle
+    DeviceData.SmokerHeatFastIdleAmt = VarArray.value(2219).toInt();                        // 2219 - Smoker heat level at fast idle
+    DeviceData.SmokerHeatMaxAmt = VarArray.value(2220).toInt();                             // 2220 - Smoker heat level at max throttle
 
     // Driving adjustments - 24xx
     DeviceData.AccelRampEnabled_1 = VarArray.value(2411).toUInt();                          // 2411 - Accel ramp enabled (profile 1)
@@ -517,6 +523,7 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2017, QByteArray::number(DeviceData.RecoilServo_Return_mS));                    // 2017 - Time in milliseconds for barrel to return
     VarArray.insert(2018, QByteArray::number(DeviceData.RecoilServo_EPMin));                        // 2018 - Recoil servo endpoint adjustments. Min will be recoiled position
     VarArray.insert(2019, QByteArray::number(DeviceData.RecoilServo_EPMax));                        // 2019 - Max will be returned position
+    VarArray.insert(2020, QByteArray::number(DeviceData.RecoilServo_PresetNum));                    // 2020 - Number that identifies a set of pre-determined recoil servo settings
 
     // On board smoker output - 22xx
     VarArray.insert(2211, QByteArray::number(DeviceData.SmokerControlAuto));                        // 2211 - Smoker controlled by engine speed
@@ -524,6 +531,11 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2213, QByteArray::number(DeviceData.SmokerFastIdleSpeed));                      // 2213 - Smoker fast idle speed (when transmission disengaged)
     VarArray.insert(2214, QByteArray::number(DeviceData.SmokerMaxSpeed));                           // 2214 - Max smoker speed
     VarArray.insert(2215, QByteArray::number(DeviceData.SmokerDestroyedSpeed));                     // 2215 - Smoker speed when tank destroyed
+    VarArray.insert(2216, QByteArray::number(DeviceData.SmokerDeviceType));                         // 2216 - Smoker device type
+    VarArray.insert(2217, QByteArray::number(DeviceData.SmokerPreHeat_Sec));                        // 2217 - Smoker preheat time in seconds
+    VarArray.insert(2218, QByteArray::number(DeviceData.SmokerHeatIdleAmt));                        // 2218 - Smoker heat level at idle
+    VarArray.insert(2219, QByteArray::number(DeviceData.SmokerHeatFastIdleAmt));                    // 2219 - Smoker heat level at fast idle
+    VarArray.insert(2220, QByteArray::number(DeviceData.SmokerHeatMaxAmt));                         // 2220 - Smoker heat level at max throttle
 
     // Driving adjustments - 24xx
     VarArray.insert(2411, QByteArray::number(DeviceData.AccelRampEnabled_1));                       // 2411 - Accel ramp enabled (profile 1)

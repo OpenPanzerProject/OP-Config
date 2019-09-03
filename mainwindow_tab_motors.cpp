@@ -25,6 +25,8 @@ void MainWindow::SetupControls_MotorTab(void)
     ui->cboSmokerControl->insertItem(1, "Manual (with function triggers)", false);
     ui->cboSmokerControl->setCurrentIndex(0);
     connect(ui->cboSmokerControl, SIGNAL(currentIndexChanged(int)), this, SLOT(ShowHideSmokerSettings()));
+    connect(ui->cboSmokerControl, SIGNAL(currentIndexChanged(int)), this, SLOT(ValidateSmokerSelections()));
+    connect(ui->cboSmokerType, SIGNAL(currentIndexChanged(int)), this, SLOT(ValidateSmokerSelections()));
 
     // Setup the airsoft/recoil combo
     ui->cboMechBarrelType->insertItem(1, "Airsoft", true);
@@ -113,14 +115,38 @@ void MainWindow::ShowHideRecoilDelay()
 void MainWindow::ShowHideSmokerSettings()
 {
     if (ui->cboSmokerControl->currentData() == true)
-    {   // Auto control - show the speed settings
+    {   // Auto control - allow type selection
+        // Show type selection
+        ui->lblSmokerType->setEnabled(true);
+        ui->cboSmokerType->setEnabled(true);
+        ui->cboSmokerType->setCurrentIndex(ui->cboSmokerType->findData(DeviceData.SmokerDeviceType));
+    }
+    else
+    {   // Manual control - disable type selection
+        // Disable type control
+        ui->cboSmokerType->setCurrentSmokerType(SMOKERTYPE_ONBOARD_STANDARD);   // Set to onboard default
+        DeviceData.SmokerDeviceType = SMOKERTYPE_ONBOARD_STANDARD;
+        ui->cboSmokerType->setEnabled(false);
+        ui->lblSmokerType->setEnabled(false);
+    }
+}
+
+
+void MainWindow::ValidateSmokerSelections()
+{
+    if (ui->cboSmokerControl->currentData() == true)
+    {   // Auto control - let the user adjust smoker settings
+
         // Show labels
         ui->lblSmokerIdle->setEnabled(true);
         ui->lblSmokerIdle2->setEnabled(true);
+        ui->lblSmokerIdle3->setEnabled(true);
         ui->lblSmokerFastIdle->setEnabled(true);
         ui->lblSmokerFastIdle2->setEnabled(true);
+        ui->lblSmokerFastIdle3->setEnabled(true);
         ui->lblSmokerMax->setEnabled(true);
         ui->lblSmokerMax2->setEnabled(true);
+        ui->lblSmokerMax3->setEnabled(true);
         ui->lblSmokeDestroyed->setEnabled(true);
         ui->lblSmokeDestroyed2->setEnabled(true);
         ui->lblSmokeDestroyed3->setEnabled(true);
@@ -151,9 +177,99 @@ void MainWindow::ShowHideSmokerSettings()
         ui->cboSelectFunction->AddSF(SF_SMOKER_ENABLE);
         ui->cboSelectFunction->AddSF(SF_SMOKER_DISABLE);
         ui->cboSelectFunction->AddSF(SF_SMOKER_TOGGLE);
+
+        // Now, some further refinement depending on whether they have combined or separate heat & fan controls
+        switch (static_cast<Smoker_t>(ui->cboSmokerType->currentData().toUInt()))
+        {
+            case SMOKERTYPE_ONBOARD_STANDARD:
+                // Heat specific settings disabled (because heater and fan combined)
+                ui->lblSmokerSeparateHint->hide();
+                ui->spinSmokerPreheatTime->setValue(0);
+                DeviceData.SmokerPreHeat_Sec = 0;
+                ui->spinSmokerPreheatTime->setEnabled(false);
+                ui->lblSmokePreheat1->setEnabled(false);
+                ui->lblSmokePreheat2->setEnabled(false);
+
+                ui->spinSmokerHeatIdle->setEnabled(false);
+                ui->lblSmokerHeatIdle->setEnabled(false);
+                ui->lblSmokerHeatIdle2->setEnabled(false);
+
+                ui->spinSmokerHeatFastIdle->setEnabled(false);
+                ui->lblSmokerHeatFastIdle->setEnabled(false);
+                ui->lblSmokerHeatFastIdle2->setEnabled(false);
+
+                ui->spinSmokerHeatMax->setEnabled(false);
+                ui->lblSmokerHeatMax->setEnabled(false);
+                ui->lblSmokerHeatMax2->setEnabled(false);
+
+                // Add back the Aux functions in case they were removed.
+                // The add function will only add it if it isn't there already
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLE);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_ON);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_OFF);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_LEVEL);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_PRESETDIM);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEDIM);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_FLASH);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_INV_FLASH);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_BLINK);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEBLINK);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_REVOLVE);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEREVOLVE);
+                break;
+
+            case SMOKERTYPE_ONBOARD_SEPARATE:
+            case SMOKERTYPE_SERIAL:
+                // Heat specific settings enabled (heater and fan separate)
+                ui->lblSmokerSeparateHint->show();
+                ui->lblSmokePreheat1->setEnabled(true);
+                ui->lblSmokePreheat2->setEnabled(true);
+                ui->spinSmokerPreheatTime->setEnabled(true);
+                ui->spinSmokerHeatIdle->setEnabled(true);
+                ui->lblSmokerHeatIdle->setEnabled(true);
+                ui->lblSmokerHeatIdle2->setEnabled(true);
+                ui->spinSmokerHeatFastIdle->setEnabled(true);
+                ui->lblSmokerHeatFastIdle->setEnabled(true);
+                ui->lblSmokerHeatFastIdle2->setEnabled(true);
+                ui->spinSmokerHeatMax->setEnabled(true);
+                ui->lblSmokerHeatMax->setEnabled(true);
+                ui->lblSmokerHeatMax2->setEnabled(true);
+
+                // Also in this case, we remove the manual Aux control functions from the function list
+                // since those will be re-purposed for the fan
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_TOGGLE);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_ON);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_OFF);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_LEVEL);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_PRESETDIM);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_TOGGLEDIM);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_FLASH);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_INV_FLASH);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_BLINK);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_TOGGLEBLINK);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_REVOLVE);
+                ui->cboSelectFunction->RemoveSF(SF_AUXOUT_TOGGLEREVOLVE);
+                // Make sure we didn't already have any function triggers defined for these too
+                // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+                if (FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLE)      |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_ON)          |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_OFF)         |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_LEVEL)       |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_PRESETDIM)   |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEDIM)   |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_FLASH)       |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_INV_FLASH)   |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_BLINK)       |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEBLINK) |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_REVOLVE)     |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEREVOLVE) )
+                    { RemovedFunctionTriggersMsgBox(); }
+                break;
+        }
     }
     else
-    {   // Manual control - hide the speed settings
+    {   // Manual control - no settings, only function triggers for manual control of smoker output
+
         // Hide labels
         ui->lblSmokerIdle->setEnabled(false);
         ui->lblSmokerIdle2->setEnabled(false);
@@ -169,12 +285,42 @@ void MainWindow::ShowHideSmokerSettings()
         ui->spinSmokerFastIdle->setEnabled(false);
         ui->spinSmokerMax->setEnabled(false);
         ui->spinSmokeDestroyed->setEnabled(false);
+        // Smoker pre-heat disabled
+        ui->lblSmokerSeparateHint->hide();
+        ui->spinSmokerPreheatTime->setValue(0);
+        DeviceData.SmokerPreHeat_Sec = 0;
+        ui->spinSmokerPreheatTime->setEnabled(false);
+        ui->lblSmokePreheat1->setEnabled(false);
+        ui->lblSmokePreheat2->setEnabled(false);
+        // Heat-specific settings disabled
+        ui->spinSmokerHeatIdle->setEnabled(false);
+        ui->lblSmokerHeatIdle->setEnabled(false);
+        ui->lblSmokerHeatIdle2->setEnabled(false);
+        ui->spinSmokerHeatFastIdle->setEnabled(false);
+        ui->lblSmokerHeatFastIdle->setEnabled(false);
+        ui->lblSmokerHeatFastIdle2->setEnabled(false);
+        ui->spinSmokerHeatMax->setEnabled(false);
+        ui->lblSmokerHeatMax->setEnabled(false);
+        ui->lblSmokerHeatMax2->setEnabled(false);
         // Manual control means we need to add the smoker control functions to the function list
         // The add function will only add it if it isn't there already
         ui->cboSelectFunction->AddSF(SF_SMOKER);    // This is an analog function for manual control of the speed (voltage)
         ui->cboSelectFunction->AddSF(SF_SMOKER_ON); // This is a digital function that allows manual control on
         ui->cboSelectFunction->AddSF(SF_SMOKER_OFF);// This is a digital function that allows manual control off
         ui->cboSelectFunction->AddSF(SF_SMOKER_MANTOGGLE);// This is a digital function that allows manual toggle of the output
+        // Also add back the Aux control functions in case those were removed
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLE);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_ON);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_OFF);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_LEVEL);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_PRESETDIM);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEDIM);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_FLASH);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_INV_FLASH);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_BLINK);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEBLINK);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_REVOLVE);
+        ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEREVOLVE);
         // But it also means we want to remove the three enable/disable/toggle functions because those only
         // apply to auto control
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_ENABLE);

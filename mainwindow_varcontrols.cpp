@@ -99,13 +99,21 @@ void MainWindow::Variables_to_Controls(void)
     ui->chkRecoilServoReversed->setChecked(DeviceData.RecoilReversed);
     ui->chkEnableRecoilServo->setChecked(DeviceData.ServoRecoilWithCannon);
     SetRecoilServoAuto(ui->chkEnableRecoilServo->isChecked());
+    ui->cboRecoilServoPreset->setCurrentIndex(ui->cboRecoilServoPreset->findData(DeviceData.RecoilServo_PresetNum));
+        // -- Now here you would presumably have a function that loaded the presets for this preset num
     // Smoker settings - convert to Percent-based for user convenience (0-100, but they are actually 0-255)
     ui->cboSmokerControl->setCurrentIndex(ui->cboSmokerControl->findData(DeviceData.SmokerControlAuto));
+    ui->cboSmokerType->setCurrentIndex(ui->cboSmokerType->findData(DeviceData.SmokerDeviceType));
     ui->spinSmokerMax->setValue(qRound(static_cast<double>(DeviceData.SmokerMaxSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerFastIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokeDestroyed->setValue(qRound(static_cast<double>(DeviceData.SmokerDestroyedSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
+    ui->spinSmokerPreheatTime->setValue(DeviceData.SmokerPreHeat_Sec);
+    ui->spinSmokerHeatIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerHeatIdleAmt)/MOTOR_MAX_FWDSPEED_DBL*100.0));
+    ui->spinSmokerHeatFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerHeatFastIdleAmt)/MOTOR_MAX_FWDSPEED_DBL*100.0));
+    ui->spinSmokerHeatMax->setValue(qRound(static_cast<double>(DeviceData.SmokerHeatMaxAmt)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ShowHideSmokerSettings();
+    ValidateSmokerSelections();
 
 
     // Lights & IO Tab
@@ -372,12 +380,18 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.RecoilReversed = ui->chkRecoilServoReversed->isChecked();
     DeviceData.RecoilServo_Recoil_mS = ui->spinRecoilTimeToRecoil->value();
     DeviceData.RecoilServo_Return_mS = ui->spinRecoilTimeToReturn->value();
+    DeviceData.RecoilServo_PresetNum = ui->cboRecoilServoPreset->getCurrentRecoilPreset();
     // Smoker settings - convert 0-100 back to 0-255
     DeviceData.SmokerControlAuto = static_cast<boolean>(ui->cboSmokerControl->currentData().toUInt());
+    DeviceData.SmokerDeviceType = ui->cboSmokerType->getCurrentSmokerType();
     DeviceData.SmokerMaxSpeed = qRound((static_cast<double>(ui->spinSmokerMax->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerIdleSpeed = qRound((static_cast<double>(ui->spinSmokerIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerFastIdleSpeed = qRound((static_cast<double>(ui->spinSmokerFastIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerDestroyedSpeed = qRound((static_cast<double>(ui->spinSmokeDestroyed->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
+    DeviceData.SmokerPreHeat_Sec = ui->spinSmokerPreheatTime->value();
+    DeviceData.SmokerHeatIdleAmt = qRound((static_cast<double>(ui->spinSmokerHeatIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
+    DeviceData.SmokerHeatFastIdleAmt = qRound((static_cast<double>(ui->spinSmokerHeatFastIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
+    DeviceData.SmokerHeatMaxAmt = qRound((static_cast<double>(ui->spinSmokerHeatMax->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
 
     // Lights & IO tab
     // ---------------------------------------------------------------------------------------------------------->>

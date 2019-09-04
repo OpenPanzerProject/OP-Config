@@ -183,39 +183,65 @@
     
 	<h2 id="smoker">Smoker</h2>
 	<p>
-	The TCB is compatible with Heng-Long style smoker units or any unit that requires nothing more than a variable voltage. You do not need a special "proportional" smoker, the TCB takes care of the 
-	smoker speed internally whenever you advance the throttle. For further information on hardware see the 
-	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:smoker">Open Panzer Wiki - Smoker</a> page. 
+	The TCB is compatible with Heng-Long style smoker units or any unit that requires nothing more than a variable voltage. You do not need a special "proportional" smoker, the TCB takes care 
+    of the smoker speed internally whenever you advance the throttle. For further information on hardware see the 
+	<a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:smoker">Open Panzer Wiki - Smoker</a> page under the Installation section. 
 	</p>
 
 	<h4 class="entry">Control</h4>
 	<p>
-	The SMOKER output on the TCB can be controlled in two ways. Automatically by engine speed is what you should use if you actually intend to connect a smoke unit to the TCB. In this control mode
-	the TCB will automatically take care of turning on and off the smoker with the engine, setting the speed to match the engine speed while running, and applying the idle, fast idle, and max speed 
-	settings defined below. But if you are not going to use a smoke unit, you can treat the SMOKER output as a general purpose, unidirectional motor speed controller. In Manual mode the output can 
-	be controlled with any analog trigger source assigned to the <b>Smoker - Manual Control</b> function. 
+    The SMOKER output on the TCB can be controlled in two ways. <b>Auto (with engine speed)</b> is what you should use if you actually intend to connect a smoke unit to the TCB. In this control mode 
+    the TCB will automatically take care of setting the speed with throttle, turning off the smoker when the engine is off, and applying the idle, fast idle, and max speed settings defined below. 
+    But if you are not going to use a smoke unit you can treat the SMOKER output as a general purpose, unidirectional motor speed controller. In <b>Manual</b> mode the output can be controlled with 
+    any analog trigger source assigned to the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:operation:functionlist#smoker">Smoker - Manual Speed function</a>. 
 	</p>
 	
+	<h4 class="entry">Type</h4>
+	<p>
+    Here you can select the type of smoker device you are using. If you have a standard Heng Long/Taigen type smoker where the fan and the heating element are driven as one, then select 
+    <b>Combined Heat &amp; Fan</b>. If however you are using some kind of custom smoker where you intend to control the fan and heating element separately, select <b>Separate Heat &amp; Fan</b>. 
+    When using separate outputs, you will need to connect the fan to the AUX output of the TCB (it must be a 5 volt fan), and connect the heating element to the SMOKER output 
+    (it will receive full battery voltage). 
+    </p>
+
+	<h4 class="entry">Preheat Time</h4>
+	<p>
+    This option becomes available if you are using separate heat and fan outputs, and will allow you to specify a length of time in seconds that the heating element should be powered before the tank engine 
+    is started. Set this option to 0 to disable preheating or if you don't want an engine start delay. Otherwise if a time is specified, when you start the engine with whatever trigger you have assigned 
+    to that function, the heating element will immediately be turned on to full power (battery voltage) and an optional pre-heat sound will be played as a notification (User Sound 2 if using the Benedini 
+    TBS Mini or "preheat.wav" if using the Open Panzer sound card). After the length of time specified has passed, the engine will automatically start and the smoker fan will then turn on. 
+    </p>
+
+	<h4 class="entry">Speed Notes</h4>
+	<p>    
+    Note - there is no requirement that the idle speed must be faster than the max speed. Some users prefer to have a lot of smoke at idle and less smoke underway. To accomplish this sort of effect 
+    simply set the idle/fast idle speeds higher than the maximum speed and the TCB will take care of the scaling.
+    </p>
+
 	<h4 class="entry">Idle Speed:</h4>
 	<p>
-	This is the minimum smoker speed. The smoker will operate at this speed when the engine is running, the transmission is engaged, and the vehicle is stopped. 
+	This is the minimum smoker speed (individual fan and heating element levels are available if you are using separate outputs). The smoker will operate at this speed when the engine is running, 
+    the transmission is engaged, and the vehicle is stopped.  
 	</p>
 	
 	<h4 class="entry">Fast Idle Speed:</h4>
 	<p>
-	You have the option of setting a slightly faster idle speed to take effect when the engine is running but the transmission is disengaged. This can serve as a visual 
-	indication of the transmission status, and it also mimics the reality that many vehicles do have a faster idle speed when not in gear. 
+	You have the option of setting a slightly faster idle speed to take effect when the engine is running but the transmission is disengaged (individual fan and heating element levels are available if 
+    you are using separate outputs). This can serve as a visual indication of the transmission status, and it also mimics the reality that many vehicles do have a faster idle speed when not in gear. 
 	</p>
 	
 	<h4 class="entry">Max Speed:</h4>
 	<p>
-	If at full throttle you think your smoker is running too fast for realism, you can reduce the maximum speed. 
+	This is the speed of the smoker at full throttle (individual fan and heating element levels are available if you are using separate outputs). Note that you are permitted to specify a maximum 
+    speed level less than the idle speed if you prefer less smoke output at higher throttle levels. 
 	</p>
     
     <h4 class="entry">Smoke when Destroyed</h4>
-    <p>This setting applies when the tank has been "destroyed" during IR battle. A destroyed tank is immobilized ("dead") for 15 seconds, during this time the smoker will run at the speed 
-    specified here. If you do not want any smoke when destroyed set this to zero.
+    <p>
+    This setting applies when the tank has been "destroyed" during IR battle. A destroyed tank is immobilized ("dead") for 15 seconds, during this time the smoker will run at the speed specified here 
+    (fan and heating element will both be given the same level). If you do not want any smoke when destroyed set this to zero.
     </p>
+
 
 
     <h2 id="servorecoil">Recoil Servo</h2>

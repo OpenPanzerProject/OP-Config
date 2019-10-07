@@ -1,7 +1,7 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-// LAST UPDATE: 10/6/2019
+// LAST UPDATE: 10/7/2019
 
 #define VER_FILEVERSION              0,93,63,00
 #define VER_FILEVERSION_STR         "0.93.63.00\0"

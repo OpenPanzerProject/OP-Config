@@ -109,6 +109,7 @@ void MainWindow::Variables_to_Controls(void)
     ui->spinSmokerFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerFastIdleSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokeDestroyed->setValue(qRound(static_cast<double>(DeviceData.SmokerDestroyedSpeed)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerPreheatTime->setValue(DeviceData.SmokerPreHeat_Sec);
+    ui->spinSmokerHotStartTimeout->setValue(DeviceData.HotStartTimeout_Sec);
     ui->spinSmokerHeatIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerHeatIdleAmt)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerHeatFastIdle->setValue(qRound(static_cast<double>(DeviceData.SmokerHeatFastIdleAmt)/MOTOR_MAX_FWDSPEED_DBL*100.0));
     ui->spinSmokerHeatMax->setValue(qRound(static_cast<double>(DeviceData.SmokerHeatMaxAmt)/MOTOR_MAX_FWDSPEED_DBL*100.0));
@@ -389,6 +390,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.SmokerFastIdleSpeed = qRound((static_cast<double>(ui->spinSmokerFastIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerDestroyedSpeed = qRound((static_cast<double>(ui->spinSmokeDestroyed->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerPreHeat_Sec = ui->spinSmokerPreheatTime->value();
+    DeviceData.HotStartTimeout_Sec = ui->spinSmokerHotStartTimeout->value();
     DeviceData.SmokerHeatIdleAmt = qRound((static_cast<double>(ui->spinSmokerHeatIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerHeatFastIdleAmt = qRound((static_cast<double>(ui->spinSmokerHeatFastIdle->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);
     DeviceData.SmokerHeatMaxAmt = qRound((static_cast<double>(ui->spinSmokerHeatMax->value())/100.0)*MOTOR_MAX_FWDSPEED_DBL);

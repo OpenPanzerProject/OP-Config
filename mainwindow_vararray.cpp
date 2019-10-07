@@ -210,6 +210,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.SmokerHeatIdleAmt = VarArray.value(2218).toInt();                            // 2218 - Smoker heat level at idle
     DeviceData.SmokerHeatFastIdleAmt = VarArray.value(2219).toInt();                        // 2219 - Smoker heat level at fast idle
     DeviceData.SmokerHeatMaxAmt = VarArray.value(2220).toInt();                             // 2220 - Smoker heat level at max throttle
+    DeviceData.HotStartTimeout_Sec = VarArray.value(2221).toUInt();                         // 2221 - Smoker timeout since last shutdown that will cause a cold start (pre-heat active), otherwise if within this time a hot-start will occur (pre-heat skipped)
 
     // Driving adjustments - 24xx
     DeviceData.AccelRampEnabled_1 = VarArray.value(2411).toUInt();                          // 2411 - Accel ramp enabled (profile 1)
@@ -536,6 +537,7 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2218, QByteArray::number(DeviceData.SmokerHeatIdleAmt));                        // 2218 - Smoker heat level at idle
     VarArray.insert(2219, QByteArray::number(DeviceData.SmokerHeatFastIdleAmt));                    // 2219 - Smoker heat level at fast idle
     VarArray.insert(2220, QByteArray::number(DeviceData.SmokerHeatMaxAmt));                         // 2220 - Smoker heat level at max throttle
+    VarArray.insert(2221, QByteArray::number(DeviceData.HotStartTimeout_Sec));                      // 2221 - Smoker timeout since last shutdown that will cause a cold start (pre-heat active), otherwise if within this time a hot-start will occur (pre-heat skipped)
 
     // Driving adjustments - 24xx
     VarArray.insert(2411, QByteArray::number(DeviceData.AccelRampEnabled_1));                       // 2411 - Accel ramp enabled (profile 1)

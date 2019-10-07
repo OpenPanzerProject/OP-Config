@@ -204,13 +204,23 @@
     (it will receive full battery voltage). 
     </p>
 
-	<h4 class="entry">Preheat Time</h4>
+	<h4 class="entry">Preheat time</h4>
 	<p>
-    This option becomes available if you are using separate heat and fan outputs, and will allow you to specify a length of time in seconds that the heating element should be powered before the tank engine 
-    is started. Set this option to 0 to disable preheating or if you don't want an engine start delay. Otherwise if a time is specified, when you start the engine with whatever trigger you have assigned 
-    to that function, the heating element will immediately be turned on to full power (battery voltage) and an optional pre-heat sound will be played as a notification (User Sound 2 if using the Benedini 
-    TBS Mini or "preheat.wav" if using the Open Panzer sound card). After the length of time specified has passed, the engine will automatically start and the smoker fan will then turn on. 
+    This option becomes available if you are using separate heat and fan outputs, and will allow you to specify a length of time in seconds (maximum of 240 seconds or 4 minutes) that the heating element 
+    should be powered before the tank engine is started. Set this option to 0 to disable preheating or if you don't want an engine start delay. Otherwise if a time is specified, when you start the engine 
+    with whatever trigger you have assigned to that function, the heating element will immediately be turned on to full power (battery voltage) and an optional pre-heat sound will be played as a 
+    notification (User Sound 2 if using the Benedini TBS Mini or "preheat.wav" if using the Open Panzer sound card). After the length of time specified has passed, the engine will automatically start 
+    and the smoker fan will then turn on. 
     </p>
+
+    <!--
+	<h4 class="entry">Hot Start time</h4>
+	<p>
+    This option becomes available if you are using separate heat and fan outputs and have selected a pre-heat time greater than 0. If you re-start the engine within the Hot Start time since the last engine shutdown, 
+    the smoker pre-heat will be skipped. In essence, we are counting on the heating element still being hot enough from the last engine run that no pre-heat is needed the subsequent time. Maximum time is 
+    240 seconds (4 minutes), or set to 0 to disable the hot start - in which case the pre-heat time will always be applied no matter how recently the engine was last shut down. 
+    </p>
+    -->
 
 	<h4 class="entry">Speed Notes</h4>
 	<p>    

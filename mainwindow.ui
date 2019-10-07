@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -1339,6 +1339,9 @@ QSizeGrip {
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
+                 </property>
                 </widget>
                 <widget class="AuxChannelPositionsCombo" name="cboAux2NumSwitchPos">
                  <property name="geometry">
@@ -1354,6 +1357,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="AuxChannelPositionsCombo" name="cboAux3NumSwitchPos">
@@ -1371,6 +1377,9 @@ QSizeGrip {
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
+                 </property>
                 </widget>
                 <widget class="AuxChannelPositionsCombo" name="cboAux4NumSwitchPos">
                  <property name="geometry">
@@ -1386,6 +1395,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblAuxChannelType">
@@ -1438,6 +1450,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="ChannelOrderComboBox" name="cboAux5ChannelNum">
@@ -1504,6 +1519,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="ChannelOrderComboBox" name="cboAux6ChannelNum">
@@ -4377,6 +4395,9 @@ QSizeGrip {
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
+                 </property>
                 </widget>
                 <widget class="ChannelOrderComboBox" name="cboAux11ChannelNum">
                  <property name="geometry">
@@ -4471,6 +4492,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="AnalogDigitalComboBox" name="cboAux10Type">
@@ -4619,6 +4643,9 @@ QSizeGrip {
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
+                 </property>
                 </widget>
                 <widget class="AuxChannelPositionsCombo" name="cboAux10NumSwitchPos">
                  <property name="geometry">
@@ -4634,6 +4661,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="ChannelOrderComboBox" name="cboAux7ChannelNum">
@@ -4679,6 +4709,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_303">
@@ -4818,6 +4851,9 @@ QSizeGrip {
                    <width>0</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maxVisibleItems">
+                  <number>11</number>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_22">
@@ -5833,24 +5869,6 @@ QSizeGrip {
                   <string>%</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="lblSmokeDestroyed3">
-                 <property name="geometry">
-                  <rect>
-                   <x>260</x>
-                   <y>240</y>
-                   <width>81</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>(0 to disable)</string>
-                 </property>
-                </widget>
                 <widget class="SmokerTypeComboBox" name="cboSmokerType">
                  <property name="geometry">
                   <rect>
@@ -5879,12 +5897,12 @@ QSizeGrip {
                   <string>Type</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="lblSmokePreheat1">
+                <widget class="QLabel" name="lblSmokePreheat">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
                    <y>120</y>
-                   <width>141</width>
+                   <width>121</width>
                    <height>21</height>
                   </rect>
                  </property>
@@ -5897,12 +5915,12 @@ QSizeGrip {
                   <string>Preheat time</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="lblSmokePreheat2">
+                <widget class="QLabel" name="lblSmokeDestroyed3">
                  <property name="geometry">
                   <rect>
-                   <x>230</x>
-                   <y>120</y>
-                   <width>151</width>
+                   <x>260</x>
+                   <y>240</y>
+                   <width>91</width>
                    <height>21</height>
                   </rect>
                  </property>
@@ -5912,7 +5930,7 @@ QSizeGrip {
                   </font>
                  </property>
                  <property name="text">
-                  <string>seconds (0 to disable)</string>
+                  <string>(0 to disable)</string>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinSmokerPreheatTime">
@@ -5928,7 +5946,7 @@ QSizeGrip {
                   <number>0</number>
                  </property>
                  <property name="maximum">
-                  <number>60</number>
+                  <number>240</number>
                  </property>
                  <property name="value">
                   <number>1</number>
@@ -6178,6 +6196,61 @@ QSizeGrip {
                  </property>
                  <property name="text">
                   <string>Fan speed</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinSmokerHotStartTimeout">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>120</y>
+                   <width>61</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>0</number>
+                 </property>
+                 <property name="maximum">
+                  <number>240</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokeHotStart">
+                 <property name="geometry">
+                  <rect>
+                   <x>310</x>
+                   <y>120</y>
+                   <width>121</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Hot Start time (sec)</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblSmokePreheat2">
+                 <property name="geometry">
+                  <rect>
+                   <x>230</x>
+                   <y>120</y>
+                   <width>161</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>seconds (0 to disable)</string>
                  </property>
                 </widget>
                </widget>

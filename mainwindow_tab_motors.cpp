@@ -178,6 +178,17 @@ void MainWindow::ValidateSmokerSelections()
         ui->cboSelectFunction->AddSF(SF_SMOKER_DISABLE);
         ui->cboSelectFunction->AddSF(SF_SMOKER_TOGGLE);
 
+// ======================================================================================================================>>
+        // HOT START - WORKS, BUT HIDDEN FOR NOW BECAUSE I DON'T THINK IT IS VERY USEFUL
+        // TO ENABLE, DELETE or UNCOMMENT THESE LINES, and then HIDE THE lblSmokePreheat2 label.
+        // Also add (sec.) to lblSmokePreheat and move things around. It won't look very good because there
+        // really isn't adequate space.
+        // ALSO - YOU WILL NEED TO UNCOMMENT THE TEXT IN THE Motors.html HELP FILE, AND ADD A SIMILAR HELP ON THE ONLINE WIKI
+        ui->spinSmokerHotStartTimeout->hide();
+        ui->lblSmokeHotStart->hide();
+//        ui->lblSmokePreheat2->hide();
+// ======================================================================================================================>>
+
         // Now, some further refinement depending on whether they have combined or separate heat & fan controls
         switch (static_cast<Smoker_t>(ui->cboSmokerType->currentData().toUInt()))
         {
@@ -187,8 +198,10 @@ void MainWindow::ValidateSmokerSelections()
                 ui->spinSmokerPreheatTime->setValue(0);
                 DeviceData.SmokerPreHeat_Sec = 0;
                 ui->spinSmokerPreheatTime->setEnabled(false);
-                ui->lblSmokePreheat1->setEnabled(false);
-                ui->lblSmokePreheat2->setEnabled(false);
+                ui->lblSmokePreheat->setEnabled(false);
+                ui->lblSmokePreheat2->setEnabled(false);    // This is the label we're showing instead of the hot-start stuff, which is hidden
+                ui->spinSmokerHotStartTimeout->setEnabled(false);
+                ui->lblSmokeHotStart->setEnabled(false);
 
                 ui->spinSmokerHeatIdle->setEnabled(false);
                 ui->lblSmokerHeatIdle->setEnabled(false);
@@ -222,9 +235,11 @@ void MainWindow::ValidateSmokerSelections()
             case SMOKERTYPE_SERIAL:
                 // Heat specific settings enabled (heater and fan separate)
                 ui->lblSmokerSeparateHint->show();
-                ui->lblSmokePreheat1->setEnabled(true);
-                ui->lblSmokePreheat2->setEnabled(true);
+                ui->lblSmokePreheat->setEnabled(true);
+                ui->lblSmokePreheat2->setEnabled(true);    // This is the label we're showing instead of the hot-start stuff, which is hidden
                 ui->spinSmokerPreheatTime->setEnabled(true);
+                ui->lblSmokeHotStart->setEnabled(true);
+                ui->spinSmokerHotStartTimeout->setEnabled(true);
                 ui->spinSmokerHeatIdle->setEnabled(true);
                 ui->lblSmokerHeatIdle->setEnabled(true);
                 ui->lblSmokerHeatIdle2->setEnabled(true);
@@ -290,8 +305,10 @@ void MainWindow::ValidateSmokerSelections()
         ui->spinSmokerPreheatTime->setValue(0);
         DeviceData.SmokerPreHeat_Sec = 0;
         ui->spinSmokerPreheatTime->setEnabled(false);
-        ui->lblSmokePreheat1->setEnabled(false);
+        ui->lblSmokePreheat->setEnabled(false);
         ui->lblSmokePreheat2->setEnabled(false);
+        ui->spinSmokerHotStartTimeout->setEnabled(false);
+        ui->lblSmokeHotStart->setEnabled(false);
         // Heat-specific settings disabled
         ui->spinSmokerHeatIdle->setEnabled(false);
         ui->lblSmokerHeatIdle->setEnabled(false);

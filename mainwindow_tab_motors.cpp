@@ -184,6 +184,7 @@ void MainWindow::ValidateSmokerSelections()
         // Also add (sec.) to lblSmokePreheat and move things around. It won't look very good because there
         // really isn't adequate space.
         // ALSO - YOU WILL NEED TO UNCOMMENT THE TEXT IN THE Motors.html HELP FILE, AND ADD A SIMILAR HELP ON THE ONLINE WIKI
+        // AND you will need to uncomment a line in DumpSmokerInfo on the TCB itself.
         ui->spinSmokerHotStartTimeout->hide();
         ui->lblSmokeHotStart->hide();
 //        ui->lblSmokePreheat2->hide();

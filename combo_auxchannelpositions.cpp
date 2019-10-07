@@ -5,9 +5,15 @@ AuxChannelPositionsCombo::AuxChannelPositionsCombo(QWidget *parent) : QComboBox(
     // Fill on creation
     this->insertItem(0, "2", 2);
     this->insertItem(1, "3", 3);
-//    this->insertItem(2, "4", 4);
-//    this->insertItem(3, "5", 5);
+    this->insertItem(2, "4", 4);
+    this->insertItem(3, "5", 5);
     this->insertItem(4, "6", 6);
+    this->insertItem(5, "7", 7);
+    this->insertItem(6, "8", 8);
+    this->insertItem(7, "9", 9);
+    this->insertItem(8, "10", 10);
+    this->insertItem(9, "11", 11);
+    this->insertItem(10, "12", 12);
 
     // Switches with up to 6 positions are already defined in TCB firmware, and the number can be increased to any
     // higher amount, although exceeding 3 positions doesn't make sense for most radios unless the user can

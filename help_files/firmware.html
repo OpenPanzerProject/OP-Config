@@ -32,7 +32,8 @@
 	
     <h4 class="entry">Select Hex File for</h4>
     <p>
-    From the drop-down menu select the device you want to update: TCB, Scout ESC, or the Open Panzer Sound Card.
+    From the drop-down menu select the device you want to update. Possible devices include various versions of the TCB, as well as the Scout ESC, Open Panzer Sound Card, and a generic selection 
+    for ATmega328 devices for which you have a hex file (useful for experimenters).    
     </p>
     
 	<h4	class="entry">Get Latest Release</h4>
@@ -66,6 +67,18 @@
         over USB, or in the Off position to flash over the Serial 1 port which is used for Bluetooth communication). The status of the flash operation will be shown in the console window. 
         Be patient, the flash operation can take 30 seconds or more.
         </p>
+        <br />
+
+        <h5>TCB - DIY Version</h5>
+        <p>
+        This is the TCB firmware for those trying to make a TCB using an off-the-shelf Arduino Mega board. All the functionality is the same except two outputs have been relocated to different pins in order to make it easier for those assembling such devices: 
+        </p>        
+        <ul>
+            <li>Machine Gun LED - will now be on Arduino Pin 20 (also labeled SDA on the Mega board)</li>
+            <li>Airsoft/Mechanical Recoil Switch - will now be on Arduino Pin 21 (also labeled SCL on the Mega board)</li>
+        </ul>
+        <p>For building a DIY TCB <a href="http://openpanzer.org/forum/index.php?topic=16.0">please read this thread</a>.</p> 
+        <br />
 	
         <h5>Scout ESC</h5>
         <p>
@@ -73,8 +86,16 @@
         FTDI cable. One end of the adapter/cable will have a six-pin socket that plugs into the six pins on the Scout. Be sure to orient it so the "Black" and "Green" labels on the adapter match the same 
         labels printed on the bottom of the Scout board. The other end of the FTDI adapter/cable is a standard USB connection that you use to connect to your computer. Be sure you have selected the 
         correct COM port in OP Config, then click the Flash button. The status of the flash operation will be shown in the console window. 
+        <br />
+        <br />
+        There are two versions of Scout firmware. Both have the same functionality but changes are required for different hardware revisions of the Scout board:
         </p>
-        
+        <ul>
+            <li><b>Scout ESC (R11+):</b> For Scout board revisions from 11 forward (using the VNH5019 motor driver chips)</li>
+            <li><b>Scout ESC (R10 and prior):</b> For Scout board revisions 10 and earlier (using the VNH2SP30 motor driver chips)</li>
+        </ul>
+        <br />
+
         <h5>Open Panzer Sound Card</h5>
         <p>
         Connect your Sound Card to your computer using a standard USB cable. A new entry may or may not appear in the COM ports list but in this case it doesn't matter 
@@ -82,9 +103,13 @@
         This allows OP Config to detect the device and let it know to start flashing. You may hear the USB connect/disconnect sounds from your computer during this process, that is normal. The status of 
         the flash operation will be shown in the console window. If you forget to press the button or OP Config can't find your device, the flash operation will time out after 10 seconds. 
         </p>
+        <br />        
 	
-    
-    
+        <h5>Generic ATmega328</h5>
+        <p>
+        You can use this setting to flash firmware from your own hex (there is no default hex to download from the internet) to any Arduino-compatible device with an ATmega328 processor 
+        (Uno, Duemilanove, Nano, Mini, or their respective clones; your own design; etc). Most people will not need to use this but it can be useful for experimenters. 
+        </p>
 		
 	<h2 id="console">Console Utility</h2>
 	<p>

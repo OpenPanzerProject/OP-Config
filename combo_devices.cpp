@@ -9,6 +9,7 @@ DeviceComboBox::DeviceComboBox(QWidget *parent) : QComboBox(parent)
     this->insertItem(3, "Scout ESC (R11+)", DEVICE_SCOUT);
     this->insertItem(4, "Scout ESC (R10 & prior)", DEVICE_SCOUT_R10);
     this->insertItem(5, "Sound Card", DEVICE_TEENSYSOUND);
+    this->insertItem(6, "Generic ATmega328", DEVICE_ATMEGA328);
 
     connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(emitFlashDeviceChanged()));
 

@@ -27,6 +27,9 @@ void MainWindow::SetupControls_FirmwareTab(void)
     connect(HexDownloader, SIGNAL(downloadSuccess()), this, SLOT(SaveWebHexToLocal()));
     connect(HexDownloader, SIGNAL(downloadFailed()), this, SLOT(SaveWebHexFailed()));
 
+    // Device type selection
+    connect(ui->cboFlashDevice, SIGNAL(currentIndexChanged(int)), this, SLOT(handleDeviceTypeSelection(int)));
+
     // Button signals and slots - flashing
     connect(ui->cmdFlashHex, SIGNAL(clicked(bool)), this, SLOT(cmdFlashHex_clicked()));
     connect(ui->cmdLocalHexPicker, SIGNAL(clicked(bool)), this, SLOT(getLocalHex()));
@@ -58,6 +61,21 @@ void MainWindow::SetupControls_FirmwareTab(void)
 
     // When we change the Device type to Flash, clear our memory of the last hex
     connect(ui->cboFlashDevice, SIGNAL(currentIndexChanged(int)), this, SLOT(clearGotHex()));
+}
+void MainWindow::handleDeviceTypeSelection(int)
+{
+    switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
+    {
+        // There is no default web hex to download for the generic ATmega328 option,
+        // the user will only be able to use their own provided hex file
+        case DEVICE_ATMEGA328:
+            ui->cmdWebHexPicker->setEnabled(false);
+            break;
+
+        default:
+            ui->cmdWebHexPicker->setEnabled(true);
+            break;
+    }
 }
 void MainWindow::clearGotHex()
 {
@@ -515,13 +533,15 @@ QString hex;
         case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
+        case DEVICE_ATMEGA328:
             {
             // Construct our AVRDUDE executable and list of arguments.
             // Don't put any spaces in the argument list, or it won't work.
             program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
             QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
             QString flagPart;
-            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB || ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY )
+            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB ||
+                ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY )
             {   // TCBs
                 flagPart =           "-patmega2560";   // -p part - TCB is the ATmega2560. This also needs to be defined in avrdude.conf
                 flagProgrammer =     "-cwiring";       // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
@@ -530,7 +550,7 @@ QString hex;
                 flagBaud =           "-b115200";       // -b baud - hardcoded to 115,200
             }
             else
-            {   // Scouts
+            {   // Scouts, generic ATmega328
                 flagPart =           "-patmega328p";   // -p part - Scout uses an ATmega328p
                 flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
                                                        //    See which is used in Arduino boards.txt for your chip, in our case it is
@@ -619,6 +639,7 @@ void MainWindow::flashFinished()
         case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
+        case DEVICE_ATMEGA328:
             //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
             if (AVRDUDEProcess->exitCode() == 0)
             {
@@ -680,13 +701,25 @@ void MainWindow::flashFinished()
 
     // We can also re-enable these
     ui->cmdLocalHexPicker->setEnabled(true);
-    ui->cmdWebHexPicker->setEnabled(true);
     ui->cmdSnoop->setEnabled(true);
     ui->cmdClearConsole->setEnabled(true);
     ui->cboCOMPorts->setEnabled(true);
     ui->cboConsoleBaud->setEnabled(true);
     ui->cmdConnect->setEnabled(true);
     ui->cboFlashDevice->setEnabled(true);
+    // Whether or not we restore the Get Web Hex button depends on the current device selection
+    switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
+    {
+        // There is no default web hex to download for the generic ATmega328 option,
+        // the user will only be able to use their own provided hex file
+        case DEVICE_ATMEGA328:
+            ui->cmdWebHexPicker->setEnabled(false);
+            break;
+
+        default:
+            ui->cmdWebHexPicker->setEnabled(true);
+            break;
+    }
 
     // Clear the flag
     AttemptFlash = false;
@@ -702,6 +735,7 @@ void MainWindow::readyReadStandardOutput()
         case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
+        case DEVICE_ATMEGA328:
             // Append output to our string
             strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
 

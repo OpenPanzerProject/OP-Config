@@ -314,6 +314,7 @@ private slots:
       void toggleSnoop();
       void putDataToConsole(const QByteArray &data);
       void stopTeensyTimer(void);                   // Teensy flash has timed-out
+      void handleDeviceTypeSelection(int);
 
       // Status bar (along the bottom)
       void StartStatusLabelOnDelay(void);           // During this delay, the status label is visible

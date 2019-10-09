@@ -310,6 +310,81 @@ void MainWindow::SetupTriggerActions(int)
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
                         ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
                         break;
+                    case 7: // 7 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 7", SP_POS7);
+                        break;
+                    case 8: // 8 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 7", SP_POS7);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 8", SP_POS8);
+                        break;
+                    case 9: // 9 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 7", SP_POS7);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 8", SP_POS8);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 9", SP_POS9);
+                        break;
+                    // We only thought about adding high switch-position numbers much later, after the trigger ID
+                    // numbering had already been worked out, and the current scheme doesn't permit for numbers
+                    // greater than 1 digit. For now 10-12 are commented out, and you would need to change the
+                    // trigger ID numbering scheme to use them.
+                    /*
+                    case 10: // 10 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 7", SP_POS7);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 8", SP_POS8);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 9", SP_POS9);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 10", SP_POS10);
+                        break;
+                    case 11: // 11 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 7", SP_POS7);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 8", SP_POS8);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 9", SP_POS9);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 10", SP_POS10);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 11", SP_POS11);
+                        break;
+                    case 12: // 12 positions
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 1", SP_POS1);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 2", SP_POS2);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 3", SP_POS3);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 4", SP_POS4);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 5", SP_POS5);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 6", SP_POS6);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 7", SP_POS7);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 8", SP_POS8);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 9", SP_POS9);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 10", SP_POS10);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 11", SP_POS11);
+                        ui->cboTriggerAction->insertItem(ui->cboTriggerAction->count(), "Pos 12", SP_POS12);
+                        break;
+                    */
                 }
             }
             // Trigger source is External Port (digital input)

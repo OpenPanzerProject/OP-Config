@@ -492,7 +492,7 @@ uint8_t FunctionTriggerTableModel::getNumPositionsFromTriggerID(uint16_t Trigger
     if (TriggerID >= trigger_id_multiplier_ports && TriggerID < trigger_id_multiplier_auxchannel)
         return 2;
 
-    // Aux Channel switches - if digital, these can be 2-6 position switches
+    // Aux Channel switches - if digital, these can be 2-9 position switches
     if (TriggerID >= trigger_id_multiplier_auxchannel)
     {
         // We will walk through an example as we calculate these values.

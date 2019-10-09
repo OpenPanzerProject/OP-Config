@@ -13,6 +13,7 @@ typedef char DEVICE;                    // Devices that we can program using OP 
 #define DEVICE_SCOUT_R10    3           // Scout board versions R10 and earlier
 #define DEVICE_TEENSYSOUND  4
 #define DEVICE_TCB_MKII     5
+#define DEVICE_ATMEGA328    6           // For generic Arduino 328 products
 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.
@@ -212,7 +213,7 @@ struct weightClassSettings{
 // SPECIAL FUNCTIONS
 // From OP_FunctionsTriggers.h
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-const byte COUNT_SPECFUNCTIONS  = 163;	// Count of special functions (1 more than max number below because we count the 0)
+const byte COUNT_SPECFUNCTIONS  = 166;	// Count of special functions (1 more than max number below because we count the 0)
 enum _special_function : byte {
     SF_NULL_FUNCTION 	= 0,		// 0    -- no function assigned
     SF_ENGINE_TOGGLE 	= 1,   		// 1
@@ -376,7 +377,10 @@ enum _special_function : byte {
     SF_IR_DISABLE       = 159,      // 159
     SF_IR_TOGGLE        = 160,      // 160
     SF_SMOKER_MANTOGGLE = 161,      // 161  -- see also 52 for analog manual control of smoker output and 101-102 for on/off
-    SF_USER_SOUND_ALL_OFF = 162    // 162
+    SF_USER_SOUND_ALL_OFF = 162,    // 162
+    SF_SMOKE_PREHEAT_ON = 163,      // 163
+    SF_SMOKE_PREHEAT_OFF= 164,      // 164
+    SF_SMOKE_PREHEAT_TOGGLE = 165   // 165
 };
 
 #define MAX_FUNCTION_TRIGGERS 40    // Maximum number of triggers we can save
@@ -530,7 +534,13 @@ enum switch_positions : byte {
     SP_POS3,
     SP_POS4,
     SP_POS5,
-    SP_POS6
+    SP_POS6,
+    SP_POS7,
+    SP_POS8,
+    SP_POS9,
+    SP_POS10,
+    SP_POS11,
+    SP_POS12
 };
 struct aux_channel_settings{
     uint8_t channelNum;				// Which number are we in the PPM input stream

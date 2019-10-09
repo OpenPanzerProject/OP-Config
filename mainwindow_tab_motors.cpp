@@ -216,6 +216,27 @@ void MainWindow::ValidateSmokerSelections()
                 ui->lblSmokerHeatMax->setEnabled(false);
                 ui->lblSmokerHeatMax2->setEnabled(false);
 
+                // Also in this case, we remove the smoker pre-heat functions from the function list since there is
+                // no direct control of the heating element
+                ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_ON);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_OFF);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_TOGGLE);
+                // Auto control also means we need to remove the smoker manual control functions
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_ON);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_OFF);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_MANTOGGLE);
+                // Make sure we didn't already have any function triggers defined for these too
+                // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+                if (FT_TableModel->removeFunctionFromList(SF_SMOKE_PREHEAT_ON)     |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKE_PREHEAT_OFF)    |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKE_PREHEAT_TOGGLE) |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER)               |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_ON)            |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_OFF)           |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_MANTOGGLE))
+                    { RemovedFunctionTriggersMsgBox(); }
+
                 // Add back the Aux functions in case they were removed.
                 // The add function will only add it if it isn't there already
                 ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLE);
@@ -235,7 +256,7 @@ void MainWindow::ValidateSmokerSelections()
             case SMOKERTYPE_ONBOARD_SEPARATE:
             case SMOKERTYPE_SERIAL:
                 // Heat specific settings enabled (heater and fan separate)
-                ui->lblSmokerSeparateHint->show();
+                static_cast<Smoker_t>(ui->cboSmokerType->currentData().toUInt()) == SMOKERTYPE_SERIAL ? ui->lblSmokerSeparateHint->hide() : ui->lblSmokerSeparateHint->show();
                 ui->lblSmokePreheat->setEnabled(true);
                 ui->lblSmokePreheat2->setEnabled(true);    // This is the label we're showing instead of the hot-start stuff, which is hidden
                 ui->spinSmokerPreheatTime->setEnabled(true);
@@ -265,21 +286,36 @@ void MainWindow::ValidateSmokerSelections()
                 ui->cboSelectFunction->RemoveSF(SF_AUXOUT_TOGGLEBLINK);
                 ui->cboSelectFunction->RemoveSF(SF_AUXOUT_REVOLVE);
                 ui->cboSelectFunction->RemoveSF(SF_AUXOUT_TOGGLEREVOLVE);
+                // Auto control also means we need to remove the smoker manual control functions
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_ON);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_OFF);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_MANTOGGLE);
                 // Make sure we didn't already have any function triggers defined for these too
                 // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
-                if (FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLE)      |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_ON)          |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_OFF)         |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_LEVEL)       |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_PRESETDIM)   |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEDIM)   |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_FLASH)       |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_INV_FLASH)   |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_BLINK)       |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEBLINK) |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_REVOLVE)     |
-                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEREVOLVE) )
+                if (FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLE)        |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_ON)            |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_OFF)           |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_LEVEL)         |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_PRESETDIM)     |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEDIM)     |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_FLASH)         |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_INV_FLASH)     |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_BLINK)         |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEBLINK)   |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_REVOLVE)       |
+                    FT_TableModel->removeFunctionFromList(SF_AUXOUT_TOGGLEREVOLVE) |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER)               |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_ON)            |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_OFF)           |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_MANTOGGLE))
                     { RemovedFunctionTriggersMsgBox(); }
+
+                // And we add the smoker preheat functions in case they were removed.
+                // The add function will only add it if it isn't there already
+                ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_ON);
+                ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_OFF);
+                ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_TOGGLE);
                 break;
         }
     }
@@ -344,11 +380,20 @@ void MainWindow::ValidateSmokerSelections()
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_ENABLE);
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_DISABLE);
         ui->cboSelectFunction->RemoveSF(SF_SMOKER_TOGGLE);
+        // Also in this case, we remove the smoker pre-heat functions from the function list since there is
+        // no direct control of the heating element (but the user can manually control both the smoker and aux outputs
+        // which is the same thing)
+        ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_ON);
+        ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_OFF);
+        ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_TOGGLE);
         // Make sure we didn't already have a function trigger defined for it too
         // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
-        if (FT_TableModel->removeFunctionFromList(SF_SMOKER_ENABLE)  |
-            FT_TableModel->removeFunctionFromList(SF_SMOKER_DISABLE) |
-            FT_TableModel->removeFunctionFromList(SF_SMOKER_TOGGLE))
+        if (FT_TableModel->removeFunctionFromList(SF_SMOKER_ENABLE)     |
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_DISABLE)    |
+            FT_TableModel->removeFunctionFromList(SF_SMOKER_TOGGLE)     |
+            FT_TableModel->removeFunctionFromList(SF_SMOKE_PREHEAT_ON)  |
+            FT_TableModel->removeFunctionFromList(SF_SMOKE_PREHEAT_OFF) |
+            FT_TableModel->removeFunctionFromList(SF_SMOKE_PREHEAT_TOGGLE))
             RemovedFunctionTriggersMsgBox();
     }
 }

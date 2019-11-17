@@ -135,7 +135,7 @@ void MainWindow::ShowHideSmokerSettings()
 void MainWindow::ValidateSmokerSelections()
 {
     if (ui->cboSmokerControl->currentData() == true)
-    {   // Auto control - let the user adjust smoker settings
+    {   // Auto control with engine - let the user adjust engine smoker settings
 
         // Show labels
         ui->lblSmokerIdle->setEnabled(true);
@@ -254,7 +254,6 @@ void MainWindow::ValidateSmokerSelections()
                 break;
 
             case SMOKERTYPE_ONBOARD_SEPARATE:
-            case SMOKERTYPE_SERIAL:
                 // Heat specific settings enabled (heater and fan separate)
                 static_cast<Smoker_t>(ui->cboSmokerType->currentData().toUInt()) == SMOKERTYPE_SERIAL ? ui->lblSmokerSeparateHint->hide() : ui->lblSmokerSeparateHint->show();
                 ui->lblSmokePreheat->setEnabled(true);
@@ -316,6 +315,59 @@ void MainWindow::ValidateSmokerSelections()
                 ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_ON);
                 ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_OFF);
                 ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_TOGGLE);
+                break;
+
+            case SMOKERTYPE_SERIAL:
+                // Heat specific settings enabled (heater and fan separate)
+                static_cast<Smoker_t>(ui->cboSmokerType->currentData().toUInt()) == SMOKERTYPE_SERIAL ? ui->lblSmokerSeparateHint->hide() : ui->lblSmokerSeparateHint->show();
+                ui->lblSmokePreheat->setEnabled(true);
+                ui->lblSmokePreheat2->setEnabled(true);    // This is the label we're showing instead of the hot-start stuff, which is hidden
+                ui->spinSmokerPreheatTime->setEnabled(true);
+                ui->lblSmokeHotStart->setEnabled(true);
+                ui->spinSmokerHotStartTimeout->setEnabled(true);
+                ui->spinSmokerHeatIdle->setEnabled(true);
+                ui->lblSmokerHeatIdle->setEnabled(true);
+                ui->lblSmokerHeatIdle2->setEnabled(true);
+                ui->spinSmokerHeatFastIdle->setEnabled(true);
+                ui->lblSmokerHeatFastIdle->setEnabled(true);
+                ui->lblSmokerHeatFastIdle2->setEnabled(true);
+                ui->spinSmokerHeatMax->setEnabled(true);
+                ui->lblSmokerHeatMax->setEnabled(true);
+                ui->lblSmokerHeatMax2->setEnabled(true);
+
+                // In this case we do NOT need to remove the manual Aux control functions
+                // because the actual heating element/fan drivers will be off-board on a module
+                // But auto control does mean we need to remove the smoker manual control functions
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_ON);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_OFF);
+                ui->cboSelectFunction->RemoveSF(SF_SMOKER_MANTOGGLE);
+                // Make sure we didn't already have any function triggers defined for these too
+                // Note we use a single | not || because we want the if statement to evaluate all conditions regardless
+                if (FT_TableModel->removeFunctionFromList(SF_SMOKER)               |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_ON)            |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_OFF)           |
+                    FT_TableModel->removeFunctionFromList(SF_SMOKER_MANTOGGLE))
+                    { RemovedFunctionTriggersMsgBox(); }
+
+                // And we add the smoker preheat functions in case they were removed.
+                // The add function will only add it if it isn't there already
+                ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_ON);
+                ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_OFF);
+                ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_TOGGLE);
+                // And add back the Aux functions if those had been removed
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLE);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_ON);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_OFF);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_LEVEL);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_PRESETDIM);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEDIM);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_FLASH);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_INV_FLASH);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_BLINK);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEBLINK);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_REVOLVE);
+                ui->cboSelectFunction->AddSF(SF_AUXOUT_TOGGLEREVOLVE);
                 break;
         }
     }

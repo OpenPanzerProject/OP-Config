@@ -39,7 +39,7 @@ void MainWindow::SetupControls_FirmwareTab(void)
     AVRDUDEProcess = new QProcess(this);
     connect(AVRDUDEProcess, SIGNAL(started()), this, SLOT(flashStarted()));
     connect(AVRDUDEProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(flashFinished()));
-    connect(AVRDUDEProcess,SIGNAL(readyReadStandardOutput()),this,SLOT(readyReadStandardOutput()));
+    connect(AVRDUDEProcess, SIGNAL(readyReadStandardOutput()),this,SLOT(readyReadStandardOutput()));
     connect(AVRDUDEProcess, SIGNAL(readyReadStandardError()), this, SLOT(readyReadStandardError()));
 
     // Teensy Loader process and signals
@@ -457,6 +457,7 @@ void MainWindow::cmdFlashHex_clicked()
 QString program;
 QStringList arguments;
 QString flagVerbose;
+QString flagPart;
 QString flagProgrammer;
 QString flagBaud;
 QString hex;
@@ -539,7 +540,6 @@ QString hex;
             // Don't put any spaces in the argument list, or it won't work.
             program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
             QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
-            QString flagPart;
             if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB ||
                 ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY )
             {   // TCBs

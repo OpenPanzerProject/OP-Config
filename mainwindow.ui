@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>8</number>
+               <number>7</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -12903,7 +12903,7 @@ gearboxes by dragging inner track during turns:</string>
                   <double>3.200000000000000</double>
                  </property>
                  <property name="maximum">
-                  <double>14.000000000000000</double>
+                  <double>24.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>

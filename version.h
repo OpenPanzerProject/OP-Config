@@ -1,15 +1,15 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-// LAST UPDATE: 10/9/2019
+// LAST UPDATE: 11/16/2019
 
-#define VER_FILEVERSION              0,93,64,00
-#define VER_FILEVERSION_STR         "0.93.64.00\0"
+#define VER_FILEVERSION              0,93,65,00
+#define VER_FILEVERSION_STR         "0.93.65.00\0"
 
 // THIS IS THE VERSION THAT WILL BE CHECKED AGAINST the appcast.xml version on the downloads page.
 // YOU MUST ALSO RUN QMAKE for this to update.
-#define VER_PRODUCTVERSION           0,93,64,00
-#define VER_PRODUCTVERSION_STR      "0.93.64\0"
+#define VER_PRODUCTVERSION           0,93,65,00
+#define VER_PRODUCTVERSION_STR      "0.93.65\0"
 
 // THIS VERSION IS THE MINIMUM VERSION OF TCB FIRMWARE NEEDED FOR THIS VERSION OF OP CONFIG:
 #define VER_MINTCB_STR              "0.93.64\0"

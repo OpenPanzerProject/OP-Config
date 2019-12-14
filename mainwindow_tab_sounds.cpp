@@ -179,20 +179,36 @@ void MainWindow::ShowHideSoundCardSettings()
 
 void MainWindow::EnableTurretSoundSettings()
 {
+    ui->lblGeneralSound->show();
+
     // Enable barrel sound option
     ui->chkEnableBarrelSound->setEnabled(true);
     ui->chkEnableBarrelSound->setChecked(DeviceData.BarrelSound_Enabled);
+    ui->chkEnableBarrelSound->show();
+    ui->lblBarrelSound->show();
+
     // Enable turret sound option
     ui->chkEnableTurretSound->setEnabled(true);
     ui->chkEnableTurretSound->setChecked(DeviceData.TurretSound_Enabled);
+    ui->chkEnableTurretSound->show();
+    ui->lblTurretSound->show();
+
 }
 void MainWindow::DisableTurretSoundSettings()
 {
+    ui->lblGeneralSound->hide();
+
+    // Disable barrel sound option
     ui->chkEnableBarrelSound->setChecked(false);
     ui->chkEnableBarrelSound->setEnabled(false);
+    ui->chkEnableBarrelSound->hide();
+    ui->lblBarrelSound->hide();
 
+    // Disable turret sound option
     ui->chkEnableTurretSound->setChecked(false);
     ui->chkEnableTurretSound->setEnabled(false);
+    ui->chkEnableTurretSound->hide();
+    ui->lblTurretSound->hide();
 }
 
 void MainWindow::EnableHeadlightSoundSetting()

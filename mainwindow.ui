@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>7</number>
+               <number>6</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -11255,7 +11255,7 @@ gearboxes by dragging inner track during turns:</string>
                   </rect>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_66">
+                <widget class="QLabel" name="lblTurretSound">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -11335,7 +11335,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>Plug lights into &quot;L1&quot; port</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_310">
+                <widget class="QLabel" name="lblGeneralSound">
                  <property name="geometry">
                   <rect>
                    <x>10</x>
@@ -11402,7 +11402,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string/>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_160">
+                <widget class="QLabel" name="lblBarrelSound">
                  <property name="geometry">
                   <rect>
                    <x>20</x>

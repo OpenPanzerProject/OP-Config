@@ -13,6 +13,8 @@ void MainWindow::SetupControls_MotorTab(void)
     ui->cboDriveType->insertItem(3, "Tank (Tamiya DMD)", DT_DMD);
     ui->cboDriveType->insertItem(4, "Halftrack (Dual drive motors + Steering servo)", DT_HALFTRACK);
     ui->cboDriveType->insertItem(5, "Car (Single drive motor + Steering servo)", DT_CAR);
+    // The functionality exists on the boards but is disabled here for now. You'd need to add documentation at least.
+    //    ui->cboDriveType->insertItem(6, "Tank (manual control of each track)", DT_DIRECT);
     ui->cboDriveType->setCurrentIndex(0);
 
     // Setup the motor type combo boxes

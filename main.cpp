@@ -18,7 +18,6 @@
  */
 
 #include "mainwindow.h"
-#include "deviceselect.h"
 //#include <QApplication>   // We are using SingleApplication instead, which is a subclass of QApplication
 #include "winsparkle.h"
 #include "singleapplication.h"

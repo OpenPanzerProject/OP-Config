@@ -149,6 +149,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Connections to the OpenPanzerComm object (there are some other set on SetupControls_FirmwareTab for snooping/console features)
     connect(comm, SIGNAL(ConnectionChanged(boolean)), this, SLOT (ShowConnectionStatus(boolean)));
     connect(comm, SIGNAL(HereIsFirmwareVersion(QString)), this, SLOT(SerialStatus_displayFirmware(QString)));
+    connect(comm, SIGNAL(HereIsHardwareVersion(uint8_t)), this, SLOT(SerialStatus_displayHardware(uint8_t)));
     connect(comm, SIGNAL(HereIsMinOPCVersion(QString)), this, SLOT(ProcessMinOPCVersion(QString)));
     connect(comm, SIGNAL(HereIsValue(uint16_t, QByteArray, boolean)), this, SLOT(updateVarArray_fromSerial(uint16_t, QByteArray, boolean)));
     connect(comm, SIGNAL(NextSentence(boolean)), this, SLOT(processNextSentence(boolean)));
@@ -175,8 +176,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Left - Index 0: Serial status label
     serialStatusLabel = new QLabel(this);
     serialStatusLabel->setText("Not connected");
-    serialStatusLabel->setMinimumWidth(260);
-    serialStatusLabel->setMaximumWidth(260);
+    serialStatusLabel->setMinimumWidth(320);
+    serialStatusLabel->setMaximumWidth(320);
     layout->addWidget(serialStatusLabel,0,Qt::AlignLeft);       // Index 0 - Serial status label
     layout->insertSpacing(1,20);                                // Index 1 - spacing
     // Next - Index 2: Other status label
@@ -536,9 +537,10 @@ void MainWindow::SerialStatus_SetConnected()
 void MainWindow::SerialStatus_displayFirmware(QString version)
 {
     // This slot gets called after the TCB returns to us its version number, which is the first request we send to it
-    // after connecting. Now display the version number in the status area at the bottom of the screen as well as the fact
-    // we are connected.
-    serialStatusLabel->setText(tr("Connected to %1 (%2)   Firmware: %3") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate).arg(version));
+    // after connecting. Subsequently we send several other requests, such as what is the minimum version of OP Config the
+    // device is expecting, and also what hardware the device actually is
+
+    CurrentFirmware = version;  // Save this for a slightly later step when it will be displayed in the serialStatusLabel
 
     // We also want to check the TCB version against the minimum TCB version this version of OP Config expects to work with.
     // This minimum TCB version is defined in version.h
@@ -546,27 +548,27 @@ void MainWindow::SerialStatus_displayFirmware(QString version)
     FirmwareVersion FVReqd = GetMinTCBVersion();          // This is the minimum version of TCB firmware we want to use
     if (FirmwareGreaterThanComparison(FVReqd, FVCurrent))
     {   // OP Config needs the TCB to be a later version. Warn the user
-        QString warn = "Your TCB firmware needs to be updated!<br /><br />";
+        QString warn = "Your device firmware needs to be updated!<br /><br />";
         warn.append("Please go to the Firmware tab, download the<br />");
-        warn.append("latest release, and flash it to your TCB.");
+        warn.append("latest release, and flash it to your device.");
         warn.append("<hr />");
         warn.append("<span style='font-size: 12px;'>");
         warn.append("<table><tr>");
         warn.append("<td>Current TCB Firmware: </td><td>");
         warn.append(version);
         warn.append("</td></tr>");
-        warn.append("<tr><td>Minimum TCB version required:&nbsp;&nbsp;</td><td>");
+        warn.append("<tr><td>Minimum device version required:&nbsp;&nbsp;</td><td>");
         warn.append(static_cast<QString>(VER_MINTCB_STR));
         warn.append("</td></tr></table></span>");
-        msgBox(warn, vbOkOnly, "TCB Update Required", vbExclamation);
+        msgBox(warn, vbOkOnly, "Device Update Required", vbExclamation);
 
         // Also, if we had connected with the intent of reading immediately, we cancel the read.
         // The user can still read but they will have to click the read button a second time
         ResetOneClickRead();    // See mainwindow_device_rw.cpp
     }
 
-    // The next thing we do is ask the TCB to tell us what version of OP Config it expects.
-    // But we only send the request if TCB firmware is greater than 00.90.99 because the
+    // The next thing we do is ask the TCB/CM/device to tell us what version of OP Config it expects.
+    // But we only send the request if TCB/CM/device firmware is greater than 00.90.99 because the
     // the TCB only obtained the capability of responding to this request with 00.91.
     FirmwareVersion FVStart;
     FVStart.Major = 0;
@@ -577,8 +579,9 @@ void MainWindow::SerialStatus_displayFirmware(QString version)
         comm->requestMinOPCVersion();
     }
     else
-    {   // If we're done connecting, and the user wanted to perform a read, kick it off
-        if (oneClickRead) readSettingsFromDevice();
+    {
+        // If we don't need to check the min OP Config version, we next ask what kind of hardware is communicating with us
+        comm->requestHardwareVersion();
     }
 }
 void MainWindow::ProcessMinOPCVersion(QString version)
@@ -614,6 +617,33 @@ void MainWindow::ProcessMinOPCVersion(QString version)
         // The user can still read but they will have to click the read button a second time
         ResetOneClickRead();    // See mainwindow_device_rw.cpp
     }
+
+    // Next we ask for the hardware version of the device communicating with us
+    comm->requestHardwareVersion();
+
+}
+void MainWindow::SerialStatus_displayHardware(uint8_t hardware)
+{
+    // This is the response from the final request (after firmware version and expected minimum OP Config version),
+    // now the device is telling us what hardware it actually is since we now support multiple boards.
+
+    // Save the hardware version in our global variable:
+    CurrentDevice = hardware;
+
+    // We might also ultimately need to change some settings within OP Config to adapt to different devices,
+    // that would probably be kicked off here.
+
+    // We now can finally display the firmware and hardware information in the status area at the bottom
+    // of the screen as well as the fact we are connected.
+    QString hw;
+    switch(hardware)
+    {
+        case DEVICE_TCB_MKI:    hw = "TCB";         break;
+        case DEVICE_TCB_MKII:   hw = "TCB MkII";    break;
+        case DEVICE_AT_MKI:     hw = "AT";    break;
+        default:                hw = "";            break;
+    }
+    serialStatusLabel->setText(tr("Connected to %1 (%2)   %3 Firmware: %4") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate).arg(hw).arg(CurrentFirmware));
 
     // If we're done connecting, and the user wanted to perform a read, kick it off
     if (oneClickRead) readSettingsFromDevice();
@@ -703,9 +733,9 @@ void MainWindow::FadeOutStatusLabel()
 //                     other devices besides the Tank Control Board (TCB) we would expand this section - not to mention
 //                     re-write half the rest of the program)
 //------------------------------------------------------------------------------------------------------------------------>>
-void MainWindow::setDevice(OP_device_name OPD)
-{
-    this->CurrentDevice = OPD;
+//void MainWindow::setDevice(OP_device_name OPD)
+//{
+//    this->CurrentDevice = OPD;
 
     // But we are not currently using this stuff
 /* It works!
@@ -721,7 +751,7 @@ void MainWindow::setDevice(OP_device_name OPD)
     }
     msgBox.exec();
 */
-}
+//}
 
 
 

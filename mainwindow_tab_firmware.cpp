@@ -66,9 +66,10 @@ void MainWindow::handleDeviceTypeSelection(int)
 {
     switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
     {
-        // There is no default web hex to download for the generic ATmega328 option,
+        // There is no default web hex to download for the generic ATmega328/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
         case DEVICE_ATMEGA328:
+        case DEVICE_TEENSY32:
             ui->cmdWebHexPicker->setEnabled(false);
             break;
 
@@ -140,12 +141,13 @@ QString versionfile;
         switch (ui->cboFlashDevice->currentData().toInt())
         {
             case DEVICE_TCB_MKII:     versionfile = LATEST_RELEASE_VERSION_URL_TCB_MKII;    break;
-            case DEVICE_TCB:          // Same version file for both of these
+            case DEVICE_TCB_MKI:      // Same version file for both of these
             case DEVICE_TCB_DIY:      // Same version file for both of these
                                       versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
             case DEVICE_SCOUT:        versionfile = LATEST_RELEASE_VERSION_URL_SCOUT;       break;
             case DEVICE_SCOUT_R10:    versionfile = LATEST_RELEASE_VERSION_URL_SCOUT_R10;   break;
             case DEVICE_TEENSYSOUND:  versionfile = LATEST_RELEASE_VERSION_URL_TEENSYSOUND; break;
+            case DEVICE_AT_MKI:       versionfile = LATEST_RELEASE_VERSION_URL_AT_MKI;      break;
         }
         VersionDownloader->startDownload(versionfile);
     }
@@ -203,8 +205,9 @@ void MainWindow::checkHexVersion()
     QString hexfile;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
+        case DEVICE_TCB_MKI:      hexfile = LATEST_RELEASE_HEX_URL_TCB;         break;
         case DEVICE_TCB_MKII:     hexfile = LATEST_RELEASE_HEX_URL_TCB_MKII;    break;
-        case DEVICE_TCB:          hexfile = LATEST_RELEASE_HEX_URL_TCB;         break;
+        case DEVICE_AT_MKI:       hexfile = LATEST_RELEASE_HEX_URL_AT_MKI;      break;
         case DEVICE_TCB_DIY:      hexfile = LATEST_RELEASE_HEX_URL_TCB_DIY;     break;
         case DEVICE_SCOUT:        hexfile = LATEST_RELEASE_HEX_URL_SCOUT;       break;
         case DEVICE_SCOUT_R10:    hexfile = LATEST_RELEASE_HEX_URL_SCOUT_R10;   break;
@@ -224,11 +227,12 @@ void MainWindow::SaveWebHexToLocal()
     QString hexFilePath;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
+        case DEVICE_TCB_MKI:      hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);     break;
         case DEVICE_TCB_MKII:     hexFilePath = hexFileFolder + QString("TCBMK2_%1.hex").arg(formattedVersion);     break;
-        case DEVICE_TCB:          hexFilePath = hexFileFolder + QString("TCBMK1_%1.hex").arg(formattedVersion);     break;
+        case DEVICE_AT_MKI:       hexFilePath = hexFileFolder + QString("ATMK1_%1.hex").arg(formattedVersion);      break;
         case DEVICE_TCB_DIY:      hexFilePath = hexFileFolder + QString("TCBMK1_DIY_%1.hex").arg(formattedVersion); break;
         case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);    break;
-        case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion); break;
+        case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion);break;
         case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);    break;
     }
     //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
@@ -355,7 +359,7 @@ FirmwareVersion MainWindow::DecodeVersion(QByteArray qbav)
 
     ClearFirmwareVersion(fv);   // Clear to start
 
-    if (qbav.size() == 8 && qbav[2] == '.' && qbav[5] == '.')           // Format xx.xx.xx
+    if (qbav.size() == 8 && qbav[2] == '.' && qbav[5] == '.')       // Format xx.xx.xx
     {
         if (isCharNumeric(qbav[0])) // Double digit major
         {
@@ -377,8 +381,9 @@ FirmwareVersion MainWindow::DecodeVersion(QByteArray qbav)
             fv.Patch = num * 10;
         }
         if (isCharNumeric(qbav[7])) fv.Patch += qbav[7] - '0';
+
     }
-    else if (qbav.size() == 7 && qbav[1] == '.' && qbav[4] == '.')      // Format x.xx.xx
+    else if (qbav.size() == 7 && qbav[1] == '.' && qbav[4] == '.')  // Format x.xx.xx
     {
         if (isCharNumeric(qbav[0])) // Single digit major
         {
@@ -399,7 +404,9 @@ FirmwareVersion MainWindow::DecodeVersion(QByteArray qbav)
             fv.Patch = num * 10;
         }
         if (isCharNumeric(qbav[6])) fv.Patch += qbav[6] - '0';
+
     }
+
     if (fv.Major > 99) fv.Major = 99;
     if (fv.Minor > 99) fv.Minor = 99;
     if (fv.Patch > 99) fv.Patch = 99;
@@ -530,7 +537,7 @@ QString hex;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
         // These two are ATmega devices and we will use AVRDUDE to flash
-        case DEVICE_TCB:
+        case DEVICE_TCB_MKI:
         case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
@@ -540,7 +547,7 @@ QString hex;
             // Don't put any spaces in the argument list, or it won't work.
             program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
             QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
-            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB ||
+            if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_MKI ||
                 ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY )
             {   // TCBs
                 flagPart =           "-patmega2560";   // -p part - TCB is the ATmega2560. This also needs to be defined in avrdude.conf
@@ -586,7 +593,9 @@ QString hex;
         // We will use PJRC's command-line version of Teensy Loader to flash the Teensy 3.2 chip on the TCB MkII and the Sound Card.
         // No baud or COM port settings are required.
         case DEVICE_TCB_MKII:
+        case DEVICE_AT_MKI:
         case DEVICE_TEENSYSOUND:
+        case DEVICE_TEENSY32:
             {
             // Construct our Teensy Loader executable and list of arguments.
             // Don't put any spaces in the argument list, or it won't work.
@@ -635,7 +644,7 @@ void MainWindow::flashFinished()
 
     switch (ui->cboFlashDevice->currentData().toInt())
     {
-        case DEVICE_TCB:
+        case DEVICE_TCB_MKI:
         case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
@@ -660,7 +669,9 @@ void MainWindow::flashFinished()
             break;
 
         case DEVICE_TCB_MKII:
+        case DEVICE_AT_MKI:
         case DEVICE_TEENSYSOUND:
+        case DEVICE_TEENSY32:
             //qDebug() << TeensyLoaderProcess->exitCode() << " - " << TeensyLoaderProcess->exitStatus();
             if (TeensyLoaderProcess->exitCode() == 0)
             {
@@ -710,9 +721,10 @@ void MainWindow::flashFinished()
     // Whether or not we restore the Get Web Hex button depends on the current device selection
     switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
     {
-        // There is no default web hex to download for the generic ATmega328 option,
+        // There is no default web hex to download for the generic ATmega328/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
         case DEVICE_ATMEGA328:
+        case DEVICE_TEENSY32:
             ui->cmdWebHexPicker->setEnabled(false);
             break;
 
@@ -731,7 +743,7 @@ void MainWindow::readyReadStandardOutput()
 {
     switch (ui->cboFlashDevice->currentData().toInt())
     {
-        case DEVICE_TCB:
+        case DEVICE_TCB_MKI:
         case DEVICE_TCB_DIY:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
@@ -758,7 +770,9 @@ void MainWindow::readyReadStandardOutput()
             break;
 
         case DEVICE_TCB_MKII:
+        case DEVICE_AT_MKI:
         case DEVICE_TEENSYSOUND:
+        case DEVICE_TEENSY32:
             // Append output to our string
             strTeensyLoaderOutput.append(TeensyLoaderProcess->readAllStandardOutput());
 

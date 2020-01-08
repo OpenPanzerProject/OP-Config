@@ -54,7 +54,6 @@
 #include <getopqmaps.h>
 #include <helpbutton.h>                             // Custom push button for help files
 #include <qxmlstream.h>
-#include <devices.h>                                // My file that defines the different devices we can configure
 #include <openpanzercomm.h>                         // OpenPanzer communication library
 #include <op_eeprom_varinfo.h>
 #include <assistant.h>
@@ -98,6 +97,7 @@ struct FirmwareVersion{
     uint8_t Patch;
 };
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -124,11 +124,6 @@ public:
 // PUBLIC SLOTS
 // ------------------------------------------------------------------------------------------------------------------------------------------------>>
 public slots:
-
-
-
-    // Set the current device. This function will be called by the deviceselect dialog form when the project first opens.
-    void setDevice(OP_device_name);
 
     // WinSparkle updater.
     void initWinSparkle();                          // Initialize the WinSparkle app
@@ -195,6 +190,7 @@ private slots:
       void writeAllSettingsToDevice();              // Write all settings to device
       void writeSomeSettingsToDevice(uint16_t startID, uint16_t endID);   // Write some settings to device
       void SerialStatus_displayFirmware(QString version);      // Display device firmware version in status bar
+      void SerialStatus_displayHardware(uint8_t hardware);     // Display device hardware version in status bar
       void ProcessMinOPCVersion(QString);           // The TCB will tell us the minimum OP Config version it requires, if it is greater than this version ask user to update.
       void updateVarArray_fromSerial(uint16_t ID, QByteArray Value, boolean found);  // Process return message from device after requesting value.
       void processNextSentence(boolean);            // When the device responds with a SERID_NEXT_SENTENCE request
@@ -502,7 +498,8 @@ private:
 
     // Physical Device Settings
     // ---------------------------------------------------------------------------------------------------->>
-      OP_device_name CurrentDevice;                 // The name of the Open Panzer device we will be communicating with
+      uint8_t CurrentDevice;                        // The hardware ID to indicate what device we are communicating with
+      QString CurrentFirmware;                      // String value of the firmware the connected device is reporting
       OpenPanzerComm *comm;                         // Our OpenPanzer Communication object
       boolean AttemptConnect;                       // This will only be true while the connection attempt is in process. Once we are
                                                     // connected or disconnected it will become false, and connection status can be obtained

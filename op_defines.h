@@ -6,14 +6,17 @@
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
 // DEVICES
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------->>
-typedef char DEVICE;                    // Devices that we can program using OP Config
-#define DEVICE_TCB          0
-#define DEVICE_TCB_DIY      1           // DIY version of the TCB firmware, moves a few pins around for compatibility with stock Arduino MEGA boards
-#define DEVICE_SCOUT        2           // Scout board versions R11 and later
-#define DEVICE_SCOUT_R10    3           // Scout board versions R10 and earlier
-#define DEVICE_TEENSYSOUND  4
-#define DEVICE_TCB_MKII     5
-#define DEVICE_ATMEGA328    6           // For generic Arduino 328 products
+typedef unsigned char DEVICE;           // Devices that we can program using OP Config
+#define DEVICE_UNKNOWN      0
+#define DEVICE_TCB_MKI      1
+#define DEVICE_TCB_MKII     2
+#define DEVICE_TCB_DIY      3           // DIY version of the TCB firmware, moves a few pins around for compatibility with stock Arduino MEGA boards
+#define DEVICE_SCOUT        4           // Scout board versions R11 and later
+#define DEVICE_SCOUT_R10    5           // Scout board versions R10 and earlier
+#define DEVICE_TEENSYSOUND  6
+#define DEVICE_ATMEGA328    7           // For generic Arduino 328 devices
+#define DEVICE_TEENSY32     8           // For generic Teensy 3.2 devices
+#define DEVICE_AT_MKI       9
 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.
@@ -25,6 +28,10 @@ typedef char DEVICE;                    // Devices that we can program using OP 
 // TCB MkII firmware
 #define LATEST_RELEASE_VERSION_URL_TCB_MKII     "http://openpanzer.org/downloads/tcbmk2/firmware/version.txt"
 #define LATEST_RELEASE_HEX_URL_TCB_MKII         "http://openpanzer.org/downloads/tcbmk2/firmware/tcbmk2.hex"
+
+// Armortek MkI firmware
+#define LATEST_RELEASE_VERSION_URL_AT_MKI       "http://openpanzer.org/downloads/atmk1/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_AT_MKI           "http://openpanzer.org/downloads/atmk1/firmware/atmk1.hex"
 
 // Scout firmware for Rev 11 boards and later (VNH5019 motor driver chips)
 #define LATEST_RELEASE_VERSION_URL_SCOUT        "http://openpanzer.org/downloads/scout/firmware/version.txt"
@@ -66,7 +73,8 @@ typedef char DRIVETYPE;
 #define DT_CAR			3
 #define DT_DKLM         4           // For the unusual DKLM gearboxes that use a single motor for propulsion and a second motor for steering. Basically same as a car, but we give it a unique drive type.
 #define DT_DMD          5           // For the Tamiya DMD integrated ESCs and mixer units
-#define LAST_DT         DT_DMD
+#define DT_DIRECT		6			// Direct drive of each tread using individual radio channels
+#define LAST_DT         DT_DIRECT
 
 #define NUM_TURN_MODES			3	// How many turn modes are configured
 #define MAX_SKIP_NUM 			14  // What is the max accel/decel level (14 = 7 seconds - is that slow enough?)

@@ -37,7 +37,6 @@ LIBS += -L$$_PRO_FILE_PWD_/ -lWinSparkle
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    deviceselect.cpp \
     assistant.cpp \
     helpbutton.cpp \
     combo_drivetype.cpp \
@@ -78,8 +77,6 @@ SOURCES += main.cpp\
     combo_smokertype.cpp
 
 HEADERS  += mainwindow.h \
-    deviceselect.h \
-    devices.h \
     arduino_compat.h \
     op_eeprom_varinfo.h \
     op_defines.h \
@@ -114,8 +111,7 @@ HEADERS  += mainwindow.h \
     combo_devices.h \
     combo_smokertype.h
 
-FORMS    += mainwindow.ui \
-        deviceselect.ui
+FORMS    += mainwindow.ui
 
 RESOURCES += \
     opc_resources.qrc

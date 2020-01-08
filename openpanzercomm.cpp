@@ -476,6 +476,11 @@ void OpenPanzerComm::requestFirmwareVersion(void)
     sendNullValueSentence(PCCMD_READ_VERSION);
 }
 
+void OpenPanzerComm::requestHardwareVersion(void)
+{
+    sendNullValueSentence(PCCMD_READ_HARDWARE);
+}
+
 void OpenPanzerComm::requestMinOPCVersion(void)
 {
     sendNullValueSentence(PCCMD_MINOPC_VERSION);
@@ -607,6 +612,11 @@ void OpenPanzerComm::readData()
                             // Value will be firmware version
                             case PCCMD_READ_VERSION:
                                 emit HereIsFirmwareVersion(SentenceIN.Value);
+                                break;
+
+                            // Value will be hardware version
+                            case PCCMD_READ_HARDWARE:
+                                emit HereIsHardwareVersion(SentenceIN.Value.toUInt());
                                 break;
 
                             // Value will be the minimum version of OP Config the TCB expects.

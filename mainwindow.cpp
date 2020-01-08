@@ -1041,7 +1041,7 @@ void MainWindow::AboutOP()
 
     about.setWindowTitle("  OP Config");
     about.setTextFormat(Qt::RichText);   //this is what makes the links clickable
-    about.setText("<img src=':/images/opconfig.png'></img><br />A desktop configuration program &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />for the Open Panzer TCB.");
+    about.setText("<img src=':/images/opconfig.png'></img><br />A desktop configuration program &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />for Open Panzer devices.");
     //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
     about.setInformativeText(infoText);
     about.setStandardButtons(QMessageBox::Ok);

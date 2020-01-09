@@ -108,20 +108,21 @@
     
 	<h2 id="sabertooth">Sabertooth Baud Rate Tool</h2>
 	<p>
-	Not all Dimension Engineering controllers operate the same way. Some can automatically detect the baud rate of the master device (in this case the TCB). This includes the 
-    popular 2x5 controller which is probably the best suited for 1/16 RC tanks. If you have a 2x5 controller you do not need to do anything with regards to the baud rate and you can skip this section.
-    </p>
-    
-    <p>Most of the other Sabertooth models such as the 2x12, 2x25, and 2x60 must have the baud rate set through special serial commands. This requires a utility such as the one provided here. Once the baud rate has been 
-    set appropriately the Sabertooth will remember it, so the utility only needs to be run once. (Note: the Sabertooth 2x32 is a special case and its baud rate must be set with the DEScribe software provided
-    by Dimension Engineering). 
+	Not all Dimension Engineering controllers operate the same way. The Sabertooth 2x5 can automatically detect the baud rate of the master device (in this case the TCB). 
+	If you have a 2x5 controller you do not need to do anything with regards to the baud rate and you can skip this section.
     </p>
     
     <p>
-    If you own one of the Sabertooth controllers that needs this setup, connect it to the TCB and then connect your TCB to your computer via USB, and finally open a connection to the TCB within OP Config. 
-    Select the baud rate you want for the Serial 2 port in the Baud Rates section. Most users should set this to 38400. Now click the "Set" button and the TCB will configure the Sabertooth to use that rate. 
+	The other Sabertooth models (2x12, 2x25, 2x32 and 2x60) must have the baud rate set through special serial commands. This requires a utility such as the one provided here. 
+	Once the baud rate has been set appropriately the Sabertooth will remember it, so the utility only needs to be run once. 
     </p>
     
+    <p>
+    If you own one of the Sabertooth controllers that needs this setup, connect it to the TCB and then connect your TCB to your computer via USB, and finally open a connection to the 
+	TCB within OP Config. Select the baud rate you want for the Serial 2 port in the Baud Rates section. Most users should set this to 38400. Now click the "Set" button and the TCB 
+	will configure the Sabertooth to use that rate.	 
+    </p>
+
 
 
 	<h2 id="pololu">Pololu Qik Configuration</h2>

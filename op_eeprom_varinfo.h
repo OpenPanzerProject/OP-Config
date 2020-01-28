@@ -310,7 +310,7 @@ const _storage_var_info STORAGEVARS[NUM_STORED_VARS] = {
     {2438, 372, varBOOL, "0"},        // DragInnerTrack
     {2439, 373, varBOOL, "0"},        // EnableTrackRecoil
     {2440, 374, varUINT8, "100"},        // TrackRecoilKickbackSpeed
-    {2441, 375, varUINT8, "65"},        // TrackRecoilDecelerateFactor
+    {2441, 375, varUINT8, "100"},        // TrackRecoilDecelerateFactor
     {2511, 376, varBOOL, "0"},        // EnableBarrelStabilize
     {2512, 377, varUINT8, "50"},        // BarrelSensitivity
     {2513, 378, varBOOL, "0"},        // EnableHillPhysics

@@ -240,20 +240,27 @@
 
 	<h2 id="trackrecoil">Track Recoil</h2>
 	<h4 class="entry">Enable Track Recoil</h4>
-	<p>Track recoil will cause the vehicle to drive backwards rapidly but briefly when then cannon is fired. This feature is standard on Heng Long and Taigen tanks, but most find it undesirable for 
+	<p>Track recoil will cause the vehicle to move backwards briefly when then cannon is fired. This feature is standard on Heng Long and Taigen tanks, but most find it undesirable for 
     scale reasons. Here you can enable or disable it as you please. Note: the Open Panzer implementation of track recoil is only active when the vehicle is stopped - even if enabled, it will 
-    not function if the cannon is fired while the vehicle is moving. Also keep in mind, that although several adjustments are provided the effect will be influenced significantly by your 
-    specific gearbox and motor combination. In general, the very high gear ratios used in model tanks do not permit for a very realistic reaction.
+    not function if the cannon is fired while the vehicle is moving. Also keep in mind that the effect will be influenced significantly by your specific gearbox and motor combination. 
+	In general, the very high gear ratios used in model tanks do not permit for a very realistic reaction.
     </p>
 
 	<h4 class="entry">Kickback Speed</h4>
-	<p>The starting speed of the track recoil movement, from 1 to 100 %.
+	<p>The reverse motor speed of the track recoil movement, from 1 to 100%. 
     </p>
     
+    <h4 class="entry">Kickback Duration</h4>
+	<p>The duration of the track recoil effect in milliseconds (ms). Maximum is 250 mS which equates to 1/4 of a second.  
+    </p>
+
+
+	<!--
     <h4 class="entry">Deceleration Factor</h4>
 	<p>The track recoil effect starts the vehicle moving backwards at the <b>Kickback Speed</b> but then quickly decelerates to a stop. The <b>Deceleration Factor</b> adjusts the exponential 
     deceleration rate. Starting at a value of 1 the kickback would last approximately 1/2 second, up to a value of 100 that would create a kickback of approximately 6 seconds. 
     </p>
+	-->
 
 
 	<h2 id="freewheel">Freewheeling Gearboxes</h2>

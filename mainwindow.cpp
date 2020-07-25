@@ -66,6 +66,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // We are not yet trying to connect
     AttemptConnect = false;
+    CountFailConnection = 0; // How many times have we tried to connect and failed
+    HideConnectAssistMsg = false;
 
     // Message Box
     // ---------------------------------------------------------------------------------------------------------------------------------->>
@@ -527,12 +529,26 @@ void MainWindow::SerialStatus_SetNotConnected()
     serialStatusLabel->setText(tr("Not connected"));
     // Red box
     connectFrame->setStyleSheet("QFrame { background-color: #FF0632; border: 1px solid white; border-radius: 2px; }");
+
+
+    // Increment the failed connection count
+    CountFailConnection += 1;
+
+    // If they haven't disabled the connection assist message, check the number of times we've failed
+    // and if over a certain number show the help message
+    if (HideConnectAssistMsg == false && CountFailConnection >= CountConnectionFailuresToShowHelp)
+    {
+        CountFailConnection = 0;
+        ConnectAssistMsgBox();
+    }
 }
 void MainWindow::SerialStatus_SetConnected()
 {
     serialStatusLabel->setText(tr("Connected to %1 (%2)") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate));
     // Green box
     connectFrame->setStyleSheet("QFrame { background-color: #01D826; border: 1px solid white; border-radius: 2px; }");
+    // Reset the running failed connection attempt count
+    CountFailConnection = 0;
 }
 void MainWindow::SerialStatus_displayFirmware(QString version)
 {
@@ -1007,7 +1023,63 @@ void MainWindow::RemovedFunctionTriggersMsgBox(void)
     msgBox("Some function triggers were removed as a result of this change.",vbOkOnly,"Function Triggers",vbExclamation);
     SetStatusLabel("Function triggers changed",slNeutral);
 }
+void MainWindow::ConnectAssistMsgBox(void)
+{
+    QMessageBox assist;
+    QCheckBox *cb = new QCheckBox("Don't show this message again");
 
+    QFile file(":/css/msgbox.qss");
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        assist.setStyleSheet(file.readAll());
+        cb->setStyleSheet(file.readAll());  // This seems to work for the text size of the QCheckbox
+        file.close();
+    }
+
+    // Even though I apply a css stylesheet, it seems to have limited effect, mostly on the existing objects
+    // (buttons, QCheckbox), so I also use inline-styles.
+    QString helpText;
+    helpText.append("<html><head><style>");
+        helpText.append("body {font-size: 13px;}");
+        helpText.append("li {margin-top: 0px; padding-top: 0px; margin-bottom: 5px;}");
+        helpText.append("ul {margin-top: 0px; padding-top: 0px; margin-bottom: 0px;}");
+    helpText.append("</style></head><body>");
+
+    helpText.append("<p><strong>Having problems connecting? Try these suggestions:</strong></p>");
+    helpText.append("<ul>");
+    helpText.append("<li>Make sure Dipswitch 5 on the TCB is in the ON position</li>");
+    helpText.append("<li>Make sure you have the correct COM Port selected</li>");
+    helpText.append("<li>Try the alternate connection method:");
+        helpText.append("<ul>");
+            helpText.append("<li>Go to the Firmware tab and click the Snoop button</li>");
+            helpText.append("<li>If Snoop connection is successful wait until TCB is done spitting out debug information to the console window</li>");
+            helpText.append("<li>Now click the Connect button and the full communication mode should be successful</li></ul>");
+        helpText.append("</ul>");
+    helpText.append("</ul>");
+    helpText.append("<hr>");
+    helpText.append("<p>For more troubleshooting help, <a href='http://openpanzer.org/wiki/doku.php?id=wiki:tcb:operation:troubleshooting' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>see the Open Panzer website</a><br/></p>");
+    helpText.append("</body></html>");
+
+    assist.setWindowTitle("  Connection Assistance");
+    mb->setTextFormat(Qt::RichText);   //this is what makes the links clickable
+    assist.setText(helpText);
+    assist.setCheckBox(cb);
+    assist.setStandardButtons(QMessageBox::Ok);
+    assist.setDefaultButton(QMessageBox::Ok);
+    assist.setIcon(QMessageBox::Question);
+    assist.show();
+
+    // Here we create a connection to the checkbox on the popup, if they check it we will not show this message again
+    QObject::connect(cb, &QCheckBox::stateChanged, [this](int state)
+    {
+        if (static_cast<Qt::CheckState>(state) == Qt::CheckState::Checked)
+        {
+            HideConnectAssistMsg = true;
+        }
+    });
+
+    assist.exec();
+}
 
 
 //------------------------------------------------------------------------------------------------------------------------>>

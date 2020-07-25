@@ -351,6 +351,10 @@ private:
     // ---------------------------------------------------------------------------------------------------->>
       int msgBox(QString msg, ButtonCollection buttons, QString title, IconCollection icon);
       QMessageBox *mb;
+      uint8_t CountFailConnection;
+      #define CountConnectionFailuresToShowHelp 3   // How many connection failures before we show the help message
+      void ConnectAssistMsgBox(void);
+      boolean HideConnectAssistMsg;
 
     // Form stuff
     // ---------------------------------------------------------------------------------------------------->>
@@ -445,7 +449,6 @@ private:
         void SqueakSettingsMoveDown(void);
         void HideSqueakHeader(void);
         void ShowSqueakHeader(void);
-
       // Misc tab
         void SetupControls_MiscTab(void);
       // Firmware tab

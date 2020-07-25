@@ -84,7 +84,7 @@
 	<p>
 	An Aux channel is any channel other than the 4 channels associated with the two sticks. At most you can have up to 12 Aux channels with an SBus receiver, 10 Aux channels with an iBus receiver, 
     or 4 Aux channels with a PPM receiver: assuming your transmitter is also capable of transmitting and controlling those extra channels. Aux channels can represent switches, knobs, or levers on 
-    your transmitter. If switches they may have 2, 3 or 6 positions. We will need to inform the TCB about the nature of each of these channels so it will know what to expect. The type of 
+    your transmitter. If switches they may have anywhere from 2 to 9 positions. We will need to inform the TCB about the nature of each of these channels so it will know what to expect. The type of 
     Aux channel will also dictate what kinds of functions it can be mapped to (see the <a href="functions.html">Functions tab</a>).	</p>
 	
 	
@@ -127,9 +127,9 @@
 		the blue bars on the right side of the screen as you manipulate the switches and knobs on your transmitter to identify the type of each channel.</li>
 		
 		<li><b>Aux Channel Positions:</b> If an Aux channel is specified as <b>Analog</b>, the Position setting will be hidden because an analog channel has an essentially unlimited number of positions. In the
-		example above, Aux channels 1 &amp; 2 are Analog so have no Position setting available. But if your Aux channel is a switch, or in other words, a <b>Digital</b> channel, you need to tell the TCB whether 
-		it is a 2-position switch or a 3-position switch. Support for switches with greater number of positions is not presently implemented. It is also important to remember that a 3-position switch will have 3 
-		positions, and a 2-position switch will have 2 positions. But of course! That sounds very logical. However it can cause some confusion when we look at the current switch position in item #9 below. </li>
+		example above, Aux channels 1 &amp; 2 are Analog so have no Position setting available. But if your Aux channel is a switch, or in other words, a <b>Digital</b> channel, you need to tell the TCB how many 
+		positions it has (2-9). It is also important to remember that a 3-position switch will have 3 positions, and a 2-position switch will have 2 positions. But of course! That sounds very logical. However it 
+		can cause some confusion when we look at the current switch position in item #9 below. </li>
 		
 		<li><b>Channel Reversing:</b> Although you could use the channel reversing feature on your transmitter, there is an advantage to letting the TCB take care of it instead: you can leave your transmitter settings unchanged
 		while still using it for multiple different models. Rather than trying to remember which model had the reversed turret direction and constantly changing the settings on your transmitter, or creating multiple 

@@ -32,8 +32,8 @@
 	
     <h4 class="entry">Select Hex File for</h4>
     <p>
-    From the drop-down menu select the device you want to update. Possible devices include various versions of the TCB, as well as the Scout ESC, Open Panzer Sound Card, and a generic selection 
-    for ATmega328 devices for which you have a hex file (useful for experimenters).    
+    From the drop-down menu select the device you want to update. Possible devices include various versions of the TCB, the Scout ESC, Open Panzer Sound Card, the Heclo shield for Mega2560 boards, 
+	as well as selections for generic ATmega or Teensy devices for which you have a hex file (useful for experimenters).  
     </p>
     
 	<h4	class="entry">Get Latest Release</h4>
@@ -43,16 +43,15 @@
 	version, in which case flashing the update is unnecessary. You can always check which version of the firmware your TCB is presently running by connecting to the TCB and looking at the
 	Serial Status label on the bottom left of the OP Config program (#8 on the <a href="formlayout.html">Program Layout</a> diagram). You can also read the firmware version by connecting
 	the TCB to any serial console (such as the built-in console discussed below), and pressing the INPUT button on the TCB board which causes the TCB to send diagnostic information including
-	the firmware version to the console. If you have a Scout ESC or Open Panzer Sound Card attached to your TCB, the diagnostic information will show the firmware versions for those 
-    devices as well. 
+	the firmware version to the console. Firmware versions may be displayed for other compatible devices as well (Scout ESC, Open Panzer Sound Card, etc...)
 	</p>
 	
 	<h4	class="entry">Use Your Own Hex</h4>
 	<p>
 	If you are a developer and have compiled your own hex, or perhaps were given a testing Hex by a developer on the Open Panzer forums, you can select it using this button. If you are working 
     on a project in the Arduino IDE, you can generate a hex file by typing Ctrl+Alt+S or going to the Sketch menu and selecting the "Export compiled Binary" option. The hex file will then appear 
-    in your sketch folder (instructions valid for Arduino 1.6.5, and may change with future versions). <b>Advanced Note:</b> you can use OP Config to flash a hex file to any Arduino Mega using the 
-    TCB option. You can flash any Arduino Uno, Nano, Duemilanove or other ATmega328 device using the Scout ESC option. 	
+    in your sketch folder (instructions valid for Arduino 1.6.5, and may change with future versions). <b>Advanced Note:</b> you can use OP Config as a general purpose firmware loader 
+	for any ATmega328, ATmega2560 or Teensy 3.2 boards using the "Generic xxx" options.
 	</p>
 	
 	<h4	class="entry">Flash</h4>
@@ -77,7 +76,13 @@
             <li>Machine Gun LED - will now be on Arduino Pin 20 (also labeled SDA on the Mega board)</li>
             <li>Airsoft/Mechanical Recoil Switch - will now be on Arduino Pin 21 (also labeled SCL on the Mega board)</li>
         </ul>
-        <p>For building a DIY TCB <a href="http://openpanzer.org/forum/index.php?topic=16.0">please read this thread</a>.</p> 
+        <p>For building a DIY TCB, <a href="http://openpanzer.org/forum/index.php?topic=16.0">please read this thread</a>.</p> 
+        <br />
+
+        <h5>TCB - Heclo Shield</h5>
+        <p>
+        Kim Olsen (username Heclo) designed a shield that when combined with a standard Arduino Mega board will provide all the functionality of the TCB, and then some. For more information on his design, 
+		<a href="http://openpanzer.org/forum/index.php?topic=240.0">please read this thread</a>.</p> 
         <br />
 	
         <h5>Scout ESC</h5>
@@ -105,10 +110,10 @@
         </p>
         <br />        
 	
-        <h5>Generic ATmega328</h5>
+        <h5>Generic ATmega328 / Generic ATmega2560 / Generic Teensy 3.2</h5>
         <p>
-        You can use this setting to flash firmware from your own hex (there is no default hex to download from the internet) to any Arduino-compatible device with an ATmega328 processor 
-        (Uno, Duemilanove, Nano, Mini, or their respective clones; your own design; etc). Most people will not need to use this but it can be useful for experimenters. 
+        You can use these selections to flash firmware from your own hex (there is no default hex to download from the internet) to any Arduino-compatible device with an ATmega328 or ATmega2560 processor 
+        (Uno, Duemilanove, Nano, Mini, Mega or their respective clones; your own design; etc), or to the PJRC Teensy 3.2. Most people will not need to use these but it can be useful for experimenters. 
         </p>
 		
 	<h2 id="console">Console Utility</h2>

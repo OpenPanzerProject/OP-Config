@@ -14,7 +14,7 @@ void DriveTypeComboBox::setCategory(MotorCategory mc)
     {
         case mcDrive:
             insertItem(count(), "RC Output", SERVO_ESC);
-            insertItem(count(), "Built-in Driver", ONBOARD);
+            insertItem(count(), "Built-in Drivers (A & B)", ONBOARD);
             break;
 
         case mcTurretRotation:
@@ -33,6 +33,12 @@ void DriveTypeComboBox::setCategory(MotorCategory mc)
     insertItem(count(), "OP Scout Serial ESC", OP_SCOUT);
     insertItem(count(), "Sabertooth Serial ESC", SABERTOOTH);
     insertItem(count(), "Pololu Serial ESC", POLOLU);
+
+    // So that it shows up last -
+    if (mc == mcDrive)
+    {
+        insertItem(count(), "HECLO ONLY! - Drivers C & D", ONBOARD_CD);
+    }
 
     // So that it shows up last -
     if (mc == mcTurretRotation || mc == mcTurretElevation)
@@ -100,6 +106,16 @@ boolean DriveTypeComboBox::isSerial()
 boolean DriveTypeComboBox::isOnboard()
 {
     if (this->getCurrentDriveType() == ONBOARD) return true;
+    else return false;
+
+    // Technically for the Heclo shield there are two other onboard drivers - C & D
+    // But the reason for this check has to do with various functions and we have not written any
+    // for those motors, so we are not counting them.
+}
+
+boolean DriveTypeComboBox::isOnboard_CD()
+{
+    if (this->getCurrentDriveType() == ONBOARD_CD) return true;
     else return false;
 }
 

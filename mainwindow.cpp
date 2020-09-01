@@ -566,7 +566,10 @@ void MainWindow::SerialStatus_displayFirmware(QString version)
     {   // OP Config needs the TCB to be a later version. Warn the user
         QString warn = "Your device firmware needs to be updated!<br /><br />";
         warn.append("Please go to the Firmware tab, download the<br />");
-        warn.append("latest release, and flash it to your device.");
+        warn.append("latest release, and flash it to your device.<br /><br />");
+        warn.append("Or you can use an older version of OP Config,<br />");
+        warn.append("prior releases are available on the Downloads<br />");
+        warn.append("page at OpenPanzer.org");
         warn.append("<hr />");
         warn.append("<span style='font-size: 12px;'>");
         warn.append("<table><tr>");
@@ -654,10 +657,11 @@ void MainWindow::SerialStatus_displayHardware(uint8_t hardware)
     QString hw;
     switch(hardware)
     {
-        case DEVICE_TCB_MKI:    hw = "TCB";         break;
-        case DEVICE_TCB_MKII:   hw = "TCB MkII";    break;
-        case DEVICE_AT_MKI:     hw = "AT";    break;
-        default:                hw = "";            break;
+        case DEVICE_TCB_MKI:        hw = "TCB";         break;
+        case DEVICE_TCB_MKII:       hw = "TCB MkII";    break;
+        case DEVICE_HECLO_SHIELD:   hw = "Heclo Shield";    break;
+        case DEVICE_AT_MKI:         hw = "AT";          break;
+        default:                    hw = "";            break;
     }
     serialStatusLabel->setText(tr("Connected to %1 (%2)   %3 Firmware: %4") .arg(comm->currentPortSettings.name).arg(comm->currentPortSettings.stringBaudRate).arg(hw).arg(CurrentFirmware));
 

@@ -66,9 +66,10 @@ void MainWindow::handleDeviceTypeSelection(int)
 {
     switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
     {
-        // There is no default web hex to download for the generic ATmega328/Teensy3.2 options,
+        // There is no default web hex to download for the generic ATmega328/2560/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
         case DEVICE_ATMEGA328:
+        case DEVICE_ATMEGA2560:
         case DEVICE_TEENSY32:
             ui->cmdWebHexPicker->setEnabled(false);
             break;
@@ -144,6 +145,7 @@ QString versionfile;
             case DEVICE_TCB_MKI:      // Same version file for both of these
             case DEVICE_TCB_DIY:      // Same version file for both of these
                                       versionfile = LATEST_RELEASE_VERSION_URL_TCB;         break;
+            case DEVICE_HECLO_SHIELD: versionfile = LATEST_RELEASE_VERSION_URL_HECLO_SHIELD; break;
             case DEVICE_SCOUT:        versionfile = LATEST_RELEASE_VERSION_URL_SCOUT;       break;
             case DEVICE_SCOUT_R10:    versionfile = LATEST_RELEASE_VERSION_URL_SCOUT_R10;   break;
             case DEVICE_TEENSYSOUND:  versionfile = LATEST_RELEASE_VERSION_URL_TEENSYSOUND; break;
@@ -209,6 +211,7 @@ void MainWindow::checkHexVersion()
         case DEVICE_TCB_MKII:     hexfile = LATEST_RELEASE_HEX_URL_TCB_MKII;    break;
         case DEVICE_AT_MKI:       hexfile = LATEST_RELEASE_HEX_URL_AT_MKI;      break;
         case DEVICE_TCB_DIY:      hexfile = LATEST_RELEASE_HEX_URL_TCB_DIY;     break;
+        case DEVICE_HECLO_SHIELD: hexfile = LATEST_RELEASE_HEX_URL_HECLO_SHIELD; break;
         case DEVICE_SCOUT:        hexfile = LATEST_RELEASE_HEX_URL_SCOUT;       break;
         case DEVICE_SCOUT_R10:    hexfile = LATEST_RELEASE_HEX_URL_SCOUT_R10;   break;
         case DEVICE_TEENSYSOUND:  hexfile = LATEST_RELEASE_HEX_URL_TEENSYSOUND; break;
@@ -231,6 +234,7 @@ void MainWindow::SaveWebHexToLocal()
         case DEVICE_TCB_MKII:     hexFilePath = hexFileFolder + QString("TCBMK2_%1.hex").arg(formattedVersion);     break;
         case DEVICE_AT_MKI:       hexFilePath = hexFileFolder + QString("ATMK1_%1.hex").arg(formattedVersion);      break;
         case DEVICE_TCB_DIY:      hexFilePath = hexFileFolder + QString("TCBMK1_DIY_%1.hex").arg(formattedVersion); break;
+        case DEVICE_HECLO_SHIELD: hexFilePath = hexFileFolder + QString("HECLOSHIELD_%1.hex").arg(formattedVersion); break;
         case DEVICE_SCOUT:        hexFilePath = hexFileFolder + QString("OPSCOUT_%1.hex").arg(formattedVersion);    break;
         case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion);break;
         case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);    break;
@@ -539,6 +543,8 @@ QString hex;
         // These two are ATmega devices and we will use AVRDUDE to flash
         case DEVICE_TCB_MKI:
         case DEVICE_TCB_DIY:
+        case DEVICE_HECLO_SHIELD:
+        case DEVICE_ATMEGA2560:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
@@ -548,7 +554,9 @@ QString hex;
             program = QString("%1/avrdude/avrdude ").arg(QCoreApplication::applicationDirPath());       // avrdude.exe
             QString conf = QString("-C%1/avrdude/avrdude.conf ").arg(QCoreApplication::applicationDirPath()); // avrdude.conf file
             if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_MKI ||
-                ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY )
+                ui->cboFlashDevice->getCurrentDevice() == DEVICE_TCB_DIY ||
+                ui->cboFlashDevice->getCurrentDevice() == DEVICE_ATMEGA2560 ||
+                ui->cboFlashDevice->getCurrentDevice() == DEVICE_HECLO_SHIELD)
             {   // TCBs
                 flagPart =           "-patmega2560";   // -p part - TCB is the ATmega2560. This also needs to be defined in avrdude.conf
                 flagProgrammer =     "-cwiring";       // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
@@ -646,9 +654,11 @@ void MainWindow::flashFinished()
     {
         case DEVICE_TCB_MKI:
         case DEVICE_TCB_DIY:
+        case DEVICE_HECLO_SHIELD:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
+        case DEVICE_ATMEGA2560:
             //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
             if (AVRDUDEProcess->exitCode() == 0)
             {
@@ -721,9 +731,10 @@ void MainWindow::flashFinished()
     // Whether or not we restore the Get Web Hex button depends on the current device selection
     switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
     {
-        // There is no default web hex to download for the generic ATmega328/Teensy3.2 options,
+        // There is no default web hex to download for the generic ATmega328/2560/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
         case DEVICE_ATMEGA328:
+        case DEVICE_ATMEGA2560:
         case DEVICE_TEENSY32:
             ui->cmdWebHexPicker->setEnabled(false);
             break;
@@ -745,9 +756,11 @@ void MainWindow::readyReadStandardOutput()
     {
         case DEVICE_TCB_MKI:
         case DEVICE_TCB_DIY:
+        case DEVICE_HECLO_SHIELD:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
+        case DEVICE_ATMEGA2560:
             // Append output to our string
             strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
 

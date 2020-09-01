@@ -17,6 +17,8 @@ typedef unsigned char DEVICE;           // Devices that we can program using OP 
 #define DEVICE_ATMEGA328    7           // For generic Arduino 328 devices
 #define DEVICE_TEENSY32     8           // For generic Teensy 3.2 devices
 #define DEVICE_AT_MKI       9
+#define DEVICE_HECLO_SHIELD 10
+#define DEVICE_ATMEGA2560   11          // For generic ATmega2560 devices
 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.
@@ -24,6 +26,10 @@ typedef unsigned char DEVICE;           // Devices that we can program using OP 
 #define LATEST_RELEASE_VERSION_URL_TCB          "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
 #define LATEST_RELEASE_HEX_URL_TCB              "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
 #define LATEST_RELEASE_HEX_URL_TCB_DIY          "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1_diy.hex"
+
+// TCB Heclo Shield firmware
+#define LATEST_RELEASE_VERSION_URL_HECLO_SHIELD "http://openpanzer.org/downloads/members/hecloshield/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_HECLO_SHIELD     "http://openpanzer.org/downloads/members/hecloshield/firmware/hecloshield.hex"
 
 // TCB MkII firmware
 #define LATEST_RELEASE_VERSION_URL_TCB_MKII     "http://openpanzer.org/downloads/tcbmk2/firmware/version.txt"
@@ -158,7 +164,8 @@ ONBOARD      = 11,
 SERVO_ESC    = 12,
 SERVO_PAN    = 13,
 SERVO_RECOIL = 14,
-DRIVE_DETACHED = 15
+DRIVE_DETACHED = 15,
+ONBOARD_CD	 = 16
 };
 
 //Recoil servo presets

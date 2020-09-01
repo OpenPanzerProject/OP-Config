@@ -26,6 +26,7 @@ public:
     Drive_t getCurrentDriveType(void);
     boolean isSerial();                     // Does the currently-selected drive type require serial communication
     boolean isOnboard();                    // Is the currently-selected drive type the on-board motors?
+    boolean isOnboard_CD();                 // Onboard drivers C & D, only for select hardware
     boolean isRCOutput();                   // Is the currently-selected drive type an RC output (SERVO_ESC or SERVO_PAN)?
     boolean isESC();                        // Is the currently-selected drive type an ESC (SERVO_ESC)?
 

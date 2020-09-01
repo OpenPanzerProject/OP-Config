@@ -758,6 +758,22 @@ void MainWindow::ValidateMotorSelections()
         }
     }
 
+    // Drive motors driven by Onboard Drivers C & D - select hardware only (Heclo shield, maybe future boards)
+    if (ui->cboDriveMotors->isOnboard_CD())
+    {
+        if (ui->cboDriveType->currentData() == DT_HALFTRACK || ui->cboDriveType->currentData() == DT_TANK)
+        {
+            ui->lblDriveMotors->setText("Connect motors to terminals: Left = \"Motor C\", Right = \"Motor D\"");
+        }
+        else if (ui->cboDriveType->currentData() == DT_DKLM)
+        {
+            ui->lblDriveMotors->setText("Connect propulsion motor to \"Motor C\", steering motor to \"Motor D\"");
+        }
+        else if (ui->cboDriveType->currentData() == DT_CAR)
+        {
+            ui->lblDriveMotors->setText("Connect drive motor to \"Motor C\"");
+        }
+    }
     // Now the turret rotation motor
     if (ui->cboTurretRotationMotor->isSerial())
     {    switch (ui->cboTurretRotationMotor->getCurrentDriveType())

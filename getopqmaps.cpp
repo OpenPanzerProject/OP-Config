@@ -32,12 +32,14 @@ uint8_t OP_QMaps::GetSpecialFunctionExternalPortNum(_special_function sf)
         case SF_OUTPUT_A_ON:
         case SF_OUTPUT_A_OFF:
         case SF_OUTPUT_A_PULSE:
+        case SF_OUTPUT_A_BLINK:
             return 1;
             break;
         case SF_OUTPUT_B_TOGGLE:
         case SF_OUTPUT_B_ON:
         case SF_OUTPUT_B_OFF:
         case SF_OUTPUT_B_PULSE:
+        case SF_OUTPUT_B_BLINK:
             return 2;
             break;
 

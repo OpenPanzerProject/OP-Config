@@ -35,7 +35,7 @@ typedef unsigned char DEVICE;           // Devices that we can program using OP 
 #define LATEST_RELEASE_VERSION_URL_TCB_MKII     "http://openpanzer.org/downloads/tcbmk2/firmware/version.txt"
 #define LATEST_RELEASE_HEX_URL_TCB_MKII         "http://openpanzer.org/downloads/tcbmk2/firmware/tcbmk2.hex"
 
-// Armortek MkI firmware
+// AT MkI firmware
 #define LATEST_RELEASE_VERSION_URL_AT_MKI       "http://openpanzer.org/downloads/atmk1/firmware/version.txt"
 #define LATEST_RELEASE_HEX_URL_AT_MKI           "http://openpanzer.org/downloads/atmk1/firmware/atmk1.hex"
 

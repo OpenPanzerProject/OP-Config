@@ -189,23 +189,24 @@
 	</p>
 
 	<p>
-	You can then assign a trigger to these functions and in so doing control the output of these ports. The first three functions are self-explanatory, the fourth function, "Pulse," will briefly
-    set the output pin to the state opposite its default. For example, if you had set Port A to Output with Default High, the pin will be kept high (+5 volts) normally and the Pulse command would 
-    cause it to briefly be held Low (to Ground). This feature can be used to emulate a button press to some external device.<br>
-    <br>
-    
-    The fifth function will cause the output to blink and blinking will continue until you call the "Turn On" or "Turn Off" function. The blink rate can be set by using the "Blink - On Time" and 
-    "Off Time" values (the blink rate is shared by both outputs). <br>
-    <br>
-    
-    What you do with these outputs is up to you, but remember these are <b>logic-level</b> outputs! That means they can <i>not source</i> enough current to actually power something, 
-    not even most LEDs! Instead consider the outputs like signals, and the signals can tell some other more powerful circuit to do something, or they could be used as direct inputs 
-    into another microcontroller (such as another Arduino). (If you know what you are doing, and you are certain your LEDs do not draw more than 20mA, you can connect them directly to the port).<br>
+	You can then assign a trigger to these functions and in so doing control the output of these ports. The first three functions are self-explanatory, the fourth function, "Pulse," will briefly 
+	set the output pin to the state opposite its default. For example, if you had set Port A to Output with Default High, the pin will be kept high (+5 volts) normally and the Pulse command would 
+	cause it to briefly be held low (to ground). If you set the output to Default Low, the pin will be kept low (at ground) normally and the Pulse command would cause it to be temporarily brought 
+	high (+5 volts). The pulse duration can be set by the "Pulse - On Time" value (the pulse time is shared by both outputs).<br>
+	<br>
+	
+	The fifth function will cause the output to blink and blinking will continue until you call the "Turn On" or "Turn Off" function. The blink rate can be set by using the "Blink - On Time" and 
+	"Off Time" values (the blink rate is shared by both outputs). <br>
+	<br>
+
+	What you do with these outputs is up to you, but remember these are logic-level outputs! The maximum current draw of each output signal pin is 40mA. This may be enough to power one or two 
+	standard LEDs but not much else. Instead consider the outputs like signals, and the signals can tell some other more powerful circuit to do something, or they could be used as direct inputs 
+	into another microcontroller (such as another Arduino).<br>
 	<br>
     
-	If you want to use these outputs to turn on a lamp, or a relay, or some other object that draws more than 20mA of current, you will need to use a driver circuit. You can find a schematic for 
-    a MOSFET driver adapter on the Open Panzer Wiki designed specifically for this purpose, see the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page. 
-    Alternatively you may want to use the Aux Output (see above) which <i>is</i> capable of driving a load directly. 
+	If you want to use these outputs to turn on a lamp, or a relay, or some other object that draws more than 40mA of current, you will need to use a driver circuit. You can find a schematic for 
+	a MOSFET driver adapter on the <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:io_ports_ab">I/O Ports</a> page of the Open Panzer Wiki. 
+	Alternatively you may want to use the Aux Output (see above) which <em>is</em> capable of driving a load directly.
 	</p>
 
 

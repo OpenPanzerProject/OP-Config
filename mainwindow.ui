@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>2</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -6858,7 +6858,7 @@ QSizeGrip {
                   <x>360</x>
                   <y>220</y>
                   <width>351</width>
-                  <height>221</height>
+                  <height>271</height>
                  </rect>
                 </property>
                 <property name="frameShape">
@@ -7056,7 +7056,7 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinIOBlinkOff_mS">
                  <property name="geometry">
                   <rect>
-                   <x>180</x>
+                   <x>170</x>
                    <y>180</y>
                    <width>71</width>
                    <height>22</height>
@@ -7072,7 +7072,7 @@ QSizeGrip {
                 <widget class="QLabel" name="lblIOBlinkOffAmt">
                  <property name="geometry">
                   <rect>
-                   <x>260</x>
+                   <x>250</x>
                    <y>180</y>
                    <width>81</width>
                    <height>21</height>
@@ -7127,7 +7127,7 @@ QSizeGrip {
                 <widget class="QSpinBox" name="spinIOBlinkOn_mS">
                  <property name="geometry">
                   <rect>
-                   <x>180</x>
+                   <x>170</x>
                    <y>150</y>
                    <width>71</width>
                    <height>22</height>
@@ -7163,7 +7163,7 @@ QSizeGrip {
                 <widget class="QLabel" name="lblIOBlinkOnAmt">
                  <property name="geometry">
                   <rect>
-                   <x>260</x>
+                   <x>250</x>
                    <y>150</y>
                    <width>81</width>
                    <height>21</height>
@@ -7176,6 +7176,79 @@ QSizeGrip {
                  </property>
                  <property name="text">
                   <string>(1-5000 mS)</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblIOBlinkOnAmt_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>250</x>
+                   <y>220</y>
+                   <width>91</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>(1-10,000 mS)</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblIOBlink_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>20</x>
+                   <y>220</y>
+                   <width>51</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Pulse - </string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="lblIOBlinkOn_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>70</x>
+                   <y>220</y>
+                   <width>61</width>
+                   <height>21</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <italic>false</italic>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>On Time</string>
+                 </property>
+                </widget>
+                <widget class="QSpinBox" name="spinIOPulseOn_mS">
+                 <property name="geometry">
+                  <rect>
+                   <x>170</x>
+                   <y>220</y>
+                   <width>71</width>
+                   <height>22</height>
+                  </rect>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5000</number>
                  </property>
                 </widget>
                </widget>

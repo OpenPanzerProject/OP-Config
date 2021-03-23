@@ -156,6 +156,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.PortB.Settings.dataType = VarArray.value(1314).toUInt();                     // 1314 - PortB digital true/false if input, normally high/low if output
     DeviceData.IOBlinkOnTime_mS = VarArray.value(1315).toUInt();                            // 1315 - Output blink on time
     DeviceData.IOBlinkOffTime_mS = VarArray.value(1316).toUInt();                           // 1316 - Output blink off time
+    DeviceData.IOPulseOnTime_mS = VarArray.value(1317).toUInt();                            // 1317 - Output pulse time
 
     // Special Function Triggers - 14xx
     int j = 0;
@@ -483,6 +484,7 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(1314, QByteArray::number(DeviceData.PortB.Settings.dataType));                  // 1314 - PortB digital true/false if input, normally high/low if output
     VarArray.insert(1315, QByteArray::number(DeviceData.IOBlinkOnTime_mS));                         // 1315 - Output blink on time
     VarArray.insert(1316, QByteArray::number(DeviceData.IOBlinkOffTime_mS));                        // 1316 - Output blink off time
+    VarArray.insert(1317, QByteArray::number(DeviceData.IOPulseOnTime_mS));                         // 1317 - Output pulse time
 
     // Special Function Triggers - 14xx
     int j = 0;

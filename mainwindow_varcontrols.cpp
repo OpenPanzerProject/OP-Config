@@ -142,6 +142,7 @@ void MainWindow::Variables_to_Controls(void)
     // IO blink times
     ui->spinIOBlinkOn_mS->setValue(DeviceData.IOBlinkOnTime_mS);
     ui->spinIOBlinkOff_mS->setValue(DeviceData.IOBlinkOffTime_mS);
+    ui->spinIOPulseOn_mS->setValue(DeviceData.IOPulseOnTime_mS);
     // First set the data direction
     ui->cboPortADataDirection->setCurrentIndex(ui->cboPortADataDirection->findData(DeviceData.PortA.Settings.dataDirection));
     ui->cboPortBDataDirection->setCurrentIndex(ui->cboPortBDataDirection->findData(DeviceData.PortB.Settings.dataDirection));
@@ -422,6 +423,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.PortB.Settings.dataType = ui->cboPortB_DataType->itemData(ui->cboPortB_DataType->currentIndex()).toUInt();
     DeviceData.IOBlinkOnTime_mS = ui->spinIOBlinkOn_mS->value();
     DeviceData.IOBlinkOffTime_mS = ui->spinIOBlinkOff_mS->value();
+    DeviceData.IOPulseOnTime_mS = ui->spinIOPulseOn_mS->value();
 
     // Functions tab
     // ---------------------------------------------------------------------------------------------------------->>

@@ -150,13 +150,13 @@ QMap<_special_function, QString> OP_QMaps::getAllSpecialFunctionsQMap()
     _SF_ALL_QMAP.insert(SF_SBB_PREVIOUS, "Sound Bank B - Play Previous");
     _SF_ALL_QMAP.insert(SF_SBB_RANDOM, "Sound Bank B - Play Random");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_TOGGLE, "External Output A - Toggle");
-    _SF_ALL_QMAP.insert(SF_OUTPUT_A_ON, "External Output A - Turn On");
-    _SF_ALL_QMAP.insert(SF_OUTPUT_A_OFF, "External Output A - Turn Off");
+    _SF_ALL_QMAP.insert(SF_OUTPUT_A_ON, "External Output A - High");
+    _SF_ALL_QMAP.insert(SF_OUTPUT_A_OFF, "External Output A - Low");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_PULSE, "External Output A - Pulse");
     _SF_ALL_QMAP.insert(SF_OUTPUT_A_BLINK, "External Output A - Blink");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_TOGGLE, "External Output B - Toggle");
-    _SF_ALL_QMAP.insert(SF_OUTPUT_B_ON, "External Output B - Turn On");
-    _SF_ALL_QMAP.insert(SF_OUTPUT_B_OFF, "External Output B - Turn Off");
+    _SF_ALL_QMAP.insert(SF_OUTPUT_B_ON, "External Output B - High");
+    _SF_ALL_QMAP.insert(SF_OUTPUT_B_OFF, "External Output B - Low");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_PULSE, "External Output B - Pulse");
     _SF_ALL_QMAP.insert(SF_OUTPUT_B_BLINK, "External Output B - Blink");
     _SF_ALL_QMAP.insert(SF_ACCEL_LEVEL, "Set Acceleration Level");                  // Analog

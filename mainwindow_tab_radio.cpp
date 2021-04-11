@@ -448,6 +448,11 @@ void MainWindow::SetupControls_RadioTab(void)
     connect(ui->cmdSaveCenters, SIGNAL(released()), this, SLOT(cmdSaveCenters_Click()));
     connect(this, SIGNAL(PulseCentersSaved(boolean)), this, SLOT(ConfirmCentersSaved(boolean)));
 
+    // View saved values button connection
+    connect(ui->cmdToggleViewSavedValues, SIGNAL(clicked(bool)), this, SLOT(cmdToggleViewSavedValues_Click()));
+    // But hide it since we're not using it for now
+    ui->cmdToggleViewSavedValues->hide();
+
 }
 
 
@@ -679,6 +684,36 @@ void MainWindow::cmdSaveMinMax_Click()
         ShowHidePulsesPositions(true);
     }
 }
+void MainWindow::cmdToggleViewSavedValues_Click()
+{
+    static boolean show = false;
+
+// It might be nice to see the saved min, max, and centerpoint values of each channel at other times than just when
+// performing Radio Setup. You would need to hide some elements, and populate the labels with the values since they
+// are not by default. Also would need to add some logic to handle transitions between "showing" and "streaming radio"
+// if that were to occur.
+
+// Right now this is just a placeholder that doesn't do much other than trap the click event of the cmdToggleViewSavedValues
+// button, which is presently hidden.
+
+    if (show)
+    {
+        ui->cmdToggleViewSavedValues->setChecked(false);                 // "Un-check" the button
+        ui->cmdToggleViewSavedValues->setText("Show Saved Values");
+        ui->frmChannelVals->hide();
+        ShowHidePulsesPositions(false);
+        show = false;
+    }
+    else
+    {
+        ui->cmdToggleViewSavedValues->setChecked(true);                 // "Check" (depress) the button
+        ui->cmdToggleViewSavedValues->setText("Hide Saved Values");
+        ui->frmChannelVals->show();
+        ShowHidePulsesPositions(true);
+        show = true;
+    }
+}
+
 void MainWindow::ShowHidePulsesPositions(boolean show)
 {
     if (!show)

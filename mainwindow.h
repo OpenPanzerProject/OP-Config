@@ -219,6 +219,7 @@ private slots:
       void RadioNotReady(void);
       void cmdSaveMinMax_Click();
       void cmdSaveCenters_Click();
+      void cmdToggleViewSavedValues_Click();
       void ConfirmCentersSaved(boolean);
       void cmdToggleRadioStream_Click();
       void SetRadioStreamStatus(boolean streaming);

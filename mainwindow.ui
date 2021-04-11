@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">
@@ -4900,6 +4900,22 @@ QSizeGrip {
                  </property>
                  <property name="text">
                   <string>Test 2</string>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="cmdToggleViewSavedValues">
+                 <property name="geometry">
+                  <rect>
+                   <x>320</x>
+                   <y>570</y>
+                   <width>111</width>
+                   <height>23</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>View Saved Values</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </widget>

@@ -909,7 +909,7 @@ QSizeGrip {
                <enum>QFrame::Sunken</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>6</number>
               </property>
               <widget class="QWidget" name="pgRadio">
                <property name="styleSheet">

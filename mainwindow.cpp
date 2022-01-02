@@ -323,7 +323,7 @@ void MainWindow::initWinSparkle()
 
     //If these functions aren't called by the app, the URL is obtained from
     //Windows resource named "FeedURL" of type "APPCAST".
-//    win_sparkle_set_appcast_url("http://openpanzer.org/downloads/opconfig/latestrelease/appcast.xml");
+//    win_sparkle_set_appcast_url("https://openpanzer.org/downloads/opconfig/latestrelease/appcast.xml");
 //    win_sparkle_set_app_details(L"openpanzer.org", L"OP Config Update Example", L"1.0");
 
     // This specifies whether automatic checks should occur. We do not want automatic checks because it
@@ -1113,12 +1113,12 @@ void MainWindow::AboutOP()
     // infoText.append("&nbsp;&nbsp;<b>[TEST]</b><br /><br />&#169; "); // Use for test versions instead of next line
     infoText.append("<br /><br />&#169; ");
     infoText.append(VER_COPYRIGHT_YEAR_STR);
-    infoText.append(" <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
+    infoText.append(" <a href='https://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
 
     about.setWindowTitle("  OP Config");
     about.setTextFormat(Qt::RichText);   //this is what makes the links clickable
     about.setText("<img src=':/images/opconfig.png'></img><br />A desktop configuration program &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />for Open Panzer devices.");
-    //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='http://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
+    //about.setInformativeText("<span style='font-size: 12px;'>Version 1.0<br /><br />&#169; 2016 <a href='https://www.openpanzer.org/' style='color: #330055; border-bottom: 1px solid #330055; background: #E7E0EB;'>OpenPanzer.org</a></span>");
     about.setInformativeText(infoText);
     about.setStandardButtons(QMessageBox::Ok);
     about.setIconPixmap(QPixmap(":/images/AboutIcon.png"));

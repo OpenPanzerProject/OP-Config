@@ -23,33 +23,33 @@ typedef unsigned char DEVICE;           // Devices that we can program using OP 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.
 // TCB firmware
-#define LATEST_RELEASE_VERSION_URL_TCB          "http://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TCB              "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
-#define LATEST_RELEASE_HEX_URL_TCB_DIY          "http://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1_diy.hex"
+#define LATEST_RELEASE_VERSION_URL_TCB          "https://openpanzer.org/downloads/tcbmk1/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TCB              "https://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1.hex"
+#define LATEST_RELEASE_HEX_URL_TCB_DIY          "https://openpanzer.org/downloads/tcbmk1/firmware/tcbmk1_diy.hex"
 
 // TCB Heclo Shield firmware
-#define LATEST_RELEASE_VERSION_URL_HECLO_SHIELD "http://openpanzer.org/downloads/members/hecloshield/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_HECLO_SHIELD     "http://openpanzer.org/downloads/members/hecloshield/firmware/hecloshield.hex"
+#define LATEST_RELEASE_VERSION_URL_HECLO_SHIELD "https://openpanzer.org/downloads/members/hecloshield/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_HECLO_SHIELD     "https://openpanzer.org/downloads/members/hecloshield/firmware/hecloshield.hex"
 
 // TCB MkII firmware
-#define LATEST_RELEASE_VERSION_URL_TCB_MKII     "http://openpanzer.org/downloads/tcbmk2/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TCB_MKII         "http://openpanzer.org/downloads/tcbmk2/firmware/tcbmk2.hex"
+#define LATEST_RELEASE_VERSION_URL_TCB_MKII     "https://openpanzer.org/downloads/tcbmk2/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TCB_MKII         "https://openpanzer.org/downloads/tcbmk2/firmware/tcbmk2.hex"
 
 // AT MkI firmware
-#define LATEST_RELEASE_VERSION_URL_AT_MKI       "http://openpanzer.org/downloads/atmk1/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_AT_MKI           "http://openpanzer.org/downloads/atmk1/firmware/atmk1.hex"
+#define LATEST_RELEASE_VERSION_URL_AT_MKI       "https://openpanzer.org/downloads/atmk1/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_AT_MKI           "https://openpanzer.org/downloads/atmk1/firmware/atmk1.hex"
 
 // Scout firmware for Rev 11 boards and later (VNH5019 motor driver chips)
-#define LATEST_RELEASE_VERSION_URL_SCOUT        "http://openpanzer.org/downloads/scout/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_SCOUT            "http://openpanzer.org/downloads/scout/firmware/opscout.hex"
+#define LATEST_RELEASE_VERSION_URL_SCOUT        "https://openpanzer.org/downloads/scout/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_SCOUT            "https://openpanzer.org/downloads/scout/firmware/opscout.hex"
 
 // Scout firmware for Rev 10 boards and earlier (VNH2SP30 motor driver chips)
-#define LATEST_RELEASE_VERSION_URL_SCOUT_R10    "http://openpanzer.org/downloads/scout/firmware_r10/version.txt"
-#define LATEST_RELEASE_HEX_URL_SCOUT_R10        "http://openpanzer.org/downloads/scout/firmware_r10/opscout_rev10.hex"
+#define LATEST_RELEASE_VERSION_URL_SCOUT_R10    "https://openpanzer.org/downloads/scout/firmware_r10/version.txt"
+#define LATEST_RELEASE_HEX_URL_SCOUT_R10        "https://openpanzer.org/downloads/scout/firmware_r10/opscout_rev10.hex"
 
 // Sound card firmware
-#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND  "http://openpanzer.org/downloads/soundcard/firmware/version.txt"
-#define LATEST_RELEASE_HEX_URL_TEENSYSOUND      "http://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
+#define LATEST_RELEASE_VERSION_URL_TEENSYSOUND  "https://openpanzer.org/downloads/soundcard/firmware/version.txt"
+#define LATEST_RELEASE_HEX_URL_TEENSYSOUND      "https://openpanzer.org/downloads/soundcard/firmware/opsound.hex"
 
 
 

@@ -323,7 +323,7 @@ void MainWindow::initWinSparkle()
 
     //If these functions aren't called by the app, the URL is obtained from
     //Windows resource named "FeedURL" of type "APPCAST".
-//    win_sparkle_set_appcast_url("https://openpanzer.org/downloads/opconfig/latestrelease/appcast.xml");
+//    win_sparkle_set_appcast_url("http://openpanzer.org/downloads/opconfig/latestrelease/appcast.xml");
 //    win_sparkle_set_app_details(L"openpanzer.org", L"OP Config Update Example", L"1.0");
 
     // This specifies whether automatic checks should occur. We do not want automatic checks because it

@@ -132,6 +132,8 @@ void MainWindow::Variables_to_Controls(void)
     // High Intensity Flash Unit
     ui->chkHiFlashWithCannon->setChecked(DeviceData.HiFlashWithCannon);
     SetHiFlashAuto(ui->chkHiFlashWithCannon->isChecked());
+    // Light Effects
+    ui->chkFlickerHeadlights->setChecked(DeviceData.FlickerLightsOnEngineStart);
     // Aux Output Settings
     ui->spinAuxFlash_mS->setValue(DeviceData.AuxLightFlashTime_mS);
     ui->spinAuxBlinkOn_mS->setValue(DeviceData.AuxLightBlinkOnTime_mS);
@@ -416,6 +418,8 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.AuxFlashWithCannon = ui->chkAuxFlashWithCannon->isChecked();
     // High-Intensity Flash Unit
     DeviceData.HiFlashWithCannon = ui->chkHiFlashWithCannon->isChecked();
+    // Light Effects
+    DeviceData.FlickerLightsOnEngineStart = ui->chkFlickerHeadlights->isChecked();
     // External I/O - Save the user data, not the index, but we must convert the QVariant to UInt/bool
     DeviceData.PortA.Settings.dataDirection = ui->cboPortADataDirection->itemData(ui->cboPortADataDirection->currentIndex()).toUInt();
     DeviceData.PortB.Settings.dataDirection = ui->cboPortBDataDirection->itemData(ui->cboPortBDataDirection->currentIndex()).toUInt();

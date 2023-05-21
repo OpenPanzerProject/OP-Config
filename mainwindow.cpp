@@ -880,6 +880,7 @@ void MainWindow::SetupHelpButtons()
         connect(ui->hpbPortsAB, SIGNAL(released()), signalMapper, SLOT(map()));             // I/O Ports
         connect(ui->hpbIndicatorLights, SIGNAL(released()), signalMapper, SLOT(map()));     // Indicator light settings
         connect(ui->hpbHiFlash, SIGNAL(released()), signalMapper, SLOT(map()));             // High-Intensity Flash settings
+        connect(ui->hpbLightEffects, SIGNAL(released()), signalMapper, SLOT(map()));        // Light effects
     // Functions tab
         connect(ui->hpbFunctions, SIGNAL(released()), signalMapper, SLOT(map()));           // Functions
         connect(ui->hpbIgnoreTurret, SIGNAL(released()), signalMapper, SLOT(map()));        // Ignore turret stick movement time
@@ -929,6 +930,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbPortsAB, "lightsio.html#io");                       // I/O Ports
         signalMapper->setMapping(ui->hpbIndicatorLights, "lightsio.html#indicator");        // Indicator light settings
         signalMapper->setMapping(ui->hpbHiFlash, "lightsio.html#hiflash");                  // High-Intensity Flash settings
+        signalMapper->setMapping(ui->hpbLightEffects, "lightsio.html#effects");             // Light effects
     // Functions
         signalMapper->setMapping(ui->hpbFunctions, "functions.html");                       // Functions
         signalMapper->setMapping(ui->hpbIgnoreTurret, "functions.html#turret");             // Ignore turret stick movement time

@@ -1,24 +1,24 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-// LAST UPDATE: 4/5/2021
+// LAST UPDATE: 5/21/2023
 
-#define VER_FILEVERSION              0,93,73,00
-#define VER_FILEVERSION_STR         "0.93.73.00\0"
+#define VER_FILEVERSION              0,93,75,00
+#define VER_FILEVERSION_STR         "0.93.75.00\0"
 
 // THIS IS THE VERSION THAT WILL BE CHECKED AGAINST the appcast.xml version on the downloads page.
 // YOU MUST ALSO RUN QMAKE for this to update.
-#define VER_PRODUCTVERSION           0,93,73,00
-#define VER_PRODUCTVERSION_STR      "0.93.73\0"
+#define VER_PRODUCTVERSION           0,93,75,00
+#define VER_PRODUCTVERSION_STR      "0.93.75\0"
 
 // THIS VERSION IS THE MINIMUM VERSION OF DEVICE FIRMWARE NEEDED FOR THIS VERSION OF OP CONFIG:
-#define VER_MINTCB_STR              "0.93.72\0"
+#define VER_MINTCB_STR              "0.93.75\0"
 
-#define VER_COPYRIGHT_YEAR_STR      "2021"      // Change it below as well v
+#define VER_COPYRIGHT_YEAR_STR      "2023"      // Change it below as well v
 #define VER_COMPANYNAME_STR         "OpenPanzer.org"
 #define VER_FILEDESCRIPTION_STR     "OP Config"
 #define VER_INTERNALNAME_STR        "OP Config"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2021 OpenPanzer.org"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2023 OpenPanzer.org"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR    VER_LEGALTRADEMARKS1_STR
 #define VER_ORIGINALFILENAME_STR    "OPConfig.exe"

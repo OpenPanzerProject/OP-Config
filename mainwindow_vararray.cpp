@@ -332,6 +332,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.AuxFlashWithCannon = VarArray.value(3421).toUInt();                          // 3421 - Trigger aux light output with cannon
     DeviceData.SecondMGLightBlink_mS = VarArray.value(3422).toUInt();                       // 3422 - Second machine gun blink interval
     DeviceData.CannonReloadBlink = VarArray.value(3423).toUInt();                           // 3423 - Blink Apple lights when cannon done reloading
+    DeviceData.FlickerLightsOnEngineStart = VarArray.value(3424).toUInt();                  // 3424 - Flicker headlights and brakelights on engine start (if TransmissionDelay_mS set)
 
     // Scout settings
     DeviceData.ScoutCurrentLimit = VarArray.value(3611).toUInt();                           // 3611 - Scout current limit setting
@@ -660,6 +661,8 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(3421, QByteArray::number(DeviceData.AuxFlashWithCannon));                       // 3421 - Trigger aux light output with cannon
     VarArray.insert(3422, QByteArray::number(DeviceData.SecondMGLightBlink_mS));                    // 3422 - Second machine gun blink interval
     VarArray.insert(3423, QByteArray::number(DeviceData.CannonReloadBlink));                        // 3423 - Blink Apple lights when cannon done reloading
+    VarArray.insert(3424, QByteArray::number(DeviceData.FlickerLightsOnEngineStart));               // 3424 - Flicker headlights and brakelights on engine start (if TransmissionDelay_mS set)
+
 
     // Scout settings
     VarArray.insert(3611, QByteArray::number(DeviceData.ScoutCurrentLimit));                        // 3611 - Scout current limit setting

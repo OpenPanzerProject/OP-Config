@@ -18,6 +18,8 @@ void MainWindow::SetupControls_LightsIOTab(void)
     ui->cboPortB_DataType->insertItem(1, "Digital (on/off)",1);
 
     // Signals and slots
+    // This handles validation of Aux output usage if the user checks the option to auto-flash Aux output with cannon fire
+    connect(ui->chkAuxFlashWithCannon, SIGNAL(clicked(bool)), this, SLOT(ValidateAuxFlash(bool)));
     // This adds/removes the manual High Intensity flash function from the list depending on if the user wants to trigger
     // it manually or automatically with cannon fire.
     connect(ui->chkHiFlashWithCannon, SIGNAL(clicked(bool)), this, SLOT(SetHiFlashAuto(bool)));
@@ -52,6 +54,34 @@ void MainWindow::SetHiFlashAuto(bool isChecked)
         // Add a manual control option to the function list instead.
         // The add function will only add it if it isn't there already
         ui->cboSelectFunction->AddSF(SF_HI_FLASH);
+    }
+}
+void MainWindow::ValidateAuxFlash(bool isChecked)
+{
+
+    if (isChecked)
+    {
+        // In this case we are using the Aux Output for a cannon flash so we disable the Flicker Lights during Engine Start option
+        // which would conflict with the use of the Aux output
+        if (ui->chkFlickerHeadlights->isChecked() == true)
+        {
+            ui->chkFlickerHeadlights->setChecked(false);
+            // msgBox("The Flicker Lights during Engine Start option will not be available under Separate Heat & Fan "
+            //        "because it would create a conflict with the use of the Aux output. That option has been disabled on the Lights tab.",vbOkOnly,"Flicker Lights Option Disabled",vbExclamation);
+        }
+        DeviceData.FlickerLightsOnEngineStart = false;
+        ui->chkFlickerHeadlights->setEnabled(false);
+        ui->lblFlickerLights->setEnabled(false);
+    }
+    else
+    {
+        // Here we can permit the "Flicker Lights during Engine Start" setting to become active since the Aux output will
+        // not be used for the cannon flash, BUT we also need to make sure that it isn't being reserved for the smoker fan
+        if (ui->cboSmokerType->currentData() != SMOKERTYPE_ONBOARD_SEPARATE)
+        {
+            ui->chkFlickerHeadlights->setEnabled(true);
+            ui->lblFlickerLights->setEnabled(true);
+        }
     }
 }
 void MainWindow::SetupInputAType(int indexnum)

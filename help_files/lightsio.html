@@ -106,10 +106,39 @@
 
 
 	<h2 id="effects">Light Effects</h2>	
-	<h4 class="entry">Flicker Headlights during Engine Start</h4>
+	<h4 class="entry">Flicker Lights during Engine Start</h4>
 	<p>
-	When this option is checked, and if the headlights are already turned on, they will flicker during the time specified by "Transmission Engage Delay" on the Motors tab. A similar flicker 
-	will also be applied to the brake lights if the "Brake Lights On when Stopped" option is checked. The "Transmission Engage Delay" time should be set to the length of time of your Engine Start sound.
+	This option attempts to create the illusion of intermittent/inadequate voltage on certain lights during the time when the engine is being started. This is something that might have been seen on 
+	WWII-era tanks, the same as it might have been seen on WWII-era cars. This effect is applied to the Aux Output and the Brake Lights output. This may seem strange, why isn't it applied to the Headlights
+	output (Light 1)? The reason is because the Light 1 output on the TCB unfortunately does not have the ability to be set to any brightness level, it can only be turned full on or full off. A realistic
+	flickering effect can not be created under those conditions. Therefore, if you wish to use this effect, know that you will need to connect your headlight LEDs to the Aux Output port instead of the Headlights
+	port, and you will need to add the appropriate function triggers to turn off/on the Aux Output from your transmitter.
+	</p>
+	
+	<p>Here is how to use this effect:
+		<ul>
+			<li>
+				Check the option to "Flicker lights during engine start"
+			</li>
+			<li>
+				Specify a "Transmission Engage Delay" time on the "Driving" tab of OP Config. You should set this delay to be equal to the length of time of your engine startup sound. When the engine is 
+				started, the engine start sound is played, this delay begins, and during the delay the transmission will not be engaged (the model can not be moved), and the LEDs connected to the Aux output 
+				as well as the Brake output will flicker.
+			</li>
+			<li>
+				Of course, the lights will only flicker if they were turned on before the engine start began. For the Aux output that means you have turned it on using a Function Trigger. For the brake or running
+				lights, that means you have checked either the "Brake Lights On when Stopped" option or the "Running Lights Always On" option. 
+			</li> 
+			<li>
+				When the "Transmission Engage Delay" has expired, your engine start sound should have also completed. At this time the transmission will automatically be engaged (allowing you to begin driving),
+				and the Aux Output and Brake Lights will cease to flicker and return to full brightness.
+			</li>
+		</ul>
+	</p>
+	
+	<p>More things to note: the Aux Output can be used for many different purposes, not all of which are compatible with this effect. If you set the Smoker Type to "Separate Heat and Fan," or if you set the 
+	Aux Output to "Auto Flash with Cannon," this flickering effect will be disabled. In the first case the Aux Output is reserved to drive the smoker fan, in the second case the Aux Output is being used with a
+	barrel flash LED. There may be other combinations that do not make sense but which are possible for the user to create, so use common sense. 
 	</p>
 
 	
@@ -148,7 +177,8 @@
 	<p>		
 	If this box is checked, the Aux Output will automatically be flashed (output brought high) whenever the cannon is fired, no function trigger needs to be created. If your muzzle flash is a simple LED, 
     connect it to the Aux Output and check this option. But if you are using a Taigen High Intensity Flash unit, connect it to the 
-    <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:hiflash">dedicated Flash port</a> on the TCB instead, in which case this Aux output can be used for other purposes. 
+    <a href="http://openpanzer.org/wiki/doku.php?id=wiki:tcb:tcbinstall:hiflash">dedicated Flash port</a> on the TCB instead, in which case this Aux output can be used for other purposes. <b>Note:</b> if 
+	you check this option, the "Flicker Lights during Engine Start" option is disabled (because it would create a conflict with the use of the Aux output). 
 	</p>
 	
 	<h4 class="entry">Blink - On and Off Time</h4>

@@ -234,6 +234,7 @@ private slots:
 
       // Lights & IO tab
       void SetHiFlashAuto(bool);
+      void ValidateAuxFlash(bool);
       void SetupInputAType(int);
       void SetupInputBType(int);
       void SavePortA_InputType(int);

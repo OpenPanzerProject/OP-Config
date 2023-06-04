@@ -218,6 +218,23 @@ void MainWindow::ValidateSmokerSelections()
                 ui->lblSmokerHeatMax->setEnabled(false);
                 ui->lblSmokerHeatMax2->setEnabled(false);
 
+                // We permit the "Flicker Lights during Engine Start" setting to become active since the Aux output will
+                // not be used for the smoker fan. But we also need to make sure that we haven't set the Aux output to
+                // flash with cannon
+                if (ui->chkAuxFlashWithCannon->isChecked() == false)
+                {
+                    ui->chkFlickerHeadlights->setEnabled(true);
+                    ui->lblFlickerLights->setEnabled(true);
+                }
+
+                // We permit the "Aux Output Auto Flash with Cannon" setting to become active since the Aux output will
+                // not be used for the smoker fan.
+                if (ui->chkAuxFlashWithCannon->isEnabled() == false)
+                {
+                    ui->chkAuxFlashWithCannon->setEnabled(true);
+                    ui->lblAuxFlashWithCannon->setEnabled(true);
+                }
+
                 // Also in this case, we remove the smoker pre-heat functions from the function list since there is
                 // no direct control of the heating element
                 ui->cboSelectFunction->RemoveSF(SF_SMOKE_PREHEAT_ON);
@@ -317,6 +334,30 @@ void MainWindow::ValidateSmokerSelections()
                 ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_ON);
                 ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_OFF);
                 ui->cboSelectFunction->AddSF(SF_SMOKE_PREHEAT_TOGGLE);
+
+                // We remove the option to auto flash the Aux output with cannon fire
+                if (ui->chkAuxFlashWithCannon->isChecked() == true)
+                {
+                    ui->chkAuxFlashWithCannon->setChecked(false);
+                    // msgBox("The Aux Output Auto Flash with Cannon option will not be available under Separate Heat & Fan "
+                    //        "because it would create a conflict with the use of the Aux output. That option has been disabled on the Lights tab.",vbOkOnly,"Aux Flash with Cannon Disabled",vbExclamation);
+                }
+                DeviceData.AuxFlashWithCannon = false;
+                ui->chkAuxFlashWithCannon->setEnabled(false);
+                ui->lblAuxFlashWithCannon->setEnabled(false);
+
+                // We also don't permit the "Flicker Lights during Engine Start" setting to be available because
+                // that would conflict with the use of the Aux output for smoker fan.
+                if (ui->chkFlickerHeadlights->isChecked() == true)
+                {
+                    ui->chkFlickerHeadlights->setChecked(false);
+                    // msgBox("The Flicker Lights during Engine Start option will not be available under Separate Heat & Fan "
+                    //        "because it would create a conflict with the use of the Aux output. That option has been disabled on the Lights tab.",vbOkOnly,"Flicker Lights Option Disabled",vbExclamation);
+                }
+                DeviceData.FlickerLightsOnEngineStart = false;
+                ui->chkFlickerHeadlights->setEnabled(false);
+                ui->lblFlickerLights->setEnabled(false);
+
                 break;
 
             case SMOKERTYPE_SERIAL:
@@ -336,6 +377,23 @@ void MainWindow::ValidateSmokerSelections()
                 ui->spinSmokerHeatMax->setEnabled(true);
                 ui->lblSmokerHeatMax->setEnabled(true);
                 ui->lblSmokerHeatMax2->setEnabled(true);
+
+                // We permit the "Flicker Lights during Engine Start" setting to become active since the Aux output will
+                // not be used for the smoker fan. But we also need to make sure that we haven't set the Aux output to
+                // flash with cannon.
+                if (ui->chkAuxFlashWithCannon->isChecked() == false)
+                {
+                    ui->chkFlickerHeadlights->setEnabled(true);
+                    ui->lblFlickerLights->setEnabled(true);
+                }
+
+                // We permit the "Aux Output Auto Flash with Cannon" setting to become active since the Aux output will
+                // not be used for the smoker fan.
+                if (ui->chkAuxFlashWithCannon->isEnabled() == false)
+                {
+                    ui->chkAuxFlashWithCannon->setEnabled(true);
+                    ui->lblAuxFlashWithCannon->setEnabled(true);
+                }
 
                 // In this case we do NOT need to remove the manual Aux control functions
                 // because the actual heating element/fan drivers will be off-board on a module

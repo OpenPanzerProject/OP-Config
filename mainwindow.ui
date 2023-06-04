@@ -7610,7 +7610,7 @@ QSizeGrip {
                   <string>Preset Level</string>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_161">
+                <widget class="QLabel" name="lblAuxFlashWithCannon">
                  <property name="geometry">
                   <rect>
                    <x>70</x>
@@ -8140,7 +8140,7 @@ QSizeGrip {
                   <string/>
                  </property>
                 </widget>
-                <widget class="QLabel" name="label_160">
+                <widget class="QLabel" name="lblFlickerLights">
                  <property name="geometry">
                   <rect>
                    <x>20</x>
@@ -8155,7 +8155,7 @@ QSizeGrip {
                   </font>
                  </property>
                  <property name="text">
-                  <string>Flicker Headlights during Engine Start</string>
+                  <string>Flicker Lights during Engine Start</string>
                  </property>
                 </widget>
                 <widget class="QCheckBox" name="chkFlickerHeadlights">
@@ -14399,7 +14399,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <zorder>stackedWidgetMain</zorder>
              </widget>
             </item>
            </layout>

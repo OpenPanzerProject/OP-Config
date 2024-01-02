@@ -19,18 +19,13 @@
 
 #include "mainwindow.h"
 //#include <QApplication>   // We are using SingleApplication instead, which is a subclass of QApplication
-#include "winsparkle.h"
 #include "singleapplication.h"
 
 
 int main(int argc, char *argv[])
 {
-    // Doesn't seem to help the high DPI/screen scaling issue
-    //QApplication::setDesktopSettingsAware();
-
-    // This was only introduced in Qt 5.6 and may help with high DPI issues
-    // Untested because I am still compiling in 5.4 for other reasons (Qt Assistant doesn't work in 5.6 for one)
-    //QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    // To enable proper scaling on High DPI/resolution screens Enable High DPI Scaling
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication::setApplicationName("OP Config");
     QApplication::setApplicationVersion(VER_PRODUCTVERSION_STR);
@@ -40,24 +35,21 @@ int main(int argc, char *argv[])
     SingleApplication app(argc, argv);
     //QApplication app(argc, argv);
 
-
     MainWindow w;
     w.show();
 
     // When the user tries to open a second instance of the same application, the SingleApplication showUp() signal is emitted
     // We can then use that signal to bring the focus to the instance that is already running. Of course in Windows this will
     // only actually highlight it in your taskbar, it won't actually bring it to the fore.
-    QObject::connect(&app, &SingleApplication::showUp, [&]
+    QObject::connect(&app, &SingleApplication::showUp, [&w]
     {
         w.show();
         w.raise();
         w.activateWindow();
     });
 
-
     // What would now be ideal is if we could get the second application instance to pass its command-line arguments to the
     // original instance before it closes. It is possible, but I have not figured it out.
-
 
     // This is the deviceselect form. We're not using it for now, it was just for testing.
     // We may want to use something like it someday if we have multiple devices configured from
@@ -69,4 +61,3 @@ int main(int argc, char *argv[])
     return app.exec();
 
 }
-

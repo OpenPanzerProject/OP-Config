@@ -10,10 +10,11 @@ DeviceComboBox::DeviceComboBox(QWidget *parent) : QComboBox(parent)
     this->insertItem(4, "Scout ESC (R11+)", DEVICE_SCOUT);
     this->insertItem(5, "Scout ESC (R10 & prior)", DEVICE_SCOUT_R10);
     this->insertItem(6, "Sound Card", DEVICE_TEENSYSOUND);
-    this->insertItem(7, "Generic ATmega328", DEVICE_ATMEGA328);
-    this->insertItem(8, "Generic ATmega2560", DEVICE_ATMEGA2560);
-    this->insertItem(9, "Generic Teensy 3.2",DEVICE_TEENSY32);
-//    this->insertItem(10, "AT CM", DEVICE_AT_MKI);            // For later use
+    this->insertItem(7, "Generic Arduino UNO", DEVICE_ARDUINO_UNO);
+    this->insertItem(8, "Generic ATmega328 (Nano, etc)", DEVICE_ATMEGA328);
+    this->insertItem(9, "Generic ATmega2560", DEVICE_ATMEGA2560);
+    this->insertItem(10, "Generic Teensy 3.2",DEVICE_TEENSY32);
+//    this->insertItem(11, "AT CM", DEVICE_AT_MKI);            // For later use
 
     connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(emitFlashDeviceChanged()));
 

@@ -66,7 +66,7 @@ void Assistant::showDocumentation(const QString &page)
 
     QByteArray ba("SetSource ");
     ba.append("qthelp://openpanzer.desktop.help/docs/");    // From .qhcp file: Namespace then virtual folder
-    ba.append(page);
+    ba.append(page.toLatin1());
     ba.append(";syncContents;");    // Add a syncContents command
     proc->write(ba + '\n');
 }

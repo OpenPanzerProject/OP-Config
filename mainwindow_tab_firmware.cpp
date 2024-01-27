@@ -29,6 +29,7 @@ void MainWindow::SetupControls_FirmwareTab(void)
 
     // Device type selection
     connect(ui->cboFlashDevice, SIGNAL(currentIndexChanged(int)), this, SLOT(handleDeviceTypeSelection(int)));
+    ui->cboFlashDevice->view()->setMinimumWidth(180);   // Increase the width of the drop-down list beyond the width of the actual combobox
 
     // Button signals and slots - flashing
     connect(ui->cmdFlashHex, SIGNAL(clicked(bool)), this, SLOT(cmdFlashHex_clicked()));
@@ -66,8 +67,9 @@ void MainWindow::handleDeviceTypeSelection(int)
 {
     switch (static_cast<DEVICE>(ui->cboFlashDevice->currentData().toUInt()))
     {
-        // There is no default web hex to download for the generic ATmega328/2560/Teensy3.2 options,
+        // There is no default web hex to download for the UNO/generic ATmega328/2560/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
+        case DEVICE_ARDUINO_UNO:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
         case DEVICE_TEENSY32:
@@ -548,6 +550,7 @@ QString hex;
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
+        case DEVICE_ARDUINO_UNO:
             {
             // Construct our AVRDUDE executable and list of arguments.
             // Don't put any spaces in the argument list, or it won't work.
@@ -564,12 +567,20 @@ QString hex;
                                                        //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
                 flagBaud =           "-b115200";       // -b baud - hardcoded to 115,200
             }
+            else if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_ARDUINO_UNO)
+            {
+                flagPart =           "-patmega328p";   // -p part - UNO uses an ATmega328p
+                flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
+                                                       //    See which is used in Arduino boards.txt for your chip, in our case it is
+                                                       //    "arduino"
+                flagBaud =           "-b115200";        // -b baud - for some reason the UNO will not work at 57,600 like the Nano, it requires 115,200
+            }
             else
-            {   // Scouts, generic ATmega328
+            {   // Scouts, generic ATmega328 including Nano
                 flagPart =           "-patmega328p";   // -p part - Scout uses an ATmega328p
                 flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
                                                        //    See which is used in Arduino boards.txt for your chip, in our case it is
-                                                       //    "arduino", which will interface with FTDI cables/adapters
+                                                       //    "arduino"
                 flagBaud =           "-b57600";        // -b baud - hardcoded to 57,600 for Nano
             }
             QString flagPort =       "-P";             // -P port
@@ -659,6 +670,7 @@ void MainWindow::flashFinished()
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
+        case DEVICE_ARDUINO_UNO:
             //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
             if (AVRDUDEProcess->exitCode() == 0)
             {
@@ -733,6 +745,7 @@ void MainWindow::flashFinished()
     {
         // There is no default web hex to download for the generic ATmega328/2560/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
+        case DEVICE_ARDUINO_UNO:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
         case DEVICE_TEENSY32:
@@ -761,6 +774,7 @@ void MainWindow::readyReadStandardOutput()
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
+        case DEVICE_ARDUINO_UNO:
             // Append output to our string
             strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
 

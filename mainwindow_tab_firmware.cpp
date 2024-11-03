@@ -69,7 +69,7 @@ void MainWindow::handleDeviceTypeSelection(int)
     {
         // There is no default web hex to download for the UNO/generic ATmega328/2560/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
-        case DEVICE_ARDUINO_UNO:
+        case DEVICE_ATMEGA328P:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
         case DEVICE_TEENSY32:
@@ -550,7 +550,7 @@ QString hex;
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
-        case DEVICE_ARDUINO_UNO:
+        case DEVICE_ATMEGA328P:
             {
             // Construct our AVRDUDE executable and list of arguments.
             // Don't put any spaces in the argument list, or it won't work.
@@ -567,17 +567,19 @@ QString hex;
                                                        //    "wiring" (basically the skt500v2 protocol) for the ATmega2560
                 flagBaud =           "-b115200";       // -b baud - hardcoded to 115,200
             }
-            else if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_ARDUINO_UNO)
+            else if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_ATMEGA328P ||
+                     ui->cboFlashDevice->getCurrentDevice() == DEVICE_SCOUT ||
+                     ui->cboFlashDevice->getCurrentDevice() == DEVICE_SCOUT_R10)
             {
-                flagPart =           "-patmega328p";   // -p part - UNO uses an ATmega328p
+                flagPart =           "-patmega328p";   // -p part - Scouts and UNO use the newer ATmega328p chip
                 flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
                                                        //    See which is used in Arduino boards.txt for your chip, in our case it is
                                                        //    "arduino"
                 flagBaud =           "-b115200";        // -b baud - for some reason the UNO will not work at 57,600 like the Nano, it requires 115,200
             }
-            else
-            {   // Scouts, generic ATmega328 including Nano
-                flagPart =           "-patmega328p";   // -p part - Scout uses an ATmega328p
+            else if (ui->cboFlashDevice->getCurrentDevice() == DEVICE_ATMEGA328)
+            {   // ATmega328 (not "p"), including Nano
+                flagPart =           "-patmega328p";   // -p part - Nano uses the 328 (not "p", even though the part is still atmega328p here)
                 flagProgrammer =     "-carduino";      // -c programmer, aka, upload programmer. Needs to be one defined in avrdude.conf.
                                                        //    See which is used in Arduino boards.txt for your chip, in our case it is
                                                        //    "arduino"
@@ -669,8 +671,8 @@ void MainWindow::flashFinished()
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
         case DEVICE_ATMEGA328:
+        case DEVICE_ATMEGA328P:
         case DEVICE_ATMEGA2560:
-        case DEVICE_ARDUINO_UNO:
             //qDebug() << AVRDUDEProcess->exitCode() << " - " << AVRDUDEProcess->exitStatus();
             if (AVRDUDEProcess->exitCode() == 0)
             {
@@ -745,7 +747,7 @@ void MainWindow::flashFinished()
     {
         // There is no default web hex to download for the generic ATmega328/2560/Teensy3.2 options,
         // the user will only be able to use their own provided hex file
-        case DEVICE_ARDUINO_UNO:
+        case DEVICE_ATMEGA328P:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
         case DEVICE_TEENSY32:
@@ -772,9 +774,9 @@ void MainWindow::readyReadStandardOutput()
         case DEVICE_HECLO_SHIELD:
         case DEVICE_SCOUT:
         case DEVICE_SCOUT_R10:
+        case DEVICE_ATMEGA328P:
         case DEVICE_ATMEGA328:
         case DEVICE_ATMEGA2560:
-        case DEVICE_ARDUINO_UNO:
             // Append output to our string
             strAVRDUDEOutput.append(AVRDUDEProcess->readAllStandardOutput());
 

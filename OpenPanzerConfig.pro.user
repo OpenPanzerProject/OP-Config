@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 15.0.0, 2024-12-28T12:19:35. -->
+<!-- Written by QtCreator 15.0.0, 2024-12-28T12:28:38. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -89,6 +89,9 @@
    <valuemap type="QVariantMap" key="ClangdSettings">
     <value type="bool" key="blockIndexing">false</value>
     <value type="bool" key="useGlobalSettings">true</value>
+   </valuemap>
+   <valuemap type="QVariantMap" key="CppEditor.QuickFix">
+    <value type="bool" key="UseGlobalSettings">true</value>
    </valuemap>
   </valuemap>
  </data>

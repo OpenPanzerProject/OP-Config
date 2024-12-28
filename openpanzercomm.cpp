@@ -211,9 +211,10 @@ void OpenPanzerComm::sendInit()
             if (APPEND_SENT_TO_CONSOLE) { QByteArray qc = Identify; emit NewData(qc.prepend("<- ")); }
             serial->write(Identify);
             // You have to wait for bytes to be written or else it will skip!!
-            if (!serial->waitForBytesWritten(50))
-            {
-                //qDebug() << serial->errorString();
+            if (serial->waitForBytesWritten(50)) {
+                if (DEBUG_SEND_RECEIVE) qDebug() << "Sent: OPZ";
+            } else {
+                qDebug() << serial->errorString();
             }
             if (startBlitz)
             {
@@ -700,8 +701,8 @@ boolean OpenPanzerComm::ParseSentence(QByteArray &data)
 
     // Initialize sentence components
     SentenceIN.Command = SentenceIN.ID = SentenceIN.Checksum = SentenceIN.NumValues = 0;
-    SentenceIN.Value[0] = '\0';
-    for (int i=0; i<MAX_SENTENCE_VALUES; i++) { SentenceIN.Values[i][0] = '\0'; }
+    // SentenceIN.Value[0] = '\0'; // This line causes a QByteArray ASSERT "n <= d.size - pos" error
+    // for (int i=0; i<MAX_SENTENCE_VALUES; i++) { SentenceIN.Values[i][0] = '\0'; }
 
     // We step through each byte in the char array and parse pieces of the sentence as they are seperated by a delimiter, or at the end by newline
     for (int line_length=0; line_length<data.size(); line_length++)

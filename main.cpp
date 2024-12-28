@@ -24,9 +24,6 @@
 
 int main(int argc, char *argv[])
 {
-    // To enable proper scaling on High DPI/resolution screens Enable High DPI Scaling
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QApplication::setApplicationName("OP Config");
     QApplication::setApplicationVersion(VER_PRODUCTVERSION_STR);
     QApplication::setOrganizationName("OPEN PANZER");

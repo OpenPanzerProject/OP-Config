@@ -162,7 +162,7 @@ void MainWindow::checkHexVersion()
     QString strIncoming = QString(VersionDownloader->downloadedData());
 
     // The file should be two lines long
-    QStringList strList = strIncoming.split(QRegExp("\n|\r\n|\r"), QString::SkipEmptyParts);
+    QStringList strList = strIncoming.split(QRegularExpression("\n|\r\n|\r"), Qt::SkipEmptyParts);
     QString strVer;
     QString strDate;
 

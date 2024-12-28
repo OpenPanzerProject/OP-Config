@@ -51,7 +51,7 @@ public slots:
     void setCurrentFunction(int);
 
 private slots:
-    void CurrentFunctionChangedSlot(const QString &newFunction);                 // We will connect this slot to the built-in index changed, and emit our custom signals
+    void CurrentFunctionChangedSlot(int selection);                 // We will connect this slot to the built-in index changed, and emit our custom signals
 
 private:
   OP_QMaps *OPQMap;

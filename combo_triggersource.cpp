@@ -13,9 +13,8 @@ TriggerSourceComboBox::TriggerSourceComboBox(QWidget *parent) : QComboBox(parent
     _EIA_Present = false;
     _EIB_Present = false;
 
-    // If either the text or index has changed, emit our custom signal
-    //connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(CurrentTriggerSourceChangedSlot(QString)));
-    //connect(this, SIGNAL(currentIndexChanged(QString)), this, SLOT(CurrentTriggerSourceChangedSlot(QString)));
+    // Connect to my custom signal
+    //connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(CurrentTriggerSourceChangedSlot(int)));
 }
 
 boolean TriggerSourceComboBox::isTriggerSourceAux(_trigger_source ts)
@@ -69,7 +68,7 @@ void TriggerSourceComboBox::removeExternalInputA(void)
 {
     for (int i=0; i<this->count(); i++)
     {
-        if (this->itemData(i) == TS_INPUT_A) this->removeItem(i); _EIA_Present = false;
+        if (this->itemData(i) == TS_INPUT_A) this->removeItem(i); //_EIA_Present = false;
     }
 }
 
@@ -77,7 +76,7 @@ void TriggerSourceComboBox::removeExternalInputB(void)
 {
     for (int i=0; i<this->count(); i++)
     {
-        if (this->itemData(i) == TS_INPUT_B) this->removeItem(i); _EIB_Present = false;
+        if (this->itemData(i) == TS_INPUT_B) this->removeItem(i); //_EIB_Present = false;
     }
 }
 
@@ -104,4 +103,3 @@ _trigger_source TriggerSourceComboBox::getCurrentTriggerSource(void)
 {
     return static_cast<_trigger_source>(this->currentData().toInt());
 }
-

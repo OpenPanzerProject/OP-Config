@@ -7,10 +7,9 @@ AnalogDigitalComboBox::AnalogDigitalComboBox(QWidget *parent) : QComboBox(parent
     this->insertItem(1, "Digital (switch)",1);
 
     // Connect to my custom signal
-    connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(AnalogDigitalChangedSlot(QString)));
-    connect(this, SIGNAL(currentIndexChanged(QString)), this, SLOT(AnalogDigitalChangedSlot(QString)));
+    connect(this, &AnalogDigitalComboBox::currentIndexChanged, this, &AnalogDigitalComboBox::AnalogDigitalChangedSlot);
 }
-void AnalogDigitalComboBox::AnalogDigitalChangedSlot(const QString )
+void AnalogDigitalComboBox::AnalogDigitalChangedSlot(const int )
 {
     // Send out custom signal with a pointer to this box
     emit analogDigitalChanged(this);

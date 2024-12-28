@@ -3,8 +3,8 @@
 ChannelOrderComboBox::ChannelOrderComboBox(QWidget *parent) : QComboBox(parent), _priorChannel()
 {
     // If either the text or index has changed, emit our custom signal
-    connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(channelNumberChangedSlot(QString)));
-    connect(this, SIGNAL(currentIndexChanged(QString)), this, SLOT(channelNumberChangedSlot(QString)));
+    connect(this, &ChannelOrderComboBox::editTextChanged, this, &ChannelOrderComboBox::channelNumberChangedSlot);
+    //connect(this, &ChannelOrderComboBox::currentIndexChanged, this, &ChannelOrderComboBox::channelNumberChangedSlot);
 }
 
 void ChannelOrderComboBox::channelNumberChangedSlot(const QString &newChannel)
@@ -12,11 +12,10 @@ void ChannelOrderComboBox::channelNumberChangedSlot(const QString &newChannel)
     // Send out a signal with the old value, the new value, and a pointer to this box
     emit channelNumberChanged(_priorChannel, newChannel, this);
     // Overload currentIndexChanged too, and pass a reference to the combo box with it
-    //emit currentIndexChanged(this->currentIndex(), this);
+    emit currentIndexChanged(this->currentIndex(), this);
     // Now save the new channel as our old channel for next time
     _priorChannel = newChannel;
 }
-
 
 void ChannelOrderComboBox::setup(boolean isAux)
 {

@@ -11,15 +11,15 @@ typedef unsigned char DEVICE;           // Devices that we can program using OP 
 #define DEVICE_TCB_MKI      1
 #define DEVICE_TCB_MKII     2
 #define DEVICE_TCB_DIY      3           // DIY version of the TCB firmware, moves a few pins around for compatibility with stock Arduino MEGA boards
-#define DEVICE_SCOUT        4           // Scout board versions R11 and later
-#define DEVICE_SCOUT_R10    5           // Scout board versions R10 and earlier
+#define DEVICE_SCOUT        4           // Scout board versions R11 and later (ATmega328P)
+#define DEVICE_SCOUT_R10    5           // Scout board versions R10 and earlier (ATmega328P)
 #define DEVICE_TEENSYSOUND  6
-#define DEVICE_ATMEGA328    7           // For generic Arduino 328 devices including Nano (but not UNO)
+#define DEVICE_ATMEGA328    7           // For the older ATmega328 chips (not "p") including Nano (baud rate 57600)
 #define DEVICE_TEENSY32     8           // For generic Teensy 3.2 devices
 #define DEVICE_AT_MKI       9
 #define DEVICE_HECLO_SHIELD 10
 #define DEVICE_ATMEGA2560   11          // For generic ATmega2560 devices
-#define DEVICE_ARDUINO_UNO  12          // Although the UNO uses a 328 chip, it requires a different baud rate (115200) than other 328 devices such as the Nano (57600)
+#define DEVICE_ATMEGA328P   12          // For the newer 328"p" chips including UNO (baud rate 115200)
 
 // Not very sophisticated. Here we store the URLs to the latest release hex and version files, and we
 // assume the URLs and filenames will never change in a million years.

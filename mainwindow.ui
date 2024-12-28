@@ -433,7 +433,7 @@ QSizeGrip {
          <number>0</number>
         </property>
         <property name="sizeConstraint">
-         <enum>QLayout::SetNoConstraint</enum>
+         <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
         </property>
         <property name="topMargin">
          <number>0</number>
@@ -459,10 +459,10 @@ QSizeGrip {
            <string notr="true"/>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::Shape::StyledPanel</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
+           <enum>QFrame::Shadow::Raised</enum>
           </property>
           <widget class="QFrame" name="frame_3">
            <property name="geometry">
@@ -480,10 +480,10 @@ QSizeGrip {
             <string notr="true">	background: url(:/images/OP.png) no-repeat; </string>
            </property>
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Shadow::Raised</enum>
            </property>
           </widget>
           <widget class="QFrame" name="frame_4">
@@ -502,10 +502,10 @@ QSizeGrip {
             <string notr="true">	background: url(:/images/opconfig_header.png) no-repeat; </string>
            </property>
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
+            <enum>QFrame::Shadow::Raised</enum>
            </property>
           </widget>
           <widget class="QPushButton" name="cmdHideHeader">
@@ -569,10 +569,10 @@ QSizeGrip {
            <string notr="true"/>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::Shape::Box</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Plain</enum>
+           <enum>QFrame::Shadow::Plain</enum>
           </property>
           <widget class="QPushButton" name="cmdWriteDevice">
            <property name="geometry">
@@ -599,7 +599,6 @@ QSizeGrip {
             <font>
              <family>OCR-B 10 BT</family>
              <pointsize>14</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -744,10 +743,10 @@ QSizeGrip {
             <string notr="true">	background: url(:/images/tcb_subheader.png) no-repeat; </string>
            </property>
            <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
+            <enum>QFrame::Shape::NoFrame</enum>
            </property>
            <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
+            <enum>QFrame::Shadow::Plain</enum>
            </property>
           </widget>
           <widget class="BaudRateComboBox" name="cboConsoleBaud">
@@ -823,7 +822,6 @@ QSizeGrip {
                <font>
                 <family>Malgun Gothic</family>
                 <pointsize>17</pointsize>
-                <weight>75</weight>
                 <bold>true</bold>
                 <stylestrategy>PreferAntialias</stylestrategy>
                 <kerning>false</kerning>
@@ -833,10 +831,10 @@ QSizeGrip {
                <string notr="true"/>
               </property>
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
               <property name="lineWidth">
                <number>1</number>
@@ -845,13 +843,13 @@ QSizeGrip {
                <bool>true</bool>
               </property>
               <property name="editTriggers">
-               <set>QAbstractItemView::NoEditTriggers</set>
+               <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
               </property>
               <property name="showDropIndicator" stdset="0">
                <bool>false</bool>
               </property>
               <property name="selectionBehavior">
-               <enum>QAbstractItemView::SelectItems</enum>
+               <enum>QAbstractItemView::SelectionBehavior::SelectItems</enum>
               </property>
               <property name="iconSize">
                <size>
@@ -860,13 +858,13 @@ QSizeGrip {
                </size>
               </property>
               <property name="movement">
-               <enum>QListView::Static</enum>
+               <enum>QListView::Movement::Static</enum>
               </property>
               <property name="flow">
-               <enum>QListView::TopToBottom</enum>
+               <enum>QListView::Flow::TopToBottom</enum>
               </property>
               <property name="resizeMode">
-               <enum>QListView::Fixed</enum>
+               <enum>QListView::ResizeMode::Fixed</enum>
               </property>
               <property name="spacing">
                <number>0</number>
@@ -903,10 +901,10 @@ QSizeGrip {
                <string notr="true"/>
               </property>
               <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
+               <enum>QFrame::Shape::NoFrame</enum>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
+               <enum>QFrame::Shadow::Sunken</enum>
               </property>
               <property name="currentIndex">
                <number>8</number>
@@ -925,7 +923,7 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="ChannelOrderComboBox" name="cboTurnChannelNum">
                  <property name="geometry">
@@ -1239,7 +1237,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1299,10 +1296,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbRadio">
@@ -1412,7 +1409,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1622,7 +1618,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1668,7 +1663,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1756,7 +1750,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1776,7 +1769,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1796,7 +1788,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -1814,10 +1805,10 @@ QSizeGrip {
                   </rect>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
+                  <enum>QFrame::Shape::NoFrame</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                  <widget class="QLabel" name="lblAux6Pulse">
                   <property name="geometry">
@@ -1840,7 +1831,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux5Pulse">
@@ -1864,7 +1855,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux6Max">
@@ -1888,7 +1879,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblSteeringMin">
@@ -1912,7 +1903,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblThrottleDirection">
@@ -1933,7 +1924,7 @@ QSizeGrip {
                    <string>Forward</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblRotationMin">
@@ -1957,7 +1948,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblThrottleMin">
@@ -1981,7 +1972,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux6Low">
@@ -2003,7 +1994,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux5High">
@@ -2022,7 +2013,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux5Low">
@@ -2044,7 +2035,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblElevationMin">
@@ -2068,7 +2059,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderSteeringLow">
@@ -2090,7 +2081,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblElevationDirection">
@@ -2111,7 +2102,7 @@ QSizeGrip {
                    <string>Up</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblThrottleMax">
@@ -2135,7 +2126,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux5Min">
@@ -2159,7 +2150,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblRotationDirection">
@@ -2180,7 +2171,7 @@ QSizeGrip {
                    <string>Right</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblElevationMax">
@@ -2204,7 +2195,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux1Pulse">
@@ -2228,7 +2219,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux5Max">
@@ -2252,7 +2243,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderElevationLow">
@@ -2274,7 +2265,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux3High">
@@ -2293,7 +2284,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux2Low">
@@ -2315,7 +2306,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderThrottleHigh">
@@ -2334,7 +2325,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderElevationHigh">
@@ -2353,7 +2344,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux4Min">
@@ -2377,7 +2368,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux3Low">
@@ -2399,7 +2390,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux3Max">
@@ -2423,7 +2414,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderRotationHigh">
@@ -2442,7 +2433,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lbl1">
@@ -2457,7 +2448,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -2468,7 +2458,7 @@ QSizeGrip {
                    <string>Min</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux4Pulse">
@@ -2492,7 +2482,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux2Max">
@@ -2516,7 +2506,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderThrottleLow">
@@ -2538,7 +2528,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblSteeringDirection">
@@ -2559,7 +2549,7 @@ QSizeGrip {
                    <string>Right</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblPulseHeaderSticks">
@@ -2574,7 +2564,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -2585,7 +2574,7 @@ QSizeGrip {
                    <string>Pulse</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux6High">
@@ -2604,7 +2593,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux2Pulse">
@@ -2628,7 +2617,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux1High">
@@ -2647,7 +2636,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblThrottlePulse">
@@ -2671,7 +2660,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux3Pulse">
@@ -2695,7 +2684,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux3Min">
@@ -2719,7 +2708,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux6Min">
@@ -2743,7 +2732,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblSteeringMax">
@@ -2767,7 +2756,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux1Low">
@@ -2789,7 +2778,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux2High">
@@ -2808,7 +2797,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux1Max">
@@ -2832,7 +2821,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblRotationPulse">
@@ -2856,7 +2845,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderSteeringHigh">
@@ -2875,7 +2864,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux1Min">
@@ -2899,7 +2888,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblSteeringPulse">
@@ -2923,7 +2912,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderRotationLow">
@@ -2945,7 +2934,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lbl2">
@@ -2960,7 +2949,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -2992,7 +2980,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux4Max">
@@ -3016,7 +3004,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux2Min">
@@ -3040,7 +3028,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux4High">
@@ -3059,7 +3047,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux4Low">
@@ -3081,7 +3069,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblElevationPulse">
@@ -3105,7 +3093,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lbl1_2">
@@ -3120,7 +3108,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -3131,7 +3118,7 @@ QSizeGrip {
                    <string>Min</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lbl2_2">
@@ -3146,7 +3133,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -3169,7 +3155,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -3180,7 +3165,7 @@ QSizeGrip {
                    <string>Pulse</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblStickDirection">
@@ -3195,7 +3180,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -3203,7 +3187,7 @@ QSizeGrip {
                    <string>Direction</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblSwitchPos">
@@ -3218,7 +3202,6 @@ QSizeGrip {
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -3226,7 +3209,7 @@ QSizeGrip {
                    <string>Switch Pos</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux1Pos">
@@ -3247,7 +3230,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux2Pos">
@@ -3268,7 +3251,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux3Pos">
@@ -3289,7 +3272,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux4Pos">
@@ -3310,7 +3293,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux5Pos">
@@ -3331,7 +3314,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux6Pos">
@@ -3352,7 +3335,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QFrame" name="frmRadioVLine">
@@ -3368,10 +3351,10 @@ QSizeGrip {
                    <string notr="true">color: #666;</string>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::VLine</enum>
+                   <enum>QFrame::Shape::VLine</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Plain</enum>
+                   <enum>QFrame::Shadow::Plain</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux7Min">
@@ -3395,7 +3378,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux7High">
@@ -3414,7 +3397,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux7Pulse">
@@ -3438,7 +3421,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux7Low">
@@ -3460,7 +3443,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux7Max">
@@ -3484,7 +3467,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux7Pos">
@@ -3505,7 +3488,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux8Min">
@@ -3529,7 +3512,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux8High">
@@ -3548,7 +3531,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux8Pulse">
@@ -3572,7 +3555,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux8Low">
@@ -3594,7 +3577,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux8Max">
@@ -3618,7 +3601,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux8Pos">
@@ -3639,7 +3622,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux9Min">
@@ -3663,7 +3646,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux9High">
@@ -3682,7 +3665,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux9Pulse">
@@ -3706,7 +3689,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux9Low">
@@ -3728,7 +3711,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux9Max">
@@ -3752,7 +3735,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux9Pos">
@@ -3773,7 +3756,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux10Min">
@@ -3797,7 +3780,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux10High">
@@ -3816,7 +3799,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux10Pulse">
@@ -3840,7 +3823,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux10Low">
@@ -3862,7 +3845,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux10Max">
@@ -3886,7 +3869,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux10Pos">
@@ -3907,7 +3890,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux11Min">
@@ -3931,7 +3914,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux11High">
@@ -3950,7 +3933,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux11Pulse">
@@ -3974,7 +3957,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux11Low">
@@ -3996,7 +3979,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux11Max">
@@ -4020,7 +4003,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux11Pos">
@@ -4041,7 +4024,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux12Min">
@@ -4065,7 +4048,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux12High">
@@ -4084,7 +4067,7 @@ QSizeGrip {
                    <number>200</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux12Pulse">
@@ -4108,7 +4091,7 @@ QSizeGrip {
                    <string>1500</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
                   </property>
                  </widget>
                  <widget class="QSlider" name="sliderAux12Low">
@@ -4130,7 +4113,7 @@ QSizeGrip {
                    <number>-800</number>
                   </property>
                   <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                   <enum>Qt::Orientation::Horizontal</enum>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux12Max">
@@ -4154,7 +4137,7 @@ QSizeGrip {
                    <string>1000</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                  <widget class="QLabel" name="lblAux12Pos">
@@ -4175,7 +4158,7 @@ QSizeGrip {
                    <string>Pos 1</string>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
                  </widget>
                 </widget>
@@ -4254,7 +4237,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -4868,7 +4850,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -4931,7 +4912,7 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="DriveTypeComboBox" name="cboDriveMotors">
                  <property name="geometry">
@@ -4980,7 +4961,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -5072,10 +5052,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbMotorSelection">
@@ -5144,7 +5124,7 @@ QSizeGrip {
                   <string>Plug steering servo into RC Output 2.</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblDriveMotors">
@@ -5217,10 +5197,10 @@ QSizeGrip {
                   <string notr="true"/>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::Box</enum>
+                  <enum>QFrame::Shape::Box</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                  <widget class="QLabel" name="lblESCWarningHelp">
                   <property name="geometry">
@@ -5277,10 +5257,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_21">
                  <property name="geometry">
@@ -5295,7 +5275,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -5319,10 +5298,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_28">
@@ -5561,7 +5540,7 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="label_32">
                  <property name="geometry">
@@ -5576,7 +5555,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -5599,7 +5577,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -5663,7 +5640,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -5683,7 +5659,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -5723,10 +5698,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbSmoker">
@@ -5986,7 +5961,7 @@ QSizeGrip {
                   <string>Connect heating element to Smoker output, fan to Aux output</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblSmokerHeatFastIdle2">
@@ -6280,10 +6255,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="lblRecoilDelay3">
                  <property name="geometry">
@@ -6415,7 +6390,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -6439,10 +6413,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_298">
@@ -6505,10 +6479,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_23">
                  <property name="geometry">
@@ -6523,7 +6497,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -6547,10 +6520,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_33">
@@ -6689,10 +6662,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_44">
                  <property name="geometry">
@@ -6707,7 +6680,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -6728,10 +6700,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbBrakeLights">
@@ -6878,10 +6850,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
+                 <enum>QFrame::Shape::Panel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <property name="midLineWidth">
                  <number>0</number>
@@ -6899,10 +6871,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_61">
@@ -6918,7 +6890,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -7168,7 +7139,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -7224,7 +7194,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -7278,10 +7247,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_99">
                  <property name="geometry">
@@ -7296,7 +7265,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -7317,10 +7285,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbAuxOutput">
@@ -7354,7 +7322,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -7531,7 +7498,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -7622,7 +7588,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>10</pointsize>
-                   <weight>50</weight>
                    <bold>false</bold>
                   </font>
                  </property>
@@ -7654,10 +7619,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_106">
                  <property name="geometry">
@@ -7672,7 +7637,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -7693,10 +7657,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbMachineGun">
@@ -7833,10 +7797,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_139">
                  <property name="geometry">
@@ -7851,7 +7815,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -7872,10 +7835,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QCheckBox" name="chkBlinkSignalLost">
@@ -7970,10 +7933,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_145">
                  <property name="geometry">
@@ -7988,7 +7951,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -8009,10 +7971,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbHiFlash">
@@ -8076,10 +8038,10 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QLabel" name="label_171">
                  <property name="geometry">
@@ -8094,7 +8056,6 @@ QSizeGrip {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -8115,10 +8076,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbLightEffects">
@@ -8184,7 +8145,7 @@ QSizeGrip {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="label_42">
                  <property name="geometry">
@@ -8198,7 +8159,6 @@ QSizeGrip {
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -8238,10 +8198,10 @@ QSizeGrip {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_50">
@@ -8401,46 +8361,46 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 </string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::Box</enum>
+                  <enum>QFrame::Shape::Box</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                  <property name="verticalScrollBarPolicy">
-                  <enum>Qt::ScrollBarAlwaysOn</enum>
+                  <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
                  </property>
                  <property name="alternatingRowColors">
                   <bool>true</bool>
                  </property>
                  <property name="selectionMode">
-                  <enum>QAbstractItemView::SingleSelection</enum>
+                  <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
                  </property>
                  <property name="selectionBehavior">
-                  <enum>QAbstractItemView::SelectRows</enum>
+                  <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
                  </property>
                  <property name="sortingEnabled">
                   <bool>true</bool>
                  </property>
+                 <attribute name="horizontalHeaderMinimumSectionSize">
+                  <number>50</number>
+                 </attribute>
                  <attribute name="horizontalHeaderDefaultSectionSize">
                   <number>215</number>
                  </attribute>
                  <attribute name="horizontalHeaderHighlightSections">
                   <bool>false</bool>
                  </attribute>
-                 <attribute name="horizontalHeaderMinimumSectionSize">
-                  <number>50</number>
-                 </attribute>
                  <attribute name="verticalHeaderVisible">
                   <bool>false</bool>
+                 </attribute>
+                 <attribute name="verticalHeaderMinimumSectionSize">
+                  <number>20</number>
                  </attribute>
                  <attribute name="verticalHeaderDefaultSectionSize">
                   <number>20</number>
                  </attribute>
                  <attribute name="verticalHeaderHighlightSections">
                   <bool>false</bool>
-                 </attribute>
-                 <attribute name="verticalHeaderMinimumSectionSize">
-                  <number>20</number>
                  </attribute>
                  <attribute name="verticalHeaderShowSortIndicator" stdset="0">
                   <bool>false</bool>
@@ -8456,7 +8416,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </rect>
                  </property>
                  <property name="insertPolicy">
-                  <enum>QComboBox::InsertAlphabetically</enum>
+                  <enum>QComboBox::InsertPolicy::InsertAlphabetically</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_51">
@@ -8605,10 +8565,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   </rect>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_43">
@@ -8623,7 +8583,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -8681,7 +8640,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="HelpButton" name="hpbAccelDecel">
                  <property name="geometry">
@@ -8761,7 +8720,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -8858,7 +8816,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -8970,7 +8927,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -8990,7 +8946,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                    <property name="font">
                     <font>
                      <pointsize>11</pointsize>
-                     <weight>75</weight>
                      <bold>true</bold>
                     </font>
                    </property>
@@ -9169,10 +9124,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_74">
@@ -9187,7 +9142,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -9206,7 +9160,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="lblTurnMode">
                  <property name="geometry">
@@ -9239,7 +9193,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -9296,10 +9249,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbTurning">
@@ -9495,7 +9448,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="label_41">
                  <property name="geometry">
@@ -9510,7 +9463,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -9549,10 +9501,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbDriving">
@@ -9814,7 +9766,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -9834,7 +9785,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -9961,7 +9911,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -9981,7 +9930,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -10109,7 +10057,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="HelpButton" name="hpbFreewheel">
                  <property name="geometry">
@@ -10143,10 +10091,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_176">
@@ -10161,7 +10109,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -10236,7 +10183,7 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="lblEnableTrackRecoil">
                  <property name="geometry">
@@ -10269,7 +10216,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -10290,10 +10236,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbTrackRecoil">
@@ -10445,7 +10391,7 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="label_94">
                  <property name="geometry">
@@ -10478,7 +10424,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -10499,10 +10444,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbCannonIR">
@@ -10552,7 +10497,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>Also accept hits from</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                 </widget>
                 <widget class="IRProtocolComboBox" name="cboHitProtocol_2">
@@ -10583,7 +10528,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>Send RCTA Tank ID</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinTankID">
@@ -10672,10 +10617,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_28">
                  <property name="geometry">
@@ -10690,10 +10635,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbWeightClass">
@@ -10727,7 +10672,6 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -10908,10 +10852,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QSpinBox" name="spinMaxMGHits">
                  <property name="geometry">
@@ -10991,7 +10935,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -11071,10 +11014,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblAcceptMG">
@@ -11125,10 +11068,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="DamageProfileComboBox" name="cboDamageProfile">
                  <property name="geometry">
@@ -11171,7 +11114,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -11211,10 +11153,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                </widget>
@@ -11228,10 +11170,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_32">
                  <property name="geometry">
@@ -11246,10 +11188,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_147">
@@ -11265,7 +11207,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -11336,10 +11277,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Sunken</enum>
+                 <enum>QFrame::Shadow::Sunken</enum>
                 </property>
                 <property name="currentIndex">
                  <number>1</number>
@@ -11355,10 +11296,10 @@ gearboxes by dragging inner track during turns:</string>
                    </rect>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::Box</enum>
+                   <enum>QFrame::Shape::Box</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Sunken</enum>
+                   <enum>QFrame::Shadow::Sunken</enum>
                   </property>
                   <widget class="QLabel" name="label_67">
                    <property name="geometry">
@@ -11386,10 +11327,10 @@ gearboxes by dragging inner track during turns:</string>
                    </rect>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::Box</enum>
+                   <enum>QFrame::Shape::Box</enum>
                   </property>
                   <property name="frameShadow">
-                   <enum>QFrame::Sunken</enum>
+                   <enum>QFrame::Shadow::Sunken</enum>
                   </property>
                   <widget class="QLabel" name="label_54">
                    <property name="geometry">
@@ -11417,7 +11358,7 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="HelpButton" name="hpbGeneralSound">
                  <property name="geometry">
@@ -11450,7 +11391,6 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -11560,7 +11500,6 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -11578,10 +11517,10 @@ gearboxes by dragging inner track during turns:</string>
                   </rect>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_88">
@@ -11693,10 +11632,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_40">
                  <property name="geometry">
@@ -11711,10 +11650,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbSoundVolumes">
@@ -11748,7 +11687,6 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -11844,10 +11782,10 @@ gearboxes by dragging inner track during turns:</string>
                   <number>50</number>
                  </property>
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="tickPosition">
-                  <enum>QSlider::TicksBelow</enum>
+                  <enum>QSlider::TickPosition::TicksBelow</enum>
                  </property>
                 </widget>
                 <widget class="QSlider" name="sliderEffectsVolume">
@@ -11866,10 +11804,10 @@ gearboxes by dragging inner track during turns:</string>
                   <number>50</number>
                  </property>
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="tickPosition">
-                  <enum>QSlider::TicksBelow</enum>
+                  <enum>QSlider::TickPosition::TicksBelow</enum>
                  </property>
                 </widget>
                 <widget class="QSlider" name="sliderOverlayVolume">
@@ -11888,10 +11826,10 @@ gearboxes by dragging inner track during turns:</string>
                   <number>50</number>
                  </property>
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                  <property name="tickPosition">
-                  <enum>QSlider::TicksBelow</enum>
+                  <enum>QSlider::TickPosition::TicksBelow</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblOverlayVolume">
@@ -11941,10 +11879,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_42">
                  <property name="geometry">
@@ -11959,10 +11897,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbSoundSqueaks">
@@ -11996,7 +11934,6 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -12078,7 +12015,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>Min</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinSqueak3Min">
@@ -12174,7 +12111,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>Interval (mS)</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                 <widget class="QCheckBox" name="chkEnableSqueak5">
@@ -12219,10 +12156,10 @@ gearboxes by dragging inner track during turns:</string>
                   </rect>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="lblMinSqueakSpeed1">
@@ -12481,7 +12418,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>Max</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignCenter</set>
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                 <widget class="QSpinBox" name="spinMinSqueakSpeed">
@@ -12577,10 +12514,10 @@ gearboxes by dragging inner track during turns:</string>
                   </rect>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                </widget>
@@ -12594,10 +12531,10 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_45">
                  <property name="geometry">
@@ -12612,10 +12549,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbSoundBank">
@@ -12649,7 +12586,6 @@ gearboxes by dragging inner track during turns:</string>
                  <property name="font">
                   <font>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -12744,10 +12680,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_26">
                  <property name="geometry">
@@ -12762,10 +12698,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_111">
@@ -12781,7 +12717,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -12987,10 +12922,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_21">
                  <property name="geometry">
@@ -13005,10 +12940,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_85">
@@ -13024,7 +12959,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -13145,10 +13079,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_33">
                  <property name="geometry">
@@ -13163,10 +13097,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_121">
@@ -13182,7 +13116,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -13263,10 +13196,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_34">
                  <property name="geometry">
@@ -13281,10 +13214,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_148">
@@ -13300,7 +13233,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -13412,10 +13344,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_39">
                  <property name="geometry">
@@ -13430,10 +13362,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_156">
@@ -13449,7 +13381,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -13521,7 +13452,7 @@ gearboxes by dragging inner track during turns:</string>
                  </rect>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <widget class="QLabel" name="lblEnableBarrelStabilization">
                  <property name="geometry">
@@ -13554,7 +13485,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -13611,10 +13541,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="HelpButton" name="hpbIMU">
@@ -13789,10 +13719,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_43">
                  <property name="geometry">
@@ -13807,10 +13737,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_166">
@@ -13826,7 +13756,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -13939,10 +13868,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_36">
                  <property name="geometry">
@@ -13957,10 +13886,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_128">
@@ -13976,7 +13905,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -14148,10 +14076,10 @@ gearboxes by dragging inner track during turns:</string>
                  </size>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::Box</enum>
+                 <enum>QFrame::Shape::Box</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <widget class="QFrame" name="frame_38">
                  <property name="geometry">
@@ -14166,10 +14094,10 @@ gearboxes by dragging inner track during turns:</string>
                   <string notr="true">color: #666;</string>
                  </property>
                  <property name="frameShape">
-                  <enum>QFrame::HLine</enum>
+                  <enum>QFrame::Shape::HLine</enum>
                  </property>
                  <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
+                  <enum>QFrame::Shadow::Plain</enum>
                  </property>
                 </widget>
                 <widget class="QLabel" name="label_149">
@@ -14185,7 +14113,6 @@ gearboxes by dragging inner track during turns:</string>
                   <font>
                    <family>MS Shell Dlg 2</family>
                    <pointsize>12</pointsize>
-                   <weight>75</weight>
                    <bold>true</bold>
                   </font>
                  </property>
@@ -14227,7 +14154,7 @@ gearboxes by dragging inner track during turns:</string>
                   <string>You may use the window below as a console to view the output from any serial device connected to the &lt;br/&gt; COM port selected above.</string>
                  </property>
                  <property name="alignment">
-                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                  <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -14259,7 +14186,7 @@ gearboxes by dragging inner track during turns:</string>
                   </rect>
                  </property>
                  <property name="layoutDirection">
-                  <enum>Qt::RightToLeft</enum>
+                  <enum>Qt::LayoutDirection::RightToLeft</enum>
                  </property>
                  <property name="text">
                   <string>Autoscroll</string>
@@ -14368,13 +14295,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
  }</string>
                 </property>
                 <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
+                 <enum>QFrame::Shape::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
+                 <enum>QFrame::Shadow::Plain</enum>
                 </property>
                 <property name="verticalScrollBarPolicy">
-                 <enum>Qt::ScrollBarAlwaysOn</enum>
+                 <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
                 </property>
                 <property name="readOnly">
                  <bool>true</bool>
@@ -14403,7 +14330,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: #E1E3E3;</string>
               </property>
               <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
+               <enum>QFrame::Shadow::Plain</enum>
               </property>
              </widget>
             </item>
@@ -14424,7 +14351,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: #E1E3E3;</string>
             </property>
             <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
+             <enum>QFrame::Shadow::Plain</enum>
             </property>
            </widget>
           </item>
@@ -14442,10 +14369,10 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
            <string notr="true">background: #E1E3E3;</string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
+           <enum>QFrame::Shape::NoFrame</enum>
           </property>
           <property name="frameShadow">
-           <enum>QFrame::Plain</enum>
+           <enum>QFrame::Shadow::Plain</enum>
           </property>
          </widget>
         </item>
@@ -14474,7 +14401,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <font>
      <family>MS Shell Dlg 2</family>
      <pointsize>10</pointsize>
-     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -14499,9 +14425,9 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <widget class="QMenu" name="menuDevice">
     <property name="geometry">
      <rect>
-      <x>414</x>
-      <y>134</y>
-      <width>202</width>
+      <x>419</x>
+      <y>109</y>
+      <width>203</width>
       <height>137</height>
      </rect>
     </property>
@@ -14565,7 +14491,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     </font>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionSaveFile">
@@ -14576,7 +14502,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Save Settings to OPZ File</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionExit">
@@ -14584,7 +14510,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Exit</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionWrite">
@@ -14592,7 +14518,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Write Settings to Device</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionRead">
@@ -14600,7 +14526,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Read Settings from Device</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionConnect">
@@ -14608,7 +14534,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Connect</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionDisconnect">
@@ -14616,7 +14542,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Disconnect</string>
    </property>
    <property name="shortcutContext">
-    <enum>Qt::ApplicationShortcut</enum>
+    <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
    </property>
   </action>
   <action name="actionHelp_Contents">

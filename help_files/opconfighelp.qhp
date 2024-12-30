@@ -5,7 +5,7 @@
     <filterSection>
         <toc>
             <section title="Getting Started with OP Config" ref="gettingstarted.html">
-                <section title="Program Layout" ref="./formlayout.html"></section>
+                <section title="Program Layout" ref="formlayout.html"></section>
                 <section title="USB Drivers" ref="drivers.html"></section>
                 <section title="Connecting to the TCB" ref="connect.html"></section>
                 <section title="Reading and Writing Settings on the TCB" ref="writedevice.html"></section>

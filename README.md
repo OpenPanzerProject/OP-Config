@@ -19,6 +19,8 @@ Qt is well-known for being cross-platform compatible so it should be possible to
 
 For those curious, we are using [Inno Setup 5.5.8](http://www.jrsoftware.org/isinfo.php) to create the Windows installer package. Qt has the Qt Installer Framework but we found it rather limiting. For the auto-update feature we are using [WinSparkle](https://github.com/vslavik/winsparkle). This would have to be changed for a non-Windows version, but it is based on the well-known Mac project called [Sparkle](https://sparkle-project.org/) so that should not be too difficult. There are no other external dependencies aside from various libraries bundled with Qt. 
 
+A deployment folder has been added which includes a number of extra artifacts and a script to build the Windows installer.  This is a unix shell script at the moment just because it was easier but could be converted to Windows batch/powershell.  The script assumes that the code and help files have already been deployed and that both Qt Assistant and InnoSetup are installed and in the PATH.  The script will gather all of the required files into a new folder and run the InnoSetup compiler to build the installer exe file.
+
 ## License
 Source files for OP Config are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.
 

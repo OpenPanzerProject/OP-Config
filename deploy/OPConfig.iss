@@ -23,7 +23,7 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 ; One of these no doubt ends up as the "OP Config on the Web" hyperlink that gets included in the install folder. It would be nice to remove it, 
 ; we already include a link to the wiki, or at least rename it because it doesn't actually take you to "OP Config" on the web, it takes you to openpanzer.org. 
-; But in fact according to the documention they also provide links in add/remove programs, though I can't see it. 
+; But in fact according to the documentation they also provide links in add/remove programs, though I can't see it.
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}

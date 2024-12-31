@@ -80,8 +80,8 @@
 
 #include <QMessageBox>
 #include <QtSerialPort/QSerialPort> // Serial port
-#include <QString.h>
-#include <QDebug.h>
+#include <qstring.h>
+#include <qdebug.h>
 #include <QTimer.h>
 #include <arduino_compat.h>         // Gives us Arduino-like data type names
 #include <op_devicedata_struct.h>

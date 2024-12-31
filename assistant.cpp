@@ -66,7 +66,7 @@ void Assistant::showDocumentation(const QString &page)
 
     QByteArray ba("SetSource ");
     ba.append("qthelp://openpanzer.desktop.help/docs/");    // From .qhcp file: Namespace then virtual folder
-    ba.append(page);
+    ba.append(page.toLatin1());
     ba.append(";syncContents;");    // Add a syncContents command
     proc->write(ba + '\n');
 }
@@ -81,7 +81,7 @@ bool Assistant::startAssistant()
             //QString app = QLibraryInfo::location(QLibraryInfo::BinariesPath) + QDir::separator();
         // That is fine during testing, but in deployment we should instead create an Assistant folder
         // in our application directory with its own files.
-        QString app = "assistant/";
+        QString app = "";
         #if !defined(Q_OS_MAC)
             app += QLatin1String("assistant");
         #else
@@ -95,7 +95,7 @@ bool Assistant::startAssistant()
         QStringList args;
         args << QLatin1String("-collectionFile")
              << QApplication::applicationDirPath()
-              + QLatin1String("/assistant/help_files/opconfighelp.qhc")
+              + QLatin1String("/help_files/opconfighelp.qhc")
              << QLatin1String("-enableRemoteControl");
         proc->start(app, args);
 

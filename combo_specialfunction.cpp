@@ -43,15 +43,14 @@ SpecialFunctionComboBox::SpecialFunctionComboBox(QWidget *parent) : QComboBox(pa
     this->removeExternalOutputsB();
     // Now other processes will add them back if appropriate
 
-    // If either the text or index has changed, emit our custom signal
-    connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(CurrentFunctionChangedSlot(QString)));
-    connect(this, SIGNAL(currentIndexChanged(QString)), this, SLOT(CurrentFunctionChangedSlot(QString)));
+    // Connect to my custom signal
+    connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(CurrentFunctionChangedSlot(int)));
 }
 
-void SpecialFunctionComboBox::CurrentFunctionChangedSlot(const QString &)
+void SpecialFunctionComboBox::CurrentFunctionChangedSlot(int selection)
 {
     // Send out a signal with the old value, the new value, and a pointer to this box
-    _special_function sf = static_cast<_special_function>(this->currentData().toInt());
+    _special_function sf = static_cast<_special_function>(selection);
     emit currentFunctionChanged(sf, OPQMap->isSpecialFunctionDigital(sf));
 }
 

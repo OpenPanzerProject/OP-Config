@@ -1,7 +1,6 @@
 #ifndef TRIGGERSOURCECOMBOBOX_H
 #define TRIGGERSOURCECOMBOBOX_H
 
-
 #include <QObject>
 #include <QComboBox>
 #include <op_defines.h>
@@ -28,14 +27,14 @@ public:
 signals:
     void externalInputA_Added(void);
     void externalInputB_Added(void);
-    //void currentTriggerSourceChanged(const QString &oldTS, const QString &newTS, TriggerSourceComboBox *changedCombo);
+    // void currentTriggerSourceChanged(const QString &oldTS, const QString &newTS, TriggerSourceComboBox *changedCombo);
 
 public slots:
     void setCurrentTriggerSource(const _trigger_source& sf);
     void setCurrentTriggerSource(int);
 
 private slots:
-    //void CurrentTriggerSourceChangedSlot(const QString &newTriggerSource);   // We will connect this slot to the built-in index changed, and emit our custom signals
+    // void CurrentTriggerSourceChangedSlot(const QString &newTriggerSource);   // We will connect this slot to the built-in index changed, and emit our custom signals
 
 private:
   boolean _EIA_Present = false;
@@ -47,6 +46,3 @@ private:
 };
 
 #endif // TRIGGERSOURCECOMBOBOX_H
-
-
-

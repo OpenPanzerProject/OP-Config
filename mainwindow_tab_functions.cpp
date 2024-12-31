@@ -42,9 +42,9 @@ void MainWindow::SetupControls_FunctionsTab(void)
 
     // Signals and slots
     // Anytime a special function is selected, update the trigger source list
-    connect(ui->cboSelectFunction, SIGNAL(currentFunctionChanged(_special_function,boolean)), SLOT(SetupTriggerSources(_special_function,boolean)));   // When they select a function, setup the trigger sources
+    connect(ui->cboSelectFunction, SIGNAL(currentFunctionChanged(_special_function,boolean)), this, SLOT(SetupTriggerSources(_special_function,boolean)));   // When they select a function, setup the trigger sources
     // Anytime a trigger source is selected, update the trigger action list
-    connect(ui->cboTriggerSource, SIGNAL(currentIndexChanged(int)), SLOT(SetupTriggerActions(int)));
+    connect(ui->cboTriggerSource, SIGNAL(currentIndexChanged(int)), this, SLOT(SetupTriggerActions(int)));
     // These buttons add or remove a function-trigger from the function trigger table model
     connect(ui->cmdAddFunctionTrigger, SIGNAL(clicked(bool)), this, SLOT(cmdAddFunctionTrigger_clicked(bool)));
     connect(ui->cmdRemoveFunctionTrigger, SIGNAL(clicked(bool)), this, SLOT(cmdRemoveFunctionTrigger_clicked(bool)));
@@ -56,7 +56,7 @@ void MainWindow::SetupControls_FunctionsTab(void)
 }
 void MainWindow::UpdateTurretStickDelayOptions(boolean isTSPresent)
 {
-    if (isTSPresent)    // Meaning, is the turret stick present in the funciton list as a trigger
+    if (isTSPresent)    // Meaning, is the turret stick present in the function list as a trigger
     {
         if (ui->cboTurretElevationMotor->getCurrentDriveType() == DRIVE_DETACHED &&
             ui->cboTurretRotationMotor->getCurrentDriveType()  == DRIVE_DETACHED)

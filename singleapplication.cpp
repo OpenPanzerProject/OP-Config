@@ -1,3 +1,4 @@
+#include "qregularexpression.h"
 #include <cstdlib>
 
 #include <QtCore/QSharedMemory>
@@ -87,7 +88,7 @@ SingleApplication::SingleApplication(int &argc, char *argv[])
     Q_D(SingleApplication);
 
     QString serverName = app_t::organizationName() + app_t::applicationName();
-    serverName.replace(QRegExp("[^\\w\\-. ]"), "");
+    serverName.replace(QRegularExpression("[^\\w\\-. ]"), "");
 
     // Guarantee thread safe behaviour with a shared memory block
     d->memory = new QSharedMemory(serverName);

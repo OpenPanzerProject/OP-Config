@@ -12,7 +12,7 @@ public:
     AnalogDigitalComboBox(QWidget *parent = 0);
 
 private slots:
-  void AnalogDigitalChangedSlot(const QString);
+  void AnalogDigitalChangedSlot(const int);
 
 private:
 
@@ -22,6 +22,3 @@ signals:
 };
 
 #endif // ANALOGDIGITALCOMBOBOX_H
-
-
-

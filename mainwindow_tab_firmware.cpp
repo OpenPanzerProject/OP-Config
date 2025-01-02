@@ -228,7 +228,7 @@ void MainWindow::SaveWebHexToLocal()
     // This is the path and file name that we want to save the file to
     QString formattedVersion = FirmwareVersionToString(DownloadedVersion);
     formattedVersion.replace(".","-");  // When saving the file name, we changed "." to "-"
-    QString hexFileFolder = QString("%1/firmware/").arg(QCoreApplication::applicationDirPath());
+    QString hexFileFolder = QString("%1/firmware/").arg(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
     QString hexFilePath;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
@@ -241,7 +241,7 @@ void MainWindow::SaveWebHexToLocal()
         case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion);break;
         case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);    break;
     }
-    //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QCoreApplication::applicationDirPath()).arg(formattedVersion);
+    //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QStandardPaths::DownloadLocation).arg(formattedVersion);
 
     // Make sure the firmware folder exists as a sub-directory of the application directory path
     if (!QDir(hexFileFolder).exists())
@@ -593,7 +593,7 @@ QString hex;
                                                        //    but the Arduino IDE always includes this flag, and without it AVRDUDE often
                                                        //    gives an error message.
             // Path to hex
-            //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QCoreApplication::applicationDirPath());
+            //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QStandardPaths::DownloadLocation);
             hex = "-Uflash:w:";
             hex.append(HexFile);
             hex.append(":i");

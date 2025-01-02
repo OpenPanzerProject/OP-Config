@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QStandardPaths>
 
 
 //------------------------------------------------------------------------------------------------------------------------>>
@@ -243,13 +244,13 @@ void MainWindow::SaveWebHexToLocal()
     }
     //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QStandardPaths::DownloadLocation).arg(formattedVersion);
 
-    // Make sure the firmware folder exists as a sub-directory of the application directory path
+    // Make sure the firmware folder exists
     if (!QDir(hexFileFolder).exists())
     {
         QDir().mkdir(hexFileFolder);
     }
 
-    // If it already exists, delete it
+    // If the hex file already exists, delete it
     if (QFile::exists(hexFilePath))
     {
          QFile::remove(hexFilePath);

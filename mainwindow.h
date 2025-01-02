@@ -30,7 +30,8 @@
 #include <QStringList>                              // Class of string lists
 #include <QStringListModel>                         // String list model, for creating simple text models to populate listviews, etc.
 #include <QAbstractItemView>
-#include <QtSerialPort/QSerialPortInfo>             // Serial port info, used to populate the drop-down list of COM Ports
+#include <QSerialPort>
+#include <QSerialPortInfo>                          // Serial port info, used to populate the drop-down list of COM Ports
 #include <QFileDialog.h>
 #include <QSignalMapper>
 #include <QSortFilterProxyModel>

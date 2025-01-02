@@ -190,7 +190,9 @@ void OpenPanzerComm::ConnectToDevice(void)
     startBlitz = false;                 // 2. We are not ready to blitz, just send the init string once
     blitzTimer->setSingleShot(true);    // 3. Because it probably won't connect, start the blitz timer.
     blitzTimer->start(FIRST_BLITZ_TIME);//    The first time is single shot, second and subsequent times will be configured by sendInit()
-    sendInit();                         // 4. Send the first init string and hope we connect right away. This will also set startBlitz to true
+    //sendInit();                         // 4. Send the first init string and hope we connect right away. This will also set startBlitz to true
+                                        // TESTING - What if we skip the first init message, and just start after FIRST_BLITZ_TIME?
+                                        // It could be that this message has something to do with the DTR being held low.
 }
 
 void OpenPanzerComm::sendInit()
@@ -253,7 +255,7 @@ void OpenPanzerComm::closeSerial()
     {
         // Make sure DTR is high at the end, in case it makes any difference next time
         serial->setDataTerminalReady(true); // True here means "set DTR pin High"
-        // This also seems to make no difference, so we'll leave it out
+        // This also seems to make no difference, so we'll leave it out. Also deprecated in Qt 6
         // serial->setSettingsRestoredOnClose(false);
         serial->close();
     }
@@ -856,7 +858,7 @@ void OpenPanzerComm::watchdogBark(void)
         else
         {
             // If we were communicating anything other than just "stay awake", we don't allow the device to miss
-            // the response even one. In this case we sent some other command, got nothing back, so now
+            // the response even once. In this case we sent some other command, got nothing back, so now
             // we disconnect
             closeSerial();
             if (DEBUG_MSGS) qDebug() << "Watchdog Timer expired!";

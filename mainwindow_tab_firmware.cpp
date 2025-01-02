@@ -229,7 +229,7 @@ void MainWindow::SaveWebHexToLocal()
     // This is the path and file name that we want to save the file to
     QString formattedVersion = FirmwareVersionToString(DownloadedVersion);
     formattedVersion.replace(".","-");  // When saving the file name, we changed "." to "-"
-    QString hexFileFolder = QString("%1/firmware/").arg(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
+    QString hexFileFolder = QString("%1/OpenPanzer/").arg(QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
     QString hexFilePath;
     switch (ui->cboFlashDevice->currentData().toInt())
     {
@@ -242,7 +242,6 @@ void MainWindow::SaveWebHexToLocal()
         case DEVICE_SCOUT_R10:    hexFilePath = hexFileFolder + QString("OPSCOUT_R10_%1.hex").arg(formattedVersion);break;
         case DEVICE_TEENSYSOUND:  hexFilePath = hexFileFolder + QString("OPSOUND_%1.hex").arg(formattedVersion);    break;
     }
-    //QString hexFilePath = QString("%1/firmware/TCBMK1_%2.hex").arg(QStandardPaths::DownloadLocation).arg(formattedVersion);
 
     // Make sure the firmware folder exists
     if (!QDir(hexFileFolder).exists())
@@ -488,7 +487,6 @@ QString hex;
     // Make sure the user has selected a hex file. Whether they selected it locally or downloaded it first,
     // either way it is a local file now. The path should be in the plain text box:
     QString HexFile = ui->ltxtHexPath->text();
-    //HexFile = "D:/UAV/QT/Projects/build-OpenPanzerConfig-Desktop_Qt_5_4_2_MSVC2013_64bit-Release/release/firmware/TCBMK1_00-91-01.hex";
     if(HexFile.isEmpty())
     {
         msgBox("No file selected",vbOkOnly,"Select File First",vbInformation);
@@ -594,7 +592,6 @@ QString hex;
                                                        //    but the Arduino IDE always includes this flag, and without it AVRDUDE often
                                                        //    gives an error message.
             // Path to hex
-            //QString hex = QString("-Uflash:w:%1/firmware/TCBMK1_00-91-01.hex:i").arg(QStandardPaths::DownloadLocation);
             hex = "-Uflash:w:";
             hex.append(HexFile);
             hex.append(":i");

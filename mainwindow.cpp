@@ -186,8 +186,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     otherStatusLabel = new QLabel(this);
     otherStatusLabel->setMinimumWidth(200);
     otherStatusLabel->setMaximumWidth(200);
-    otherStatusLabel->setMinimumHeight(20);
-    otherStatusLabel->setMaximumHeight(20);
+    otherStatusLabel->setMinimumHeight(22);                     // Increased the size slightly in Qt6 aas AlignVCenter doesn't seem to be working.
+    otherStatusLabel->setMaximumHeight(22);                     // ' '
     otherStatusLabel->setAlignment(Qt::AlignVCenter);
     otherStatusLabel->setAlignment(Qt::AlignHCenter);
     otherStatusLabel->setText("");

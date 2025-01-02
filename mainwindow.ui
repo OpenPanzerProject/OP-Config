@@ -15843,7 +15843,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <rect>
       <x>512</x>
       <y>169</y>
-      <width>189</width>
+      <width>202</width>
       <height>137</height>
      </rect>
     </property>
@@ -15878,6 +15878,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <addaction name="actionAbout_OP_Config"/>
    </widget>
    <widget class="QMenu" name="menuTools">
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="title">
      <string>Tools</string>
     </property>
@@ -15890,7 +15896,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
    <addaction name="menuDevice"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+    </font>
+   </property>
+  </widget>
   <action name="actionOpenFile">
    <property name="text">
     <string>Import Settings</string>
@@ -15902,10 +15914,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Import Settings from OPZ file</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
@@ -15935,10 +15944,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Write Settings to Device</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
@@ -15949,10 +15955,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Read Settings from Device</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
@@ -15963,10 +15966,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Connect</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
@@ -15977,10 +15977,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Disconnect</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
    <property name="shortcutContext">
     <enum>Qt::ShortcutContext::ApplicationShortcut</enum>
@@ -15991,10 +15988,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Help Contents</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
   </action>
   <action name="actionCheck_for_Updates">
@@ -16002,10 +15996,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>Check for Updates</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
   </action>
   <action name="actionAbout_OP_Config">
@@ -16013,10 +16004,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     <string>About OP Config</string>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>9</pointsize>
-    </font>
+    <font/>
    </property>
   </action>
   <action name="actionResetAllVals">

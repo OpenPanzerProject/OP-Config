@@ -115,8 +115,8 @@ FinishedLabel=Setup has finished installing [name] on your computer.%n%n
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-Type: filesandordirs; Name: "{app}\help_files\*"
-Type: filesandordirs; Name: "{app}\firmware\*"
+Type: filesandordirs; Name: "{localappdata}\OpenPanzer*"
+Type: filesandordirs; Name: "{%USERPROFILE}\Downloads\OpenPanzer*"
 
 ;-------------------------------------------------------------------------------
 

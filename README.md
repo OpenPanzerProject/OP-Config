@@ -13,9 +13,11 @@
 If you are not a developer, you probably don't need to worry about anything on this site. Instead, go to the [Open Panzer Downloads page](http://www.openpanzer.org/downloads) and get your own installable version of OP Config. 
 
 ## Developers
-OP Config was developed using Qt Creator 15.0.0 using Qt version 6.8.1. Code is written in C++. The executable version on the [Downloads page](http://www.openpanzer.org/downloads) was compiled for Windows using the MinGW 13.1.0 64-bit compiler. 
+OP Config from versions 0.94.00 were developed using Qt Creator 15.0.0 using Qt version 6.8.1. Code is written in C++. Executables (available on the [Open Panzer Downloads page](http://www.openpanzer.org/downloads) were compiled for Windows using the MinGW 13.1.0 64-bit compiler. 
 
-Qt is well-known for being cross-platform compatible so it should be possible to compile a version for use on other operating systems such as Mac OS X, but I don't have any environment other than Windows to develop in at present. If you want to compile this source for another operating system feel free, and please let us know! 
+OP Config versions prior to 0.94.00 were developed with Qt Creator 3.4.1 using Qt version 5.4.2. Compiler was MinGW 4.9.1 32-bit. Prior version executables are available from the same Downloads link above. 
+
+Qt is well-known for being cross-platform compatible so it should be possible to compile a version for use on other operating systems such as Mac OS X, but it only exists here in a Windows variant at present. If you want to compile this source for another operating system feel free, and please let us know! 
 
 For those curious, we are using [Inno Setup 5.5.8](http://www.jrsoftware.org/isinfo.php) to create the Windows installer package. Qt has the Qt Installer Framework but we found it rather limiting. For the auto-update feature we are using [WinSparkle](https://github.com/vslavik/winsparkle). This would have to be changed for a non-Windows version, but it is based on the well-known Mac project called [Sparkle](https://sparkle-project.org/) so that should not be too difficult. There are no other external dependencies aside from various libraries bundled with Qt. 
 

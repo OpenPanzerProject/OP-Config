@@ -169,30 +169,23 @@ void OpenPanzerComm::ConnectToDevice(void)
     // Here's how it works:
     // 1. We start the initTimer. If we don't connect before it expires, we give up
     // 2. Set startBlitz to false. We don't want to blitz the controller just yet.
-    // 3. Send the init string right away. If we're lucky, DTR won't be set low, and the device will connect on the first try.
-    //    After it has sent this first string, sendInit also sets startBlitz to true.
-    // 4. Because we know DTR probably *will* be toggled on the first send, we start a second timer called blitzTimer. This timer has two time settings,
-    //    FIRST_BLITZ_TIME, and SECOND_BLITZ_TIME. We start with the first one, which is set to some length that should be long enough for
+    // 3. Because it seems inevitable that the TCB will reboot on a connection attempt, we start a second timer called blitzTimer. This timer has two time settings,
+    //    FIRST_BLITZ_TIME, and SECOND_BLITZ_TIME. We start with the first one (FIRST_BLITZ_TIME), which is set to some length that should be long enough for
     //    the device to reset if it's going to. This timer is also set to single shot (only happens once).
-    // 5. FIRST_BLITZ_TIME expires, and blitzTimer calls sendInit() again. sendInit sends the init string a second time, hoping
-    //    to catch the device as it wakes from reboot. But in case it's too early, and because startBlitz is set to true, sendInit
-    //    will re-configure blitzTimer as a repeating timer with intervale of SECOND_BLITZ_TIME. This interval is much shorter.
+    // 4. FIRST_BLITZ_TIME expires, and blitzTimer calls sendInit() for the first time. sendInit sends the init string, hoping
+    //    to catch the device as it wakes from reboot. But in case it's too early, we set startBlitz to true, and the sendInit() function
+    //    re-configures blitzTimer as a repeating timer with intervale of SECOND_BLITZ_TIME. This interval is much shorter.
     //    Every time blitzTimer reaches that interval it will keep calling sendInit() (thus "blitzing" the device with our init string
     //    over and over). This continues until the device responds or else our original initTimer expires and we give up trying.
-    // 6. If the device does respond at any time, both initTimer and blitzTimer are stopped in readData(). So we only keep blitzing as long as
+    // 5. If the device does respond at any time, both initTimer and blitzTimer are stopped in readData(). So we only keep blitzing as long as
     //    we need, but no longer.
 
-    //  Yes, it's convoluted, but this is the only way I've found to reliably connect. If issues arise, probably the first thing to try would
-    //  be tweaking the values of FIRST and SECOND blitz times, rather than changing the concept generally, which I think is sound.
-
-    initTimer->setSingleShot(true);
+    initTimer->setSingleShot(true);     // When this expires, we give up
     initTimer->start(INIT_TIME);        // 1. Start this first, because sendInit() will only do anything if initTimer is active
-    startBlitz = false;                 // 2. We are not ready to blitz, just send the init string once
-    blitzTimer->setSingleShot(true);    // 3. Because it probably won't connect, start the blitz timer.
-    blitzTimer->start(FIRST_BLITZ_TIME);//    The first time is single shot, second and subsequent times will be configured by sendInit()
-    //sendInit();                         // 4. Send the first init string and hope we connect right away. This will also set startBlitz to true
-                                        // TESTING - What if we skip the first init message, and just start after FIRST_BLITZ_TIME?
-                                        // It could be that this message has something to do with the DTR being held low.
+    startBlitz = false;                 // 2. This flag lets us change the blitzTimer after the first SingleShot has expired.
+    blitzTimer->setSingleShot(true);    // 3. Set the blitzTimer to SingleShot to begin with.
+    blitzTimer->start(FIRST_BLITZ_TIME);//    This first time is how long we think the device will take to reboot. After this time expires, sendInit() is called for the first time.
+                                        // 4. After the first init is sent, sendInit() recongigures blitzTimer to repeating every (shorter) SECOND_BLITZ_TIME
 }
 
 void OpenPanzerComm::sendInit()

@@ -102,7 +102,7 @@
 
 // Time
 #define INIT_TIME               4100    // How much total time will we use to try to connect to the device
-#define FIRST_BLITZ_TIME        2200    // Time in milliseconds between the first init string and how long we think the device takes to reboot (and get past bootloader)
+#define FIRST_BLITZ_TIME        2200    // Time in milliseconds for how long we think the device takes to reboot (and get past bootloader) after a connection attempt is made.
 #define SECOND_BLITZ_TIME       500     // Time in milliseconds between spamming the device repeatedly with our INIT_STRING
 #define WATCHDOG_TIME_DEFAULT   1000    // Time in milliseconds we will wait for a response from the device generally.
 #define WATCHDOG_TIME_SABERTOOTH_SETUP 3000 // When we command a Sabertooth baud rate setup routine of the TCB, the response will take over 2 seconds, so we must increase the default watchdog timeout time

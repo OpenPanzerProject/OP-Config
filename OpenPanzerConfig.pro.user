@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< qt6-upgrade
 <!-- Written by QtCreator 15.0.0, 2024-12-30T15:45:27. -->
-=======
-<!-- Written by QtCreator 3.4.1, 2025-01-02T22:10:16. -->
->>>>>>> master
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>

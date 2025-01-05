@@ -12,7 +12,7 @@ OpenPanzerComm::OpenPanzerComm()
         // way to work around that. Sadly, regardless of what we put this setting to or any other, I can not get QSerialPort to behave
         // consistently with regards to the state of DTR on serial port open. Not to mention the crazy things Windows does with it when the
         // port is closed as part of its "discovery" (basically toggle DTR every half second, keeping the TCB in a continual state of reset).
-        serial->setSettingsRestoredOnClose(false);
+        //serial->setSettingsRestoredOnClose(false);
 
         // Timers
         initTimer = new QTimer(this);
@@ -41,7 +41,7 @@ OpenPanzerComm::OpenPanzerComm()
 
     // Serial connections
         connect(this, SIGNAL(IncrementError()), this, SLOT(handleNonCriticalError()));
-        connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
+        connect(serial, SIGNAL(errorOccurred(QSerialPort::SerialPortError)), this, SLOT(handleError(QSerialPort::SerialPortError)));
         connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
 }
 
@@ -59,7 +59,6 @@ void OpenPanzerComm::begin()
 
     CRCRequired = true; // Meaning, we only accept sentences that include, and match, a CRC
 }
-
 
 
 //------------------------------------------------------------------------------------------------------------------------>>
@@ -138,7 +137,7 @@ void OpenPanzerComm::openSerial_forComms(void)
         // communication.
 
         // Note, this can only be set after the serial port is open.
-//        serial->setRequestToSend(true);      // Don't need to worry about RTS
+        //serial->setRequestToSend(true);      // Don't need to worry about RTS
         serial->setDataTerminalReady(true); // True here means "set DTR pin High", ie don't reset device
 
         // But - in testing, this doesn't seem to work consistently. QSerialPort seems to toggle DTR if it feels like it, probably based on
@@ -152,6 +151,7 @@ void OpenPanzerComm::openSerial_forComms(void)
         //qDebug() << serial->errorString();
     }
 }
+
 void OpenPanzerComm::ConnectFromSnoop(void)
 {
     // Here we assume the serial is open because we are already snooping. Instead of closing/opening the port,
@@ -190,7 +190,9 @@ void OpenPanzerComm::ConnectToDevice(void)
     startBlitz = false;                 // 2. We are not ready to blitz, just send the init string once
     blitzTimer->setSingleShot(true);    // 3. Because it probably won't connect, start the blitz timer.
     blitzTimer->start(FIRST_BLITZ_TIME);//    The first time is single shot, second and subsequent times will be configured by sendInit()
-    sendInit();                         // 4. Send the first init string and hope we connect right away. This will also set startBlitz to true
+    //sendInit();                         // 4. Send the first init string and hope we connect right away. This will also set startBlitz to true
+                                        // TESTING - What if we skip the first init message, and just start after FIRST_BLITZ_TIME?
+                                        // It could be that this message has something to do with the DTR being held low.
 }
 
 void OpenPanzerComm::sendInit()
@@ -207,13 +209,14 @@ void OpenPanzerComm::sendInit()
             // Clear response, do this *before* sending anything
             ClearResponseData();
             SentenceReceived = false;   // Reset this as well. DO NOT DO THIS in ClearResponseData()
-            if (DEBUG_SEND_RECEIVE) qDebug() << "Sent: OPZ";
+            if (DEBUG_SEND_RECEIVE) qDebug() << "Sending: OPZ";
             if (APPEND_SENT_TO_CONSOLE) { QByteArray qc = Identify; emit NewData(qc.prepend("<- ")); }
             serial->write(Identify);
             // You have to wait for bytes to be written or else it will skip!!
-            if (!serial->waitForBytesWritten(50))
-            {
-                //qDebug() << serial->errorString();
+            if (serial->waitForBytesWritten(50)) {
+                if (DEBUG_SEND_RECEIVE) qDebug() << "Sent: OPZ";
+            } else {
+                qDebug() << serial->errorString();
             }
             if (startBlitz)
             {
@@ -234,8 +237,8 @@ void OpenPanzerComm::sendInit()
 }
 
 void OpenPanzerComm::connectionFailed()
-{   // We come here if initTimer expires. That means we were unable to connect.
-
+{
+    // We come here if initTimer expires. That means we were unable to connect.
     closeSerial();   // We no longer close the serial port here
 }
 
@@ -249,9 +252,10 @@ void OpenPanzerComm::closeSerial()
 
     // Close the port
     if (serial->isOpen())
-    {   // Make sure DTR is high at the end, in case it makes any difference next time
+    {
+        // Make sure DTR is high at the end, in case it makes any difference next time
         serial->setDataTerminalReady(true); // True here means "set DTR pin High"
-        // This also seems to make no difference, so we'll leave it out
+        // This also seems to make no difference, so we'll leave it out. Also deprecated in Qt 6
         // serial->setSettingsRestoredOnClose(false);
         serial->close();
     }
@@ -536,7 +540,6 @@ void OpenPanzerComm::writeEEPROM(uint16_t WhatID, QByteArray WhatValue)
 //------------------------------------------------------------------------------------------------------------------------>>
 void OpenPanzerComm::readData()
 {
-
     QByteArray data = serial->readAll();
 
     if (Snooping)
@@ -700,9 +703,8 @@ boolean OpenPanzerComm::ParseSentence(QByteArray &data)
 
     // Initialize sentence components
     SentenceIN.Command = SentenceIN.ID = SentenceIN.Checksum = SentenceIN.NumValues = 0;
-    SentenceIN.Value[0] = '\0';
-    for (int i=0; i<MAX_SENTENCE_VALUES; i++) { SentenceIN.Values[i][0] = '\0'; }
-
+    // SentenceIN.Value[0] = '\0'; // This line causes a QByteArray ASSERT "n <= d.size - pos" error
+    // for (int i=0; i<MAX_SENTENCE_VALUES; i++) { SentenceIN.Values[i][0] = '\0'; }
 
     // We step through each byte in the char array and parse pieces of the sentence as they are seperated by a delimiter, or at the end by newline
     for (int line_length=0; line_length<data.size(); line_length++)
@@ -856,7 +858,7 @@ void OpenPanzerComm::watchdogBark(void)
         else
         {
             // If we were communicating anything other than just "stay awake", we don't allow the device to miss
-            // the response even one. In this case we sent some other command, got nothing back, so now
+            // the response even once. In this case we sent some other command, got nothing back, so now
             // we disconnect
             closeSerial();
             if (DEBUG_MSGS) qDebug() << "Watchdog Timer expired!";

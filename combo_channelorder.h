@@ -5,8 +5,6 @@
 #include <QComboBox>
 #include <op_defines.h>
 
-
-
 class ChannelOrderComboBox : public QComboBox
 {
     Q_OBJECT
@@ -24,9 +22,7 @@ private:
 
 signals:
   void channelNumberChanged(const QString &oldChannel, const QString &newChannel, ChannelOrderComboBox *changedCombo);
-  //void currentIndexChanged(int, ChannelOrderComboBox *changedCombo);
-
+  void currentIndexChanged(int, ChannelOrderComboBox *changedCombo);
 };
 
 #endif // CHANNELORDERCOMBOBOX_H
-

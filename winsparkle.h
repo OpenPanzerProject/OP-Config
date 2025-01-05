@@ -1,7 +1,7 @@
 /*
  *  This file is part of WinSparkle (https://winsparkle.org)
  *
- *  Copyright (C) 2009-2016 Vaclav Slavik
+ *  Copyright (C) 2009-2024 Vaclav Slavik
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a
  *  copy of this software and associated documentation files (the "Software"),
@@ -27,6 +27,7 @@
 #define _winsparkle_h_
 
 #include <stddef.h>
+#include <time.h>
 
 #include "winsparkle-version.h"
 
@@ -43,6 +44,12 @@ extern "C" {
 #else
     #define WIN_SPARKLE_API __declspec(dllimport)
 #endif
+
+
+/// Return value for boolean functions to indicate unexpected error.
+/// Only used by functions or callbacks that are explicitly documented as using it.
+#define WINSPARKLE_RETURN_ERROR (-1)
+
 
 /*--------------------------------------------------------------------------*
                        Initialization and shutdown
@@ -160,6 +167,25 @@ WIN_SPARKLE_API void __cdecl win_sparkle_set_langid(unsigned short lang);
 WIN_SPARKLE_API void __cdecl win_sparkle_set_appcast_url(const char *url);
 
 /**
+    Sets DSA public key.
+
+    Only PEM format is supported.
+
+    Public key will be used to verify DSA signature of the update file.
+    PEM data will be set only if it contains valid DSA public key.
+
+    If this function isn't called by the app, public key is obtained from
+    Windows resource named "DSAPub" of type "DSAPEM".
+
+    @param dsa_pub_pem  DSA public key in PEM format.
+
+    @return  1 if valid DSA public key provided, 0 otherwise.
+
+    @since 0.6.0
+ */
+WIN_SPARKLE_API int __cdecl win_sparkle_set_dsa_pub_pem(const char *dsa_pub_pem);
+
+/**
     Sets application metadata.
 
     Normally, these are taken from VERSIONINFO/StringFileInfo resources,
@@ -204,6 +230,25 @@ WIN_SPARKLE_API void __cdecl win_sparkle_set_app_details(const wchar_t *company_
 WIN_SPARKLE_API void __cdecl win_sparkle_set_app_build_version(const wchar_t *build);
 
 /**
+    Set custom HTTP header for appcast checks.
+
+    @since 0.7
+
+    @see win_sparkle_clear_http_headers()
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_http_header(const char *name, const char *value);
+
+/**
+    Clears all custom HTTP headers previously added using
+    win_sparkle_set_http_header().
+
+    @since 0.7
+
+    @see win_sparkle_set_http_header()
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_clear_http_headers();
+
+/**
     Set the registry path where settings will be stored.
 
     Normally, these are stored in
@@ -222,6 +267,42 @@ WIN_SPARKLE_API void __cdecl win_sparkle_set_app_build_version(const wchar_t *bu
     @since 0.3
  */
 WIN_SPARKLE_API void __cdecl win_sparkle_set_registry_path(const char *path);
+
+/// Type used to override WinSparkle configuration's read, write and delete functions
+typedef struct win_sparkle_config_methods_tag {
+    /// Copy config value named @a name to the buffer pointed by @a buf, returns TRUE on success, FALSE on failure
+    int(__cdecl *config_read)(const char *name, wchar_t *buf, size_t len, void *user_data);
+    /// Write @a value as config value @a name 's new value
+    void(__cdecl *config_write)(const char *name, const wchar_t *value, void *user_data);
+    /// Delete config value named @a name
+    void(__cdecl *config_delete)(const char *name, void *user_data);
+    /// Arbitrary data which will be passed to the above functions, WinSparkle will not read or alter it.
+    void *user_data;
+} win_sparkle_config_methods_t;
+
+
+/**
+    Override WinSparkle's configuration read, write and delete functions.
+
+    By default, WinSparkle will read, write and delete configuration values by
+    interacting directly with Windows Registry.
+    If you want to manage configuration by yourself, or if you don't want let WinSparkle 
+    write settings directly to the Windows Registry, you can provide your own functions 
+    to read, write and delete configuration.
+
+    These functions needs to return TRUE on success, FALSE on failure.
+    If you passed NULL as a configuration action (read, write or delete)'s function pointer, 
+    WinSparkle will use the default function for that action.
+
+    @param config_methods  Your own configuration read, write and delete functions.
+                           Pass NULL to let WinSparkle continue to use its default functions.
+
+    @note There's no guarantee about the thread from which these functions are called,
+          Make sure your functions are thread-safe.
+
+    @since 0.7
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_config_methods(win_sparkle_config_methods_t *config_methods);
 
 /**
     Sets whether updates are checked automatically or only through a manual call.
@@ -366,7 +447,9 @@ WIN_SPARKLE_API void __cdecl win_sparkle_set_did_not_find_update_callback(win_sp
 typedef void (__cdecl *win_sparkle_update_cancelled_callback_t)();
 
 /**
-    Set callback to be called when the user cancels a download.
+    Set callback to be called when the user cancels an update, e.g.
+    by closing the window, skipping an update or cancelling download.
+    This callback is not called when there's no update to install or an error occurs.
 
     This is useful in combination with
     win_sparkle_check_update_with_ui_and_install() as it allows you to perform
@@ -374,9 +457,82 @@ typedef void (__cdecl *win_sparkle_update_cancelled_callback_t)();
 
     @since 0.5
 
-    @see win_sparkle_check_update_with_ui_and_install()
+    @see win_sparkle_check_update_with_ui_and_install(), win_sparkle_set_update_dismissed_callback()
 */
 WIN_SPARKLE_API void __cdecl win_sparkle_set_update_cancelled_callback(win_sparkle_update_cancelled_callback_t callback);
+
+/// Callback type for win_sparkle_update_skipped_callback()
+typedef void(__cdecl* win_sparkle_update_skipped_callback_t)();
+
+/**
+    Set callback to be called when the user skips an update.
+
+    This is useful in combination with
+    win_sparkle_check_update_with_ui() or similar as it
+    allows you to perform some action when the update
+    is skipped.
+
+    @see win_sparkle_check_update_with_ui_and_install()
+
+    @since 0.8
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_update_skipped_callback(win_sparkle_update_skipped_callback_t callback);
+
+/// Callback type for win_sparkle_update_postponed_callback()
+typedef void(__cdecl* win_sparkle_update_postponed_callback_t)();
+
+/**
+    Set callback to be called when the user postpones an update
+    ( presses 'remind me later' button).
+
+    This is useful in combination with
+    win_sparkle_check_update_with_ui() or similar as it
+    allows you to perform some action when the download
+    is postponed.
+
+    @see win_sparkle_check_update_with_ui()
+
+    @since 0.8
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_update_postponed_callback(win_sparkle_update_postponed_callback_t callback);
+
+/// Callback type for win_sparkle_update_dismissed_callback()
+typedef void(__cdecl* win_sparkle_update_dismissed_callback_t)();
+
+/**
+    Set callback to be called when the user dismisses
+    (closes) update dialog, including when there were no updates or an error occured.
+    See win_sparkle_set_update_cancelled_callback() for a subtly different callback
+    that may be more appropriate.
+
+    This is useful in combination with
+    win_sparkle_check_update_with_ui() or similar as it
+    allows you to perform some action when the update
+    dialog is closed.
+
+    @see win_sparkle_check_update_with_ui(), win_sparkle_set_update_cancelled_callback()
+
+    @since 0.8
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_update_dismissed_callback(win_sparkle_update_dismissed_callback_t callback);
+
+
+/// Callback type for win_sparkle_user_run_installer_callback()
+typedef int(__cdecl* win_sparkle_user_run_installer_callback_t)(const wchar_t *);
+
+/**
+    Set callback to be called when the update payload is
+    downloaded and read to be executed.or handled in some
+    other manner.
+
+    The callback returns:
+    - 1 if the file was handled by the callback
+    - 0 if it was not, in which case WinSparkle default handling will take place
+    - WINSPARKLE_RETURN_ERROR in case of an error
+
+    @since 0.8
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_user_run_installer_callback(win_sparkle_user_run_installer_callback_t callback);
 
 //@}
 
@@ -449,7 +605,7 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_with_ui_and_install();
     @since 0.4
 
     @see win_sparkle_check_update_with_ui()
-*/
+ */
 WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui();
 
 //@}

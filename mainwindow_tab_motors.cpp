@@ -846,7 +846,6 @@ void MainWindow::ValidateMotorSelections()
             ui->lblRotationMotor->setText("Connect turret rotation motor to \"M1\" on Scout");
             break;
         case DRIVE_DETACHED:
-            ui->lblRotationMotor->setText("");
         default:
             ui->lblRotationMotor->setText("");
         }
@@ -878,7 +877,6 @@ void MainWindow::ValidateMotorSelections()
             ui->lblElevationMotor->setText("Connect barrel elevation motor to \"M2\"  on Scout");
             break;
         case DRIVE_DETACHED:
-            ui->lblElevationMotor->setText("");
         default:
             ui->lblElevationMotor->setText("");
         }

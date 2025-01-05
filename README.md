@@ -2,7 +2,7 @@
 # Introduction
   * [Open Panzer](http://www.openpanzer.org) is a community project to develop open source products for the RC tank market. 
   * The TCB (tank control board) is a highly capable circuit board designed specifically for RC model tanks, but also suitable for halftracks, cars, or even battleships. The hardware is based on an ATmega 2560 processor and the code consists of an Arduino sketch as well as various C++ libraries. It has its own firmware repository, [see here](https://github.com/OpenPanzerProject/TCB)
-  * OP Config is a desktop application used to configure the many options on the TCB and to simplify flashing new firmware to the TCB. The repository you are in now contains the source code for the OP Config application. It was written in C++ using the open source application development software called ["Qt"](http://www.qt.io/developers/). Specifically we used Qt Creator 3.4.1 using Qt 5.4.2. 
+  * OP Config is a desktop application used to configure the many options on the TCB and to simplify flashing new firmware to the TCB. The repository you are in now contains the source code for the OP Config application. It was written in C++ using the open source application development software called ["Qt"](http://www.qt.io/developers/).
 
 ## Resources
   * For more information on the Open Panzer project, see the [OpenPanzer Wiki](http://wiki.openpanzer.org).
@@ -13,11 +13,13 @@
 If you are not a developer, you probably don't need to worry about anything on this site. Instead, go to the [Open Panzer Downloads page](http://www.openpanzer.org/downloads) and get your own installable version of OP Config. 
 
 ## Developers
-OP Config was developed using Qt Creator 3.4.1 using Qt version 5.4.2. Code is written in C++. The executable version on the [Downloads page](http://www.openpanzer.org/downloads) was compiled for Windows using the MinGW 4.9.1 32-bit compiler. 
+OP Config was developed using Qt Creator 15.0.0 using Qt version 6.8.1. Code is written in C++. The executable version on the [Downloads page](http://www.openpanzer.org/downloads) was compiled for Windows using the MinGW 13.1.0 64-bit compiler. 
 
 Qt is well-known for being cross-platform compatible so it should be possible to compile a version for use on other operating systems such as Mac OS X, but I don't have any environment other than Windows to develop in at present. If you want to compile this source for another operating system feel free, and please let us know! 
 
 For those curious, we are using [Inno Setup 5.5.8](http://www.jrsoftware.org/isinfo.php) to create the Windows installer package. Qt has the Qt Installer Framework but we found it rather limiting. For the auto-update feature we are using [WinSparkle](https://github.com/vslavik/winsparkle). This would have to be changed for a non-Windows version, but it is based on the well-known Mac project called [Sparkle](https://sparkle-project.org/) so that should not be too difficult. There are no other external dependencies aside from various libraries bundled with Qt. 
+
+A deployment folder has been added which includes a number of extra artifacts and a script to build the Windows installer.  This is a unix shell script at the moment just because it was easier but could be converted to Windows batch/powershell.  The script assumes that the code and help files have already been deployed and that both Qt Assistant and InnoSetup are installed and in the PATH.  The script will gather all of the required files into a new folder and run the InnoSetup compiler to build the installer exe file.
 
 ## License
 Source files for OP Config are free software: you can redistribute them and/or modify them under the terms of the GNU General Public License version 3 as published by the Free Software Foundation.

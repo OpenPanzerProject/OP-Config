@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QHelpCollectionProject version="1.0">
     <assistant>
-        <title> OP Config Help</title>
+        <title>OP Config Help</title>
         <applicationIcon>images/helpicon_32.png</applicationIcon>
-		<cacheDirectory base="collection">OpenPanzer/OPConfig</cacheDirectory>
-		<homePage>qthelp://openpanzer.desktop.help/docs/gettingstarted.html</homePage>
-		<startPage>qthelp://openpanzer.desktop.help/docs/index.html</startPage>
-		<aboutMenuText>
-			<text>About OP Config</text>
-		</aboutMenuText>
-		<aboutDialog>
-			<icon>images/AboutIcon.png</icon>
-			<file>about.txt</file>
-		</aboutDialog>
-		<enableDocumentationManager>false</enableDocumentationManager>
-		<enableAddressBar>false</enableAddressBar>
-		<enableFilterFunctionality>false</enableFilterFunctionality>
-		<enableFullTextSearchFallback>true</enableFullTextSearchFallback>
+        <cacheDirectory>OpenPanzer/OPConfig</cacheDirectory>		
+        <homePage>qthelp://openpanzer.desktop.help/docs/gettingstarted.html</homePage>
+        <startPage>qthelp://openpanzer.desktop.help/docs/index.html</startPage>
+        <aboutMenuText>
+            <text>About OP Config</text>
+        </aboutMenuText>
+        <aboutDialog>
+            <icon>images/AboutIcon.png</icon>
+            <file>about.txt</file>
+        </aboutDialog>
+        <enableDocumentationManager>false</enableDocumentationManager>
+        <enableAddressBar>false</enableAddressBar>
+        <enableFilterFunctionality>false</enableFilterFunctionality>
+        <enableFullTextSearchFallback>true</enableFullTextSearchFallback>
     </assistant>    
-	<docFiles>
+    <docFiles>
         <generate>
             <file>
                 <input>opconfighelp.qhp</input>

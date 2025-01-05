@@ -12,7 +12,7 @@ public:
     AuxChannelPositionsCombo(QWidget *parent = 0);
 
 private slots:
-  void AuxChannelPositionChangedSlot(const QString &);
+  void AuxChannelPositionChangedSlot(const int &);
 
 private:
 
@@ -21,10 +21,4 @@ signals:
 
 };
 
-#endif // AUXCHANNELPOSITIONSCOMBO_H
-
-
-
-
-
-
+#endif // AUXCHANNELPOSITIONSCOMBO_

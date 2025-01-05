@@ -186,8 +186,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     otherStatusLabel = new QLabel(this);
     otherStatusLabel->setMinimumWidth(200);
     otherStatusLabel->setMaximumWidth(200);
-    otherStatusLabel->setMinimumHeight(20);
-    otherStatusLabel->setMaximumHeight(20);
+    otherStatusLabel->setMinimumHeight(22);                     // Increased the size slightly in Qt6 aas AlignVCenter doesn't seem to be working.
+    otherStatusLabel->setMaximumHeight(22);                     // ' '
     otherStatusLabel->setAlignment(Qt::AlignVCenter);
     otherStatusLabel->setAlignment(Qt::AlignHCenter);
     otherStatusLabel->setText("");
@@ -299,8 +299,7 @@ void MainWindow::ProcessCommandLineArgs()
     if (parser.isSet(loadSettingsFileOption))
     {
         // It was, now retrieve the value that came with it.
-        QString filename = (parser.value(loadSettingsFileOption));
-        filename.simplified(); // trim white space
+        QString filename = (parser.value(loadSettingsFileOption)).simplified();
 
         // Ok - if they passed a file name, send it to the readSettingsFromFile function (mainwindow_file_rw.cpp)
         if (filename != "")
@@ -782,11 +781,11 @@ void MainWindow::initActionsConnections()
 {
     // File Menu
     ui->actionOpenFile->setEnabled(true);
-    ui->actionOpenFile->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
+    ui->actionOpenFile->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_O));
     ui->actionSaveFile->setEnabled(true);
-    ui->actionSaveFile->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
+    ui->actionSaveFile->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_S));
     ui->actionExit->setEnabled(true);
-    ui->actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_X));
+    ui->actionExit->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_X));
     connect(ui->actionOpenFile, SIGNAL(triggered()), this, SLOT(actionReadSettingsFromFile()));
     connect(ui->actionSaveFile, SIGNAL(triggered()), this, SLOT(writeSettingsToFile()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
@@ -799,13 +798,13 @@ void MainWindow::initActionsConnections()
 
     // Device Menu
     ui->actionConnect->setEnabled(true);
-    ui->actionConnect->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_C));
+    ui->actionConnect->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_C));
     ui->actionDisconnect->setEnabled(false);
-    ui->actionDisconnect->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_D));
+    ui->actionDisconnect->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_D));
     ui->actionRead->setEnabled(false);      // Can't read or write until connected
-    ui->actionRead->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
+    ui->actionRead->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_R));
     ui->actionWrite->setEnabled(false);     //
-    ui->actionWrite->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_W));
+    ui->actionWrite->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_W));
     connect(ui->actionConnect, SIGNAL(triggered()), this, SLOT(connectToDevice()));
     connect(ui->actionDisconnect, SIGNAL(triggered()), this, SLOT(disconnectFromDevice()));
     connect(ui->actionRead, SIGNAL(triggered()), this, SLOT(readSettingsFromDevice()));
@@ -964,7 +963,7 @@ void MainWindow::SetupHelpButtons()
         signalMapper->setMapping(ui->hpbConsole, "firmware.html#console");                  // Console
 
     // Now connect the mapped signals to the showPageDocumentation() function
-    connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(showPageDocumentation(QString)));
+    connect(signalMapper, SIGNAL(mappedString(QString)), this, SLOT(showPageDocumentation(QString)));
 
     // Not really a help button, but we also map the link in this text warning label to a section of the help documentation.
     connect(ui->lblESCWarningHelp, SIGNAL(linkActivated(QString)), this, SLOT(showPageDocumentation(QString)));
@@ -1076,7 +1075,7 @@ void MainWindow::ConnectAssistMsgBox(void)
     assist.show();
 
     // Here we create a connection to the checkbox on the popup, if they check it we will not show this message again
-    QObject::connect(cb, &QCheckBox::stateChanged, [this](int state)
+    QObject::connect(cb, &QCheckBox::checkStateChanged, [this](int state)
     {
         if (static_cast<Qt::CheckState>(state) == Qt::CheckState::Checked)
         {

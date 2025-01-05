@@ -17,12 +17,10 @@ AuxChannelPositionsCombo::AuxChannelPositionsCombo(QWidget *parent) : QComboBox(
     // this->insertItem(10, "12", 12);
 
     // Connect to my custom signal
-    connect(this, SIGNAL(editTextChanged(QString)), this, SLOT(AuxChannelPositionChangedSlot(QString)));
-    connect(this, SIGNAL(currentIndexChanged(QString)), this, SLOT(AuxChannelPositionChangedSlot(QString)));
+    connect(this, &AuxChannelPositionsCombo::currentIndexChanged, this, &AuxChannelPositionsCombo::AuxChannelPositionChangedSlot);
 }
-void AuxChannelPositionsCombo::AuxChannelPositionChangedSlot(const QString &)
+void AuxChannelPositionsCombo::AuxChannelPositionChangedSlot(const int &)
 {
     // Send out custom signal with a pointer to this box
     emit AuxChannelPositionChanged(this);
 }
-

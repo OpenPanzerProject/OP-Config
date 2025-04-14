@@ -4,6 +4,7 @@
 #include <QMap>
 #include <QString>
 #include <op_defines.h>
+#include <QDebug.h>
 
 class OP_QMaps
 {

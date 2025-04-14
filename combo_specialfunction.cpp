@@ -49,8 +49,16 @@ SpecialFunctionComboBox::SpecialFunctionComboBox(QWidget *parent) : QComboBox(pa
 
 void SpecialFunctionComboBox::CurrentFunctionChangedSlot(int selection)
 {
-    // Send out a signal with the old value, the new value, and a pointer to this box
-    _special_function sf = static_cast<_special_function>(selection);
+    // in Qt 5.4, the following line worked:
+ //   _special_function sf = static_cast<_special_function>(selection);
+
+    // However it does not work in Qt6.8, because "selection" passed is now the Index, whereas previously it would seem it was the data.
+    // Our special functions (a byte/numeric value that references the function in question) is not the same thing as the index in the list,
+    // instead this number is held in data.
+//    _special_function sf = qvariant_cast<_special_function>(this->currentData()); // This also works.
+    _special_function sf = static_cast<_special_function>(this->currentData().toUInt());
+    //qDebug() << selection << " " << this->currentData();
+
     emit currentFunctionChanged(sf, OPQMap->isSpecialFunctionDigital(sf));
 }
 

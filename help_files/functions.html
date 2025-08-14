@@ -116,26 +116,31 @@
 	<h2 id="turret">Turret Stick Trigger Adjustment</h2>
 	<p>
 	This setting only applies if you have are using one of the 9 Turret Stick positions for any trigger, otherwise it is ignored. This setting introduces a delay in milliseconds (1,000 mS = 1 second)
-	from the time you first move the turret stick on the transmitter, to when that movement is actually applied to the turret rotation motor or the barrel elevation motor. <br><br>
+	from the time you first move the turret stick on the transmitter, to when that movement is actually applied to the turret rotation motor or the barrel elevation motor.
+	</p>
 	
 	Why would we want a delay? Let's say you assigned the Turret Stick position of "Top Left" to trigger the "Cannon - Fire" function. Assume there is no delay implemented. When you move the turret
 	stick to the top left corner in order to fire the cannon, the TCB will detect the stick starting to move towards that corner. The radio signal is updated dozens of times a second. Even if you move your
 	thumb quickly to the top left corner, to the TCB it will seem like it takes a long time. While the stick is on its way to that corner, the TCB will interpret the turret stick command as
 	"I should move the turret to the left and elevate the barrel." When your thumb finally gets the turret stick all the way to the top left corner, only then will the TCB interpret the 
-	command as "I should fire the cannon now." <br><br>
+	command as "I should fire the cannon now."
+	</p>
 
 	If all you really wanted to do was fire the cannon, you may be frustrated that the barrel and turret moved too - and it may throw off your aim! For that reason we can specify a delay. 
 	Any turret stick movement that takes less time than the delay will be ignored for purposes of actually moving the turret or barrel. If you set the delay to 500 mS (1/2 second), and 
 	it only takes your thumb 250 mS to get the stick to that top left corner, then you will be able to trigger the Fire Cannon function without having the turret actually move when you do so.
-	<br><br>
+	</p>
 	
 	The drawback of course is that now when you <i>do</i> want to move the turret, you will experience a lag in control equal to the time you set here. If you set the delay to 500 mS, you will have to hold
-	the turret stick over 1/2 second before the turret starts to move. This can also be frustrating.<br><br>
+	the turret stick over 1/2 second before the turret starts to move. This can also be frustrating.
+	</p>
 	
 	There is no perfect solution to this issue. Trying to fix one problem makes the other problem worse. That is why you can specify for yourself what the delay should be. If you want perfect 
 	responsiveness of the stick for turret movement, set the delay very low, or disable it completely by setting it to 0. If it is more important that you be able to reach the corners in order to 
-	trigger functions you may have assigned to those corners without at the same time moving the turret or barrel, set the delay higher.<br><br>
+	trigger functions you may have assigned to those corners without at the same time moving the turret or barrel, set the delay higher.
+	</p>
 	
+	<p>
 	And of course if your transmitter has lots of switches you can simply assign all your triggers to auxiliary channels. If you don't have any triggers assigned to the Turret Stick, 
 	this delay is disabled completely and you will find the turret stick very responsive.
 	</p>

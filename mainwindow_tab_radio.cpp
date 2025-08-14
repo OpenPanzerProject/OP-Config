@@ -1020,12 +1020,18 @@ uint8_t MainWindow::calculateAuxSwitchPos(int16_t Pulse, uint8_t NumPositions, b
     {
         switch (NumPositions)
         {
-            case 2: d = abs(MultiSwitch_MatchArray2[i] - Pulse);   break;
-            case 3: d = abs(MultiSwitch_MatchArray3[i] - Pulse);   break;
-            case 4: d = abs(MultiSwitch_MatchArray4[i] - Pulse);   break;
-            case 5: d = abs(MultiSwitch_MatchArray5[i] - Pulse);   break;
-            case 6: d = abs(MultiSwitch_MatchArray6[i] - Pulse);   break;
-        }
+            case 2:  d = abs(MultiSwitch_MatchArray2[i]  - Pulse);   break;
+            case 3:  d = abs(MultiSwitch_MatchArray3[i]  - Pulse);   break;
+            case 4:  d = abs(MultiSwitch_MatchArray4[i]  - Pulse);   break;
+            case 5:  d = abs(MultiSwitch_MatchArray5[i]  - Pulse);   break;
+            case 6:  d = abs(MultiSwitch_MatchArray6[i]  - Pulse);   break;
+            case 7:  d = abs(MultiSwitch_MatchArray7[i]  - Pulse);   break;
+            case 8:  d = abs(MultiSwitch_MatchArray8[i]  - Pulse);   break;
+            case 9:  d = abs(MultiSwitch_MatchArray9[i]  - Pulse);   break;
+            case 10: d = abs(MultiSwitch_MatchArray10[i] - Pulse);   break;
+            case 11: d = abs(MultiSwitch_MatchArray11[i] - Pulse);   break;
+            case 12: d = abs(MultiSwitch_MatchArray12[i] - Pulse);   break;
+            }
 
         if (d < distance)
         {
@@ -1069,8 +1075,74 @@ uint8_t MainWindow::calculateAuxSwitchPos(int16_t Pulse, uint8_t NumPositions, b
                 else if (pos == 4) pos = 3;
                 else if (pos == 5) pos = 2;
                 else if (pos == 6) pos = 1;
+                break; 
+            case 7:
+                if (pos == 1) pos = 7;
+                else if (pos == 2) pos = 6;
+                else if (pos == 3) pos = 5;
+                else if (pos == 5) pos = 3;
+                else if (pos == 6) pos = 2;
+                else if (pos == 7) pos = 1;
                 break;
-        }
+            case 8:
+                if (pos == 1) pos = 8;
+                else if (pos == 2) pos = 7;
+                else if (pos == 3) pos = 6;
+                else if (pos == 4) pos = 5;
+                else if (pos == 5) pos = 4;
+                else if (pos == 6) pos = 3;
+                else if (pos == 7) pos = 2;
+                else if (pos == 8) pos = 1;
+                break;
+            case 9:
+                if (pos == 1) pos = 9;
+                else if (pos == 2) pos = 8;
+                else if (pos == 3) pos = 7;
+                else if (pos == 4) pos = 6;
+                else if (pos == 6) pos = 4;
+                else if (pos == 7) pos = 3;
+                else if (pos == 8) pos = 2;
+                else if (pos == 9) pos = 1;
+                break;
+            case 10:
+                if (pos == 1) pos = 10;
+                else if (pos == 2) pos = 9;
+                else if (pos == 3) pos = 8;
+                else if (pos == 4) pos = 7;
+                else if (pos == 5) pos = 6;
+                else if (pos == 6) pos = 5;
+                else if (pos == 7) pos = 4;
+                else if (pos == 8) pos = 3;
+                else if (pos == 9) pos = 2;
+                else if (pos == 10) pos = 1;
+                break;
+            case 11:
+                if (pos == 1) pos = 11;
+                else if (pos == 2) pos = 10;
+                else if (pos == 3) pos = 9;
+                else if (pos == 4) pos = 8;
+                else if (pos == 5) pos = 7;
+                else if (pos == 7) pos = 5;
+                else if (pos == 8) pos = 4;
+                else if (pos == 9) pos = 3;
+                else if (pos == 10) pos = 2;
+                else if (pos == 11) pos = 1;
+                break;
+            case 12:
+                if (pos == 1) pos = 12;
+                else if (pos == 2) pos = 11;
+                else if (pos == 3) pos = 10;
+                else if (pos == 4) pos = 9;
+                else if (pos == 5) pos = 8;
+                else if (pos == 6) pos = 7;
+                else if (pos == 7) pos = 6;
+                else if (pos == 8) pos = 5;
+                else if (pos == 9) pos = 4;
+                else if (pos == 10) pos = 3;
+                else if (pos == 11) pos = 2;
+                else if (pos == 11) pos = 1;
+                break;
+            }
     }
 
     return pos;

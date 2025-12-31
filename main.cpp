@@ -28,6 +28,9 @@ int main(int argc, char *argv[])
     QApplication::setApplicationVersion(VER_PRODUCTVERSION_STR);
     QApplication::setOrganizationName("OPEN PANZER");
 
+    // Attempt to force the application to remain in light theme (not dark)
+    qputenv("QT_QPA_PLATFORM", "windows:darkmode=0");
+
     // Use the SingleApplication version instead - this prevents multiple instances from opening
     SingleApplication app(argc, argv);
     //QApplication app(argc, argv);

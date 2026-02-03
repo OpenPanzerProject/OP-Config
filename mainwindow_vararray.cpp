@@ -245,6 +245,7 @@ void MainWindow::VarArray_to_Variables(void)
     DeviceData.EnableTrackRecoil = VarArray.value(2439).toUInt();                           // 2439 - Enable track recoil
     DeviceData.TrackRecoilKickbackSpeed = VarArray.value(2440).toUInt();                    // 2440 - Initial kickback speed percent 0-100
     DeviceData.TrackRecoilDecelerateFactor = VarArray.value(2441).toUInt();                 // 2441 - Deceleration factor
+    DeviceData.EnableTrackRecoil_IRHit = VarArray.value(2442).toUInt();                     // 2442 - Enable track recoil on IR hit
 
     // "Physics" Settings - 25xx
     DeviceData.EnableBarrelStabilize = VarArray.value(2511).toUInt();                       // 2511 - Enable barrel stabilization
@@ -574,6 +575,7 @@ void MainWindow::Variables_to_VarArray(void)
     VarArray.insert(2439, QByteArray::number(DeviceData.EnableTrackRecoil));                        // 2439 - Enable track recoil
     VarArray.insert(2440, QByteArray::number(DeviceData.TrackRecoilKickbackSpeed));                 // 2440 - Initial kickback speed percent 0-100
     VarArray.insert(2441, QByteArray::number(DeviceData.TrackRecoilDecelerateFactor));              // 2441 - Deceleration factor
+    VarArray.insert(2442, QByteArray::number(DeviceData.EnableTrackRecoil_IRHit));                  // 2442 - Enable track recoil on IR hit
 
     // Accelerometer Settings - 25xx
     VarArray.insert(2511, QByteArray::number(DeviceData.EnableBarrelStabilize));                    // 2511 - Enable barrel stabilization

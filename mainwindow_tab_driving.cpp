@@ -63,7 +63,8 @@ void MainWindow::SetupControls_DrivingTab(void)
     // If we disable the nudge feature (by setting nudge percent to zero), disable the nudge time
     connect(ui->spinNudgePercent, SIGNAL(valueChanged(int)), this, SLOT(ShowHideNudgeTime(int)));
     // Track recoil enabled/disabled
-    connect(ui->chkEnableTrackRecoil, SIGNAL(clicked(bool)), this, SLOT(ShowHideTrackRecoil(bool)));
+    connect(ui->chkEnableTrackRecoil, SIGNAL(clicked()), this, SLOT(ShowHideTrackRecoil()));
+    connect(ui->chkEnableTrackRecoil_IRHit, SIGNAL(clicked()), this, SLOT(ShowHideTrackRecoil()));
 
     // FOR NOW WE ARE HIDING THE IMU SETTINGS BECAUSE THE FUNCTIONALITY IS NOT COMPLETE ON THE TCB
     // However, the code here is done and the settings are saved/recorded to TCB if we just unhide
@@ -334,9 +335,9 @@ void MainWindow::ShowHideBarrelStabilization(bool isEnabled)
     }
 }
 
-void MainWindow::ShowHideTrackRecoil(bool isEnabled)
+void MainWindow::ShowHideTrackRecoil()
 {
-    if (isEnabled)
+    if (ui->chkEnableTrackRecoil->isChecked() || ui->chkEnableTrackRecoil_IRHit->isChecked())
     {
         ui->spinKickbackSpeed->setEnabled(true);
         ui->spinDecelerateFactor->setEnabled(true);

@@ -207,9 +207,10 @@ void MainWindow::Variables_to_Controls(void)
     ShowHideNeutralTurnAllowed(ui->cboDriveType->currentIndex());
     // Track recoil
     ui->chkEnableTrackRecoil->setChecked(DeviceData.EnableTrackRecoil);
+    ui->chkEnableTrackRecoil_IRHit->setChecked(DeviceData.EnableTrackRecoil_IRHit);
     ui->spinKickbackSpeed->setValue(DeviceData.TrackRecoilKickbackSpeed);
     ui->spinDecelerateFactor->setValue(DeviceData.TrackRecoilDecelerateFactor);
-    ShowHideTrackRecoil(ui->chkEnableTrackRecoil->isChecked());
+    ShowHideTrackRecoil();
     // Freewheeling Gearbox
     ui->chkFreewheelGearbox->setChecked(DeviceData.DragInnerTrack);
     ValidateFreewheelingGearboxOptions();
@@ -487,6 +488,7 @@ void MainWindow::Controls_to_Variables(void)
     DeviceData.HalftrackTreadTurnPct = ui->spinHalftrackTurnPct->value();
     // Track Recoil
     DeviceData.EnableTrackRecoil = ui->chkEnableTrackRecoil->isChecked();
+    DeviceData.EnableTrackRecoil_IRHit = ui->chkEnableTrackRecoil_IRHit->isChecked();
     DeviceData.TrackRecoilKickbackSpeed = ui->spinKickbackSpeed->value();
     DeviceData.TrackRecoilDecelerateFactor = ui->spinDecelerateFactor->value();
     // Freewheeling gearbox
